@@ -1,0 +1,65 @@
+# ----------------------
+# Python
+# ----------------------
+__pycache__/
+*.py[cod]
+*.so
+*.pyd
+*.pyo
+*.egg-info/
+*.log
+
+# Checkpoints de notebooks
+.ipynb_checkpoints/
+
+# Ambientes virtuais
+.env/
+.venv/
+env/
+venv/
+
+# Arquivos de ambiente e configuração locais
+*.env
+
+# IDEs e editores
+.vscode/
+.idea/
+*.swp
+
+# Arquivos temporários de dados e trabalho
+data/tmp/
+data/**/~$*
+data/**/.DS_Store
+data/**/Thumbs.db
+
+# Arquivos exportados
+*.pdf
+*.docx
+*.xlsx
+*.csv~
+*.parquet
+*.gz
+*.tar
+
+# Streamlit
+.streamlit/
+!.streamlit/config.toml   # Garante que config.toml seja versionado
+
+# Logs
+logs/
+*.log
+nohup.out
+
+# Cache de pacotes Python
+pip-wheel-metadata/
+__pypackages__/
+*.dist-info/
+
+# Cache geral
+.cache/
+*.cache
+*.tmp
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
