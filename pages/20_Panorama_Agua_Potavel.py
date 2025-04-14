@@ -10,119 +10,96 @@ plt.style.use('dark_background')
 COR_TEXTO = '#FFA07A'
 CORES_BARRAS = ['#B0E0E6', '#FFC107']
 
-st.set_page_config(page_title="Panorama Água Potável", layout="wide")
-st.title('💧 Panorama da Oferta de Água Potável nas Escolas Públicas')
+st.set_page_config(page_title="Panorama Água Potável", layout="wide", page_icon="🦜")
+st.title('💧 Panorama da Oferta de Água Potável')
 
-# Identificar arquivos de censo disponíveis
-arquivos_censo = sorted([f for f in os.listdir("data") if re.match(r'censo_ac_\d{4}\.csv', f)])
-anos_disponiveis = [int(re.search(r'\d{4}', arq).group()) for arq in arquivos_censo]
+# URLs dos arquivos CSV no GitHub
+url_agua_2019 = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_agua/df_censo_ac_agua_2019.csv"
+url_agua_2020 = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_agua/df_censo_ac_agua_2020.csv"
+url_agua_2021 = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_agua/df_censo_ac_agua_2021.csv"
+url_agua_2022 = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_agua/df_censo_ac_agua_2022.csv"
+url_agua_2023 = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_agua/df_censo_ac_agua_2023.csv"
+url_agua_2024 = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_agua/df_censo_ac_agua_2024.csv"
 
-# Sidebar: seleção do ano
-ano_selecionado = st.sidebar.selectbox("Selecione o ano do Censo Escolar", sorted(anos_disponiveis, reverse=True))
-arquivo_censo = f"data/censo_ac_{ano_selecionado}.csv"
+# Carregar os dados diretamente dos links do GitHub
+df_censo_ac_agua_2019 = pd.read_csv(url_agua_2019, delimiter=';', encoding='utf-8', low_memory=False)
+df_censo_ac_agua_2020 = pd.read_csv(url_agua_2020, delimiter=';', encoding='utf-8', low_memory=False)
+df_censo_ac_agua_2021 = pd.read_csv(url_agua_2021, delimiter=';', encoding='utf-8', low_memory=False)
+df_censo_ac_agua_2022 = pd.read_csv(url_agua_2022, delimiter=';', encoding='utf-8', low_memory=False)
+df_censo_ac_agua_2023 = pd.read_csv(url_agua_2023, delimiter=';', encoding='utf-8', low_memory=False)
+df_censo_ac_agua_2024 = pd.read_csv(url_agua_2024, delimiter=';', encoding='utf-8', low_memory=False)
 
-# Carregamento dos dados
-@st.cache_data
-def carregar_dados_censo(arquivo):
-    return pd.read_csv(arquivo, delimiter=';', encoding='utf-8', low_memory=False)
+# Combina todos os dataframes em um único dataframe
+df_combined = pd.concat([
+    df_censo_ac_agua_2019,
+    df_censo_ac_agua_2020,
+    df_censo_ac_agua_2021,
+    df_censo_ac_agua_2022,
+    df_censo_ac_agua_2023,
+    df_censo_ac_agua_2024
+])
 
-df = carregar_dados_censo(arquivo_censo)
+# Exibe as primeiras linhas para verificação
+# st.write("Exibindo as primeiras linhas dos dados combinados:")
+# st.write(df_combined.head())
 
-# Filtro: apenas escolas públicas ativas
-df = df[df['TP_DEPENDENCIA'] != 4]
-df = df[df['TP_SITUACAO_FUNCIONAMENTO'] == 1]
+# Filtros de Seleção
+# Seleção do ano do Censo Escolar
+ano_censo = st.selectbox("Selecione o ano do Censo Escolar:", options=df_combined['NU_ANO_CENSO'].unique())
 
-# Seleciona variáveis relevantes
-colunas_agua = [
-    'SG_UF', 'NO_MUNICIPIO', 'CO_MUNICIPIO', 'NO_ENTIDADE', 'CO_ENTIDADE',
-    'TP_DEPENDENCIA', 'TP_LOCALIZACAO', 'TP_LOCALIZACAO_DIFERENCIADA',
-    'TP_OCUPACAO_PREDIO_ESCOLAR', 'IN_PREDIO_COMPARTILHADO',
-    'IN_AGUA_POTAVEL', 'IN_AGUA_REDE_PUBLICA', 'IN_AGUA_POCO_ARTESIANO',
-    'IN_AGUA_CACIMBA', 'IN_AGUA_FONTE_RIO', 'IN_AGUA_INEXISTENTE',
-    'IN_ENERGIA_REDE_PUBLICA', 'IN_ENERGIA_GERADOR_FOSSIL',
-    'IN_ENERGIA_RENOVAVEL', 'IN_ENERGIA_INEXISTENTE', 'QT_MAT_BAS'
-]
+# Seleção de Localização (Urbana/Rural)
+localizacao = st.selectbox("Selecione a Localização (Urbana ou Rural):", options=["Urbana", "Rural"])
 
-df_agua = df[colunas_agua].copy()
+# Filtro de Fornecimento de Água
+agua_potavel = st.selectbox("Selecione a condição de fornecimento de Água Potável:", options=["Sim", "Não"])
 
-# Gráfico 1: Escolarização por Localização
-def plot_localizacao(df):
-    localizacao = df['TP_LOCALIZACAO'].value_counts().sort_index()
-    localizacao.index = ['Urbana', 'Rural']
-    total = localizacao.sum()
-    percentuais = (localizacao / total) * 100
+# Filtro de Município
+municipio_selecionado = st.selectbox("Selecione o Município:", options=df_combined['NO_MUNICIPIO'].unique())
 
-    fig, ax = plt.subplots(figsize=(6, 4))
-    bars = ax.bar(localizacao.index, localizacao.values, color=['#696969', '#76EE00'])
-    ax.set_title('Escolas Públicas por Localização', color=COR_TEXTO)
-    ax.set_ylabel('Número de Escolas', color=COR_TEXTO)
-    ax.set_xticks(range(len(localizacao)))
-    ax.set_xticklabels(localizacao.index, color=COR_TEXTO)
-    ax.set_yticks(ax.get_yticks())
-    ax.set_yticklabels([int(y) for y in ax.get_yticks()], color=COR_TEXTO)
+# Filtrando os dados com base nas seleções
+df_filtered = df_combined.copy()
 
-    for i, v in enumerate(localizacao):
-        ax.text(i, v + 5, f'{percentuais[i]:.1f}%', ha='center', color=COR_TEXTO, fontweight='bold')
+# Mapeando valores para filtros
+localizacao_map = {"Urbana": 1, "Rural": 2}
+agua_map = {"Sim": 1, "Não": 0}
 
-    for spine in ax.spines.values():
-        spine.set_color(COR_TEXTO)
+df_filtered = df_filtered[df_filtered['NU_ANO_CENSO'] == ano_censo]
+df_filtered = df_filtered[df_filtered['TP_LOCALIZACAO'] == localizacao_map[localizacao]]
+df_filtered = df_filtered[df_filtered['IN_AGUA_POTAVEL'] == agua_map[agua_potavel]]
+df_filtered = df_filtered[df_filtered['NO_MUNICIPIO'] == municipio_selecionado]
 
-    st.pyplot(fig)
+# Exibe o DataFrame filtrado
+st.write(f"Exibindo dados filtrados para {municipio_selecionado} - {localizacao} - {agua_potavel}:")
+st.write(df_filtered[['NU_ANO_CENSO', 'NO_MUNICIPIO', 'NO_ENTIDADE', 'CO_ENTIDADE', 'TP_LOCALIZACAO', 'IN_AGUA_POTAVEL']])
 
-# Gráfico 2: Condição de Fornecimento de Água Potável
-def plot_condicao_agua(df):
-    contagem = df['IN_AGUA_POTAVEL'].value_counts().sort_index(ascending=False)
-    contagem.index = ['Fornece', 'Não Fornece']
-    total = contagem.sum()
-    percentuais = (contagem / total) * 100
+# Verificando o conteúdo de agua_counts
+agua_counts = df_filtered['IN_AGUA_POTAVEL'].value_counts()
+st.write(print(agua_counts.value_counts()))
 
-    fig, ax = plt.subplots(figsize=(6, 4))
-    bars = ax.bar(contagem.index, contagem.values, color=CORES_BARRAS)
-    ax.set_title('Fornecimento de Água Potável', color=COR_TEXTO)
-    ax.set_ylabel('Número de Escolas', color=COR_TEXTO)
-    ax.set_xticks(range(len(contagem)))
-    ax.set_xticklabels(contagem.index, color=COR_TEXTO)
-    ax.set_yticks(ax.get_yticks())
-    ax.set_yticklabels([int(y) for y in ax.get_yticks()], color=COR_TEXTO)
+# Garantir que o índice tenha duas categorias
+agua_counts = agua_counts.sort_index()
+st.write(print(agua_counts))
 
-    for i, v in enumerate(contagem):
-        ax.text(i, v + 5, f'{percentuais[i]:.1f}%', ha='center', color='white', fontweight='bold')
+# Renomeando os índices de forma segura
+agua_counts.index = ['Não Fornece', 'Fornece']  # Só renomeie se houver exatamente 2 categorias
 
-    for spine in ax.spines.values():
-        spine.set_color(COR_TEXTO)
+# Exibe o gráfico
+fig, ax = plt.subplots(figsize=(6, 5))
+bars = ax.bar(agua_counts.index, agua_counts.values, color=['#B0E0E6', '#FFC107'])
 
-    st.pyplot(fig)
+# Customização do gráfico
+ax.set_title(f"Fornecimento de Água Potável em {municipio_selecionado} - {localizacao}", color='#FFA07A')
+ax.set_ylabel('Número de Escolas', color='#FFA07A')
+ax.set_xticklabels(agua_counts.index, color='#FFA07A')
+ax.tick_params(axis='y', colors='#FFA07A')
+ax.spines['top'].set_color('#FFA07A')
+ax.spines['bottom'].set_color('#FFA07A')
+ax.spines['left'].set_color('#FFA07A')
+ax.spines['right'].set_color('#FFA07A')
 
-# Gráfico 3: Escolas sem Água Potável por Município
-def plot_municipios_sem_agua(df):
-    df_sem_agua = df[df['IN_AGUA_POTAVEL'] == 0]
-    municipios = df_sem_agua.groupby('NO_MUNICIPIO').size().sort_values()
+# Adiciona os valores acima das barras
+for i, v in enumerate(agua_counts):
+    ax.text(i, v + 5, str(v), ha='center', color='white', fontweight='bold')
 
-    cmap = mcolors.LinearSegmentedColormap.from_list('custom_gradient', CORES_BARRAS)
-    norm = plt.Normalize(vmin=municipios.min(), vmax=municipios.max())
-    cores = [cmap(norm(v)) for v in municipios]
-
-    fig, ax = plt.subplots(figsize=(10, 6))
-    bars = ax.barh(municipios.index, municipios.values, color=cores)
-    ax.set_title('Escolas Sem Água Potável por Município', color=COR_TEXTO)
-    ax.set_xlabel('Número de Escolas', color=COR_TEXTO)
-    ax.tick_params(axis='x', colors=COR_TEXTO)
-    ax.tick_params(axis='y', colors=COR_TEXTO)
-
-    for spine in ax.spines.values():
-        spine.set_color(COR_TEXTO)
-
-    for i, v in enumerate(municipios):
-        ax.text(v + 0.5, i, str(v), va='center', color='white', fontweight='bold')
-
-    st.pyplot(fig)
-
-# Exibição dos gráficos
-st.subheader('Distribuição por Localização')
-plot_localizacao(df_agua)
-
-st.subheader('Censo Escolar - Situação de Água Potável')
-plot_condicao_agua(df_agua)
-
-st.subheader('Distribuição Geográfica das Escolas sem Água Potável')
-plot_municipios_sem_agua(df_agua)
+# Exibe o gráfico
+st.pyplot(fig)
