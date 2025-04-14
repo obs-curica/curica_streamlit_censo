@@ -70,7 +70,7 @@ df_filtered = df_filtered[df_filtered['NO_MUNICIPIO'] == municipio_selecionado]
 
 # Exibe o DataFrame filtrado
 st.write(f"Exibindo dados filtrados para {municipio_selecionado} - {localizacao} - {agua_potavel}:")
-st.write(df_filtered[['NU_ANO_CENSO', 'NO_MUNICIPIO', 'NO_ENTIDADE', 'CO_ENTIDADE', 'TP_LOCALIZACAO', 'IN_AGUA_POTAVEL']])
+st.write(df_filtered[['NU_ANO_CENSO', 'NO_MUNICIPIO', 'NO_ENTIDADE', 'CO_ENTIDADE', 'TP_LOCALIZACAO', 'QT_MAT_BAS', 'IN_AGUA_POTAVEL']])
 
 # Verificando o conteúdo de agua_counts
 agua_counts = df_filtered['IN_AGUA_POTAVEL'].value_counts()
