@@ -42,8 +42,8 @@ data/**/Thumbs.db
 *.tar
 
 # Streamlit
-.streamlit/
-!.streamlit/config.toml   # Garante que config.toml seja versionado
+# .streamlit/
+# !.streamlit/config.toml   # Garante que config.toml seja versionado
 
 # Logs
 logs/
