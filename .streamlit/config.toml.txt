@@ -5,24 +5,22 @@
 
 [theme]
 primaryColor = "#76EE00"                 # Verde fosforescente do Diagrama Curica
-backgroundColor = "#0E1117"              # Preto carvão (fundo principal)
-secondaryBackgroundColor = "#262730"     # Cinza escuro (painéis e barra lateral)
-textColor = "#FFA07A"                    # Salmão (textos e títulos)
-# font = "sans serif"                    # Comentado: valor inválido no Streamlit (padrão já é sans-serif)
+backgroundColor = "#0E1117"              # Preto carvão (tema escuro)
+secondaryBackgroundColor = "#262730"     # Cinza escuro para painéis
+textColor = "#FFA07A"                    # Salmão para textos e títulos
+font = "sans serif"                      # Fonte legível e moderna
 
 [server]
-headless = true
-enableCORS = false
-port = 8501
-serverAddress = "0.0.0.0"              # Em produção: use "0.0.0.0"
-runOnSave = true
+headless = true                          # Necessário para deploy em servidor
+enableCORS = false                       # Segurança para deploy local
+port = 8501                              # Porta padrão do Streamlit
+runOnSave = true                         # Atualização automática durante desenvolvimento
+enableXsrfProtection = true              # Proteção CSRF (ativar em produção)
 
 [client]
-toolbarMode = "minimal"
-showErrorDetails = true
+toolbarMode = "minimal"                  # Oculta opções de edição e reload
+showErrorDetails = true                  # Exibe detalhes em caso de erro
 
 [browser]
-gatherUsageStats = false
+gatherUsageStats = false                 # Privacidade: não envia dados para o Streamlit
 
-[global]
-logLevel = "info"
