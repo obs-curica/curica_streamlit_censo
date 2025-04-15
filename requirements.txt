@@ -1,0 +1,29 @@
+# Bibliotecas principais para análise de dados
+pandas
+numpy
+matplotlib
+seaborn
+missingno
+
+# Visualização interativa (Streamlit e Altair)
+streamlit>=1.25
+altair
+
+# Suporte para estilo de gráficos e logs
+pyyaml
+python-dateutil
+
+# Streamlit - logging e backend
+watchdog
+toml
+
+# Para o tratamento de arquivos excel
+openpyxl
+xlrd
+
+# Caso futuramente seja necessário manipular arquivos .docx ou .pdf
+python-docx
+PyPDF2
+
+# Controle de versões e ambiente
+gitpython
