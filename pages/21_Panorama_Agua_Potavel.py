@@ -89,7 +89,7 @@ agua_counts.index = agua_counts.index.map({0: 'Não Fornece', 1: 'Fornece'})
 col1, col2 = st.columns(2)
 
 with col1:
-        
+
     # Plotagem correta do gráfico
     fig, ax = plt.subplots(figsize=(6, 5))
 
@@ -164,4 +164,3 @@ chart = alt.Chart(df_altair).mark_bar().encode(
 
 # Exibe no Streamlit
 st.altair_chart(chart, use_container_width=False)
-
