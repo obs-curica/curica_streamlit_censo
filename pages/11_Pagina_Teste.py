@@ -84,45 +84,6 @@ agua_counts = df_grafico['IN_AGUA_POTAVEL'].value_counts().sort_index()
 # Garantindo sempre duas categorias no gráfico
 agua_counts.index = agua_counts.index.map({0: 'Não Fornece', 1: 'Fornece'})
 
-# Criando colunas na página do Streamlit para diminuir a largura do gráfico
-# e melhorar a visualização
-col1, col2 = st.columns(2)
-
-with col1:
-        
-    # Plotagem correta do gráfico
-    fig, ax = plt.subplots(figsize=(6, 5))
-
-    # Barras com cores específicas para cada categoria
-    cores_barras = [CORES_BARRAS[1] if categoria == 'Não Fornece' else CORES_BARRAS[0] for categoria in agua_counts.index]
-
-    bars = ax.bar(agua_counts.index, agua_counts.values, color=cores_barras)
-
-    # Define um espaço extra acima das barras
-    ax.set_ylim(0, agua_counts.values.max() * 1.2)  # Aumenta o limite superior em 20%
-
-    # Customização visual do gráfico
-    ax.set_title(f"Fornecimento de Água Potável em {municipio_selecionado} ({ano_censo})", color=COR_TEXTO)
-    ax.set_ylabel('Número de Escolas', color=COR_TEXTO)
-    ax.set_xticklabels(agua_counts.index, color=COR_TEXTO)
-    ax.tick_params(axis='y', colors=COR_TEXTO)
-
-    for spine in ax.spines.values():
-        spine.set_color(COR_TEXTO)
-
-    # Adiciona valores acima das barras
-    for i, v in enumerate(agua_counts):
-        ax.text(i, v + 0.2, str(v), ha='center', color='white', fontweight='bold')
-
-    # Exibe o gráfico no Streamlit
-    plt.tight_layout()  # Ajusta automaticamente o layout para evitar sobreposição
-    st.pyplot(fig)
-
-st.write("     ")
-st.write("     ")
-st.write("     ")
-
-
 # TESTE ALTAIR
 import altair as alt
 
@@ -164,4 +125,3 @@ chart = alt.Chart(df_altair).mark_bar().encode(
 
 # Exibe no Streamlit
 st.altair_chart(chart, use_container_width=False)
-
