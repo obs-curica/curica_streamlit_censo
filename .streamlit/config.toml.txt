@@ -1,0 +1,28 @@
+# ============================
+# Streamlit - Observatório Curica
+# Configurações de Estilo, Servidor e Privacidade
+# ============================
+
+[theme]
+primaryColor = "#76EE00"                 # Verde fosforescente do Diagrama Curica
+backgroundColor = "#0E1117"              # Preto carvão (fundo principal)
+secondaryBackgroundColor = "#262730"     # Cinza escuro (painéis e barra lateral)
+textColor = "#FFA07A"                    # Salmão (textos e títulos)
+# font = "sans serif"                    # Comentado: valor inválido no Streamlit (padrão já é sans-serif)
+
+[server]
+headless = true
+enableCORS = false
+port = 8501
+serverAddress = "0.0.0.0"              # Em produção: use "0.0.0.0"
+runOnSave = true
+
+[client]
+toolbarMode = "minimal"
+showErrorDetails = true
+
+[browser]
+gatherUsageStats = false
+
+[global]
+logLevel = "info"
