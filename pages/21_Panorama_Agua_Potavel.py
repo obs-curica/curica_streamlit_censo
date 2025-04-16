@@ -25,7 +25,8 @@ st.write("Esta página apresenta uma análise do fornecimento de água potável 
 st.subheader("Análise do Fornecimento de Água Potável nas Escolas Públicas do Acre")
 
 # Texto subtítulo
-st.write("Análise da oferta de água potável segundo a marcação do campo no Censo Escolar. Você pode filtrar os dados por ano, localização (urbana ou rural), condição de fornecimento de água e Município.")
+st.write("Análise da oferta de água potável segundo a marcação do campo no Censo Escolar.")
+st.write("Você pode filtrar os dados por ano, localização (urbana ou rural), condição de fornecimento de água e Município.")
 
 # Carregar os dados
 df_censo_agua = carregar_dados_agua()
