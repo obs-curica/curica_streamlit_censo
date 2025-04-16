@@ -7,6 +7,7 @@ import re
 
 from scripts.load_data import carregar_dados_agua
 from scripts.graficos import plot_agua_potavel_por_municipio
+from scripts.load_data import carregar_dados
 
 # Configuração visual
 plt.style.use('dark_background')
@@ -29,7 +30,8 @@ st.write("Análise da oferta de água potável segundo a marcação do campo no 
 st.write("Você pode filtrar os dados por ano, localização (urbana ou rural), condição de fornecimento de água e Município.")
 
 # Carregar os dados
-df_censo_agua = carregar_dados_agua()
+url_agua = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_agua/df_censo_ac_agua.csv"
+df_censo_agua = carregar_dados(url_agua)
 
 # Filtros de Seleção
 # Seleção do ano do Censo Escolar
