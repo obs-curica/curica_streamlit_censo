@@ -66,5 +66,5 @@ st.write(df_filtered[['NU_ANO_CENSO', 'NO_MUNICIPIO', 'NO_ENTIDADE', 'CO_ENTIDAD
 # Subtítulo gráfico
 st.subheader("Gráfico com o total de escolas do Município, por tipo de fornecimento de água.")
 
-# Filtrar o DataFrame apenas pelo ano e município (não por água potável aqui!)
+# Filtrar o DataFrame apenas pelo ano e município (não inserir água potável aqui!)
 plot_agua_potavel_por_municipio(df_censo_agua, ano_censo, municipio_selecionado, CORES_BARRAS, COR_TEXTO)
