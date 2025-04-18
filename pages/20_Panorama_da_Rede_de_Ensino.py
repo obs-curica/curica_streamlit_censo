@@ -10,6 +10,11 @@ from scripts.graficos import grafico_alunos_por_municipio
 from scripts.graficos import grafico_escolas_por_municipio
 from scripts.graficos import grafico_escolas_por_dependencia
 from scripts.graficos import grafico_alunos_por_dependencia
+from scripts.graficos import dataframe_dependencia_municipio
+from scripts.graficos import grafico_alunos_por_localizacao
+from scripts.graficos import grafico_escolas_por_localizacao
+from scripts.graficos import grafico_alunos_por_localizacao_diferenciada
+from scripts.graficos import grafico_escolas_por_localizacao_diferenciada
 
 # Configuração visual
 plt.style.use('dark_background')
@@ -38,7 +43,7 @@ st.subheader("Total de Alunos e Escolas por Município")
 st.write("Abaixo será apresentada a caracterização da rede de ensino, discriminando o número total de escolas e alunos por ano e por Município.")
 
 # Selectbox do ano do Censo Escolar
-ano_censo = st.selectbox("Selecione o ano do Censo Escolar:", sorted(df_panorama_geral['NU_ANO_CENSO'].unique()))
+ano_censo = st.selectbox("Selecione o ano do Censo Escolar:", sorted(df_panorama_geral['NU_ANO_CENSO'].unique()), key="ano_censo")
 col1, col2 = st.columns(2)
 
 with col1:
@@ -52,7 +57,11 @@ st.write("Texto analítico.")
 
 # Subseção 01.2 - Total de Alunos e Escolas por Dependência Administrativa
 st.subheader("Total de Alunos e Escolas por Dependência Administrativa")
-st.write("Abaixo será realizada a caracterização da rede de ensino, discriminando a dependência administrativa a qual a escola está vinculada, se Municial, Estadual ou Federal. Total e por Município.")
+st.write("Abaixo será realizada a caracterização da rede de ensino, discriminando a dependência administrativa a qual a escola está vinculada, se Municipal, Estadual ou Federal. Total e por Município.")
+
+st.write("Ano Selecionado: ", ano_censo)
+
+#st.write(":green-badge[Ano Selecionado: ]", ano_censo)
 
 # Divide a tela em duas colunas
 col1, col2 = st.columns(2)
@@ -63,6 +72,16 @@ with col1:
 with col2:
     grafico_escolas_por_dependencia(df_panorama_geral, ano_censo)
 
+st.write("Texto analítico. Retomar a política de anexos.")
+
+# Tabela de dependência administrativa por Município
+with st.form("form_dependencia"):
+    ano_censo_dependencia = st.selectbox("Selecione o ano do Censo Escolar:", sorted(df_panorama_geral['NU_ANO_CENSO'].unique()), key ="ano_censo_dependencia")
+    municipio_dependencia = st.selectbox("Selecione o município:", sorted(df_panorama_geral['NO_MUNICIPIO'].unique()), key="municipio_dependencia")
+    submitted = st.form_submit_button("Gerar Dados")
+    if submitted:
+        st.write(dataframe_dependencia_municipio(df_panorama_geral, ano_censo_dependencia, municipio_dependencia))
+        
 
 #===============================
 # Seção 02 - Urbano vs. Rural
@@ -70,25 +89,56 @@ with col2:
 st.header("Urbano vs. Rural")
 st.write("Texto explicativo")
 
-st.write("Número de alunos por localização (Urbana/Rural).")
+st.write("Ano Selecionado: ", ano_censo)
 
-# Gráficos = Coluna 1 total no Estado, Coluna 2 total do Município
+# Divide a tela em duas colunas
+col1, col2 = st.columns(2)
+# Gráfico do total de alunos por localização
+with col1:
+    grafico_alunos_por_localizacao(df_panorama_geral, ano_censo)
+# Gráfico do total de escolas por localização
+with col2:
+    grafico_escolas_por_localizacao(df_panorama_geral, ano_censo)
+# Texto de análise dos gráficos
+st.write("Texto analítico.")
 
-st.write("Número de escolas por localização (Urbana/Rural).")
-
-# Grafico do total de alunos por localização, por Município
-
+# Subseção 02.1 - Total de Alunos e Escolas por Localização Diferenciada
 st.subheader("Escolas em localização diferenciada")
-st.write("Texto explicativo")
+st.write("Texto explicativo.")
+st.write("Explicar que o campo Comunidades Tradicionais, somente a partir de 2024.")
 
-# Grafico do total de alunos por localização diferenciada
+# Criação do dataframe para localização diferenciada
+df_localizacao_diferenciada = df_panorama_geral[
+    (df_panorama_geral['TP_LOCALIZACAO_DIFERENCIADA'] != 0) & 
+    (df_panorama_geral['NU_ANO_CENSO'] == ano_censo) &
+    (df_panorama_geral['TP_LOCALIZACAO_DIFERENCIADA'].notnull())
+]
 
-st.subheader("Escolas em Terra Indígena")
+st.write("Número total de escolas declaradas em localização diferenciada: ", df_localizacao_diferenciada['TP_LOCALIZACAO_DIFERENCIADA'].count())
 
+# Gráficos
+col1, col2 = st.columns(2)
+# Gráfico do total de alunos por localização diferenciada
+with col1:
+    grafico_alunos_por_localizacao_diferenciada(df_panorama_geral, ano_censo)
+# Gráfico do total de escolas por localização diferenciada
+with col2:
+    grafico_escolas_por_localizacao_diferenciada(df_panorama_geral, ano_censo)
+# Texto de análise dos gráficos
+st.write("Texto analítico.")
+
+# Subseção 02.3 - Total de Alunos e Escolas em Projeto de Assentamento do INCRA
 st.subheader("Escolas em Projeto de Assentamento do INCRA")
 
+# Subseção 02.2 - Total de Alunos e Escolas em Terra Indígena
+st.subheader("Escolas em Terra Indígena")
+
+# Subseção 02.4 - Total de Alunos e Escolas em área de população tradicionais
 st.subheader("Escolas em área onde habitam populações tradicionais")
 st.write("Problematizar o endereço da escola que contém a palavra rio e se está marcada com localização diferenciada. Falar das Unidades de Conservação, Reservas Extrativistas e ribeirinhos.")
 
-st.subheader("Geração de relatórios")
+#===============================
+# Seção 03 - Geração de Relatórios
+#===============================
+st.header("Geração de relatórios")
 st.write("Seegue abaixo ferramente para geração de relatórios para download. Basta selecionar os filtros desejados e clicar no botão de download.")
