@@ -56,8 +56,6 @@ def plot_agua_potavel_por_municipio(df_censo_agua, ano_censo, municipio_selecion
         plt.tight_layout()
         st.pyplot(fig)
 
-
-
 #==========================
 # Função para plotar gráfico de barras horizontal com o total de alunos por município
 #==========================
@@ -118,9 +116,6 @@ def grafico_alunos_por_municipio(df, ano_censo):
     fig.tight_layout()
     st.pyplot(fig)
 
-
-
-
 #===========================
 # Função para plotar gráfico de barras horizontal com o total de escolas
 #============================    
@@ -180,7 +175,6 @@ def grafico_escolas_por_municipio(df, ano_censo):
     
     plt.tight_layout()
     st.pyplot(plt)
-
 
 #===========================
 # Função para gráfico de barras verticais para o total de escolas por dependência administrativa
@@ -244,7 +238,6 @@ def grafico_escolas_por_dependencia(df, ano_censo):
 
     fig.tight_layout()
     st.pyplot(fig)
-
 
 #===========================
 # Função para gráfico de barras verticais para o total de alunos por dependência administrativa
@@ -310,6 +303,9 @@ def grafico_alunos_por_dependencia(df, ano_censo):
     fig.tight_layout()
     st.pyplot(fig)
 
+#===========================
+# Função para gerar DataFrame com o total de alunos e escolas por dependência administrativa
+#===========================
 def dataframe_dependencia_municipio(df, ano_censo, municipio):
     """
     Gera um DataFrame com o total de alunos e escolas por dependência administrativa no município selecionado.
@@ -355,13 +351,12 @@ def dataframe_dependencia_municipio(df, ano_censo, municipio):
 
     return resultado
 
-
 #===========================
 # Função para panorama Urbano vs Rural
 #===========================
 def grafico_escolas_por_localizacao(df, ano_censo):
     """
-    Gera um gráfico de barras verticais com o total de escolas por dependência administrativa.
+    Gera um gráfico de barras verticais com o total de escolas por localização.
 
     Parâmetros:
     -----------
@@ -385,8 +380,6 @@ def grafico_escolas_por_localizacao(df, ano_censo):
         'Rural': '#1FB029',
         'Urbana': '#C0C0C0'
     }
-
-   
    
     cores = [cores_localizacao[r] for r in localizacao_counts.index]
 
@@ -415,7 +408,6 @@ def grafico_escolas_por_localizacao(df, ano_censo):
                 color='white', fontweight='bold', fontsize=14)
     fig.tight_layout()
     st.pyplot(fig)
-
 
 #===========================
 # Função para gráfico de barras verticais para o total de alunos por localizacao
@@ -481,11 +473,114 @@ def grafico_alunos_por_localizacao(df, ano_censo):
     fig.tight_layout()
     st.pyplot(fig)
 
+#===========================
+# Função para gerar dataframe para o total de alunos por localizacao
+#============================
+def dataframe_totais_por_localizacao_municipio(df, ano_censo, municipio):
+    """
+    Gera um DataFrame com o total de alunos e escolas por localizacao no ano selecionado.
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas 'NU_ANO_CENSO', 'TP_LOCALIZACAO', 'QT_MAT_BAS'.
+    ano_censo : int
+        Ano do censo escolar selecionado pelo usuário.
+
+    Retorno:
+    --------
+    pd.DataFrame
+        DataFrame com colunas: ['Localização', 'Total de Alunos']
+    """
+
+    # Filtra o DataFrame pelo ano e Municípios selecionados
+    df_filtrado = df[
+        (df['NU_ANO_CENSO'] == ano_censo) &
+        (df['NO_MUNICIPIO'] == municipio) &
+        (df['TP_LOCALIZACAO'].notnull())
+    ]
+
+    # Agrupa por Localização e soma os alunos
+    resultado = df_filtrado.groupby('TP_LOCALIZACAO').agg(
+        Total_Alunos = ('QT_MAT_BAS', 'sum'),
+        Total_Escolas = ('CO_ENTIDADE', 'count')
+    ).reset_index()
+    
+    # Mapeia os valores numéricos de TP_LOCALIZACAO para categorias legíveis
+    map_localizacao = {
+        1: 'Urbana',
+        2: 'Rural'
+    }
+    resultado['Localizacao'] = resultado['TP_LOCALIZACAO'].map(map_localizacao)
+    resultado = resultado[['Localizacao', 'Total_Alunos', 'Total_Escolas']]
+    
+    return resultado
+
+#===========================
+# Função gráfico de barras total de escolas por localizacao, por município
+#===========================
+def grafico_escolas_por_localizacao_municipio(df, ano_censo, municipio):
+    """
+    Gera um gráfico de barras verticais com o total de escolas por localização.
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas 'TP_LOCALIZACAO', e 'NU_ANO_CENSO'.
+    ano_censo : int
+        Ano do censo escolar selecionado pelo usuário na interface.
+    """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    # Filtra o DataFrame pelo ano e município selecionados
+    df_filtrado = df[
+        (df['NU_ANO_CENSO'] == ano_censo) &
+        (df['NO_MUNICIPIO'] == municipio) &
+        (df['TP_LOCALIZACAO'].notnull())
+    ]
+
+    # Agrupa por Localização e soma os alunos
+    localizacao_counts = df_filtrado['TP_LOCALIZACAO'].value_counts().sort_index()
+    localizacao_counts.index = localizacao_counts.index.map({1: 'Urbana', 2: 'Rural'})
+
+    # Cores fixas opacas por categoria
+    cores_localizacao = {
+        'Rural': '#1FB029',
+        'Urbana': '#C0C0C0'
+    }
+    cores = [cores_localizacao[r] for r in localizacao_counts.index]
+
+    # Estilo escuro
+    plt.style.use('dark_background')
+
+    # Criação do gráfico
+    fig, ax = plt.subplots(figsize=(10, 6))
+    bars = ax.bar(localizacao_counts.index, localizacao_counts.values, color=cores)
+
+    # Título e rótulos
+    ax.set_title(f'Total de Escolas por Localização em {municipio}', color='#FFA07A', fontsize=25)
+    
+    # Estilo dos spines
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+        spine.set_linewidth(1)
+
+    # Ticks
+    ax.set_ylim(0, localizacao_counts.max() * 1.1)
+    ax.tick_params(axis='x', colors='#FFA07A', labelsize=20)
+    ax.tick_params(axis='y', colors='#FFA07A', labelsize=20)
+
+    # Inserir valores nas barras
+    for i, valor in enumerate(localizacao_counts):
+        ax.text(i, valor + max(localizacao_counts) * 0.02, str(valor), ha='center',
+                color='white', fontweight='bold', fontsize=14)
+
+    fig.tight_layout()
+    st.pyplot(fig)
 
 #===========================
 # Função gráfico de barras total de alunos por localizacao diferenciada
 #===========================
-
 def grafico_alunos_por_localizacao_diferenciada(df, ano_censo):
     """
     Gera um gráfico de barras verticais com o total de alunos por localizacao diferenciada.
@@ -617,3 +712,111 @@ def grafico_escolas_por_localizacao_diferenciada(df, ano_censo):
     st.pyplot(fig)
     
 #===========================
+# Função para gerar dataframe para o total de escolas e alunos por localizacao diferenciada
+#============================
+def dataframe_totais_por_localizacao_diferenciada_municipio(df, ano_censo, municipio):    
+    """
+    Gera um DataFrame com o total de alunos e escolas por localizacao no ano selecionado.
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas 'NU_ANO_CENSO', 'TP_LOCALIZACAO', 'QT_MAT_BAS'.
+    ano_censo : int
+        Ano do censo escolar selecionado pelo usuário.
+
+    Retorno:
+    --------
+    pd.DataFrame
+        DataFrame com colunas: ['Localização', 'Total de Alunos']
+    """
+    
+    # Filtra o DataFrame pelo ano e Municípios selecionados
+    df_filtrado = df[
+        (df['TP_LOCALIZACAO_DIFERENCIADA'] != 0) &
+        (df['TP_LOCALIZACAO_DIFERENCIADA'].notnull()) &
+        (df['NU_ANO_CENSO'] == ano_censo) &
+        (df['NO_MUNICIPIO'] == municipio)
+    ]
+
+        # Agrupa por Localização e soma os alunos
+    resultado = df_filtrado.groupby('TP_LOCALIZACAO_DIFERENCIADA').agg(
+        Total_Alunos = ('QT_MAT_BAS', 'sum'),
+        Total_Escolas = ('CO_ENTIDADE', 'count')              
+    ).reset_index()
+    
+    # Mapeamento os valores numériocos de TP_LOCALIZACAO_DIFERENCIADA para categorias legíveis
+    map_localizacao = {
+        1: 'Assentamento',
+        2: 'Terra Indígena',
+        3: 'Quilombola',
+        8: 'Com. Tradicionais'
+    }
+    resultado['Loc. Diferenciada'] = resultado['TP_LOCALIZACAO_DIFERENCIADA'].map(map_localizacao)
+    resultado = resultado[['Loc. Diferenciada', 'Total_Alunos', 'Total_Escolas']]
+    return resultado
+
+
+#===========================
+# Função para gráfico de barras total de escolas por localizacao diferenciada, por município
+#===========================
+def grafico_escolas_por_localizacao_diferenciada_municipio(df, ano_censo, municipio):
+    """
+    Gera um gráfico de barras verticais com o total de escolas por localização diferenciada.
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas 'TP_LOCALIZACAO_DIFERENCIADA', e 'NU_ANO_CENSO'.
+    ano_censo : int
+        Ano do censo escolar selecionado pelo usuário na interface.
+    """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+
+    # Filtra o DataFrame pelo ano e município selecionados
+    df_filtrado = df[
+        (df['TP_LOCALIZACAO_DIFERENCIADA'] != 0) &
+        (df['TP_LOCALIZACAO_DIFERENCIADA'].notnull()) &
+        (df['NU_ANO_CENSO'] == ano_censo) &
+        (df['NO_MUNICIPIO'] == municipio)
+    ]
+
+    # Agrupa por Localização e conta as escolas
+    localizacao_counts = df_filtrado['TP_LOCALIZACAO_DIFERENCIADA'].value_counts().sort_index()
+    localizacao_counts.index = localizacao_counts.index.map({1: 'Assentamento', 2: 'Terra Indígena', 3: 'Quilombola', 8: 'Com. Tradicionais'})
+
+    # Cores fixas opacas por categoria
+    cores_localizacao = {
+        'Assentamento': '#1FB029',
+        'Terra Indígena': '#C0C0C0',
+        'Quilombola': '#FFA07A',
+        'Com. Tradicionais': '#FF6347'
+    }
+    
+    cores_localizacao = [cores_localizacao[r] for r in localizacao_counts.index]
+    
+    # Estilo escuro
+    plt.style.use('dark_background')
+
+    # Criação do gráfico
+    fig, ax = plt.subplots(figsize=(10, 6))
+    bars = ax.bar(localizacao_counts.index, localizacao_counts.values, color=cores_localizacao)
+
+    # Título e rótulos
+    ax.set_title(f'Total de Escolas por Localização Diferenciada em {municipio}', color='#FFA07A', fontsize=25)
+    
+    # Estilo dos spines
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+        spine.set_linewidth(1)
+    # Ticks
+    ax.set_ylim(0, localizacao_counts.max() * 1.1)
+    ax.tick_params(axis='x', colors='#FFA07A', labelsize=20)
+    ax.tick_params(axis='y', colors='#FFA07A', labelsize=20)
+    # Inserir valores nas barras
+    for i, valor in enumerate(localizacao_counts):
+        ax.text(i, valor + max(localizacao_counts) * 0.02, str(valor), ha='center',
+                color='white', fontweight='bold', fontsize=14)
+    fig.tight_layout()
+    st.pyplot(fig)
