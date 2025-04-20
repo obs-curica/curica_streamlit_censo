@@ -1,5 +1,7 @@
 import streamlit as st
 
+from scripts.textos import texto_home_contextualizacao
+
 # Configurações iniciais de layout
 st.set_page_config(
     page_title="Observatório Curica",
@@ -34,10 +36,12 @@ st.markdown("""
 # Conteúdo da página inicial
 st.markdown('<div class="title">Observatório Curica</div>', unsafe_allow_html=True)
 
+# st.header("Observatório :orange[Cu]:green[ri]:orange[ca]")
+
 st.markdown("""
 <div class="text">
 <p>
-O Observatório Curica é uma iniciativa desenvolvida pela Promotoria de Defesa da Criança e do Adolescente de Cruzeiro do Sul (MPAC), que visa monitorar, diagnosticar e subsidiar intervenções em políticas públicas voltadas à educação escolar pública no Estado do Acre. 
+O Observatório Curica é uma iniciativa desenvolvida pela Promotoria de Defesa da Criança e do Adolescente de Cruzeiro do Sul, que visa monitorar, diagnosticar e subsidiar intervenções em políticas públicas voltadas à educação escolar pública no Estado do Acre. 
 </p>
 
 <p>
@@ -58,3 +62,8 @@ Acesse os painéis laterais para explorar os dados e análises construídos nest
 </p>
 </div>
 """, unsafe_allow_html=True)
+
+st.markdown(texto_home_contextualizacao())
+
+st.subheader("O Censo Escolar")
+st.write("explicar a metodologia e fonte dos dados")

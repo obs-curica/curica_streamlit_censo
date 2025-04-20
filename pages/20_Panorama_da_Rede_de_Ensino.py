@@ -5,19 +5,26 @@ import matplotlib.colors as mcolors
 import os
 import re
 
+from scripts.textos import texto_pan_rede_intro
+from scripts.textos import texto_pan_rede_caracterizacao
+from scripts.textos import texto_pan_rede_totais
+from scripts.textos import texto_pan_rede_analise
+from scripts.textos import texto_pan_rede_dependencia_intro
+
 from scripts.load_data import carregar_dados
+from scripts.load_data import dataframe_dependencia_municipio
+from scripts.load_data import dataframe_totais_por_localizacao_municipio
+from scripts.load_data import dataframe_totais_por_localizacao_diferenciada_municipio
+
 from scripts.graficos import grafico_alunos_por_municipio
 from scripts.graficos import grafico_escolas_por_municipio
 from scripts.graficos import grafico_escolas_por_dependencia
 from scripts.graficos import grafico_alunos_por_dependencia
-from scripts.graficos import dataframe_dependencia_municipio
 from scripts.graficos import grafico_alunos_por_localizacao
 from scripts.graficos import grafico_escolas_por_localizacao
-from scripts.graficos import dataframe_totais_por_localizacao_municipio
 from scripts.graficos import grafico_escolas_por_localizacao_municipio
 from scripts.graficos import grafico_alunos_por_localizacao_diferenciada
 from scripts.graficos import grafico_escolas_por_localizacao_diferenciada
-from scripts.graficos import dataframe_totais_por_localizacao_diferenciada_municipio
 from scripts.graficos import grafico_escolas_por_localizacao_diferenciada_municipio
 
 # Configuração da página
@@ -29,18 +36,19 @@ df_panorama_geral = carregar_dados(url_panorama)
 
 # Título da página
 st.title("🏫 Panorama da Rede Pública de Ensino do Estado do Acre")
-st.write("Esta página apresenta uma análise da rede de ensino do estado do Acre, com base nos dados do Censo Escolar.")
-st.write(df_panorama_geral.head(5))
+st.write(texto_pan_rede_intro())
+
 
 #============================
 # Seção 01 - Caracterização da Rede de Ensino
 #============================
 st.header("Caracterização da Rede de Ensino")
-st.write("Texto explicativo.")
+st.write(texto_pan_rede_caracterizacao())
 
+#++++++++++++
 # Subseção 01.1 - Total de Alunos e Escolas por Município
 st.subheader("Total de Alunos e Escolas por Município")
-st.write("Abaixo será apresentada a caracterização da rede de ensino, discriminando o número total de escolas e alunos por ano e por Município.")
+st.write(texto_pan_rede_totais())
 
 # Selectbox do ano do Censo Escolar
 # ano_censo = st.selectbox("Selecione o ano do Censo Escolar:", sorted(df_panorama_geral['NU_ANO_CENSO'].unique()), key="ano_censo")
@@ -63,11 +71,12 @@ with col2:
     grafico_escolas_por_municipio(df_panorama_geral, ano_censo)
 
 # Texto de análise dos gráficos
-st.write("Texto analítico.")
+st.write(texto_pan_rede_analise())
 
+#++++++++++++++
 # Subseção 01.2 - Total de Alunos e Escolas por Dependência Administrativa
 st.subheader("Total de Alunos e Escolas por Dependência Administrativa")
-st.write("Abaixo será realizada a caracterização da rede de ensino, discriminando a dependência administrativa a qual a escola está vinculada, se Municipal, Estadual ou Federal. Total e por Município.")
+st.write(texto_pan_rede_dependencia_intro())
 
 st.write("Ano Selecionado: ", ano_censo)
 

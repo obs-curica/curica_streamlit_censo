@@ -8,7 +8,7 @@ import re
 from scripts.load_data import carregar_dados
 from scripts.graficos import grafico_alunos_por_localizacao_diferenciada
 from scripts.graficos import grafico_escolas_por_localizacao_diferenciada
-from scripts.graficos import dataframe_totais_por_localizacao_diferenciada_municipio
+from scripts.load_data import dataframe_totais_por_localizacao_diferenciada_municipio
 from scripts.graficos import grafico_escolas_por_localizacao_diferenciada_municipio
 
 # Configuração da página
