@@ -111,13 +111,91 @@ def texto_pan_rede_dependencia_intro():
     Nesta subseção é detalhada a dependência administrativa das escolas, que pode ser Municipal, Estadual ou Federal. Ou seja,
     ela indica a qual sistema de ensino alunos e escolas estão vinculados. Ela segue a Lei de Diretrizes e Bases da Educação (LDB),
     que detalha a responsabilidade de cada ente federativo na oferta de educação básica. Embora a colaboração entre os entes 
-    seja destaque, a LDB detalha que os Municípios devem oferecer a educação infantil e, com prioridade, o ensino fundamental. Já os Estados 
-    devem assegurar o ensino fundamental e ofertar, com prioriodade, o ensino médio.
+    seja destaque, a LDB detalha que os Municípios devem oferecer a educação infantil e, com prioridade, o ensino fundamental. 
+    Já os Estados devem assegurar o ensino fundamental e ofertar, com prioriodade, o ensino médio.
     
-    A oferta da educação básica por entes que integram o sistema de ensino federal se dá, no Estado do Acre, por meio do Colégio de Aplicação,
-    da UFAC, com sede em Rio Branco, e por meio dos Institutos Federais do Acre (IFAC), com maior capilaridade.
+    A oferta da educação básica por entes que integram o sistema de ensino federal se dá, no Estado do Acre, por meio do 
+    Colégio de Aplicação, da UFAC, com sede em Rio Branco, e por meio dos Institutos Federais do Acre (IFAC), com maior capilaridade.
     
     Do ponto de vista de uma Promotoria de Justiça, a dependência administrativa indica o polo passivo de eventual ação civil pública.
     
     Os gráficos a seguir apresentam o total de alunos e escolas por dependência administrativa, para todo o Estado.
+    """
+    
+def texto_pan_rede_dependencia_analise():
+    return """
+    Como será aprofundado na avaliação do cumprimento das metas do Plano Nacional de Educação, as matrículas do ensino 
+    infantil e fundamental somadas superam o número de matrículas do ensino médio. Pensando que esses níveis de ensino 
+    devem ser ofertados prioritariamente pelos Municípios, era de se esperar que a maior quantidade de alunos e escolas 
+    estivesse vinculada à rede pública municipal.  
+    
+    No entanto, os dados revelam que, somados, a maior parte dos alunos está vinculada à rede pública estadual e, por
+    outro lado, a maior parte das escolas está vinculada à rede pública Municipal.  
+    Essa informação é importante para entender as estratégias adotadas por cada ente federativo, bem como a distribuição 
+    de responsabilidades entre os diferentes níveis de governo na oferta de educação básica.  
+    
+    Nesse ponto, é importante lembrar que grande parte dos recursos federais para a educação básica são transferidos
+    ao Estado e Municípios levando em conta o quantitativo de alunos matriculados e contabilizados no Censo Escolar.
+    
+    Agora dê corda à sua inquietação e verifique se este panorama geral se repete localmente, em seu Município. Melhor ainda,
+    escolha alguns Municípios, compare os dados e reflita sobre as diferenças e suas motivações.
+    """
+    
+def texto_pan_rede_dependencia_analise_2():
+    return """
+    Sem pretensão de exaurir o tema, é possível afirmar que, ao se comparar os dados entre os Municípios, nota-se que
+    quanto maior a população do Município, maior o número de alunos e escolas vinculados à rede pública estadual. 
+    É o caso nos Municípios de Rio Branco, Cruzeiro do Sul, Tarauacá, Feijó e Sena Madureira.  
+    
+    Ainda, é possível notar uma acentuada diminuição da presença do sistema de ensino estadual nos Municípios que não possuem 
+    acesso terrestre: Santa Rosa do Purus, Jordão, Marechal Thaumaturgo e Porto Walter.
+    
+   Esta análise segue sendo aprofundada abaixo, categorizando-se a rede de ensino pela localização das escolas.
+    """
+
+#===========================
+# Funções para a página Panorama Rede - Urbano vs. Rural
+#===========================
+def texto_pan_rede_rural_intro():
+    return """
+    Abaixo são apresentados os dados sobre a localização das escolas, que são classificadas no Censo Escolar como aquelas
+    localizadas em área urbana ou rural, tento como critério os limites geográficos definidos no Plano Diretor do Município 
+    ou instrumento equivalente. Essa classificação é importante para entender a distribuição das escolas no território e a 
+    acessibilidade dos alunos à educação básica.  
+    
+    Muito já foi dito a respeito da dualidade entre os adjetivos "rural" e "urbano", bem como sobre os concepções pejorativas
+    ou supremacistas que permeiam essa classificação. Nunca é demais relembrar que o termo rural deve ser empregado com a cautela
+    de se levar em conta o contexto que o abriga. Nesse caso, o contexto amazônico marcado por sua rica sociobiodiversidade. 
+    Desse modo, o termo rural abriga tanto escolas indígenas, como escolas em reservas extrativistas, projetos de 
+    assentamento do INCRA e ribeirinhas. É quase um conceito negativo do urbano. Críticas à parte, o Censo Escolar busca 
+    afinar essa categorização com outros campos que tratam da "Localização Diferenciada", abordada em panorama próprio.
+    
+    O ensino rural é explicitamente previsto na LDB, que estabelece a necessidade de adaptação às peculiaridades locais e 
+    suas as manifestações culturais, a adequação do currículo às necessidades dos alunos, calendário escolar adaptado ao 
+    ciclo agrícola e às condições climáticas e adequação da escola à natureza do trabalho rural 
+    ([LDB, 1996](https://www.planalto.gov.br/ccivil_03/leis/L9394compilado.htm#:~:text=desportivas%20n%C3%A3o%2Dformais.-,Art.%2028,-.%20Na%20oferta%20de)).    
+    
+    Segue o panorama geral da localização das escolas, para todo o Estado do Acre.
+    """
+    
+def texto_pan_rede_rural_analise():
+    return """
+    O primeiro gráfico apresenta o total de alunos por localização, indicando a maior concentração de alunos em escolas
+    localizadas em áreas urbanas. Esse dado reflete os dados populacionais de que a maioria da população do Acre reside 
+    em áreas urbanas. A quantidade total de alunos em áreas rurais é menos da metade do total de alunos em áreas urbanas.
+    
+    No entanto, o segundo gráfico revela que a quantidade de escolas em áreas rurais é quase dois terços maior do que a
+    quantidade de escolas em áreas urbanas. Esse é o dado que começa a diferenciar a educação amazônica daquela executada
+    em outras regiões do Brasil. Para se ter uma perspectiva, o Estado do Acre abrange uma área territorial próxima da Inglaterra.
+    Os Municípios do Vale do Alto Rio Juruá, por sua vez, possuem uma área territorial maior que a do Estado de Israel.
+    A noção dessas dimensões espaciais são fundamentais para se compreender os desafios da realidade educacional do Acre 
+    e não se surpreender com a quantidade de escolas rurais/florestais.
+    
+    Portanto, a quantidade de escolas rurais é um reflexo da dispersão espacial da população no território, que é uma característica
+    marcante da região amazônica.
+    
+    
+    
+    Assim como na análise anterior, é possível comparar os dados entre os Municípios e refletir sobre as diferenças
+    e suas motivações.
     """

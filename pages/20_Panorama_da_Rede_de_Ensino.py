@@ -10,22 +10,22 @@ from scripts.textos import texto_pan_rede_caracterizacao
 from scripts.textos import texto_pan_rede_totais
 from scripts.textos import texto_pan_rede_analise
 from scripts.textos import texto_pan_rede_dependencia_intro
+from scripts.textos import texto_pan_rede_dependencia_analise
+from scripts.textos import texto_pan_rede_dependencia_analise_2
+from scripts.textos import texto_pan_rede_rural_intro
 
 from scripts.load_data import carregar_dados
-from scripts.load_data import dataframe_dependencia_municipio
 from scripts.load_data import dataframe_totais_por_localizacao_municipio
-from scripts.load_data import dataframe_totais_por_localizacao_diferenciada_municipio
 
 from scripts.graficos import grafico_alunos_por_municipio
 from scripts.graficos import grafico_escolas_por_municipio
 from scripts.graficos import grafico_escolas_por_dependencia
 from scripts.graficos import grafico_alunos_por_dependencia
+from scripts.graficos import grafico_alunos_por_dependencia_municipio
+from scripts.graficos import grafico_escolas_por_dependencia_municipio
 from scripts.graficos import grafico_alunos_por_localizacao
 from scripts.graficos import grafico_escolas_por_localizacao
 from scripts.graficos import grafico_escolas_por_localizacao_municipio
-from scripts.graficos import grafico_alunos_por_localizacao_diferenciada
-from scripts.graficos import grafico_escolas_por_localizacao_diferenciada
-from scripts.graficos import grafico_escolas_por_localizacao_diferenciada_municipio
 
 # Configuração da página
 st.set_page_config(page_title="Panorama Rede de Ensino", layout="wide", page_icon="🦜")
@@ -82,7 +82,7 @@ st.write("Ano Selecionado: ", ano_censo)
 
 #st.write(":green-badge[Ano Selecionado: ]", ano_censo)
 
-# Divide a tela em duas colunas
+# Divide a tela em duas colunas e plota os seus gráficos
 col1, col2 = st.columns(2)
 # Gráfico do total de alunos por dependência
 with col1:
@@ -91,33 +91,55 @@ with col1:
 with col2:
     grafico_escolas_por_dependencia(df_panorama_geral, ano_censo)
 
-st.write("Texto analítico. Retomar a política de anexos.")
+# Texto análise dos gráficos
+st.write(texto_pan_rede_dependencia_analise())
 
 # Tabela de dependência administrativa por Município
 with st.form("form_dependencia"):
-    ano_censo_dependencia = st.selectbox("Selecione o ano do Censo Escolar:", sorted(df_panorama_geral['NU_ANO_CENSO'].unique()), key ="ano_censo_dependencia")
+    ano_censo_dependencia = st.selectbox(
+        "Selecione o ano do Censo Escolar:", 
+        options=anos_disponiveis, 
+        index=anos_disponiveis.index(ano_mais_recente), 
+        key ="ano_censo_dependencia"
+    )
     municipio_dependencia = st.selectbox("Selecione o município:", sorted(df_panorama_geral['NO_MUNICIPIO'].unique()), key="municipio_dependencia")
     submitted = st.form_submit_button("Gerar Dados")
     if submitted:
-        st.write(dataframe_dependencia_municipio(df_panorama_geral, ano_censo_dependencia, municipio_dependencia))
-        
+        col1, col2 = st.columns(2)
+        # Dataframe do total de alunos e escolas por dependência
+        with col1:
+            grafico_alunos_por_dependencia_municipio(df_panorama_geral, ano_censo_dependencia, municipio_dependencia)
+        # Gráfico do total de escolas por dependência
+        with col2:
+            grafico_escolas_por_dependencia_municipio(df_panorama_geral, ano_censo_dependencia, municipio_dependencia)
+
+        # Texto de análise dos gráficos
+        st.write(texto_pan_rede_dependencia_analise_2())
 
 #===============================
 # Seção 02 - Urbano vs. Rural
 #===============================
 st.header("Urbano vs. Rural")
-st.write("Texto explicativo")
 
-st.write("Ano Selecionado: ", ano_censo)
+# Texto de introdução
+st.write(texto_pan_rede_rural_intro())
+
+# Selectbox do ano do Censo Escolar
+ano_censo_rural = st.selectbox(
+    "Selecione o ano do Censo Escolar:", 
+    options=anos_disponiveis, 
+    index=anos_disponiveis.index(ano_mais_recente), 
+    key ="ano_censo_rural"
+)
 
 # Divide a tela em duas colunas
 col1, col2 = st.columns(2)
 # Gráfico do total de alunos por localização
 with col1:
-    grafico_alunos_por_localizacao(df_panorama_geral, ano_censo)
+    grafico_alunos_por_localizacao(df_panorama_geral, ano_censo_rural)
 # Gráfico do total de escolas por localização
 with col2:
-    grafico_escolas_por_localizacao(df_panorama_geral, ano_censo)
+    grafico_escolas_por_localizacao(df_panorama_geral, ano_censo_rural)
 # Texto de análise dos gráficos
 st.write("Texto analítico.")
 
