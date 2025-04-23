@@ -47,6 +47,7 @@ def texto_home_contextualizacao():
 #==========================
 # Funções para a página Panorama Rede
 #==========================
+
 def texto_pan_rede_intro():
     return """
     Esta página busca oferecer uma visão geral sobre os sistemas de ensino da rede pública de **educação básica** 
@@ -105,7 +106,9 @@ def texto_pan_rede_analise():
     Esta situação será detalhada em diversos momentos nesta plataforma, evidenciando os reflexos negativos dessa escolha 
     administrativa e apontando caminhos para intervenção. 
     """
-    
+
+# Funções para a página Panorama Rede - Dependência Administrativa
+
 def texto_pan_rede_dependencia_intro():
     return """
     Nesta subseção é detalhada a dependência administrativa das escolas, que pode ser Municipal, Estadual ou Federal. Ou seja,
@@ -153,10 +156,9 @@ def texto_pan_rede_dependencia_analise_2():
    Esta análise segue sendo aprofundada abaixo, categorizando-se a rede de ensino pela localização das escolas.
     """
 
-#===========================
 # Funções para a página Panorama Rede - Urbano vs. Rural
-#===========================
-def texto_pan_rede_rural_intro():
+
+def texto_pan_rede_rural_intro_1():
     return """
     Abaixo são apresentados os dados sobre a localização das escolas, que são classificadas no Censo Escolar como aquelas
     localizadas em área urbana ou rural, tento como critério os limites geográficos definidos no Plano Diretor do Município 
@@ -166,25 +168,25 @@ def texto_pan_rede_rural_intro():
     Muito já foi dito a respeito da dualidade entre os adjetivos "rural" e "urbano", bem como sobre os concepções pejorativas
     ou supremacistas que permeiam essa classificação. Nunca é demais relembrar que o termo rural deve ser empregado com a cautela
     de se levar em conta o contexto que o abriga. Nesse caso, o contexto amazônico marcado por sua rica sociobiodiversidade. 
-    Desse modo, o termo rural abriga tanto escolas indígenas, como escolas em reservas extrativistas, projetos de 
-    assentamento do INCRA e ribeirinhas. É quase um conceito negativo do urbano. Críticas à parte, o Censo Escolar busca 
+    Desse modo, é importante ter em mente que o termo "rural" abriga tanto escolas indígenas, como escolas em reservas extrativistas, 
+    projetos de assentamento do INCRA e ribeirinhas. É quase um conceito negativo do urbano. Críticas à parte, o Censo Escolar busca 
     afinar essa categorização com outros campos que tratam da "Localização Diferenciada", abordada em panorama próprio.
     
-    O ensino rural é explicitamente previsto na LDB, que estabelece a necessidade de adaptação às peculiaridades locais e 
+    O ensino rural é explicitamente previsto na LDB, que estabelece a necessidade de sua adaptação às peculiaridades locais e 
     suas as manifestações culturais, a adequação do currículo às necessidades dos alunos, calendário escolar adaptado ao 
     ciclo agrícola e às condições climáticas e adequação da escola à natureza do trabalho rural 
     ([LDB, 1996](https://www.planalto.gov.br/ccivil_03/leis/L9394compilado.htm#:~:text=desportivas%20n%C3%A3o%2Dformais.-,Art.%2028,-.%20Na%20oferta%20de)).    
     
-    Segue o panorama geral da localização das escolas, para todo o Estado do Acre.
+    Segue o panorama geral da localização das escolas, para todo o Estado do Acre, conforme os dados do Censo Escolar.
     """
     
-def texto_pan_rede_rural_analise():
+def texto_pan_rede_rural_analise_1():
     return """
     O primeiro gráfico apresenta o total de alunos por localização, indicando a maior concentração de alunos em escolas
     localizadas em áreas urbanas. Esse dado reflete os dados populacionais de que a maioria da população do Acre reside 
-    em áreas urbanas. A quantidade total de alunos em áreas rurais é menos da metade do total de alunos em áreas urbanas.
+    em áreas urbanas. Entretanto, quase um terço do total de alunos está matriculado em escolas rurais.
     
-    No entanto, o segundo gráfico revela que a quantidade de escolas em áreas rurais é quase dois terços maior do que a
+    Por sua vez, o segundo gráfico revela que a quantidade de escolas em áreas rurais é quase dois terços maior do que a
     quantidade de escolas em áreas urbanas. Esse é o dado que começa a diferenciar a educação amazônica daquela executada
     em outras regiões do Brasil. Para se ter uma perspectiva, o Estado do Acre abrange uma área territorial próxima da Inglaterra.
     Os Municípios do Vale do Alto Rio Juruá, por sua vez, possuem uma área territorial maior que a do Estado de Israel.
@@ -192,10 +194,67 @@ def texto_pan_rede_rural_analise():
     e não se surpreender com a quantidade de escolas rurais/florestais.
     
     Portanto, a quantidade de escolas rurais é um reflexo da dispersão espacial da população no território, que é uma característica
-    marcante da região amazônica.
-    
-    
+    marcante da região amazônica. E serve de alerta àqueles que pensam que a floresta é um "[deserto verde](https://search.worldcat.org/title/3189649)"
+    a ser conquistado.
     
     Assim como na análise anterior, é possível comparar os dados entre os Municípios e refletir sobre as diferenças
     e suas motivações.
+    """
+    
+def texto_pan_rede_rural_intro_2():
+    return """
+    Selecione abaixo o ano do Censo Escolar e o Município desejado. Os gráficos apresentam o total de alunos e escolas por localização.
+    """
+
+def texto_pan_rede_rural_analise_2():
+    return """
+    E então, como está a localização das escolas em seu Município? A maior parte delas está localizada em áreas urbanas ou rurais?
+    E os alunos, estão de fato concentrados na área urbana? Existem Municípios com maior número de alunos em escolas rurais?
+    Há uma relação entre a quantidade de alunos em áreas rurais e a região onde o Município está inserido?
+    
+    O grande número de alunos e escolas rurais nos Municípios do interior do Acre apenas reflete a realidade geográfica e 
+    demográfica do Estado. O que é preciso enfatizar é que existem Municípios com grande quantidade de alunos e escolas rurais,
+    que enfrentam os desafios logísticos e climáticos da região amazônica. Como fica o transporte escolar em ramais, durante
+    o período chuvoso, ou em igarapés, no período da seca? E o fornecimento de alimentação escolar e material de expediente?
+    
+    Existem soluções para esses desafios já previstas pela legislação e ainda pouco exploradas pela administração escolar 
+    estadual e municipais, como a :orange-background[adequação do calendário escolar] ao ciclo agrícola e às condições climáticas ou a 
+    aquisição da alimentação escolar diretamente da :orange-background[agricultura familiar local], ou mesmo a :orange-background[pedagogia da alternância]. 
+    Há muito trabalho a ser feito.
+    
+    De quem é a responsabilidade?
+    
+    O início da resposta a essa pergunta pode ser obtido combinando-se os dados da análise anterior que trata da dependência
+    administrativa, com os dados sobre a localização das escolas. Essa combinação de dados é importante porque
+    identifica a presença dos diferentes sistemas de ensino em áreas urbanas e rurais. 
+    """
+    
+# Funções para a página Panorama Rede - Dependencia Administrativa e Localização
+
+def texto_pan_rede_dependencia_rural_intro_1():
+    return """
+    A combinação dos dados sobre a dependência administrativa e a localização das escolas é fundamental para entender 
+    como os diferentes sistemas de ensino atuam em áreas urbanas e rurais. Essa análise permite identificar as 
+    escolhas administrativas do Governo do Estado e dos Municípios, bem como suas responsabilidades por possíveis
+    omissões.
+        
+    A seguir, são apresentados gráficos que mostram o total de alunos e escolas por dependência administrativa, 
+    considerando a localização das escolas. Selecione o ano do Censo Escolar desejado.
+    """    
+
+def texto_pan_rede_dependencia_rural_analise_1():
+    return """
+    analise
+    """
+    
+def texto_pan_rede_dependencia_rural_intro_2():
+    return """
+    intro 2
+    Relembra-se que os gráficos abaixo podem ser visualizados em tela cheia, clicando no ícone de tela cheia no 
+    anto superior direito da imagem.
+    """
+    
+def texto_pan_rede_dependencia_rural_analise_2():
+    return """
+    analise 2
     """

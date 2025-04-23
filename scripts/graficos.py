@@ -56,6 +56,12 @@ def plot_agua_potavel_por_municipio(df_censo_agua, ano_censo, municipio_selecion
         plt.tight_layout()
         st.pyplot(fig)
 
+
+
+#===========================
+# PAGINA PANORAMA GERAL
+#===========================
+
 #==========================
 # Função para plotar gráfico de barras horizontal com o total de alunos por município
 #==========================
@@ -369,7 +375,6 @@ def grafico_alunos_por_dependencia_municipio(df, ano_censo, municipio):
     fig.tight_layout()
     st.pyplot(fig)
     
-
 #============================
 # Função para gráfico de barras total de escolas por dependência, por município
 #============================
@@ -435,7 +440,6 @@ def grafico_escolas_por_dependencia_municipio(df, ano_censo, municipio):
     fig.tight_layout()
     st.pyplot(fig)
     
-
 #===========================
 # Função para gráfico de barras panorama Urbano vs Rural
 #===========================
@@ -559,6 +563,75 @@ def grafico_alunos_por_localizacao(df, ano_censo):
     st.pyplot(fig)
 
 #===========================
+# Função gráfico de barras total de alunos por localizacao, por município
+#===========================
+def grafico_alunos_por_localizacao_municipio(df, ano_censo, municipio):
+    """
+    Gera um gráfico de barras verticais com o total de alunos por localização.
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas 'TP_LOCALIZACAO', 'QT_MAT_BAS' e 'NU_ANO_CENSO'.
+    ano_censo : int
+        Ano do censo escolar selecionado pelo usuário na interface.
+    municipio : str
+        Nome do município para filtrar os dados.
+    """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    from matplotlib.ticker import MaxNLocator
+
+    # Filtra o DataFrame pelo ano e município selecionados
+    df_filtrado = df[
+        (df['NU_ANO_CENSO'] == ano_censo) &
+        (df['NO_MUNICIPIO'] == municipio)
+    ]
+
+    # Agrupa por Localização e soma os alunos
+    localizacao_counts = df_filtrado.groupby('TP_LOCALIZACAO')['QT_MAT_BAS'].sum().sort_index().astype(int)
+    localizacao_counts.index = localizacao_counts.index.map({1: 'Urbana', 2: 'Rural'})
+
+    # Cores fixas opacas por categoria
+    cores_localizacao = {
+        'Rural': '#1FB029',
+        'Urbana': '#C0C0C0'
+    }
+
+  
+    cores = [cores_localizacao[r] for r in localizacao_counts.index]
+
+    # Estilo escuro
+    plt.style.use('dark_background')
+
+    # Criação do gráfico
+    fig, ax = plt.subplots(figsize=(10, 6))
+    bars = ax.bar(localizacao_counts.index, localizacao_counts.values, color=cores)
+
+    # Título e rótulos
+    ax.set_title(f'Total de Alunos por Localização em {municipio}', color='#FFA07A', fontsize=25)
+    
+    # Estilo dos spines
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+        spine.set_linewidth(1)
+
+    
+    # Ticks
+    ax.set_ylim(0, localizacao_counts.max() * 1.1)
+    ax.tick_params(axis='x', colors='#FFA07A', labelsize=20)
+    ax.tick_params(axis='y', colors='#FFA07A', labelsize=20)
+    
+    # Definindo o número de ticks no eixo y
+    ax.yaxis.set_major_locator(MaxNLocator(nbins=6))
+    # Inserir valores nas barras
+    for i, valor in enumerate(localizacao_counts):
+        ax.text(i, valor + max(localizacao_counts) * 0.02, str(valor), ha='center',
+                color='white', fontweight='bold', fontsize=14)
+    fig.tight_layout()
+    st.pyplot(fig)
+
+#===========================
 # Função gráfico de barras total de escolas por localizacao, por município
 #===========================
 def grafico_escolas_por_localizacao_municipio(df, ano_censo, municipio):
@@ -619,6 +692,275 @@ def grafico_escolas_por_localizacao_municipio(df, ano_censo, municipio):
 
     fig.tight_layout()
     st.pyplot(fig)
+
+
+def grafico_alunos_por_dependencia_localizacao(df, ano_censo):
+    """
+    Gera gráfico de barras agrupadas com total de alunos por dependência e localização (urbana/rural).
+
+    Parâmetros:
+    - df : pd.DataFrame
+        DataFrame contendo as colunas 'TP_DEPENDENCIA', 'TP_LOCALIZACAO', 'QT_MAT_BAS', 'NU_ANO_CENSO'
+    - ano_censo : int
+        Ano do censo escolar a ser filtrado
+    """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    import numpy as np
+
+    # Filtro por ano
+    df_filtrado = df[df['NU_ANO_CENSO'] == ano_censo]
+
+    # Agrupamento por dependência e localização, somando os alunos
+    agrupado = df_filtrado.groupby(['TP_DEPENDENCIA', 'TP_LOCALIZACAO'])['QT_MAT_BAS'].sum().unstack(fill_value=0)
+    agrupado = agrupado.rename(index={1: 'Federal', 2: 'Estadual', 3: 'Municipal'})
+    agrupado = agrupado.rename(columns={1: 'Urbana', 2: 'Rural'})
+
+    # Preparar dados
+    categorias = agrupado.index.tolist()
+    urbana = agrupado['Urbana']
+    rural = agrupado['Rural']
+    x = np.arange(len(categorias))
+    largura = 0.35
+
+    # Estilo escuro
+    plt.style.use('dark_background')
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    # Plotagem
+    ax.bar(x - largura/2, urbana, width=largura, label='Urbana', color='#C0C0C0')
+    ax.bar(x + largura/2, rural, width=largura, label='Rural', color='#1FB029')
+
+    # Eixos e rótulos
+    ax.set_title('Total de Alunos por Dependência e Localização', color='#FFA07A', fontsize=25)
+    ax.set_xticks(x)
+    ax.set_xticklabels(categorias, color='#FFA07A', fontsize=25)
+    ax.tick_params(axis='y', colors='#FFA07A')
+    ax.legend()
+
+    # Estilo dos spines
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    # Cálculo do limite superior responsivo
+    limite_superior = max(urbana.max(), rural.max()) * 1.15
+    ax.set_ylim(0, limite_superior)
+
+    # Inserção de valores nas barras com espaçamento dinâmico
+    espaco_texto = limite_superior * 0.015
+    for i in range(len(categorias)):
+        ax.text(x[i] - largura/2, urbana[i] + espaco_texto, f'{urbana[i]:,.0f}', ha='center', color='white', fontweight='bold', fontsize=17)
+        ax.text(x[i] + largura/2, rural[i] + espaco_texto, f'{rural[i]:,.0f}', ha='center', color='white', fontweight='bold', fontsize=17)
+
+    plt.tight_layout()
+    st.pyplot(fig)
+
+
+def grafico_escolas_por_dependencia_localizacao(df, ano_censo):
+    """
+    Gera gráfico de barras agrupadas com total de escolas por dependência e localização (urbana/rural).
+
+    Parâmetros:
+    - df : pd.DataFrame
+        DataFrame contendo as colunas 'TP_DEPENDENCIA', 'TP_LOCALIZACAO', 'NU_ANO_CENSO'
+    - ano_censo : int
+        Ano do censo escolar a ser filtrado
+    """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    import numpy as np
+
+    # Filtros iniciais
+    df_filtrado = df[df['NU_ANO_CENSO'] == ano_censo]
+
+    # Agrupamento por dependência e localização
+    agrupado = df_filtrado.groupby(['TP_DEPENDENCIA', 'TP_LOCALIZACAO'])['CO_ENTIDADE'].count().unstack(fill_value=0)
+    agrupado = agrupado.rename(index={1: 'Federal', 2: 'Estadual', 3: 'Municipal'})
+    agrupado = agrupado.rename(columns={1: 'Urbana', 2: 'Rural'})
+
+    # Preparar os dados
+    categorias = agrupado.index.tolist()
+    urbana = agrupado['Urbana']
+    rural = agrupado['Rural']
+
+    x = np.arange(len(categorias))
+    largura = 0.35
+
+    # Estilo do projeto
+    plt.style.use('dark_background')
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    # Plotagem das barras
+    ax.bar(x - largura/2, urbana, width=largura, label='Urbana', color='#C0C0C0')
+    ax.bar(x + largura/2, rural, width=largura, label='Rural', color='#1FB029')
+
+    # Eixos e rótulos
+    ax.set_title('Total de Escolas por Dependência e Localização', color='#FFA07A', fontsize=25)
+    ax.set_xticks(x)
+    ax.set_xticklabels(categorias, color='#FFA07A', fontsize=25)
+    ax.tick_params(axis='y', colors='#FFA07A')
+    ax.legend()
+
+    # Estilo dos spines
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    # Cálculo do limite superior responsivo
+    limite_superior = max(urbana.max(), rural.max()) * 1.15
+    ax.set_ylim(0, limite_superior)
+
+    # Inserção de valores nas barras com espaçamento dinâmico
+    espaco_texto = limite_superior * 0.015
+    for i in range(len(categorias)):
+        ax.text(x[i] - largura/2, urbana[i] + espaco_texto, f'{urbana[i]:,.0f}', ha='center', color='white', fontweight='bold', fontsize=20)
+        ax.text(x[i] + largura/2, rural[i] + espaco_texto, f'{rural[i]:,.0f}', ha='center', color='white', fontweight='bold', fontsize=20)
+
+    plt.tight_layout()
+    st.pyplot(fig)
+
+
+def grafico_alunos_por_dependencia_localizacao_municipio(df, ano_censo, municipio):
+    """
+    Gera gráfico de barras agrupadas com o total de alunos por dependência e localização (urbana/rural) 
+    no município e ano selecionados.
+
+    Parâmetros:
+    - df : pd.DataFrame
+        DataFrame contendo as colunas 'TP_DEPENDENCIA', 'TP_LOCALIZACAO', 'QT_MAT_BAS', 'NU_ANO_CENSO', 'NO_MUNICIPIO'
+    - ano_censo : int
+        Ano do censo escolar a ser filtrado.
+    - municipio : str
+        Nome do município a ser filtrado.
+    """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    import numpy as np
+
+    # Filtro por ano e município
+    df_filtrado = df[
+        (df['NU_ANO_CENSO'] == ano_censo) &
+        (df['NO_MUNICIPIO'] == municipio)
+    ]
+
+    # Agrupamento por dependência e localização
+    agrupado = df_filtrado.groupby(['TP_DEPENDENCIA', 'TP_LOCALIZACAO'])['QT_MAT_BAS'].sum().unstack(fill_value=0)
+    agrupado = agrupado.rename(index={1: 'Federal', 2: 'Estadual', 3: 'Municipal'})
+    agrupado = agrupado.rename(columns={1: 'Urbana', 2: 'Rural'})
+
+    # Preparar dados
+    categorias = agrupado.index.tolist()
+    urbana = agrupado['Urbana']
+    rural = agrupado['Rural']
+    x = np.arange(len(categorias))
+    largura = 0.35
+
+    # Estilo escuro
+    plt.style.use('dark_background')
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    # Barras
+    ax.bar(x - largura/2, urbana, width=largura, label='Urbana', color='#C0C0C0')
+    ax.bar(x + largura/2, rural, width=largura, label='Rural', color='#1FB029')
+
+    # Eixos e rótulos
+    ax.set_title(f'Alunos por Dependência e Localização - {municipio} ({ano_censo})', color='#FFA07A', fontsize=25)
+    ax.set_xticks(x)
+    ax.set_xticklabels(categorias, color='#FFA07A', fontsize=25)
+    ax.tick_params(axis='y', colors='#FFA07A')
+    ax.legend()
+
+    # Estilo dos spines
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    # Cálculo do limite superior responsivo
+    limite_superior = max(urbana.max(), rural.max()) * 1.15
+    ax.set_ylim(0, limite_superior)
+
+    # Inserção de valores nas barras com espaçamento dinâmico
+    espaco_texto = limite_superior * 0.015
+    for i in range(len(categorias)):
+        ax.text(x[i] - largura/2, urbana[i] + espaco_texto, f'{urbana[i]:,.0f}', ha='center', color='white', fontweight='bold', fontsize=20)
+        ax.text(x[i] + largura/2, rural[i] + espaco_texto, f'{rural[i]:,.0f}', ha='center', color='white', fontweight='bold', fontsize=20)
+
+    plt.tight_layout()
+    st.pyplot(fig)
+
+
+def grafico_escolas_por_dependencia_localizacao_municipio(df, ano_censo, municipio):
+    """
+    Gera gráfico de barras agrupadas com o total de escolas por dependência e localização (urbana/rural)
+    no município e ano selecionados.
+
+    Parâmetros:
+    - df : pd.DataFrame
+        DataFrame contendo as colunas 'TP_DEPENDENCIA', 'TP_LOCALIZACAO', 'CO_ENTIDADE', 'NU_ANO_CENSO', 'NO_MUNICIPIO'
+    - ano_censo : int
+        Ano do censo escolar a ser filtrado.
+    - municipio : str
+        Nome do município a ser filtrado.
+    """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    import numpy as np
+
+    # Filtro por ano e município
+    df_filtrado = df[
+        (df['NU_ANO_CENSO'] == ano_censo) &
+        (df['NO_MUNICIPIO'] == municipio)
+    ]
+
+    # Agrupamento por dependência e localização, contando entidades únicas
+    agrupado = df_filtrado.groupby(['TP_DEPENDENCIA', 'TP_LOCALIZACAO'])['CO_ENTIDADE'].nunique().unstack(fill_value=0)
+    agrupado = agrupado.rename(index={1: 'Federal', 2: 'Estadual', 3: 'Municipal'})
+    agrupado = agrupado.rename(columns={1: 'Urbana', 2: 'Rural'})
+
+    # Preparar dados
+    categorias = agrupado.index.tolist()
+    urbana = agrupado['Urbana']
+    rural = agrupado['Rural']
+    x = np.arange(len(categorias))
+    largura = 0.35
+
+    # Estilo escuro
+    plt.style.use('dark_background')
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    # Barras
+    ax.bar(x - largura/2, urbana, width=largura, label='Urbana', color='#C0C0C0')
+    ax.bar(x + largura/2, rural, width=largura, label='Rural', color='#1FB029')
+
+    # Eixos e rótulos
+    ax.set_title(f'Escolas por Dependência e Localização - {municipio} ({ano_censo})', color='#FFA07A', fontsize=25)
+    ax.set_xticks(x)
+    ax.set_xticklabels(categorias, color='#FFA07A', fontsize=25)
+    ax.tick_params(axis='y', colors='#FFA07A')
+    ax.legend()
+
+    # Estilo dos spines
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    # Cálculo do limite superior responsivo
+    limite_superior = max(urbana.max(), rural.max()) * 1.15
+    ax.set_ylim(0, limite_superior)
+
+    # Inserção de valores nas barras com espaçamento dinâmico
+    espaco_texto = limite_superior * 0.015
+    for i in range(len(categorias)):
+        ax.text(x[i] - largura/2, urbana[i] + espaco_texto, f'{urbana[i]:,.0f}', ha='center', color='white', fontweight='bold', fontsize=20)
+        ax.text(x[i] + largura/2, rural[i] + espaco_texto, f'{rural[i]:,.0f}', ha='center', color='white', fontweight='bold', fontsize=20)
+
+
+    plt.tight_layout()
+    st.pyplot(fig)
+
+
+
+#===========================
+# PAGINA POVOS TRADICIONAIS
+#===========================
+
 
 #===========================
 # Função gráfico de barras total de alunos por localizacao diferenciada

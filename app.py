@@ -118,9 +118,10 @@ st.markdown(texto_app())
 #    language="markdown"
 #)
 
-#st.subheader("E̴͘͡s̷͘t̸̕͞a͡ ͢v̶̸͘e͠͏n̛͘͏d̶̡o͜?")
+st.subheader("E̴͘͡s̷͘t̸̕͞a͡ ͢v̶̸͘e͠͏n̛͘͏d̶̡o͜?")
 #st.subheader("E̛s͠t̸a͘ ͜v̵̨e̡͞n̛͡d̢ó͘?")
-st.subheader("E͢͠͡s̷͞͞t̸̢̡a͢͡ ̡v̷́͞e̷̸̢n̛͝͞d̵̡͠ǫ̢͡?")
+#st.subheader("E͢͠͡s̷͞͞t̸̢̡a͢͡ ̡v̷́͞e̷̸̢n̛͝͞d̵̡͠ǫ̢͡?")
+
 
 
 st.sidebar.markdown("### 📌 Navegação")
