@@ -239,12 +239,26 @@ def texto_pan_rede_dependencia_rural_intro_1():
     omissões.
         
     A seguir, são apresentados gráficos que mostram o total de alunos e escolas por dependência administrativa, 
-    considerando a localização das escolas. Selecione o ano do Censo Escolar desejado.
+    considerando a localização das escolas, se urbanas ou rurais. Selecione o ano do Censo Escolar desejado.
     """    
 
 def texto_pan_rede_dependencia_rural_analise_1():
     return """
-    analise
+    Agora fica evidente o modo como os sistemas de ensino estão concentrados em cada uma das dependências administrativas. 
+    Nota-se que o sistema de ensino estadual possui um número significativamente maior de alunos matriculados em sua rede,
+    quando comparado com o sistema de ensino municipal. Entretanto, possui um número de escolas urbanas e rurais menor que
+    o dos Muncípios, especialmente na zona rural.
+
+    Novamente, há que se refletir sobre as causas e os impactos dessas decisões admninistrativas. Pensando no sistema estadual 
+    de ensino, há redução ou aumento de custos? Menos escolas significam menos salas de aula e maior lotação? Há ausência de 
+    cobertura na zona rural? Esses mesmos questionamentos se aplicam ao sistema municipal. 
+    
+    De plano, é possível concluir que o sistema de ensino estadual possui um índice de concentração maior que os sistemas 
+    de ensino municipais. Ou seja, possui menos escolas para um maior número de alunos. Ainda, é claramente menos presente 
+    na zona rural. Os demais questionamentos serão endereçados logo mais abaixo, na seção que tratará do financiamento da 
+    educação pública e sua relação com os dados analisados até aqui.  
+    
+    Por hora, vale comparar a distribuição específica por Município:
     """
     
 def texto_pan_rede_dependencia_rural_intro_2():
