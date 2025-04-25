@@ -31,6 +31,7 @@ data/tmp/
 data/**/~$*
 data/**/.DS_Store
 data/**/Thumbs.db
+data/raw
 
 # Arquivos exportados
 *.pdf
