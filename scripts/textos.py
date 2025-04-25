@@ -294,7 +294,10 @@ def texto_pan_rede_financiamento_intro():
     Intro
     O financiamento da educação básica é um tema central nas discussões sobre a qualidade do ensino e o acesso à educação. 
     Responsabilidades LDB.
-    VAAT e VAAR. Relacionamento com o número de matrículas.
+    VAAT, VAAR e VAAF. Relacionamento com o número de matrículas e o Censo Escolar.
+    
+    Os recursos dos Fundos devem ser utilizados no mesmo exercício financeiro, podendo ser utilizado até 10% do total do 
+    repasse no primeiro quadrimestre do ano seguinte.
     """
 def texto_pan_rede_financiamento_analise():
     return """
