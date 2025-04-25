@@ -20,6 +20,7 @@ from scripts.textos import texto_pan_rede_dependencia_rural_intro_1
 from scripts.textos import texto_pan_rede_dependencia_rural_analise_1
 from scripts.textos import texto_pan_rede_dependencia_rural_intro_2
 from scripts.textos import texto_pan_rede_dependencia_rural_analise_2
+from scripts.textos import text_pan_rede_dependencia_rural_conclusao
 
 from scripts.load_data import carregar_dados
 from scripts.load_data import dataframe_totais_por_localizacao_municipio
@@ -261,38 +262,18 @@ with st.form("form_dependencia_localizacao_municipio"):
         # Texto de análise dos gráficos
         st.write(texto_pan_rede_dependencia_rural_analise_2())
 
+st.write(text_pan_rede_dependencia_rural_conclusao())
 
+#===============================
+# Seção 03 - Considerações Gerais sobre o Financiamento da Educação Básica
+#===============================
+st.header("Considerações Gerais sobre o Financiamento da Educação Básica")
 
-#########################
-
-#with st.form("form_localizacao"):
-#    # Selectbox do ano do Censo Escolar, com valor padrão para o ano mais recente
-#    ano_censo_localizacao = st.selectbox(
-#        "Selecione o ano do Censo Escolar:", 
-#        options=anos_disponiveis, 
-#        index=anos_disponiveis.index(ano_mais_recente), 
-#        key ="ano_censo_localizacao")
-#    # Selectbox do município
-#    municipio_localizacao = st.selectbox("Selecione o município:", sorted(df_panorama_geral['NO_MUNICIPIO'].unique()), key="municipio_localizacao")
-#    # Botão de submissão
-#    submitted = st.form_submit_button("Gerar Dados")
-#    # Condicional para verificar se o botão foi pressionado
-#    # Se o botão foi pressionado, gera os gráficos
-#    if submitted:
-#        # divisão da tela em duas colunas
-#        col1, col2 = st.columns(2)
-#        # Grafico do total de alunos por localização
-#        with col1:
-#            grafico_alunos_por_localizacao_municipio(df_panorama_geral, ano_censo_localizacao, municipio_localizacao)
-#        
-#        # Gráfico do total de escolas por localização    
-#        with col2:
-#            grafico_escolas_por_localizacao_municipio(df_panorama_geral, ano_censo_localizacao, municipio_localizacao)
 
 
 
 #===============================
-# Seção 03 - Geração de Relatórios
+# Seção 04 - Geração de Relatórios
 #===============================
 st.header("Geração de relatórios")
 st.write("Seegue abaixo ferramente para geração de relatórios para download. Basta selecionar os filtros desejados e clicar no botão de download.")

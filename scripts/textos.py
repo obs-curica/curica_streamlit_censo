@@ -245,7 +245,7 @@ def texto_pan_rede_dependencia_rural_intro_1():
 def texto_pan_rede_dependencia_rural_analise_1():
     return """
     Agora fica evidente o modo como os sistemas de ensino estão concentrados em cada uma das dependências administrativas. 
-    Nota-se que o sistema de ensino estadual possui um número significativamente maior de alunos matriculados em sua rede,
+    No geral, nota-se que o sistema de ensino estadual possui um número significativamente maior de alunos matriculados em sua rede,
     quando comparado com o sistema de ensino municipal. Entretanto, possui um número de escolas urbanas e rurais menor que
     o dos Muncípios, especialmente na zona rural.
 
@@ -256,19 +256,48 @@ def texto_pan_rede_dependencia_rural_analise_1():
     De plano, é possível concluir que o sistema de ensino estadual possui um índice de concentração maior que os sistemas 
     de ensino municipais. Ou seja, possui menos escolas para um maior número de alunos. Ainda, é claramente menos presente 
     na zona rural. Os demais questionamentos serão endereçados logo mais abaixo, na seção que tratará do financiamento da 
-    educação pública e sua relação com os dados analisados até aqui.  
+    educação pública e sua relação com os dados analisados até aqui. O leitor vai perceber que este é um tema recorrente que 
+    será abordado em outras seções deste site.
     
-    Por hora, vale comparar a distribuição específica por Município:
+    Por hora, vale comparar a distribuição específica por Município e verificar se o quadro geral se repete localmente.
     """
     
 def texto_pan_rede_dependencia_rural_intro_2():
     return """
-    intro 2
-    Relembra-se que os gráficos abaixo podem ser visualizados em tela cheia, clicando no ícone de tela cheia no 
-    anto superior direito da imagem.
+    O formulário abaixo permite a visualização dos dados por Município.  
+    Relembra-se que os gráficos abaixo podem ser visualizados em tela cheia, clicando no ícone de tela cheia no canto superior 
+    direito da imagem.
     """
     
 def texto_pan_rede_dependencia_rural_analise_2():
     return """
-    analise 2
+    Como ficou a distribuição dos alunos e escolas por dependência administrativa e localização em seu Município, quando comparado 
+    com o quadro geral? Há Municípios com maior número de alunos matriculados no sistema de ensino municipal? As escolas estatudais 
+    continuam concentradas na zona urbana? E as escolas municipais? Há Municípios com maior número de alunos matriculados em escolas rurais?
+    Há uma relação entre a presença do sistema de ensino estadual e a região onde o Município está inserido?
     """
+    
+def text_pan_rede_dependencia_rural_conclusao():
+    return """
+    A análise dos dados sobre a dependência administrativa e a localização das escolas revela a complexidade da
+    realidade educacional do estado do Acre. A vasta extensão territorial, a diversidade cultural e as
+    características geográficas da região exigem uma abordagem diferenciada para a oferta de educação básica.
+    A presença significativa de escolas rurais e a concentração de alunos em áreas urbanas indicam a necessidade
+    de políticas públicas que considerem as especificidades locais e promovam a equidade no acesso à educação.
+    A combinação desses dados com informações sobre o financiamento da educação pública permitirá uma análise
+    mais aprofundada das responsabilidades dos diferentes sistemas de ensino e suas implicações na formação dos alunos.
+    """
+    
+# Funções para a página Panorama Rede - Financiamento da Educação
+def texto_pan_rede_financiamento_intro():
+    return """
+    Intro
+    O financiamento da educação básica é um tema central nas discussões sobre a qualidade do ensino e o acesso à educação. 
+    Responsabilidades LDB.
+    VAAT e VAAR. Relacionamento com o número de matrículas.
+    """
+def texto_pan_rede_financiamento_analise():
+    return """
+    Análise repasses do FNDE Estado e Municípios.
+    """
+

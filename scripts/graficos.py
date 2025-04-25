@@ -4,67 +4,12 @@ import matplotlib.colors as mcolors
 
 import streamlit as st
 
+
 #============================
-# Função para plotar gráfico de barras sobre o fornecimento de água potável
-#============================
-def plot_agua_potavel_por_municipio(df_censo_agua, ano_censo, municipio_selecionado, CORES_BARRAS, COR_TEXTO):
-    """
-    Gera gráfico de barras sobre o fornecimento de água potável em um município específico e ano selecionado.
-
-    Parâmetros:
-    - df_censo_agua: DataFrame contendo os dados do censo escolar.
-    - ano_censo: Ano do censo a ser filtrado (int).
-    - municipio_selecionado: Nome do município (string).
-    - CORES_BARRAS: Dicionário com cores personalizadas para as categorias 0 e 1.
-    - COR_TEXTO: Cor padrão dos textos e títulos (hexadecimal string).
-    """
-    # Filtrar o DataFrame
-    df_grafico = df_censo_agua[
-        (df_censo_agua['NU_ANO_CENSO'] == ano_censo) &
-        (df_censo_agua['NO_MUNICIPIO'] == municipio_selecionado)
-    ]
-
-    # Contar categorias de fornecimento de água potável
-    agua_counts = df_grafico['IN_AGUA_POTAVEL'].value_counts().sort_index()
-    agua_counts.index = agua_counts.index.map({0: 'Não Fornece', 1: 'Fornece'})
-
-    # Dividir layout em colunas
-    col1, _ = st.columns(2)
-
-    with col1:
-        fig, ax = plt.subplots(figsize=(6, 5))
-
-        # Cores das barras com base no índice
-        cores_barras = [CORES_BARRAS[1] if cat == 'Não Fornece' else CORES_BARRAS[0] for cat in agua_counts.index]
-
-        ax.bar(agua_counts.index, agua_counts.values, color=cores_barras)
-
-        # Ajustes visuais
-        ax.set_ylim(0, agua_counts.max() * 1.2)
-        ax.set_title(f"Fornecimento de Água Potável em {municipio_selecionado} ({ano_censo})", color=COR_TEXTO)
-        ax.set_ylabel('Número de Escolas', color=COR_TEXTO)
-        ax.set_xticklabels(agua_counts.index, color=COR_TEXTO)
-        ax.tick_params(axis='y', colors=COR_TEXTO)
-
-        for spine in ax.spines.values():
-            spine.set_color(COR_TEXTO)
-
-        # Adicionar rótulos nas barras
-        for i, v in enumerate(agua_counts):
-            ax.text(i, v + 0.2, str(v), ha='center', color='white', fontweight='bold')
-
-        plt.tight_layout()
-        st.pyplot(fig)
-
-
-
-#===========================
 # PAGINA PANORAMA GERAL
-#===========================
+#=============================
 
-#==========================
 # Função para plotar gráfico de barras horizontal com o total de alunos por município
-#==========================
 def grafico_alunos_por_municipio(df, ano_censo):
     """
     Gera um gráfico de barras horizontal com o total de alunos por município.
@@ -122,9 +67,7 @@ def grafico_alunos_por_municipio(df, ano_censo):
     fig.tight_layout()
     st.pyplot(fig)
 
-#===========================
-# Função para plotar gráfico de barras horizontal com o total de escolas
-#============================    
+# Função para plotar gráfico de barras horizontal com o total de escolas 
 def grafico_escolas_por_municipio(df, ano_censo):
     """
     Gera um gráfico de barras horizontal com o total de escolas por município.
@@ -182,9 +125,7 @@ def grafico_escolas_por_municipio(df, ano_censo):
     plt.tight_layout()
     st.pyplot(plt)
 
-#===========================
 # Função para gráfico de barras verticais para o total de escolas por dependência administrativa
-#===========================
 def grafico_escolas_por_dependencia(df, ano_censo):
     """
     Gera um gráfico de barras verticais com o total de escolas por dependência administrativa.
@@ -245,9 +186,7 @@ def grafico_escolas_por_dependencia(df, ano_censo):
     fig.tight_layout()
     st.pyplot(fig)
 
-#===========================
 # Função para gráfico de barras verticais para o total de alunos por dependência administrativa
-#===========================
 def grafico_alunos_por_dependencia(df, ano_censo):
     """
     Gera um gráfico de barras verticais com o total de alunos por dependência administrativa.
@@ -309,9 +248,7 @@ def grafico_alunos_por_dependencia(df, ano_censo):
     fig.tight_layout()
     st.pyplot(fig)
 
-#===========================
 # Função para gráfico de barras total de alunos por dependência, por município
-#============================
 def grafico_alunos_por_dependencia_municipio(df, ano_censo, municipio):
     """
     Gera um gráfico de barras verticais com o total de alunos por dependência administrativa.
@@ -374,10 +311,8 @@ def grafico_alunos_por_dependencia_municipio(df, ano_censo, municipio):
     
     fig.tight_layout()
     st.pyplot(fig)
-    
-#============================
+
 # Função para gráfico de barras total de escolas por dependência, por município
-#============================
 def grafico_escolas_por_dependencia_municipio(df, ano_censo, municipio):
     """
     Gera um gráfico de barras verticais com o total de escolas por dependência administrativa.
@@ -439,10 +374,8 @@ def grafico_escolas_por_dependencia_municipio(df, ano_censo, municipio):
         
     fig.tight_layout()
     st.pyplot(fig)
-    
-#===========================
+
 # Função para gráfico de barras panorama Urbano vs Rural
-#===========================
 def grafico_escolas_por_localizacao(df, ano_censo):
     """
     Gera um gráfico de barras verticais com o total de escolas por localização.
@@ -498,9 +431,7 @@ def grafico_escolas_por_localizacao(df, ano_censo):
     fig.tight_layout()
     st.pyplot(fig)
 
-#===========================
 # Função para gráfico de barras verticais para o total de alunos por localizacao
-#===========================
 def grafico_alunos_por_localizacao(df, ano_censo):
     """
     Gera um gráfico de barras verticais com o total de alunos por localizacao.
@@ -562,9 +493,7 @@ def grafico_alunos_por_localizacao(df, ano_censo):
     fig.tight_layout()
     st.pyplot(fig)
 
-#===========================
 # Função gráfico de barras total de alunos por localizacao, por município
-#===========================
 def grafico_alunos_por_localizacao_municipio(df, ano_censo, municipio):
     """
     Gera um gráfico de barras verticais com o total de alunos por localização.
@@ -631,9 +560,7 @@ def grafico_alunos_por_localizacao_municipio(df, ano_censo, municipio):
     fig.tight_layout()
     st.pyplot(fig)
 
-#===========================
 # Função gráfico de barras total de escolas por localizacao, por município
-#===========================
 def grafico_escolas_por_localizacao_municipio(df, ano_censo, municipio):
     """
     Gera um gráfico de barras verticais com o total de escolas por localização.
@@ -693,7 +620,7 @@ def grafico_escolas_por_localizacao_municipio(df, ano_censo, municipio):
     fig.tight_layout()
     st.pyplot(fig)
 
-
+# Função gráfico barras agrupadas alunos por dependência e localização
 def grafico_alunos_por_dependencia_localizacao(df, ano_censo):
     """
     Gera gráfico de barras agrupadas com total de alunos por dependência e localização (urbana/rural).
@@ -755,7 +682,7 @@ def grafico_alunos_por_dependencia_localizacao(df, ano_censo):
     plt.tight_layout()
     st.pyplot(fig)
 
-
+# Função gráfico barras agrupadas escolas por dependência e localização
 def grafico_escolas_por_dependencia_localizacao(df, ano_censo):
     """
     Gera gráfico de barras agrupadas com total de escolas por dependência e localização (urbana/rural).
@@ -818,7 +745,7 @@ def grafico_escolas_por_dependencia_localizacao(df, ano_censo):
     plt.tight_layout()
     st.pyplot(fig)
 
-
+# Função gráfico barras agrupadas alunos por dependência e localização, por Município
 def grafico_alunos_por_dependencia_localizacao_municipio(df, ano_censo, municipio):
     """
     Gera gráfico de barras agrupadas com o total de alunos por dependência e localização (urbana/rural) 
@@ -886,7 +813,7 @@ def grafico_alunos_por_dependencia_localizacao_municipio(df, ano_censo, municipi
     plt.tight_layout()
     st.pyplot(fig)
 
-
+# Função gráfico barras agrupadas escolas por dependência e localização, por Município
 def grafico_escolas_por_dependencia_localizacao_municipio(df, ano_censo, municipio):
     """
     Gera gráfico de barras agrupadas com o total de escolas por dependência e localização (urbana/rural)
@@ -956,15 +883,11 @@ def grafico_escolas_por_dependencia_localizacao_municipio(df, ano_censo, municip
     st.pyplot(fig)
 
 
-
 #===========================
 # PAGINA POVOS TRADICIONAIS
 #===========================
 
-
-#===========================
 # Função gráfico de barras total de alunos por localizacao diferenciada
-#===========================
 def grafico_alunos_por_localizacao_diferenciada(df, ano_censo):
     """
     Gera um gráfico de barras verticais com o total de alunos por localizacao diferenciada.
@@ -1025,10 +948,8 @@ def grafico_alunos_por_localizacao_diferenciada(df, ano_censo):
                 color='white', fontweight='bold', fontsize=14)
     fig.tight_layout()
     st.pyplot(fig)
-    
-#===========================
+  
 # Função gráfico de barras total de escolas por localizacao diferenciada
-#===========================
 def grafico_escolas_por_localizacao_diferenciada(df, ano_censo):
     """
     Gera um gráfico de barras verticais com o total de escolas por localizacao diferenciada.
@@ -1095,10 +1016,7 @@ def grafico_escolas_por_localizacao_diferenciada(df, ano_censo):
     fig.tight_layout()
     st.pyplot(fig)
     
-
-#===========================
 # Função para gráfico de barras total de escolas por localizacao diferenciada, por município
-#===========================
 def grafico_escolas_por_localizacao_diferenciada_municipio(df, ano_censo, municipio):
     """
     Gera um gráfico de barras verticais com o total de escolas por localização diferenciada.
@@ -1159,3 +1077,59 @@ def grafico_escolas_por_localizacao_diferenciada_municipio(df, ano_censo, munici
                 color='white', fontweight='bold', fontsize=14)
     fig.tight_layout()
     st.pyplot(fig)
+
+
+
+#==========================
+# PAGINA PANORAMA ÁGUA
+#==========================
+    
+# Função para plotar gráfico de barras sobre o fornecimento de água potável
+def plot_agua_potavel_por_municipio(df_censo_agua, ano_censo, municipio_selecionado, CORES_BARRAS, COR_TEXTO):
+    """
+    Gera gráfico de barras sobre o fornecimento de água potável em um município específico e ano selecionado.
+
+    Parâmetros:
+    - df_censo_agua: DataFrame contendo os dados do censo escolar.
+    - ano_censo: Ano do censo a ser filtrado (int).
+    - municipio_selecionado: Nome do município (string).
+    - CORES_BARRAS: Dicionário com cores personalizadas para as categorias 0 e 1.
+    - COR_TEXTO: Cor padrão dos textos e títulos (hexadecimal string).
+    """
+    # Filtrar o DataFrame
+    df_grafico = df_censo_agua[
+        (df_censo_agua['NU_ANO_CENSO'] == ano_censo) &
+        (df_censo_agua['NO_MUNICIPIO'] == municipio_selecionado)
+    ]
+
+    # Contar categorias de fornecimento de água potável
+    agua_counts = df_grafico['IN_AGUA_POTAVEL'].value_counts().sort_index()
+    agua_counts.index = agua_counts.index.map({0: 'Não Fornece', 1: 'Fornece'})
+
+    # Dividir layout em colunas
+    col1, _ = st.columns(2)
+
+    with col1:
+        fig, ax = plt.subplots(figsize=(6, 5))
+
+        # Cores das barras com base no índice
+        cores_barras = [CORES_BARRAS[1] if cat == 'Não Fornece' else CORES_BARRAS[0] for cat in agua_counts.index]
+
+        ax.bar(agua_counts.index, agua_counts.values, color=cores_barras)
+
+        # Ajustes visuais
+        ax.set_ylim(0, agua_counts.max() * 1.2)
+        ax.set_title(f"Fornecimento de Água Potável em {municipio_selecionado} ({ano_censo})", color=COR_TEXTO)
+        ax.set_ylabel('Número de Escolas', color=COR_TEXTO)
+        ax.set_xticklabels(agua_counts.index, color=COR_TEXTO)
+        ax.tick_params(axis='y', colors=COR_TEXTO)
+
+        for spine in ax.spines.values():
+            spine.set_color(COR_TEXTO)
+
+        # Adicionar rótulos nas barras
+        for i, v in enumerate(agua_counts):
+            ax.text(i, v + 0.2, str(v), ha='center', color='white', fontweight='bold')
+
+        plt.tight_layout()
+        st.pyplot(fig)
