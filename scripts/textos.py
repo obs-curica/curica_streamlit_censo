@@ -288,9 +288,39 @@ def text_pan_rede_dependencia_rural_conclusao():
     mais aprofundada das responsabilidades dos diferentes sistemas de ensino e suas implicações na formação dos alunos.
     """
     
-# Funções para a página Panorama Rede - Financiamento da Educação
+
 def texto_pan_rede_financiamento_intro():
     return """
+    O modelo de federalismo brasileiro prevê que a União, os Estados e os Municípios mantenham seus respectivos sistemas de ensino, 
+    em regime de colaboração [(art. 211 CF)](https://www.planalto.gov.br/ccivil_03/Constituicao/Constituicao.htm#art212:~:text=Art.%20211.%20A%20Uni%C3%A3o%2C%20os%20Estados%2C%20o%20Distrito%20Federal%20e%20os%20Munic%C3%ADpios%20organizar%C3%A3o%20em%20regime%20de%20colabora%C3%A7%C3%A3o%20seus%20sistemas%20de%20ensino.). 
+    Cada ente possui responsabilidades prioritárias: os Municípios, com a educação infantil e fundamental; 
+    os Estados, com o ensino fundamental e médio; e a União, em caráter supletivo e redistributivo, para garantir padrão mínimo de 
+    qualidade em todo o país. Essa organização reflete tanto a autonomia dos entes quanto a necessidade de cooperação federativa 
+    para assegurar o direito à educação.
+    
+    Nesse contexto, destaca-se o Fundo Nacional de Desenvolvimento da Educação (FNDE), autarquia vinculada ao Ministério da Educação, 
+    criada em 1968[(Lei 5.537/68)](https://www.planalto.gov.br/ccivil_03/leis/l5537.htm). Desde então, o FNDE tem sido um dos principais 
+    instrumentos de apoio técnico e financeiro aos sistemas públicos de ensino, viabilizando a implementação de políticas públicas 
+    educacionais em todo o território nacional. Programas como o PNLD, PNAE, PDDE e o próprio Fundeb consolidam sua atuação estratégica 
+    para garantir o acesso, a permanência e a qualidade da educação básica no Brasil.
+    
+    Os repasses de recursos realizados pelo FNDE podem ser classificados em três categorias: constitucionais, automáticos e voluntários.
+    Os repasses constitucionais, como o Fundeb, são obrigatórios e definidos pela Constituição Federal. Os repasses automáticos são 
+    transferidos diretamente para os entes federativos ou escolas, mediante adesão e cumprimento de critérios legais, sem necessidade 
+    de convênio(ex: PNATE, PNAE). Já os repasses voluntários dependem da celebração de convênios ou termos de compromisso, sendo utilizados para 
+    apoiar projetos específicos aprovados tecnicamente (ex: Proinfância).
+    """
+
+
+# Funções para a página Panorama Rede - Financiamento da Educação
+def texto_pan_rede_financiamento_fundeb():
+    return """
+    Responsablidades de financiamento da educação pelos entes, segundo a LDB.
+    
+    Colaboração da União, por meio do FNDE. 
+    
+    Falar dos programas e ações. Afunilar para FUNDEB.
+    
     O financiamento da educação básica pública no Brasil passou por importantes transformações nos últimos anos.
     Em 1996, foi criado o FUNDEF (Fundo de Manutenção e Desenvolvimento do Ensino Fundamental e de Valorização do 
     Magistério), voltado exclusivamente para o ensino fundamental. Sua estrutura visava garantir o acesso e a 
@@ -304,9 +334,10 @@ def texto_pan_rede_financiamento_intro():
     Aprovado de forma permanente em 2020, o novo FUNDEB trouxe melhorias, como o aumento da participação da União 
     e a adoção de mecanismos de correção de desigualdades educacionais. Agora o FUNDEB tem caráter permanente e 
     constitucional e está regulamentado pela Lei [13.421/2020](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm). 
-
-
+    """
     
+def texto_pan_rede_financiamento_intro_fundeb():
+    return """
     Responsabilidades LDB.
     VAAT, VAAR e VAAF. Relacionamento com o número de matrículas e o Censo Escolar.
     

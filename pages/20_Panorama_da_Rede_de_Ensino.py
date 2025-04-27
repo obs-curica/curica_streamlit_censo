@@ -271,15 +271,18 @@ st.write(text_pan_rede_dependencia_rural_conclusao())
 st.header("Considerações Gerais sobre o Financiamento da Educação Básica")
 
 # Carrega dados FUNDEB
-url_fundeb = "https://github.com/obs-curica/curica_streamlit_censo/blob/main/data/fnde/df_fundeb_ac.csv"
-df_fundeb_ac = carregar_dados(url_fundeb)
+# url_fundeb_estado = ""
+# url_fundeb_municipios = ""
+# df_fundeb_estado = carregar_dados(url_fundeb_estado)
+# df_fundeb_municipios = carregar_dados(url_fundeb_municipios)
 
 # texto introdutório
 st.write(texto_pan_rede_financiamento_intro())
 
-
 st.subheader("Quadro de utilização dos recursos financeiros disponíveis")
 st.write("conluir o financimento apresentando os programas e a não utilização de recursos. Aí fazer a chamada para os outros panoramas.")
+
+st.subheader("O Fundeb")
 
 
 #===============================

@@ -67,3 +67,6 @@ Thumbs.db
 
 # Notebooks
 notebooks/data
+
+# Pasta com arquivos de Publicações sobre o tema
+publicacoes/
