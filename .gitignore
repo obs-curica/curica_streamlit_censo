@@ -64,3 +64,6 @@ __pypackages__/
 # Arquivos de sistema
 .DS_Store
 Thumbs.db
+
+# Notebooks
+notebooks/data

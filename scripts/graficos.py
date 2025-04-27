@@ -883,6 +883,20 @@ def grafico_escolas_por_dependencia_localizacao_municipio(df, ano_censo, municip
     st.pyplot(fig)
 
 
+# Função gráfico de barras vertical fundeb por ano
+def grafico_fundeb_total_ano(df):
+    """
+    Gera um gráfico de barras 
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas 
+    """
+
+# Função gráfico
+
+
 #===========================
 # PAGINA POVOS TRADICIONAIS
 #===========================

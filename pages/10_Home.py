@@ -59,6 +59,8 @@ O nome “Curica” homenageia os saberes tradicionais e a biodiversidade da reg
 
 <p>
 Acesse os painéis laterais para explorar os dados e análises construídos nesta plataforma.
+
+Objetivo: consolidacao dos dados em uma única plataforma.
 </p>
 </div>
 """, unsafe_allow_html=True)

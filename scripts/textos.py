@@ -291,8 +291,22 @@ def text_pan_rede_dependencia_rural_conclusao():
 # Funções para a página Panorama Rede - Financiamento da Educação
 def texto_pan_rede_financiamento_intro():
     return """
-    Intro
-    O financiamento da educação básica é um tema central nas discussões sobre a qualidade do ensino e o acesso à educação. 
+    O financiamento da educação básica pública no Brasil passou por importantes transformações nos últimos anos.
+    Em 1996, foi criado o FUNDEF (Fundo de Manutenção e Desenvolvimento do Ensino Fundamental e de Valorização do 
+    Magistério), voltado exclusivamente para o ensino fundamental. Sua estrutura visava garantir o acesso e a 
+    qualidade deste nível de ensino, mas deixava de fora a educação infantil e o ensino médio.  
+
+    Com a ampliação do conceito de educação como direito social em todas as etapas, o FUNDEB (Fundo de Manutenção 
+    e Desenvolvimento da Educação Básica e de Valorização dos Profissionais da Educação) foi instituído em 2007. 
+    Diferente do FUNDEF, o FUNDEB abrange toda a educação básica — da creche ao ensino médio — e contempla todos 
+    os profissionais da educação, fortalecendo o compromisso com a equidade e a qualidade do ensino público.  
+
+    Aprovado de forma permanente em 2020, o novo FUNDEB trouxe melhorias, como o aumento da participação da União 
+    e a adoção de mecanismos de correção de desigualdades educacionais. Agora o FUNDEB tem caráter permanente e 
+    constitucional e está regulamentado pela Lei [13.421/2020](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm). 
+
+
+    
     Responsabilidades LDB.
     VAAT, VAAR e VAAF. Relacionamento com o número de matrículas e o Censo Escolar.
     

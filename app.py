@@ -1,6 +1,7 @@
 # app.py
 
 import streamlit as st
+import pandas as pd
 import logging
 import os
 import sys
@@ -18,6 +19,12 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# ======================
+# CONFIGURAÇÃO GLOBAL DE EXIBIÇÃO DE NÚMEROS
+# ======================
+# Força o pandas a exibir floats sem notação científica
+pd.set_option('display.float_format', '{:,.2f}'.format)
 
 # ======================
 # LOGGING DIÁRIO
