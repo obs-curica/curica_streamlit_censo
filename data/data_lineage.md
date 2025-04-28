@@ -25,6 +25,12 @@ https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/financiament
 Cartilha Novo FUNDEB
 https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/financiamento/fundeb/CartilhaNovoFundeb2021.pdf
 
+Fundeb Perguntas e Respostas
+https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/financiamento/fundeb/manuais-a-cartilhas-1/perguntas-e-respostas_atualizacao_11_10_22.pdf
+
+Fundeb e CACs TCE-AC
+https://tceac.tc.br/site/wp-content/uploads/2024/10/CARTILHA-FUNDEB-final.pdf
+
 PNE
 https://pne.mec.gov.br/images/pdf/pne_conhecendo_20_metas.pdf
 
@@ -51,6 +57,12 @@ https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm
 
 PNE
 https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2014/lei/l13005.htm
+
+Movimentação do Fundeb
+https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/financiamento/fundeb/legislacao/2022/portaria-conjunta-no-3-de-29-de-dezembro-de-2022
+
+Resolução FNDE prestação de contas quadrienal PNAE
+https://www.in.gov.br/web/dou/-/resolucao-cd/fnde-n-7-de-2-de-maio-de-2024-557685634
 
 # Jurisprudência
 

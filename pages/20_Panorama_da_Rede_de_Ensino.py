@@ -21,27 +21,25 @@ from scripts.textos import texto_pan_rede_dependencia_rural_analise_1
 from scripts.textos import texto_pan_rede_dependencia_rural_intro_2
 from scripts.textos import texto_pan_rede_dependencia_rural_analise_2
 from scripts.textos import text_pan_rede_dependencia_rural_conclusao
-from scripts.textos import texto_pan_rede_financiamento_intro
-from scripts.textos import texto_pan_rede_financiamento_fundeb_intro
-from scripts.textos import texto_pan_rede_financiamento_fundeb_analise
+from scripts.textos import texto_pan_rede_relatorio_intro
 
 from scripts.load_data import carregar_dados
-from scripts.load_data import dataframe_totais_por_localizacao_municipio
 
-from scripts.graficos import grafico_alunos_por_municipio
+from scripts.graficos import grafico_matriculas_por_municipio
 from scripts.graficos import grafico_escolas_por_municipio
 from scripts.graficos import grafico_escolas_por_dependencia
-from scripts.graficos import grafico_alunos_por_dependencia
-from scripts.graficos import grafico_alunos_por_dependencia_municipio
+from scripts.graficos import grafico_matriculas_por_dependencia
+from scripts.graficos import grafico_matriculas_por_dependencia_municipio
 from scripts.graficos import grafico_escolas_por_dependencia_municipio
-from scripts.graficos import grafico_alunos_por_localizacao
+from scripts.graficos import grafico_matriculas_por_localizacao
 from scripts.graficos import grafico_escolas_por_localizacao
-from scripts.graficos import grafico_alunos_por_localizacao_municipio
+from scripts.graficos import grafico_matriculas_por_localizacao_municipio
 from scripts.graficos import grafico_escolas_por_localizacao_municipio
 from scripts.graficos import grafico_escolas_por_dependencia_localizacao
-from scripts.graficos import grafico_alunos_por_dependencia_localizacao
-from scripts.graficos import grafico_alunos_por_dependencia_localizacao_municipio
+from scripts.graficos import grafico_matriculas_por_dependencia_localizacao
+from scripts.graficos import grafico_matriculas_por_dependencia_localizacao_municipio
 from scripts.graficos import grafico_escolas_por_dependencia_localizacao_municipio
+
 # Configuração da página
 st.set_page_config(page_title="Panorama Rede de Ensino", layout="wide", page_icon="🦜")
 
@@ -61,8 +59,8 @@ st.header("Caracterização da Rede de Ensino")
 st.write(texto_pan_rede_caracterizacao())
 
 #++++++++++++
-# Subseção 01.1 - Total de Alunos e Escolas por Município
-st.subheader("Total de Alunos e Escolas por Município")
+# Subseção 01.1 - Total de matriculas e Escolas por Município
+st.subheader("Total de matrículas e Escolas por Município")
 st.write(texto_pan_rede_totais())
 
 # Selectbox do ano do Censo Escolar
@@ -80,7 +78,7 @@ ano_censo = st.selectbox(
 col1, col2 = st.columns(2)
 
 with col1:
-    grafico_alunos_por_municipio(df_panorama_geral, ano_censo)
+    grafico_matriculas_por_municipio(df_panorama_geral, ano_censo)
 
 with col2:
     grafico_escolas_por_municipio(df_panorama_geral, ano_censo)
@@ -89,8 +87,8 @@ with col2:
 st.write(texto_pan_rede_analise())
 
 #++++++++++++++
-# Subseção 01.2 - Total de Alunos e Escolas por Dependência Administrativa
-st.subheader("Total de Alunos e Escolas por Dependência Administrativa")
+# Subseção 01.2 - Total de matriculas e Escolas por Dependência Administrativa
+st.subheader("Total de matrículas e Escolas por Dependência Administrativa")
 st.write(texto_pan_rede_dependencia_intro())
 
 st.write("Ano Selecionado: ", ano_censo)
@@ -99,9 +97,9 @@ st.write("Ano Selecionado: ", ano_censo)
 
 # Divide a tela em duas colunas e plota os seus gráficos
 col1, col2 = st.columns(2)
-# Gráfico do total de alunos por dependência
+# Gráfico do total de matriculas por dependência
 with col1:
-    grafico_alunos_por_dependencia(df_panorama_geral, ano_censo)
+    grafico_matriculas_por_dependencia(df_panorama_geral, ano_censo)
 # Gráfico do total de escolas por dependência
 with col2:
     grafico_escolas_por_dependencia(df_panorama_geral, ano_censo)
@@ -121,9 +119,9 @@ with st.form("form_dependencia"):
     submitted = st.form_submit_button("Gerar Dados")
     if submitted:
         col1, col2 = st.columns(2)
-        # Dataframe do total de alunos e escolas por dependência
+        # Dataframe do total de matriculas e escolas por dependência
         with col1:
-            grafico_alunos_por_dependencia_municipio(df_panorama_geral, ano_censo_dependencia, municipio_dependencia)
+            grafico_matriculas_por_dependencia_municipio(df_panorama_geral, ano_censo_dependencia, municipio_dependencia)
         # Gráfico do total de escolas por dependência
         with col2:
             grafico_escolas_por_dependencia_municipio(df_panorama_geral, ano_censo_dependencia, municipio_dependencia)
@@ -150,9 +148,9 @@ ano_censo_rural = st.selectbox(
 
 # Divide a tela em duas colunas
 col1, col2 = st.columns(2)
-# Gráfico do total de alunos por localização
+# Gráfico do total de matriculas por localização
 with col1:
-    grafico_alunos_por_localizacao(df_panorama_geral, ano_censo_rural)
+    grafico_matriculas_por_localizacao(df_panorama_geral, ano_censo_rural)
 # Gráfico do total de escolas por localização
 with col2:
     grafico_escolas_por_localizacao(df_panorama_geral, ano_censo_rural)
@@ -160,9 +158,9 @@ with col2:
 st.write(texto_pan_rede_rural_analise_1())
 
 
-#==========================
-# Subseção 02.2 - Total de Alunos e Escolas por Localização
-st.subheader("Total de Alunos e Escolas por Localização, por Município")
+#++++++++++++++
+# Subseção 02.2 - Total de matriculas e Escolas por Localização
+st.subheader("Total de matrículas e Escolas por Localização, por Município")
 
 # Texto introdutório xxxxxxxxxxxxxxxxxxxxxx
 st.write(texto_pan_rede_rural_intro_2())
@@ -188,9 +186,9 @@ with st.form("form_localizacao"):
     if submitted:
         # divisão da tela em duas colunas
         col1, col2 = st.columns(2)
-        # Grafico do total de alunos por localização
+        # Grafico do total de matriculas por localização
         with col1:
-            grafico_alunos_por_localizacao_municipio(df_panorama_geral, ano_censo_localizacao, municipio_localizacao)
+            grafico_matriculas_por_localizacao_municipio(df_panorama_geral, ano_censo_localizacao, municipio_localizacao)
         
         # Gráfico do total de escolas por localização    
         with col2:
@@ -199,9 +197,9 @@ with st.form("form_localizacao"):
         # Texto de análise dos gráficos
         st.write(texto_pan_rede_rural_analise_2())
         
-#===========================
-# Subseção 02.3 - A vinculação de alunos e escolas, por localização
-st.header("Dependência Administrativa de alunos e escolas, por Localização")
+#++++++++++++++
+# Subseção 02.3 - A vinculação de matriculas e escolas, por localização
+st.header("Dependência Administrativa de matrículas e escolas, por Localização")
 
 st.write(texto_pan_rede_dependencia_rural_intro_1())
 
@@ -215,9 +213,9 @@ ano_censo_dependencia_rural = st.selectbox(
 
 col1, col2 = st.columns(2)
 
-# Gráfico do total de alunos por dependência
+# Gráfico do total de matriculas por dependência
 with col1:
-    grafico_alunos_por_dependencia_localizacao(df_panorama_geral, ano_censo_dependencia_rural)
+    grafico_matriculas_por_dependencia_localizacao(df_panorama_geral, ano_censo_dependencia_rural)
 # Gráfico do total de escolas por dependência
 with col2:
     grafico_escolas_por_dependencia_localizacao(df_panorama_geral, ano_censo_dependencia_rural)
@@ -225,8 +223,9 @@ with col2:
 # Texto de análise dos gráficos
 st.write(texto_pan_rede_dependencia_rural_analise_1())
 
-# Subseção 02.4 - Total de Alunos e Escolas por Dependência Administrativa, por Localização, por Município
-st.subheader("Total de Alunos e Escolas por Dependência Administrativa, por Localização, por Município")
+#++++++++++++++
+# Subseção 02.4 - Total de matriculas e Escolas por Dependência Administrativa, por Localização, por Município
+st.subheader("Total de matrículas e Escolas por Dependência Administrativa, por Localização, por Município")
 
 # Texto introdutório
 st.write(texto_pan_rede_dependencia_rural_intro_2())
@@ -243,7 +242,7 @@ with st.form("form_dependencia_localizacao_municipio"):
 
     # Selectbox do Município
     municipio_dependencia_rural = st.selectbox(
-        "Selecione o município:", 
+        "Selecione o Município:", 
         sorted(df_panorama_geral['NO_MUNICIPIO'].unique()), 
         key="municipio_dependencia_localizacao_municipio"
     )
@@ -255,9 +254,9 @@ with st.form("form_dependencia_localizacao_municipio"):
     if submitted:
         # divisão da tela em duas colunas
         col1, col2 = st.columns(2)
-        # Gráfico do total de alunos por dependência
+        # Gráfico do total de matriculas por dependência
         with col1:
-            grafico_alunos_por_dependencia_localizacao_municipio(df_panorama_geral, ano_censo_dependencia_rural, municipio_dependencia_rural)
+            grafico_matriculas_por_dependencia_localizacao_municipio(df_panorama_geral, ano_censo_dependencia_rural, municipio_dependencia_rural)
         # Gráfico do total de escolas por dependência
         with col2:
             grafico_escolas_por_dependencia_localizacao_municipio(df_panorama_geral, ano_censo_dependencia_rural, municipio_dependencia_rural)
@@ -267,39 +266,11 @@ with st.form("form_dependencia_localizacao_municipio"):
 
 st.write(text_pan_rede_dependencia_rural_conclusao())
 
-#===============================
-# Seção 03 - Considerações Gerais sobre o Financiamento da Educação Básica
-#===============================
-st.header("Considerações Gerais sobre o Financiamento da Educação Básica")
-
-# Carrega dados FUNDEB
-# url_fundeb_estado = ""
-# url_fundeb_municipios = ""
-# df_fundeb_estado = carregar_dados(url_fundeb_estado)
-# df_fundeb_municipios = carregar_dados(url_fundeb_municipios)
-
-# texto introdutório financiamento
-st.write(texto_pan_rede_financiamento_intro())
-
-st.subheader("O Fundeb")
-st.write(texto_pan_rede_financiamento_fundeb_intro())
-
-# Gráficos do Fundeb vaat e total
-# funcao aqui
-
-st.write(texto_pan_rede_financiamento_fundeb_analise())
-
-# Gráficos do Fundeb Estado e Municpios sob demanda
-# funcao aqui
-
-st.subheader("Deficiências na execução dos recursos disponibilizados pelo FNDE")
-st.write("conluir o financimento apresentando os programas e a não utilização de recursos. Aí fazer a chamada para os outros panoramas.")
-
-
-
 
 #===============================
-# Seção 04 - Geração de Relatórios
+# Seção 03 - Geração de Relatórios
 #===============================
 st.header("Geração de relatórios")
-st.write("Seegue abaixo ferramente para geração de relatórios para download. Basta selecionar os filtros desejados e clicar no botão de download.")
+st.write(texto_pan_rede_relatorio_intro())
+
+st.write(df_panorama_geral)

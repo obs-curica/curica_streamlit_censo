@@ -3,7 +3,7 @@
 #============================
 
 #======================
-# Funções para a página inicial
+# PÁGINA APP.PY
 #======================
 def texto_app():
     return """
@@ -18,7 +18,7 @@ def texto_app():
 """
 
 #==========================
-# Funções para a página Home
+# PÁGINA HOME
 #==========================
 
 def texto_home_contextualizacao():
@@ -45,14 +45,14 @@ def texto_home_contextualizacao():
 
 
 #==========================
-# Funções para a página Panorama Rede
+# PÁGINA PANORAMA REDE
 #==========================
 
 def texto_pan_rede_intro():
     return """
     Esta página busca oferecer uma visão geral sobre os sistemas de ensino da rede pública de **educação básica** 
     do estado do Acre, com base nos dados do Censo Escolar. Serão introduzidos gráficos e tabelas que
-    possibilitam uma análise mais detalhada sobre a quantidade de alunos e escolas por Município, bem como 
+    possibilitam uma análise mais detalhada sobre a quantidade de matrículas e escolas por Município, bem como 
     a dependência administrativa, localização e outros aspectos relevantes. Lembre-se que todos os gráficos 
     e tabelas estão disponíveis para download. Basta passar o mouse por cima da imagem ou tabela para que o 
     menu fique disponível no canto superior direito. Sugere-se que o menu lateral seja retraído, para 
@@ -63,7 +63,7 @@ def texto_pan_rede_intro():
 def texto_pan_rede_caracterizacao():
     return """
     A caracterização da rede de ensino é fundamental para compreender a estrutura educacional do estado do 
-    Acre em seu contexto amazônico ímpar. Nesta seção, apresentam-se dados sobre o total de alunos e escolas 
+    Acre em seu contexto amazônico ímpar. Nesta seção, apresentam-se dados sobre o total de matrículas e escolas 
     por Município, além de informações sobre a dependência administrativa das instituições de ensino. 
     A caracterização da rede é essencial para identificar as necessidades e desafios enfrentados pelos 
     Municípios, permitindo uma análise mais aprofundada das políticas públicas educacionais e suas 
@@ -71,17 +71,21 @@ def texto_pan_rede_caracterizacao():
     
     Ainda, as características da rede de ensino são fundamentais para o planejamento e a implementação de políticas públicas
     educacionais eficazes, dado que elas **:orange-background[determinam] as possibilidades de :orange-background[captação de recursos] 
-    federais**.
+    federais**.  
+    
+    Ressalta-se que o estudo adota como nomenclatura o número de matrículas e não o número de alunos, porque há a 
+    possibilidade dupla matrícula de alunos que recebem atendimento educacional especializado e daqueles matriculados
+    em itinerários de formação técnica e profissional do ensino médio.
     """
 
 def texto_pan_rede_totais():
     return """
-    Inicia-se o estudo com a apresentação geral do quantitativo de alunos e escolas, por Município. É possível 
+    Inicia-se o estudo com a apresentação geral do quantitativo de matrículas e escolas, por Município. É possível 
     selecionar o ano do Censo Escolar desejado, para que os gráficos sejam atualizados. Os gráficos podem ser 
     visualizados em tela cheia, clicando no ícone de tela cheia no canto superior direito da imagem.
     
     Sobre os dados, intuitivamente, espera-se que os Municípios com maior população tenham maior número 
-    de alunos e escolas, certo?
+    de matrículas e escolas, certo?
     """
     
 def texto_pan_rede_analise():
@@ -90,7 +94,7 @@ def texto_pan_rede_analise():
     compreensão mais aprofundada da estrutura educacional do estado do Acre e das escolhas administrativas dos sistemas de ensino.
     
     Compare os Municípios de Taraucá e Jordão, localizados na mesma bacia hidrográfica. Taraucá abriga a terceira maior população 
-    do Estado. Jordão, por sua vez, é um dos menos populosos do Acre. O número de alunos matriculados em seus sistemas de ensino 
+    do Estado. Jordão, por sua vez, é um dos menos populosos do Acre. O número de matrículas em seus sistemas de ensino 
     aderem a essa lógica. No entanto, **o número de escolas de Taraucá é próximo do número de escolas de Jordão**.  
     
     Esse dado evidencia uma prática muito comum adotada pelas Secretarias de Educação dos Municípios do Acre: a criação 
@@ -107,7 +111,7 @@ def texto_pan_rede_analise():
     administrativa e apontando caminhos para intervenção. 
     """
 
-# Funções para a página Panorama Rede - Dependência Administrativa
+# Panorama Rede - Dependência Administrativa
 
 def texto_pan_rede_dependencia_intro():
     return """
@@ -122,17 +126,17 @@ def texto_pan_rede_dependencia_intro():
     
     Do ponto de vista de uma Promotoria de Justiça, a dependência administrativa indica o polo passivo de eventual ação civil pública.
     
-    Os gráficos a seguir apresentam o total de alunos e escolas por dependência administrativa, para todo o Estado.
+    Os gráficos a seguir apresentam o total de matrículas e escolas por dependência administrativa, para todo o Estado.
     """
     
 def texto_pan_rede_dependencia_analise():
     return """
     Como será aprofundado na avaliação do cumprimento das metas do Plano Nacional de Educação, as matrículas do ensino 
     infantil e fundamental somadas superam o número de matrículas do ensino médio. Pensando que esses níveis de ensino 
-    devem ser ofertados prioritariamente pelos Municípios, era de se esperar que a maior quantidade de alunos e escolas 
+    devem ser ofertados prioritariamente pelos Municípios, era de se esperar que a maior quantidade de matrículas e escolas 
     estivesse vinculada à rede pública municipal.  
     
-    No entanto, os dados revelam que, somados, a maior parte dos alunos está vinculada à rede pública estadual e, por
+    No entanto, os dados revelam que, somados, a maior parte das matrículas está vinculada à rede pública estadual e, por
     outro lado, a maior parte das escolas está vinculada à rede pública Municipal.  
     Essa informação é importante para entender as estratégias adotadas por cada ente federativo, bem como a distribuição 
     de responsabilidades entre os diferentes níveis de governo na oferta de educação básica.  
@@ -147,7 +151,7 @@ def texto_pan_rede_dependencia_analise():
 def texto_pan_rede_dependencia_analise_2():
     return """
     Sem pretensão de exaurir o tema, é possível afirmar que, ao se comparar os dados entre os Municípios, nota-se que
-    quanto maior a população do Município, maior o número de alunos e escolas vinculados à rede pública estadual. 
+    quanto maior a população do Município, maior o número de matrículas e escolas vinculados à rede pública estadual. 
     É o caso nos Municípios de Rio Branco, Cruzeiro do Sul, Tarauacá, Feijó e Sena Madureira.  
     
     Ainda, é possível notar uma acentuada diminuição da presença do sistema de ensino estadual nos Municípios que não possuem 
@@ -156,15 +160,15 @@ def texto_pan_rede_dependencia_analise_2():
    Esta análise segue sendo aprofundada abaixo, categorizando-se a rede de ensino pela localização das escolas.
     """
 
-# Funções para a página Panorama Rede - Urbano vs. Rural
+# Panorama Rede - Urbano vs. Rural
 
 def texto_pan_rede_rural_intro_1():
     return """
     Abaixo são apresentados os dados sobre a localização das escolas, que são classificadas no Censo Escolar como aquelas
     localizadas em área urbana ou rural, tento como critério os limites geográficos definidos no Plano Diretor do Município 
-    ou instrumento equivalente. Essa classificação é importante para entender a distribuição das escolas no território e a 
-    acessibilidade dos alunos à educação básica.  
-    
+    ou instrumento equivalente. Essa classificação é importante para entender a distribuição das escolas no território e o
+    acesso dos alunos à educação básica.  
+        
     Muito já foi dito a respeito da dualidade entre os adjetivos "rural" e "urbano", bem como sobre os concepções pejorativas
     ou supremacistas que permeiam essa classificação. Nunca é demais relembrar que o termo rural deve ser empregado com a cautela
     de se levar em conta o contexto que o abriga. Nesse caso, o contexto amazônico marcado por sua rica sociobiodiversidade. 
@@ -182,9 +186,9 @@ def texto_pan_rede_rural_intro_1():
     
 def texto_pan_rede_rural_analise_1():
     return """
-    O primeiro gráfico apresenta o total de alunos por localização, indicando a maior concentração de alunos em escolas
+    O primeiro gráfico apresenta o total de matrículas por localização, indicando a maior concentração de matrículas em escolas
     localizadas em áreas urbanas. Esse dado reflete os dados populacionais de que a maioria da população do Acre reside 
-    em áreas urbanas. Entretanto, quase um terço do total de alunos está matriculado em escolas rurais.
+    em áreas urbanas. Entretanto, quase um terço do total de alunos estão matriculados em escolas rurais.
     
     Por sua vez, o segundo gráfico revela que a quantidade de escolas em áreas rurais é quase dois terços maior do que a
     quantidade de escolas em áreas urbanas. Esse é o dado que começa a diferenciar a educação amazônica daquela executada
@@ -203,16 +207,16 @@ def texto_pan_rede_rural_analise_1():
     
 def texto_pan_rede_rural_intro_2():
     return """
-    Selecione abaixo o ano do Censo Escolar e o Município desejado. Os gráficos apresentam o total de alunos e escolas por localização.
+    Selecione abaixo o ano do Censo Escolar e o Município desejado. Os gráficos apresentam o total de matrículas e escolas por localização.
     """
 
 def texto_pan_rede_rural_analise_2():
     return """
     E então, como está a localização das escolas em seu Município? A maior parte delas está localizada em áreas urbanas ou rurais?
-    E os alunos, estão de fato concentrados na área urbana? Existem Municípios com maior número de alunos em escolas rurais?
-    Há uma relação entre a quantidade de alunos em áreas rurais e a região onde o Município está inserido?
+    E as matrículas, estão de fato concentrados na área urbana? Existem Municípios com maior número de matrículas em escolas rurais?
+    Há uma relação entre a quantidade de matrículas em áreas rurais e a região onde o Município está inserido?
     
-    O grande número de alunos e escolas rurais nos Municípios do interior do Acre apenas reflete a realidade geográfica e 
+    O grande número de matrículas e escolas rurais nos Municípios do interior do Acre apenas reflete a realidade geográfica e 
     demográfica do Estado. O que é preciso enfatizar é que existem Municípios com grande quantidade de alunos e escolas rurais,
     que enfrentam os desafios logísticos e climáticos da região amazônica. Como fica o transporte escolar em ramais, durante
     o período chuvoso, ou em igarapés, no período da seca? E o fornecimento de alimentação escolar e material de expediente?
@@ -224,12 +228,12 @@ def texto_pan_rede_rural_analise_2():
     
     De quem é a responsabilidade?
     
-    O início da resposta a essa pergunta pode ser obtido combinando-se os dados da análise anterior que trata da dependência
+    O início da resposta a essa pergunta pode ser obtido combinando-se os dados da análise anterior, que trata da dependência
     administrativa, com os dados sobre a localização das escolas. Essa combinação de dados é importante porque
     identifica a presença dos diferentes sistemas de ensino em áreas urbanas e rurais. 
     """
     
-# Funções para a página Panorama Rede - Dependencia Administrativa e Localização
+# Panorama Rede - Dependencia Administrativa e Localização
 
 def texto_pan_rede_dependencia_rural_intro_1():
     return """
@@ -238,7 +242,7 @@ def texto_pan_rede_dependencia_rural_intro_1():
     escolhas administrativas do Governo do Estado e dos Municípios, bem como suas responsabilidades por possíveis
     omissões.
         
-    A seguir, são apresentados gráficos que mostram o total de alunos e escolas por dependência administrativa, 
+    A seguir, são apresentados gráficos que mostram o total de matrículas e escolas por dependência administrativa, 
     considerando a localização das escolas, se urbanas ou rurais. Selecione o ano do Censo Escolar desejado.
     """    
 
@@ -254,10 +258,10 @@ def texto_pan_rede_dependencia_rural_analise_1():
     cobertura na zona rural? Esses mesmos questionamentos se aplicam ao sistema municipal. 
     
     De plano, é possível concluir que o sistema de ensino estadual possui um índice de concentração maior que os sistemas 
-    de ensino municipais. Ou seja, possui menos escolas para um maior número de alunos. Ainda, é claramente menos presente 
-    na zona rural. Os demais questionamentos serão endereçados logo mais abaixo, na seção que tratará do financiamento da 
-    educação pública e sua relação com os dados analisados até aqui. O leitor vai perceber que este é um tema recorrente que 
-    será abordado em outras seções deste site.
+    de ensino municipais. Ou seja, possui menos escolas para um maior número de matrículas. Ainda, é claramente menos presente 
+    na zona rural. Os questionamentos sobre os custos serão endereçados na página trata do financiamento da educação pública e 
+    sua relação com os dados analisados até aqui. O leitor vai perceber que este é um tema recorrente que também será abordado 
+    especificamente em cada uma das páginas deste site.
     
     Por hora, vale comparar a distribuição específica por Município e verificar se o quadro geral se repete localmente.
     """
@@ -271,7 +275,7 @@ def texto_pan_rede_dependencia_rural_intro_2():
     
 def texto_pan_rede_dependencia_rural_analise_2():
     return """
-    Como ficou a distribuição dos alunos e escolas por dependência administrativa e localização em seu Município, quando comparado 
+    Como ficou a distribuição de matrículas e escolas por dependência administrativa e localização em seu Município, quando comparado 
     com o quadro geral? Há Municípios com maior número de alunos matriculados no sistema de ensino municipal? As escolas estatudais 
     continuam concentradas na zona urbana? E as escolas municipais? Há Municípios com maior número de alunos matriculados em escolas rurais?
     Há uma relação entre a presença do sistema de ensino estadual e a região onde o Município está inserido?
@@ -282,14 +286,29 @@ def text_pan_rede_dependencia_rural_conclusao():
     A análise dos dados sobre a dependência administrativa e a localização das escolas revela a complexidade da
     realidade educacional do estado do Acre. A vasta extensão territorial, a diversidade cultural e as
     características geográficas da região exigem uma abordagem diferenciada para a oferta de educação básica.
-    A presença significativa de escolas rurais e a concentração de alunos em áreas urbanas indicam a necessidade
+    A presença significativa de escolas rurais e a concentração de matrículas em áreas urbanas indicam a necessidade
     de políticas públicas que considerem as especificidades locais e promovam a equidade no acesso à educação.
     A combinação desses dados com informações sobre o financiamento da educação pública permitirá uma análise
     mais aprofundada das responsabilidades dos diferentes sistemas de ensino e suas implicações na formação dos alunos.
     """
     
+# Geração de relatórios
 
-def texto_pan_rede_financiamento_intro():
+def texto_pan_rede_relatorio_intro():
+    return """
+    Nesta subseção, você pode gerar relatórios com a relação das escolas de cada Município, contendo o seu número
+    identificador no cadastro do MEC, o número de matrículas, a dependência administrativa, localização e endereço.  
+    São dados úteis para diminuir a abstração dos gráficos a iniciar a materialização do trabalho.
+    
+    Eles podem ser baixados pelo usuario. Basta selecionar os filtros desejados e clicar no botão de download.
+    """
+
+#==========================
+# PÁGINA FINANCIAMENTO REDE
+#==========================
+
+
+def texto_pan_financiamento_intro():
     return """
     O modelo de federalismo brasileiro prevê que a União, os Estados e os Municípios mantenham seus respectivos sistemas de ensino, 
     em regime de colaboração [(art. 211 CF)](https://www.planalto.gov.br/ccivil_03/Constituicao/Constituicao.htm#art212:~:text=Art.%20211.%20A%20Uni%C3%A3o%2C%20os%20Estados%2C%20o%20Distrito%20Federal%20e%20os%20Munic%C3%ADpios%20organizar%C3%A3o%20em%20regime%20de%20colabora%C3%A7%C3%A3o%20seus%20sistemas%20de%20ensino.). 
@@ -313,7 +332,7 @@ def texto_pan_rede_financiamento_intro():
 
 
 # Funções para a página Panorama Rede - Financiamento da Educação
-def texto_pan_rede_financiamento_fundeb_intro():
+def texto_pan_financiamento_fundeb_intro():
     return """
     O financiamento da educação básica pública no Brasil passou por importantes transformações nos últimos anos.
     Em 1996, foi criado o Fundef (Fundo de Manutenção e Desenvolvimento do Ensino Fundamental e de Valorização do 
@@ -338,9 +357,11 @@ def texto_pan_rede_financiamento_fundeb_intro():
     Gráficos evolução vaat e fundeb total.
     
     Gráficos SEE e Municípios sob demanda.
+    
+    Fiscalização, art. 30 e 32 da lei 14113/2020.
     """
     
-def texto_pan_rede_financiamento_fundeb_analise():
+def texto_pan_financiamento_fundeb_analise():
     return """
     Análise repasses do FNDE Estado e Municípios.
     

@@ -9,10 +9,10 @@ import streamlit as st
 # PAGINA PANORAMA GERAL
 #=============================
 
-# Função para plotar gráfico de barras horizontal com o total de alunos por município
-def grafico_alunos_por_municipio(df, ano_censo):
+# Função para plotar gráfico de barras horizontal com o total de matriculas por município
+def grafico_matriculas_por_municipio(df, ano_censo):
     """
-    Gera um gráfico de barras horizontal com o total de alunos por município.
+    Gera um gráfico de barras horizontal com o total de matriculas por município.
 
     Parâmetros:
     -----------
@@ -29,25 +29,25 @@ def grafico_alunos_por_municipio(df, ano_censo):
     # Filtra o DataFrame pelo ano selecionado
     df_filtrado = df[df['NU_ANO_CENSO'] == ano_censo]
 
-    # Agrupar e somar os alunos por município
-    resultado_alunos = df_filtrado.groupby('NO_MUNICIPIO')['QT_MAT_BAS'].sum().sort_values(ascending=True)
+    # Agrupar e somar os matriculas por município
+    resultado_matriculas = df_filtrado.groupby('NO_MUNICIPIO')['QT_MAT_BAS'].sum().sort_values(ascending=True)
 
     # Gradiente de cores
     cmap = mcolors.LinearSegmentedColormap.from_list('custom_gradient', ['#B0E0E6', '#FFC107'])
-    norm = plt.Normalize(vmin=resultado_alunos.min(), vmax=resultado_alunos.max())
-    cores = [cmap(norm(valor)) for valor in resultado_alunos]
+    norm = plt.Normalize(vmin=resultado_matriculas.min(), vmax=resultado_matriculas.max())
+    cores = [cmap(norm(valor)) for valor in resultado_matriculas]
 
-    # Gráfico total de alunos por município
+    # Gráfico total de matriculas por município
     plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(15, max(8, 0.5 * len(resultado_alunos))))
-    bars = ax.barh(resultado_alunos.index, resultado_alunos.values, color=cores)
+    fig, ax = plt.subplots(figsize=(15, max(8, 0.5 * len(resultado_matriculas))))
+    bars = ax.barh(resultado_matriculas.index, resultado_matriculas.values, color=cores)
 
     # Ajusta dinamicamente o limite superior do eixo X com uma folga de 10%
-    limite_superior = resultado_alunos.max() * 1.1
+    limite_superior = resultado_matriculas.max() * 1.1
     ax.set_xlim(right=limite_superior)
 
     # Título e rótulos
-    ax.set_title('Total de Alunos por Município', color='#FFA07A', fontsize=40)
+    ax.set_title('Total de matrículas por Município', color='#FFA07A', fontsize=40)
 
     # Estilo dos spines
     for spine in ax.spines.values():
@@ -60,8 +60,8 @@ def grafico_alunos_por_municipio(df, ano_censo):
     ax.xaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f'{int(x/1000)}mil'))
 
     # Inserir valores nas barras com base mil
-    for i, valor in enumerate(resultado_alunos):
-        ax.text(valor + (resultado_alunos.max() * 0.01), i, f'{int(valor/1000)}', va='center',
+    for i, valor in enumerate(resultado_matriculas):
+        ax.text(valor + (resultado_matriculas.max() * 0.01), i, f'{int(valor/1000)}', va='center',
                 color='white', fontweight='bold', fontsize=22)
 
     fig.tight_layout()
@@ -186,10 +186,10 @@ def grafico_escolas_por_dependencia(df, ano_censo):
     fig.tight_layout()
     st.pyplot(fig)
 
-# Função para gráfico de barras verticais para o total de alunos por dependência administrativa
-def grafico_alunos_por_dependencia(df, ano_censo):
+# Função para gráfico de barras verticais para o total de matriculas por dependência administrativa
+def grafico_matriculas_por_dependencia(df, ano_censo):
     """
-    Gera um gráfico de barras verticais com o total de alunos por dependência administrativa.
+    Gera um gráfico de barras verticais com o total de matriculas por dependência administrativa.
 
     Parâmetros:
     -----------
@@ -207,7 +207,7 @@ def grafico_alunos_por_dependencia(df, ano_censo):
     # Filtra o DataFrame pelo ano selecionado
     df_filtrado = df[df['NU_ANO_CENSO'] == ano_censo]
 
-    # Agrupa por Dependência Administrativa e soma os alunos
+    # Agrupa por Dependência Administrativa e soma os matriculas
     dependencia_counts = df_filtrado.groupby('TP_DEPENDENCIA')['QT_MAT_BAS'].sum().sort_index().astype(int)
     dependencia_counts.index = dependencia_counts.index.map({1: 'Federal', 2: 'Estadual', 3: 'Municipal'})
 
@@ -228,8 +228,8 @@ def grafico_alunos_por_dependencia(df, ano_censo):
     bars = ax.bar(dependencia_counts.index, dependencia_counts.values, color=cores)
 
     # Título e rótulos
-    ax.set_title(f'Total de Alunos por Dependência Administrativa', color='#FFA07A', fontsize=25)
-    #ax.set_ylabel('Número de Alunos', color='#FFA07A', fontsize=14)
+    ax.set_title(f'Total de matrículas por Dependência Administrativa', color='#FFA07A', fontsize=25)
+    #ax.set_ylabel('Número de matriculas', color='#FFA07A', fontsize=14)
     #ax.set_xlabel(f'Ano {ano_censo}', color='#FFA07A', fontsize=25)
 
     # Estilo dos spines
@@ -248,10 +248,10 @@ def grafico_alunos_por_dependencia(df, ano_censo):
     fig.tight_layout()
     st.pyplot(fig)
 
-# Função para gráfico de barras total de alunos por dependência, por município
-def grafico_alunos_por_dependencia_municipio(df, ano_censo, municipio):
+# Função para gráfico de barras total de matriculas por dependência, por município
+def grafico_matriculas_por_dependencia_municipio(df, ano_censo, municipio):
     """
-    Gera um gráfico de barras verticais com o total de alunos por dependência administrativa.
+    Gera um gráfico de barras verticais com o total de matriculas por dependência administrativa.
 
     Parâmetros:
     -----------
@@ -270,7 +270,7 @@ def grafico_alunos_por_dependencia_municipio(df, ano_censo, municipio):
         (df['NO_MUNICIPIO'] == municipio)
     ]
 
-    # Agrupa por Dependência Administrativa e soma os alunos
+    # Agrupa por Dependência Administrativa e soma os matriculas
     dependencia_counts = df_filtrado.groupby('TP_DEPENDENCIA')['QT_MAT_BAS'].sum().sort_index().astype(int)
     dependencia_counts.index = dependencia_counts.index.map({1: 'Federal', 2: 'Estadual', 3: 'Municipal'})
 
@@ -291,7 +291,7 @@ def grafico_alunos_por_dependencia_municipio(df, ano_censo, municipio):
     bars = ax.bar(dependencia_counts.index, dependencia_counts.values, color=cores)
 
     # Título e rótulos
-    ax.set_title(f'Total de Alunos por Dep. Administrativa em {municipio}', color='#FFA07A', fontsize=25)
+    ax.set_title(f'Total de matrículas por Dep. Administrativa em {municipio}', color='#FFA07A', fontsize=25)
     
     # Estilo dos spines
     for spine in ax.spines.values():
@@ -431,10 +431,10 @@ def grafico_escolas_por_localizacao(df, ano_censo):
     fig.tight_layout()
     st.pyplot(fig)
 
-# Função para gráfico de barras verticais para o total de alunos por localizacao
-def grafico_alunos_por_localizacao(df, ano_censo):
+# Função para gráfico de barras verticais para o total de matriculas por localizacao
+def grafico_matriculas_por_localizacao(df, ano_censo):
     """
-    Gera um gráfico de barras verticais com o total de alunos por localizacao.
+    Gera um gráfico de barras verticais com o total de matriculas por localizacao.
 
     Parâmetros:
     -----------
@@ -450,7 +450,7 @@ def grafico_alunos_por_localizacao(df, ano_censo):
     # Filtra o DataFrame pelo ano selecionado
     df_filtrado = df[df['NU_ANO_CENSO'] == ano_censo]
 
-    # Agrupa por Localização e soma os alunos
+    # Agrupa por Localização e soma os matriculas
     localizacao_counts = df_filtrado.groupby('TP_LOCALIZACAO')['QT_MAT_BAS'].sum().sort_index().astype(int)
     localizacao_counts.index = localizacao_counts.index.map({1: 'Urbana', 2: 'Rural'})
 
@@ -471,8 +471,8 @@ def grafico_alunos_por_localizacao(df, ano_censo):
     bars = ax.bar(localizacao_counts.index, localizacao_counts.values, color=cores)
 
     # Título e rótulos
-    ax.set_title('Total de Alunos por Localização', color='#FFA07A', fontsize=25)
-    # ax.set_ylabel('Número de Alunos', color='#FFA07A', fontsize=14)
+    ax.set_title('Total de matrículas por Localização', color='#FFA07A', fontsize=25)
+    # ax.set_ylabel('Número de matriculas', color='#FFA07A', fontsize=14)
     # ax.set_xlabel('Localização', color='#FFA07A', fontsize=14)
     
     # Estilo dos spines
@@ -493,10 +493,10 @@ def grafico_alunos_por_localizacao(df, ano_censo):
     fig.tight_layout()
     st.pyplot(fig)
 
-# Função gráfico de barras total de alunos por localizacao, por município
-def grafico_alunos_por_localizacao_municipio(df, ano_censo, municipio):
+# Função gráfico de barras total de matriculas por localizacao, por município
+def grafico_matriculas_por_localizacao_municipio(df, ano_censo, municipio):
     """
-    Gera um gráfico de barras verticais com o total de alunos por localização.
+    Gera um gráfico de barras verticais com o total de matriculas por localização.
 
     Parâmetros:
     -----------
@@ -517,7 +517,7 @@ def grafico_alunos_por_localizacao_municipio(df, ano_censo, municipio):
         (df['NO_MUNICIPIO'] == municipio)
     ]
 
-    # Agrupa por Localização e soma os alunos
+    # Agrupa por Localização e soma os matriculas
     localizacao_counts = df_filtrado.groupby('TP_LOCALIZACAO')['QT_MAT_BAS'].sum().sort_index().astype(int)
     localizacao_counts.index = localizacao_counts.index.map({1: 'Urbana', 2: 'Rural'})
 
@@ -538,7 +538,7 @@ def grafico_alunos_por_localizacao_municipio(df, ano_censo, municipio):
     bars = ax.bar(localizacao_counts.index, localizacao_counts.values, color=cores)
 
     # Título e rótulos
-    ax.set_title(f'Total de Alunos por Localização em {municipio}', color='#FFA07A', fontsize=25)
+    ax.set_title(f'Total de matrículas por Localização em {municipio}', color='#FFA07A', fontsize=25)
     
     # Estilo dos spines
     for spine in ax.spines.values():
@@ -581,7 +581,7 @@ def grafico_escolas_por_localizacao_municipio(df, ano_censo, municipio):
         (df['TP_LOCALIZACAO'].notnull())
     ]
 
-    # Agrupa por Localização e soma os alunos
+    # Agrupa por Localização e soma os matriculas
     localizacao_counts = df_filtrado['TP_LOCALIZACAO'].value_counts().sort_index()
     localizacao_counts.index = localizacao_counts.index.map({1: 'Urbana', 2: 'Rural'})
 
@@ -620,10 +620,10 @@ def grafico_escolas_por_localizacao_municipio(df, ano_censo, municipio):
     fig.tight_layout()
     st.pyplot(fig)
 
-# Função gráfico barras agrupadas alunos por dependência e localização
-def grafico_alunos_por_dependencia_localizacao(df, ano_censo):
+# Função gráfico barras agrupadas matriculas por dependência e localização
+def grafico_matriculas_por_dependencia_localizacao(df, ano_censo):
     """
-    Gera gráfico de barras agrupadas com total de alunos por dependência e localização (urbana/rural).
+    Gera gráfico de barras agrupadas com total de matriculas por dependência e localização (urbana/rural).
 
     Parâmetros:
     - df : pd.DataFrame
@@ -638,7 +638,7 @@ def grafico_alunos_por_dependencia_localizacao(df, ano_censo):
     # Filtro por ano
     df_filtrado = df[df['NU_ANO_CENSO'] == ano_censo]
 
-    # Agrupamento por dependência e localização, somando os alunos
+    # Agrupamento por dependência e localização, somando os matriculas
     agrupado = df_filtrado.groupby(['TP_DEPENDENCIA', 'TP_LOCALIZACAO'])['QT_MAT_BAS'].sum().unstack(fill_value=0)
     agrupado = agrupado.rename(index={1: 'Federal', 2: 'Estadual', 3: 'Municipal'})
     agrupado = agrupado.rename(columns={1: 'Urbana', 2: 'Rural'})
@@ -659,7 +659,7 @@ def grafico_alunos_por_dependencia_localizacao(df, ano_censo):
     ax.bar(x + largura/2, rural, width=largura, label='Rural', color='#1FB029')
 
     # Eixos e rótulos
-    ax.set_title('Total de Alunos por Dependência e Localização', color='#FFA07A', fontsize=25)
+    ax.set_title('Total de matrículas por Dependência e Localização', color='#FFA07A', fontsize=25)
     ax.set_xticks(x)
     ax.set_xticklabels(categorias, color='#FFA07A', fontsize=25)
     ax.tick_params(axis='y', colors='#FFA07A')
@@ -745,10 +745,10 @@ def grafico_escolas_por_dependencia_localizacao(df, ano_censo):
     plt.tight_layout()
     st.pyplot(fig)
 
-# Função gráfico barras agrupadas alunos por dependência e localização, por Município
-def grafico_alunos_por_dependencia_localizacao_municipio(df, ano_censo, municipio):
+# Função gráfico barras agrupadas matriculas por dependência e localização, por Município
+def grafico_matriculas_por_dependencia_localizacao_municipio(df, ano_censo, municipio):
     """
-    Gera gráfico de barras agrupadas com o total de alunos por dependência e localização (urbana/rural) 
+    Gera gráfico de barras agrupadas com o total de matriculas por dependência e localização (urbana/rural) 
     no município e ano selecionados.
 
     Parâmetros:
@@ -790,7 +790,7 @@ def grafico_alunos_por_dependencia_localizacao_municipio(df, ano_censo, municipi
     ax.bar(x + largura/2, rural, width=largura, label='Rural', color='#1FB029')
 
     # Eixos e rótulos
-    ax.set_title(f'Alunos por Dependência e Localização - {municipio} ({ano_censo})', color='#FFA07A', fontsize=25)
+    ax.set_title(f'Matrículas por Dependência e Localização - {municipio} ({ano_censo})', color='#FFA07A', fontsize=25)
     ax.set_xticks(x)
     ax.set_xticklabels(categorias, color='#FFA07A', fontsize=25)
     ax.tick_params(axis='y', colors='#FFA07A')
@@ -883,6 +883,11 @@ def grafico_escolas_por_dependencia_localizacao_municipio(df, ano_censo, municip
     st.pyplot(fig)
 
 
+
+#============================
+# PAGINA PANORAMA FINANCIAMENTO
+#=============================
+
 # Função gráfico de barras vertical fundeb por ano
 def grafico_fundeb_total_ano(df):
     """
@@ -901,10 +906,10 @@ def grafico_fundeb_total_ano(df):
 # PAGINA POVOS TRADICIONAIS
 #===========================
 
-# Função gráfico de barras total de alunos por localizacao diferenciada
-def grafico_alunos_por_localizacao_diferenciada(df, ano_censo):
+# Função gráfico de barras total de matriculas por localizacao diferenciada
+def grafico_matriculas_por_localizacao_diferenciada(df, ano_censo):
     """
-    Gera um gráfico de barras verticais com o total de alunos por localizacao diferenciada.
+    Gera um gráfico de barras verticais com o total de matriculas por localizacao diferenciada.
 
     Parâmetros:
     -----------
@@ -924,7 +929,7 @@ def grafico_alunos_por_localizacao_diferenciada(df, ano_censo):
         (df['TP_LOCALIZACAO_DIFERENCIADA'].notnull())
     ]
     
-    # Agrupa por Localização e soma os alunos
+    # Agrupa por Localização e soma os matriculas
     localizacao_counts = df_filtrado.groupby('TP_LOCALIZACAO_DIFERENCIADA')['QT_MAT_BAS'].sum().sort_index().astype(int)
     localizacao_counts.index = localizacao_counts.index.map({1: 'Assentamento', 2: 'Terra Indígena', 3: 'Quilombola', 8: 'Com. Tradicionais'})
     
@@ -944,8 +949,8 @@ def grafico_alunos_por_localizacao_diferenciada(df, ano_censo):
     fig, ax = plt.subplots(figsize=(10, 6))
     bars = ax.bar(localizacao_counts.index, localizacao_counts.values, color=cores_localizacao)
     # Título e rótulos
-    ax.set_title('Total de Alunos por Localização Diferenciada', color='#FFA07A', fontsize=25)
-    # ax.set_ylabel('Número de Alunos', color='#FFA07A', fontsize=14)
+    ax.set_title('Total de matriculas por Localização Diferenciada', color='#FFA07A', fontsize=25)
+    # ax.set_ylabel('Número de matriculas', color='#FFA07A', fontsize=14)
     # ax.set_xlabel('Localização', color='#FFA07A', fontsize=14)
     # Estilo dos spines
     for spine in ax.spines.values():
