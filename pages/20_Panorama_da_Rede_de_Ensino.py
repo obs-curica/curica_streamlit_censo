@@ -22,6 +22,8 @@ from scripts.textos import texto_pan_rede_dependencia_rural_intro_2
 from scripts.textos import texto_pan_rede_dependencia_rural_analise_2
 from scripts.textos import text_pan_rede_dependencia_rural_conclusao
 from scripts.textos import texto_pan_rede_financiamento_intro
+from scripts.textos import texto_pan_rede_financiamento_fundeb_intro
+from scripts.textos import texto_pan_rede_financiamento_fundeb_analise
 
 from scripts.load_data import carregar_dados
 from scripts.load_data import dataframe_totais_por_localizacao_municipio
@@ -276,13 +278,24 @@ st.header("Considerações Gerais sobre o Financiamento da Educação Básica")
 # df_fundeb_estado = carregar_dados(url_fundeb_estado)
 # df_fundeb_municipios = carregar_dados(url_fundeb_municipios)
 
-# texto introdutório
+# texto introdutório financiamento
 st.write(texto_pan_rede_financiamento_intro())
 
-st.subheader("Quadro de utilização dos recursos financeiros disponíveis")
+st.subheader("O Fundeb")
+st.write(texto_pan_rede_financiamento_fundeb_intro())
+
+# Gráficos do Fundeb vaat e total
+# funcao aqui
+
+st.write(texto_pan_rede_financiamento_fundeb_analise())
+
+# Gráficos do Fundeb Estado e Municpios sob demanda
+# funcao aqui
+
+st.subheader("Deficiências na execução dos recursos disponibilizados pelo FNDE")
 st.write("conluir o financimento apresentando os programas e a não utilização de recursos. Aí fazer a chamada para os outros panoramas.")
 
-st.subheader("O Fundeb")
+
 
 
 #===============================

@@ -313,39 +313,40 @@ def texto_pan_rede_financiamento_intro():
 
 
 # Funções para a página Panorama Rede - Financiamento da Educação
-def texto_pan_rede_financiamento_fundeb():
+def texto_pan_rede_financiamento_fundeb_intro():
     return """
-    Responsablidades de financiamento da educação pelos entes, segundo a LDB.
-    
-    Colaboração da União, por meio do FNDE. 
-    
-    Falar dos programas e ações. Afunilar para FUNDEB.
-    
     O financiamento da educação básica pública no Brasil passou por importantes transformações nos últimos anos.
-    Em 1996, foi criado o FUNDEF (Fundo de Manutenção e Desenvolvimento do Ensino Fundamental e de Valorização do 
+    Em 1996, foi criado o Fundef (Fundo de Manutenção e Desenvolvimento do Ensino Fundamental e de Valorização do 
     Magistério), voltado exclusivamente para o ensino fundamental. Sua estrutura visava garantir o acesso e a 
     qualidade deste nível de ensino, mas deixava de fora a educação infantil e o ensino médio.  
 
-    Com a ampliação do conceito de educação como direito social em todas as etapas, o FUNDEB (Fundo de Manutenção 
+    Com a ampliação do conceito de educação como direito social em todas as etapas, o Fundeb (Fundo de Manutenção 
     e Desenvolvimento da Educação Básica e de Valorização dos Profissionais da Educação) foi instituído em 2007. 
-    Diferente do FUNDEF, o FUNDEB abrange toda a educação básica — da creche ao ensino médio — e contempla todos 
+    Diferente do Fundef, o Fundeb abrange toda a educação básica — da creche ao ensino médio — e contempla todos 
     os profissionais da educação, fortalecendo o compromisso com a equidade e a qualidade do ensino público.  
 
-    Aprovado de forma permanente em 2020, o novo FUNDEB trouxe melhorias, como o aumento da participação da União 
-    e a adoção de mecanismos de correção de desigualdades educacionais. Agora o FUNDEB tem caráter permanente e 
+    Aprovado de forma permanente em 2020, o novo Fundeb trouxe melhorias, como o aumento da participação da União 
+    e a adoção de mecanismos de correção de desigualdades educacionais. Agora o Fundeb tem caráter permanente e 
     constitucional e está regulamentado pela Lei [13.421/2020](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm). 
+    
+    Ele é formado por uma cesta de tributos.
+    
+    VAAT
+    
+    Acompanhe abaixo a evolução dos repasses do Fundeb.
+    
+    Gráficos evolução vaat e fundeb total.
+    
+    Gráficos SEE e Municípios sob demanda.
     """
     
-def texto_pan_rede_financiamento_intro_fundeb():
+def texto_pan_rede_financiamento_fundeb_analise():
     return """
-    Responsabilidades LDB.
-    VAAT, VAAR e VAAF. Relacionamento com o número de matrículas e o Censo Escolar.
+    Análise repasses do FNDE Estado e Municípios.
+    
+    Relacionamento com o número de matrículas e o Censo Escolar.
     
     Os recursos dos Fundos devem ser utilizados no mesmo exercício financeiro, podendo ser utilizado até 10% do total do 
     repasse no primeiro quadrimestre do ano seguinte.
-    """
-def texto_pan_rede_financiamento_analise():
-    return """
-    Análise repasses do FNDE Estado e Municípios.
     """
 
