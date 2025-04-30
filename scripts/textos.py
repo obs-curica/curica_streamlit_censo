@@ -137,8 +137,7 @@ def texto_pan_rede_dependencia_analise():
     estivesse vinculada à rede pública municipal.  
     
     No entanto, os dados revelam que, somados, a maior parte das matrículas está vinculada à rede pública estadual e, por
-    outro lado, a maior parte das escolas está vinculada à rede pública Municipal.  
-    Essa informação é importante para entender as estratégias adotadas por cada ente federativo, bem como a distribuição 
+    outro lado, a maior parte das escolas está vinculada à rede pública Municipal. Essa informação é importante para entender as estratégias adotadas por cada ente federativo, bem como a distribuição 
     de responsabilidades entre os diferentes níveis de governo na oferta de educação básica.  
     
     Nesse ponto, é importante lembrar que grande parte dos recursos federais para a educação básica são transferidos
@@ -191,7 +190,7 @@ def texto_pan_rede_rural_analise_1():
     em áreas urbanas. Entretanto, quase um terço do total de alunos estão matriculados em escolas rurais.
     
     Por sua vez, o segundo gráfico revela que a quantidade de escolas em áreas rurais é quase dois terços maior do que a
-    quantidade de escolas em áreas urbanas. Esse é o dado que começa a diferenciar a educação amazônica daquela executada
+    quantidade de escolas em áreas urbanas. Esse é o dado que começa a diferenciar a **educação amazônica** daquela executada
     em outras regiões do Brasil. Para se ter uma perspectiva, o Estado do Acre abrange uma área territorial próxima da Inglaterra.
     Os Municípios do Vale do Alto Rio Juruá, por sua vez, possuem uma área territorial maior que a do Estado de Israel.
     A noção dessas dimensões espaciais são fundamentais para se compreender os desafios da realidade educacional do Acre 

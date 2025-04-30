@@ -4,7 +4,7 @@
 # ============================
 
 [theme]
-primaryColor = "#76EE00"                 # Verde fosforescente do Diagrama Curica
+primaryColor = "#008000"                 # Verde fosforescente do Diagrama Curica
 backgroundColor = "#0E1117"              # Preto carvão (tema escuro)
 secondaryBackgroundColor = "#262730"     # Cinza escuro para painéis
 textColor = "#FFA07A"                    # Salmão para textos e títulos

@@ -5,6 +5,8 @@ import matplotlib.colors as mcolors
 import os
 import re
 
+from scripts.load_data import carregar_dados
+
 from scripts.textos import texto_pan_rede_intro
 from scripts.textos import texto_pan_rede_caracterizacao
 from scripts.textos import texto_pan_rede_totais
@@ -23,7 +25,7 @@ from scripts.textos import texto_pan_rede_dependencia_rural_analise_2
 from scripts.textos import text_pan_rede_dependencia_rural_conclusao
 from scripts.textos import texto_pan_rede_relatorio_intro
 
-from scripts.load_data import carregar_dados
+
 
 from scripts.graficos import grafico_matriculas_por_municipio
 from scripts.graficos import grafico_escolas_por_municipio
@@ -273,4 +275,108 @@ st.write(text_pan_rede_dependencia_rural_conclusao())
 st.header("Geração de relatórios")
 st.write(texto_pan_rede_relatorio_intro())
 
-st.write(df_panorama_geral)
+
+# Colunas excluídas
+colunas_excluidas = [
+    'CO_MUNICIPIO', 
+    'TP_LOCALIZACAO_DIFERENCIADA', 
+    'IN_ENERGIA_REDE_PUBLICA', 
+    'IN_ENERGIA_GERADOR_FOSSIL',
+    'IN_ENERGIA_RENOVAVEL',
+    'IN_ENERGIA_INEXISTENTE'
+    ]
+
+# Remover colunas excluídas
+df_panorama_geral = df_panorama_geral.drop(columns=colunas_excluidas)
+
+# Renomear colunas para exibição
+colunas_renomeadas = {
+    'NU_ANO_CENSO': 'Ano do Censo',
+    'NO_MUNICIPIO': 'Município',
+    'NO_ENTIDADE': 'Nome da Escola',
+    'CO_ENTIDADE': 'Código da Escola',
+    'TP_DEPENDENCIA': 'Dep. Administrativa',
+    'TP_LOCALIZACAO': 'Localização',
+    'DS_ENDERECO': 'Endereço',
+    'DS_COMPLEMENTO': 'Complemento',
+    'QT_MAT_BAS': 'Matrículas'
+}
+df_panorama_geral = df_panorama_geral.rename(columns=colunas_renomeadas)
+
+# Renomear valores da dependência administrativa e localização
+map_dependencia = {1: 'Federal', 2: 'Estadual', 3: 'Municipal'}
+map_localizacao = {1: 'Urbana', 2: 'Rural'}
+
+df_panorama_geral['Dep. Administrativa'] = df_panorama_geral['Dep. Administrativa'].map(map_dependencia)
+df_panorama_geral['Localização'] = df_panorama_geral['Localização'].map(map_localizacao)
+
+# Identificar anos disponíveis
+anos_disponiveis = sorted(df_panorama_geral['Ano do Censo'].unique())
+ano_mais_recente = max(anos_disponiveis)
+
+
+# Formulário principal
+with st.form("form_pan_rede_relatorio"):
+
+    col1, col2 = st.columns(2)
+    
+    with col1:
+
+        # Selectbox do ano
+        ano_censo_rede_relatorio = st.selectbox(
+            "Selecione o ano do Censo Escolar:",
+            options=anos_disponiveis,
+            index=anos_disponiveis.index(ano_mais_recente),
+            key="ano_censo_pan_rede_relatorio"
+        )
+
+        # Selectbox do Município
+        municipio_pan_rede_relatorio = st.selectbox(
+            "Selecione o Município:",
+            sorted(df_panorama_geral['Município'].unique()),
+            key="municipio_pan_rede_relatorio"
+        )
+
+    with col2:
+        # Cartão de filtros de dependência
+        with st.container(border=True):
+            st.markdown("##### Filtrar por Dependência Administrativa")
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                federal = st.checkbox("Federal", value=True, key="dep_federal")
+            with col2:
+                estadual = st.checkbox("Estadual", value=True, key="dep_estadual")
+            with col3:
+                municipal = st.checkbox("Municipal", value=True, key="dep_municipal")
+            
+        dependencia_selecionada = []
+        if federal: dependencia_selecionada.append("Federal")
+        if estadual: dependencia_selecionada.append("Estadual")
+        if municipal: dependencia_selecionada.append("Municipal")
+    
+        # Cartão de filtros de localização
+        with st.container(border=True):
+            st.markdown("##### Filtrar por Localização")
+            col4, col5 = st.columns(2)
+            with col4:
+                urbana = st.checkbox("Urbana", value=True, key="loc_urbana")
+            with col5:
+                rural = st.checkbox("Rural", value=True, key="loc_rural")
+            
+        localizacao_selecionada = []
+        if urbana: localizacao_selecionada.append("Urbana")
+        if rural: localizacao_selecionada.append("Rural")
+
+    # Botão
+    submitted = st.form_submit_button("Gerar Dados")
+
+    if submitted:
+        df_filtrado = df_panorama_geral[
+            (df_panorama_geral['Ano do Censo'] == ano_censo_rede_relatorio) &
+            (df_panorama_geral['Município'] == municipio_pan_rede_relatorio) &
+            (df_panorama_geral['Dep. Administrativa'].isin(dependencia_selecionada)) &
+            (df_panorama_geral['Localização'].isin(localizacao_selecionada))
+        ]
+
+        st.write("### 📋 Dados filtrados:")
+        st.dataframe(df_filtrado)
