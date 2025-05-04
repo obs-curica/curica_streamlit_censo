@@ -5,14 +5,29 @@ import matplotlib.colors as mcolors
 import os
 import re
 
+from scripts.load_data import carregar_dados
+
 from scripts.textos import texto_pan_financiamento_intro
+from scripts.textos import texto_pan_financiamento_intro_mde
+from scripts.textos import texto_pan_financiamento_analise_mde
+from scripts.textos import texto_pan_financiamento_intro_se
+from scripts.textos import texto_pan_financiamento_analise_se
 from scripts.textos import texto_pan_financiamento_fundeb_intro
 from scripts.textos import texto_pan_financiamento_fundeb_analise
+from scripts.textos import texto_pan_financiamento_fnde_intro
+from scripts.textos import texto_pan_financiamento_fnde_programas
 
 
+
+# Configuração da página
 st.set_page_config(page_title="Panorama Financiamento", layout="wide", page_icon="🦜")
 
-st.title("💵 Considerações Gerais sobre o Financiamento da Educação Básica")
+# Carregar dados
+url = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/fnde/df_fundeb_ac_completo.csv"
+df_fundeb = carregar_dados(url)
+
+
+st.title("💲 Considerações Gerais sobre o Financiamento da Educação Básica")
 
 # Carrega dados FUNDEB
 # url_fundeb_estado = ""
@@ -23,6 +38,18 @@ st.title("💵 Considerações Gerais sobre o Financiamento da Educação Básic
 # texto introdutório financiamento
 st.write(texto_pan_financiamento_intro())
 
+
+#+++++++++
+# Subseção MDE
+st.header("Manutenção e Desenvolvimento do Ensino - MDE")
+
+
+#++++++++
+# Subseção Salário Educação
+st.header("Salário Educação")
+
+#++++++++
+# Subseção Fundeb
 st.header("O Fundeb")
 st.write(texto_pan_financiamento_fundeb_intro())
 
@@ -34,5 +61,8 @@ st.write(texto_pan_financiamento_fundeb_analise())
 # Gráficos do Fundeb Estado e Municpios sob demanda
 # funcao aqui
 
+
+#++++++++
+# Subseção Programas do FNDE
 st.subheader("Deficiências na execução dos recursos disponibilizados pelo FNDE")
 st.write("conluir o financimento apresentando os programas e a não utilização de recursos. Aí fazer a chamada para os outros panoramas.")

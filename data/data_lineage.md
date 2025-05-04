@@ -16,8 +16,21 @@ dataframes processados: df_fundeb_estado.csv, df_fundeb_municipios.csv, df_funde
 
 # Referências bibliográficas
 
+## Orçamento
+
+Glossário de termos orçamentários
+https://www.congressonacional.leg.br/legislacao-e-publicacoes/glossario-orcamentario
+
+Fonte ou destinação de recursos
+https://www.gov.br/tesouronacional/pt-br/contabilidade-e-custos/federacao/fonte-ou-destinacao-de-recursos
+
 FNDE 50 anos.
 https://www.gov.br/fnde/pt-br/acesso-a-informacao/institucional/biografia/55anosdeFNDEversaovirtual.pdf
+
+Correlação entre repasses e Ideb - Tese Doutorado
+https://teses.usp.br/teses/disponiveis/12/12136/tde-26072012-113928/pt-br.php
+
+### Fundeb
 
 Manual Novo FUNDEB
 https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/financiamento/fundeb/ManualNovoFundeb2021.pdf
@@ -25,11 +38,23 @@ https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/financiament
 Cartilha Novo FUNDEB
 https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/financiamento/fundeb/CartilhaNovoFundeb2021.pdf
 
+Novo Fundeb - TCE-SP
+https://www.tce.sp.gov.br/publicacoes/novo-fundeb-perguntas-e-respostas
+
 Fundeb Perguntas e Respostas
 https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/financiamento/fundeb/manuais-a-cartilhas-1/perguntas-e-respostas_atualizacao_11_10_22.pdf
 
 Fundeb e CACs TCE-AC
 https://tceac.tc.br/site/wp-content/uploads/2024/10/CARTILHA-FUNDEB-final.pdf
+
+Fundeb e Mínimo Constitucional
+https://apet.org.br/artigos/o-fundeb-e-os-minimos-constitucionais-da-educacao/#:~:text=Em%20tal%20contexto%2C%20somente%20a,se%20automaticamente%20nos%2025%25%20constitucionais.
+
+Metodologia cálculo Fundeb segmentos
+https://cadernosdeestudos.inep.gov.br/ojs3/index.php/cadernos/article/view/6511
+
+
+
 
 PNE
 https://pne.mec.gov.br/images/pdf/pne_conhecendo_20_metas.pdf
@@ -43,8 +68,7 @@ https://cadernosdeestudos.inep.gov.br/ojs3/index.php/cadernos/article/view/6503
 Evasão escolar em terras indígenas
 https://cadernosdeestudos.inep.gov.br/ojs3/index.php/cadernos/article/view/6504
 
-Metodologia cálculo Fundeb segmentos
-https://cadernosdeestudos.inep.gov.br/ojs3/index.php/cadernos/article/view/6511
+
 
 
 # Legislação
@@ -63,6 +87,11 @@ https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/financiament
 
 Resolução FNDE prestação de contas quadrienal PNAE
 https://www.in.gov.br/web/dou/-/resolucao-cd/fnde-n-7-de-2-de-maio-de-2024-557685634
+
+Salário Educação
+https://www.planalto.gov.br/ccivil_03/LEIS/L9766.htm
+
+
 
 # Jurisprudência
 

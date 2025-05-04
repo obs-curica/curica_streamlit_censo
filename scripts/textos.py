@@ -309,28 +309,51 @@ def texto_pan_rede_relatorio_intro():
 
 def texto_pan_financiamento_intro():
     return """
+    Quando se pensa em recursos para financiamento de políticas públicas logo vem à mente a ideia de escassez e o argumento da 
+    [reserva do possível](https://www.stf.jus.br/arquivo/informativo/documento/informativo345.htm#ADPF%20-%20Pol%C3%ADticas%20P%C3%BAblicas%20-%20Interven%C3%A7%C3%A3o%20Judicial%20-%20%22Reserva%20do%20Poss%C3%ADvel%22%20(Transcri%C3%A7%C3%B5es):~:text=T%20R%20A%20N%20S%20C%20R%20I%20%C3%87%20%C3%95%20E%20S%).  
+    **Será mesmo que os recursos são escassos ao ponto de inviabilizar a oferta da educação básica com qualidade?**
+    
     O modelo de federalismo brasileiro prevê que a União, os Estados e os Municípios mantenham seus respectivos sistemas de ensino, 
-    em regime de colaboração [(art. 211 CF)](https://www.planalto.gov.br/ccivil_03/Constituicao/Constituicao.htm#art212:~:text=Art.%20211.%20A%20Uni%C3%A3o%2C%20os%20Estados%2C%20o%20Distrito%20Federal%20e%20os%20Munic%C3%ADpios%20organizar%C3%A3o%20em%20regime%20de%20colabora%C3%A7%C3%A3o%20seus%20sistemas%20de%20ensino.). 
-    Cada ente possui responsabilidades prioritárias: os Municípios, com a educação infantil e fundamental; 
-    os Estados, com o ensino fundamental e médio; e a União, em caráter supletivo e redistributivo, para garantir padrão mínimo de 
-    qualidade em todo o país. Essa organização reflete tanto a autonomia dos entes quanto a necessidade de cooperação federativa 
-    para assegurar o direito à educação.
+    em regime de colaboração ([art. 211 CF](https://www.planalto.gov.br/ccivil_03/Constituicao/Constituicao.htm#art212:~:text=Art.%20211.%20A%20Uni%C3%A3o%2C%20os%20Estados%2C%20o%20Distrito%20Federal%20e%20os%20Munic%C3%ADpios%20organizar%C3%A3o%20em%20regime%20de%20colabora%C3%A7%C3%A3o%20seus%20sistemas%20de%20ensino.)). 
+    Pensando na educação básica, cada ente possui responsabilidades prioritárias: os Municípios, com a educação infantil e fundamental; 
+    os Estados, com o ensino fundamental e médio; e a União, responsabilidade em caráter supletivo e redistributivo, para garantir 
+    padrão mínimo de qualidade em todo o país. Essa organização reflete tanto a autonomia dos entes quanto a necessidade de 
+    cooperação federativa para assegurar o direito à educação. 
     
-    Nesse contexto, destaca-se o Fundo Nacional de Desenvolvimento da Educação (FNDE), autarquia vinculada ao Ministério da Educação, 
-    criada em 1968[(Lei 5.537/68)](https://www.planalto.gov.br/ccivil_03/leis/l5537.htm). Desde então, o FNDE tem sido um dos principais 
-    instrumentos de apoio técnico e financeiro aos sistemas públicos de ensino, viabilizando a implementação de políticas públicas 
-    educacionais em todo o território nacional. Programas como o PNLD, PNAE, PDDE e o próprio Fundeb consolidam sua atuação estratégica 
-    para garantir o acesso, a permanência e a qualidade da educação básica no Brasil.
+    O [art. 212](https://www.planalto.gov.br/ccivil_03/constituicao/ConstituicaoCompilado.htm#:~:text=Art.%20212.-,A%20Uni%C3%A3o%20aplicar%C3%A1,-%2C%20anualmente%2C%20nunca%20menos)
+     da CF define três diferentes fontes de financiamento da educação básica:
     
-    Os repasses de recursos realizados pelo FNDE podem ser classificados em três categorias: constitucionais, automáticos e voluntários.
-    Os repasses constitucionais, como o Fundeb, são obrigatórios e definidos pela Constituição Federal. Os repasses automáticos são 
-    transferidos diretamente para os entes federativos ou escolas, mediante adesão e cumprimento de critérios legais, sem necessidade 
-    de convênio(ex: PNATE, PNAE). Já os repasses voluntários dependem da celebração de convênios ou termos de compromisso, sendo utilizados para 
-    apoiar projetos específicos aprovados tecnicamente (ex: Proinfância).
+    * a aplicação mínima da arrecadação em impostos, na proporção de 18% para a União e **25%** para Estados e Municípios, 
+    na Manutenção e Desenvolvimento do Ensino (MDE);
+    * o Salário Educação;
+    * o Fundeb - Fundo  de Manutenção e Desenvolvimento da Educação Básica e de Valorização dos Profissionais da Educação.
+    
+    Além dessas fontes, há também outros programas e ações executadas dentro da estrutura do **Fundo Nacional de Desenvolvimento 
+    da Educação (FNDE)**, autarquia vinculada ao Ministério da Educação, criada no ano de 1968 [(Lei 5.537/68)](https://www.planalto.gov.br/ccivil_03/leis/l5537.htm). 
+    Repasses de recursos por meio de programas como o PNLD, PNAE, PNATE, PDDE e o próprio Fundeb consolidam sua atuação.
+    
+    Na sequência, apresenta-se uma visão geral desses recursos para cada esfera administrativa.
     """
 
+# MDE
+def texto_pan_financiamento_intro_mde():
+    return """
+    Receita Orçamentária decorrente de tributos. Vinculação da receita de tributos com despesas em MDE.
+    
+    Exercício financeiro.
+    """
 
-# Funções para a página Panorama Rede - Financiamento da Educação
+def texto_pan_financiamento_analise_mde():
+    return """ """
+
+# Salário Educação
+def texto_pan_financiamento_intro_se():
+    return """ """
+
+def texto_pan_financiamento_analise_se():
+    return """ """
+
+# Fundeb
 def texto_pan_financiamento_fundeb_intro():
     return """
     O financiamento da educação básica pública no Brasil passou por importantes transformações nos últimos anos.
@@ -345,9 +368,22 @@ def texto_pan_financiamento_fundeb_intro():
 
     Aprovado de forma permanente em 2020, o novo Fundeb trouxe melhorias, como o aumento da participação da União 
     e a adoção de mecanismos de correção de desigualdades educacionais. Agora o Fundeb tem caráter permanente e 
-    constitucional e está regulamentado pela Lei [13.421/2020](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm). 
+    constitucional e está regulamentado pela Lei [13.113/2020](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm). 
+        
+    Ele é formado pelo repasse de 20% de uma [cesta de tributos](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=Receita%20dos%20Fundos-,Art.%203%C2%BA,-Os%20Fundos%2C%20no) 
+    provenientes da arrecadação estadual e federal. 
+    Logo, é importante esclarecer que o Fundeb não possui uma natureza estadual ou federal, mas híbrida. Assim, o 
+    que define a competência na tomada de contas ou da fiscalização do repasse é a origem do recurso utilizado, 
+    segundo as declarações contábeis ([ADI 5791](https://portal.stf.jus.br/noticias/verNoticiaDetalhe.asp?idConteudo=493795&ori=1), 
+    [art, 30 da Lei do Fundeb](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=e%20do%20Controle-,Art.%2030,-.%C2%A0%20A%20fiscaliza%C3%A7%C3%A3o%20e)).
+
+    A atribuição do Ministério Público está explicitamente definida no [artigo 32](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=Art.%2032.%C2%A0%20A-,defesa,-da%20ordem%20jur%C3%ADdica) desse Diploma:
     
-    Ele é formado por uma cesta de tributos.
+    "A defesa da ordem jurídica, do regime democrático, dos interesses sociais e individuais indisponíveis, 
+    relacionada ao pleno cumprimento desta Lei, :orange-background[compete ao Ministério Público dos Estados] e do Distrito Federal 
+    e Territórios e ao Ministério Público Federal, especialmente quanto às transferências de recursos federais."
+    
+    Este dispositivo 
     
     VAAT
     
@@ -370,3 +406,15 @@ def texto_pan_financiamento_fundeb_analise():
     repasse no primeiro quadrimestre do ano seguinte.
     """
 
+# FNDE
+def texto_pan_financiamento_fnde_intro():
+    return """ 
+    Os repasses de recursos realizados pelo FNDE podem ser classificados em três categorias: constitucionais, automáticos e voluntários.
+    Os repasses constitucionais, como o Fundeb, são obrigatórios e definidos pela Constituição Federal. Os repasses automáticos são 
+    transferidos diretamente para os entes federativos ou escolas, mediante adesão e cumprimento de critérios legais, sem necessidade 
+    de convênio(ex: PNATE, PNAE). Já os repasses voluntários dependem da celebração de convênios ou termos de compromisso, sendo utilizados para 
+    apoiar projetos específicos aprovados tecnicamente (ex: Proinfância).
+    """
+
+def texto_pan_financiamento_fnde_programas():
+    return """ """
