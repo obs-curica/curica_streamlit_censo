@@ -2,17 +2,22 @@
 
 ## Página Panorama Rede de Ensino
 
-Microdados do Censo Escolar
+* Microdados do Censo Escolar
 
-Dados abertos do Inep.
-Link: https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-escolar
-dataframes processados: df_panorama_geral.csv, df_panorama_agua.csv
+        Dados abertos do Inep.
+        Link: https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-escolar
+        -> dataframes processados: df_panorama_geral.csv, df_panorama_agua.csv
 
-Repasses Fundeb
-Tesouro Nacional.
-Link: https://sisweb.tesouro.gov.br/apex/f?p=2600:1
-dataframes processados: df_fundeb_estado.csv, df_fundeb_municipios.csv, df_fundeb_ac_completo.csv
+* Repasses Fundeb
+  Tesouro Nacional.
+  Link: https://sisweb.tesouro.gov.br/apex/f?p=2600:1
+  -> dataframes processados: df_fundeb_estado.csv, df_fundeb_municipios.csv, df_fundeb_ac_completo.csv
 
+* Relatórios Resumidos de Execução Orçamentária, RREO's:
+  
+  Link: https://www.fnde.gov.br/siope/o_que_e.jsp
+  
+  -> dataframes processados: df_panorama_financiamento
 
 # Referências bibliográficas
 
@@ -53,9 +58,6 @@ https://apet.org.br/artigos/o-fundeb-e-os-minimos-constitucionais-da-educacao/#:
 Metodologia cálculo Fundeb segmentos
 https://cadernosdeestudos.inep.gov.br/ojs3/index.php/cadernos/article/view/6511
 
-
-
-
 PNE
 https://pne.mec.gov.br/images/pdf/pne_conhecendo_20_metas.pdf
 
@@ -67,9 +69,6 @@ https://cadernosdeestudos.inep.gov.br/ojs3/index.php/cadernos/article/view/6503
 
 Evasão escolar em terras indígenas
 https://cadernosdeestudos.inep.gov.br/ojs3/index.php/cadernos/article/view/6504
-
-
-
 
 # Legislação
 
@@ -90,8 +89,6 @@ https://www.in.gov.br/web/dou/-/resolucao-cd/fnde-n-7-de-2-de-maio-de-2024-55768
 
 Salário Educação
 https://www.planalto.gov.br/ccivil_03/LEIS/L9766.htm
-
-
 
 # Jurisprudência
 
