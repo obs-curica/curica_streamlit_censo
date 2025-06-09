@@ -23,7 +23,7 @@ from scripts.textos import texto_pan_financiamento_fnde_programas
 st.set_page_config(page_title="Panorama Financiamento", layout="wide", page_icon="🦜")
 
 # Carregar dados
-url = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/fnde/df_fundeb_ac_completo.csv"
+url = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_financiamento/df_panorama_financiamento.csv"
 df_fundeb = carregar_dados(url)
 
 

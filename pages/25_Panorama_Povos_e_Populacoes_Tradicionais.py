@@ -6,7 +6,7 @@ import os
 import re
 
 from scripts.load_data import carregar_dados
-from scripts.graficos import grafico_alunos_por_localizacao_diferenciada
+from scripts.graficos import grafico_matriculas_por_localizacao_diferenciada
 from scripts.graficos import grafico_escolas_por_localizacao_diferenciada
 from scripts.load_data import dataframe_totais_por_localizacao_diferenciada_municipio
 from scripts.graficos import grafico_escolas_por_localizacao_diferenciada_municipio
@@ -48,7 +48,7 @@ st.write("Número total de escolas declaradas em localização diferenciada: ", 
 col1, col2 = st.columns(2)
 # Gráfico do total de alunos por localização diferenciada
 with col1:
-    grafico_alunos_por_localizacao_diferenciada(df_panorama_geral, ano_censo)
+    grafico_matriculas_por_localizacao_diferenciada(df_panorama_geral, ano_censo)
 # Gráfico do total de escolas por localização diferenciada
 with col2:
     grafico_escolas_por_localizacao_diferenciada(df_panorama_geral, ano_censo)
