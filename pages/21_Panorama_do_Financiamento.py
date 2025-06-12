@@ -29,24 +29,8 @@ df_fundeb = carregar_dados(url)
 
 st.title("💲 Considerações Gerais sobre o Financiamento da Educação Básica")
 
-# Carrega dados FUNDEB
-# url_fundeb_estado = ""
-# url_fundeb_municipios = ""
-# df_fundeb_estado = carregar_dados(url_fundeb_estado)
-# df_fundeb_municipios = carregar_dados(url_fundeb_municipios)
-
 # texto introdutório financiamento
 st.write(texto_pan_financiamento_intro())
-
-
-#+++++++++
-# Subseção MDE
-st.header("Manutenção e Desenvolvimento do Ensino - MDE")
-
-
-#++++++++
-# Subseção Salário Educação
-st.header("Salário Educação")
 
 #++++++++
 # Subseção Fundeb
@@ -60,6 +44,19 @@ st.write(texto_pan_financiamento_fundeb_analise())
 
 # Gráficos do Fundeb Estado e Municpios sob demanda
 # funcao aqui
+
+
+#+++++++++
+# Subseção MDE
+st.header("Manutenção e Desenvolvimento do Ensino - MDE")
+
+
+#++++++++
+# Subseção Salário Educação
+st.header("Salário Educação")
+
+
+
 
 
 #++++++++

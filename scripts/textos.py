@@ -309,7 +309,7 @@ def texto_pan_rede_relatorio_intro():
 
 def texto_pan_financiamento_intro():
     return """
-    Quando se pensa em recursos para financiamento de políticas públicas logo vem à mente a ideia de escassez e o argumento da 
+    Quando se pensa em recursos para financiamento de políticas públicas, logo vem à mente a ideia de escassez e o argumento da 
     [reserva do possível](https://www.stf.jus.br/arquivo/informativo/documento/informativo345.htm#ADPF%20-%20Pol%C3%ADticas%20P%C3%BAblicas%20-%20Interven%C3%A7%C3%A3o%20Judicial%20-%20%22Reserva%20do%20Poss%C3%ADvel%22%20(Transcri%C3%A7%C3%B5es):~:text=T%20R%20A%20N%20S%20C%20R%20I%20%C3%87%20%C3%95%20E%20S%).  
     **Será mesmo que os recursos são escassos ao ponto de inviabilizar a oferta da educação básica com qualidade?**
     
@@ -323,10 +323,11 @@ def texto_pan_financiamento_intro():
     O [art. 212](https://www.planalto.gov.br/ccivil_03/constituicao/ConstituicaoCompilado.htm#:~:text=Art.%20212.-,A%20Uni%C3%A3o%20aplicar%C3%A1,-%2C%20anualmente%2C%20nunca%20menos)
      da CF define três diferentes fontes de financiamento da educação básica:
     
+    * o Fundeb - Fundo  de Manutenção e Desenvolvimento da Educação Básica e de Valorização dos Profissionais da Educação.
     * a aplicação mínima da arrecadação em impostos, na proporção de 18% para a União e **25%** para Estados e Municípios, 
     na Manutenção e Desenvolvimento do Ensino (MDE);
     * o Salário Educação;
-    * o Fundeb - Fundo  de Manutenção e Desenvolvimento da Educação Básica e de Valorização dos Profissionais da Educação.
+    
     
     Além dessas fontes, há também outros programas e ações executadas dentro da estrutura do **Fundo Nacional de Desenvolvimento 
     da Educação (FNDE)**, autarquia vinculada ao Ministério da Educação, criada no ano de 1968 [(Lei 5.537/68)](https://www.planalto.gov.br/ccivil_03/leis/l5537.htm). 
@@ -375,15 +376,28 @@ def texto_pan_financiamento_fundeb_intro():
     Logo, é importante esclarecer que o Fundeb não possui uma natureza estadual ou federal, mas híbrida. Assim, o 
     que define a competência na tomada de contas ou da fiscalização do repasse é a origem do recurso utilizado, 
     segundo as declarações contábeis ([ADI 5791](https://portal.stf.jus.br/noticias/verNoticiaDetalhe.asp?idConteudo=493795&ori=1), 
-    [art, 30 da Lei do Fundeb](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=e%20do%20Controle-,Art.%2030,-.%C2%A0%20A%20fiscaliza%C3%A7%C3%A3o%20e)).
+    [art. 30 da Lei do Fundeb](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=e%20do%20Controle-,Art.%2030,-.%C2%A0%20A%20fiscaliza%C3%A7%C3%A3o%20e)).
 
     A atribuição do Ministério Público está explicitamente definida no [artigo 32](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=Art.%2032.%C2%A0%20A-,defesa,-da%20ordem%20jur%C3%ADdica) desse Diploma:
     
     "A defesa da ordem jurídica, do regime democrático, dos interesses sociais e individuais indisponíveis, 
-    relacionada ao pleno cumprimento desta Lei, :orange-background[compete ao Ministério Público dos Estados] e do Distrito Federal 
-    e Territórios e ao Ministério Público Federal, especialmente quanto às transferências de recursos federais."
+    relacionada ao pleno cumprimento desta Lei, :orange-background[compete ao Ministério Público dos Estados] e 
+    do Distrito Federal e Territórios e ao Ministério Público Federal, especialmente quanto às transferências 
+    de recursos federais."
     
-    Este dispositivo 
+    Se existia, este dispositivo retira qualquer dúvida a respeito da atribuição do Ministério Público Estadual 
+    na fiscalização dos repasses do Fundeb.
+    
+    A distribuição de recursos que compõem os Fundos ocorre de forma automática e se dá em função do número de 
+    alunos matriculados nas respectivas redes de educação básica pública presencial, no âmbito da atuação 
+    prioritária de cada ente federado. Ainda, a distribuição do recurso é feita de forma ponderada pela modalidade
+    de ensino na qual o aluno está matriculado, com índices definidos anualmente [(art. 7)](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=e%20das%20Pondera%C3%A7%C3%B5es-,Art.%207%C2%BA,-A%20distribui%C3%A7%C3%A3o%20de).
+    
+    Acompanhe abaixo a evolução dos repasses do Fundeb, com gráficos que mostram a distribuição dos recursos 
+    por ente federado, no tempo.
+    
+    
+    (VAAF, VAAT e VAAR).
     
     VAAT
     
