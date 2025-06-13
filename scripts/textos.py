@@ -380,10 +380,10 @@ def texto_pan_financiamento_fundeb_intro():
 
     A atribuição do Ministério Público está explicitamente definida no [artigo 32](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=Art.%2032.%C2%A0%20A-,defesa,-da%20ordem%20jur%C3%ADdica) desse Diploma:
     
-    "A defesa da ordem jurídica, do regime democrático, dos interesses sociais e individuais indisponíveis, 
+    "*A defesa da ordem jurídica, do regime democrático, dos interesses sociais e individuais indisponíveis, 
     relacionada ao pleno cumprimento desta Lei, :orange-background[compete ao Ministério Público dos Estados] e 
     do Distrito Federal e Territórios e ao Ministério Público Federal, especialmente quanto às transferências 
-    de recursos federais."
+    de recursos federais.*"
     
     Se existia, este dispositivo retira qualquer dúvida a respeito da atribuição do Ministério Público Estadual 
     na fiscalização dos repasses do Fundeb.
@@ -395,19 +395,6 @@ def texto_pan_financiamento_fundeb_intro():
     
     Acompanhe abaixo a evolução dos repasses do Fundeb, com gráficos que mostram a distribuição dos recursos 
     por ente federado, no tempo.
-    
-    
-    (VAAF, VAAT e VAAR).
-    
-    VAAT
-    
-    Acompanhe abaixo a evolução dos repasses do Fundeb.
-    
-    Gráficos evolução vaat e fundeb total.
-    
-    Gráficos SEE e Municípios sob demanda.
-    
-    Fiscalização, art. 30 e 32 da lei 14113/2020.
     """
     
 def texto_pan_financiamento_fundeb_analise():

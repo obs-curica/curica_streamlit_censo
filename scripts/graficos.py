@@ -888,19 +888,107 @@ def grafico_escolas_por_dependencia_localizacao_municipio(df, ano_censo, municip
 # PAGINA PANORAMA FINANCIAMENTO
 #=============================
 
-# Função gráfico de barras vertical fundeb por ano
-def grafico_fundeb_total_ano(df):
+# Função gráfico de barras horizontal fundeb por ano
+def grafico_fundeb_total_ano(df, ano):
     """
-    Gera um gráfico de barras 
+    Gera um gráfico de barras horizontal com o total de receita do FUNDEB por Município e Estado, para o ano selecionado.
+    Os valores são convertidos e apresentados em milhões de reais (R$ mi).
 
     Parâmetros:
     -----------
     df : pd.DataFrame
-        DataFrame contendo as colunas 
+        DataFrame contendo as colunas 'nome', 'ano' e 'valor_receita_total_fundeb'.
+    ano : int
+        Ano selecionado pelo usuário na interface Streamlit.
     """
+    # Filtra e ordena os dados
+    df_filtrado = df[df['ano'] == ano].copy()
+    df_filtrado.sort_values(by='valor_receita_total_fundeb', ascending=True, inplace=True)
 
-# Função gráfico
+    # Conversão para milhões
+    df_filtrado['valor_milhoes'] = df_filtrado['valor_receita_total_fundeb'] / 1_000_000
 
+    # Gradiente de verde (verde claro -> verde escuro)
+    cmap = mcolors.LinearSegmentedColormap.from_list('verde_gradiente', ['#90ee90', '#006400'])
+    norm = plt.Normalize(vmin=df_filtrado['valor_milhoes'].min(),
+                         vmax=df_filtrado['valor_milhoes'].max())
+    cores = [cmap(norm(v)) for v in df_filtrado['valor_milhoes']]
+
+    # Estilo escuro
+    plt.style.use('dark_background')
+    fig, ax = plt.subplots(figsize=(12, max(6, 0.4 * len(df_filtrado))))
+
+    # Gráfico
+    ax.barh(df_filtrado['nome'], df_filtrado['valor_milhoes'], color=cores)
+
+    # Título e eixos
+    ax.set_title('Total da Receita do FUNDEB por Município e Estado (R$ milhões)', color='#FFA07A', fontsize=20)
+    ax.set_xlabel('Valor em milhões de reais (R$ mi)', color='#FFA07A', fontsize=14)
+
+    # Estilo dos ticks e spines
+    ax.tick_params(colors='#FFA07A', labelsize=17)
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    # Limite dinâmico do eixo X
+    limite_superior = df_filtrado['valor_milhoes'].max() * 1.23
+    ax.set_xlim(right=limite_superior)
+
+    # Inserir rótulos nas barras (em milhões com uma casa decimal)
+    for i, valor in enumerate(df_filtrado['valor_milhoes']):
+        deslocamento = limite_superior * 0.005
+        ax.text(valor + deslocamento, i, f"R$ {valor:,.1f} mi",
+                color='white', va='center', fontsize=15, fontweight='bold')
+
+    fig.tight_layout()
+    st.pyplot(fig)
+
+# Função gráfico fundeb ente
+def grafico_fundeb_total_ente(df, ente):
+    """
+    Gera um gráfico de barras verticais mostrando a evolução da receita total do FUNDEB
+    ao longo dos anos para o ente federado selecionado, com valores em milhões de reais.
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas 'nome', 'ano' e 'valor_receita_total_fundeb'.
+    ente : str
+        Nome do Município ou Estado selecionado pelo usuário.
+    """
+    # Filtra os dados para o ente selecionado
+    df_filtrado = df[df['nome'] == ente].sort_values(by='ano').copy()
+
+    # Conversão para milhões
+    df_filtrado['valor_milhoes'] = df_filtrado['valor_receita_total_fundeb'] / 1_000_000
+
+    # Estilo escuro
+    plt.style.use('dark_background')
+
+    # Cores: Verde escuro fixo
+    cor_barras = '#006400'
+
+    # Plot
+    fig, ax = plt.subplots(figsize=(8, 6))
+    ax.bar(df_filtrado['ano'].astype(str), df_filtrado['valor_milhoes'], color=cor_barras)
+
+    # Título e eixos
+    ax.set_title(f'Total do FUNDEB por Ente - {ente}', color='#FFA07A', fontsize=25)
+    ax.set_ylabel('Valor em milhões de reais (R$ mi)', color='#FFA07A', fontsize=15)
+    
+    # Estilo dos spines e ticks
+    ax.tick_params(colors='#FFA07A', labelsize=12)
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    # Rótulos nas barras
+    for i, valor in enumerate(df_filtrado['valor_milhoes']):
+        deslocamento = df_filtrado['valor_milhoes'].max() * 0.01
+        ax.text(i, valor + deslocamento,
+                f"R$ {valor:,.1f} mi", ha='center', color='white', fontsize=12, fontweight='bold')
+
+    fig.tight_layout()
+    st.pyplot(fig)
 
 #===========================
 # PAGINA POVOS TRADICIONAIS
