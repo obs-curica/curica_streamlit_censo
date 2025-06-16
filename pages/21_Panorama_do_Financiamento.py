@@ -19,7 +19,8 @@ from scripts.textos import texto_pan_financiamento_fnde_programas
 
 from scripts.graficos import grafico_fundeb_total_ano
 from scripts.graficos import grafico_fundeb_total_ente
-
+from scripts.graficos import grafico_indicador_despesa_profissionais
+from scripts.graficos import grafico_percentual_recursos_nao_utilizados
 
 
 # Configuração da página
@@ -58,7 +59,7 @@ with col1:
     grafico_fundeb_total_ano(df_panorama_financiamento, ano)
     
 with col2:
-    st.subheader("Evolução do Fundeb por Ente")
+    st.subheader("Fundeb Total por Ente")
     
     entes_disponiveis = sorted(df_panorama_financiamento['nome'].unique())
     
@@ -78,6 +79,21 @@ st.write(texto_pan_financiamento_fundeb_analise())
 # Gráficos do Fundeb Estado e Municpios sob demanda
 # funcao aqui
 
+entes_disponiveis = sorted(df_panorama_financiamento['nome'].unique())
+    
+entes = st.selectbox(
+    "Selecione o ente:",
+    options=entes_disponiveis,
+    key="fundeb_despesa_profissionais"
+)
+
+col1, col2 = st.columns(2)
+
+with col1:
+    grafico_indicador_despesa_profissionais(df_panorama_financiamento, entes)
+    
+with col2:
+    grafico_percentual_recursos_nao_utilizados(df_panorama_financiamento, entes)
 
 #+++++++++
 # Subseção MDE

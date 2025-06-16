@@ -916,29 +916,37 @@ def grafico_fundeb_total_ano(df, ano):
 
     # Estilo escuro
     plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(12, max(6, 0.4 * len(df_filtrado))))
+    fig, ax = plt.subplots(figsize=(12, max(6, 0.48 * len(df_filtrado))))
 
     # Gráfico
     ax.barh(df_filtrado['nome'], df_filtrado['valor_milhoes'], color=cores)
 
     # Título e eixos
-    ax.set_title('Total da Receita do FUNDEB por Município e Estado (R$ milhões)', color='#FFA07A', fontsize=20)
-    ax.set_xlabel('Valor em milhões de reais (R$ mi)', color='#FFA07A', fontsize=14)
-
+    ax.set_title('Total da Receita do Fundeb (R$ milhões)', color='#FFA07A', fontsize=30)
+    
     # Estilo dos ticks e spines
-    ax.tick_params(colors='#FFA07A', labelsize=17)
+    ax.tick_params(colors='#FFA07A', labelsize=20)
     for spine in ax.spines.values():
         spine.set_color('#FFA07A')
 
     # Limite dinâmico do eixo X
-    limite_superior = df_filtrado['valor_milhoes'].max() * 1.23
+    max_valor = df_filtrado['valor_milhoes'].max()
+    limite_superior = max_valor * 1.3
     ax.set_xlim(right=limite_superior)
+    
+    # Reduz o espaçamento superior e inferior
+    n_barras = len(df_filtrado)
+    ax.set_ylim(-0.7, n_barras - 0.3)
 
+
+    # Alinha o spine direito com o limite superior dinâmico
+    ax.spines['right'].set_position(('data', limite_superior * 1))  # ajusta a posição do spine direito para o limite superior + 2%
+    
     # Inserir rótulos nas barras (em milhões com uma casa decimal)
     for i, valor in enumerate(df_filtrado['valor_milhoes']):
-        deslocamento = limite_superior * 0.005
+        deslocamento = limite_superior * 0.01
         ax.text(valor + deslocamento, i, f"R$ {valor:,.1f} mi",
-                color='white', va='center', fontsize=15, fontweight='bold')
+                color='white', va='center', fontsize=17, fontweight='bold')
 
     fig.tight_layout()
     st.pyplot(fig)
@@ -969,11 +977,11 @@ def grafico_fundeb_total_ente(df, ente):
     cor_barras = '#006400'
 
     # Plot
-    fig, ax = plt.subplots(figsize=(8, 6))
+    fig, ax = plt.subplots(figsize=(9, 8))
     ax.bar(df_filtrado['ano'].astype(str), df_filtrado['valor_milhoes'], color=cor_barras)
 
     # Título e eixos
-    ax.set_title(f'Total do FUNDEB por Ente - {ente}', color='#FFA07A', fontsize=25)
+    ax.set_title(f'Fundeb Total por Ente - {ente}', color='#FFA07A', fontsize=23)
     ax.set_ylabel('Valor em milhões de reais (R$ mi)', color='#FFA07A', fontsize=15)
     
     # Estilo dos spines e ticks
@@ -989,6 +997,164 @@ def grafico_fundeb_total_ente(df, ente):
 
     fig.tight_layout()
     st.pyplot(fig)
+    
+# Gráfico de barras vertical com o indicador de gastos com remuneração
+def grafico_indicador_despesa_profissionais(df, ente):
+    """
+    Gera um gráfico de barras verticais mostrando a evolução do indicador de gastos com 
+    a remuneração dos profissionais da educação, ao longo dos anos, para o ente selecionado.
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas 'nome', 'ano' e 'indicador_despesa_fundeb_profissionais'.
+    ente : str
+        Nome do Município ou Estado selecionado pelo usuário.
+    """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    import pandas as pd
+
+    # Filtrar dados do ente
+    df_filtrado = df[df['nome'] == ente].sort_values(by='ano').copy()
+
+    # Conversão segura para float (caso esteja como string com vírgula)
+    df_filtrado['indicador_despesa_fundeb_profissionais'] = pd.to_numeric(
+        df_filtrado['indicador_despesa_fundeb_profissionais'].astype(str).str.replace(',', '.'),
+        errors='coerce'
+    )
+
+    # Estilo do gráfico
+    plt.style.use('dark_background')
+
+    # Cor padrão
+    cor_barras = '#006400'  # Verde escuro
+
+    # Plot
+    fig, ax = plt.subplots(figsize=(8, 6))
+    bars = ax.bar(
+        df_filtrado['ano'].astype(str),
+        df_filtrado['indicador_despesa_fundeb_profissionais'],
+        color=cor_barras
+    )
+
+    # Título e eixos
+    ax.set_title(f'Evolução da Despesa com Profissionais da Educação - {ente}',
+                 color='#FFA07A', fontsize=16)
+    ax.set_ylabel('Indicador (%)', color='#FFA07A', fontsize=12)
+    ax.set_xlabel('Ano', color='#FFA07A', fontsize=12)
+
+    # Estilo dos spines
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    # Estilo dos ticks
+    ax.tick_params(axis='x', colors='#FFA07A', labelsize=12)
+    ax.tick_params(axis='y', colors='#FFA07A', labelsize=12)
+
+    # Limite do eixo Y
+    ax.set_ylim(0, 100)
+
+    # Inserção dos valores
+    for i, valor in enumerate(df_filtrado['indicador_despesa_fundeb_profissionais']):
+        if pd.notnull(valor):
+            ax.text(
+                i,
+                valor + 2,
+                f'{valor:.1f}%',
+                ha='center',
+                color='white',
+                fontsize=10,
+                fontweight='bold'
+            )
+
+    fig.tight_layout()
+    st.pyplot(fig)
+
+# Gráfico de barras vertical com o indicador de receita não executada
+import matplotlib.pyplot as plt
+import streamlit as st
+import pandas as pd
+
+def grafico_percentual_recursos_nao_utilizados(df, ente):
+    """
+    Gera um gráfico de barras verticais mostrando, ano a ano, o percentual dos recursos
+    do Fundeb não utilizados (restos a pagar), para o ente selecionado.
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas 'nome', 'ano', 'valor_receita_nao_aplicada' e 'valor_receita_total_fundeb'.
+    ente : str
+        Nome do Município ou Estado selecionado pelo usuário.
+    """
+
+    # Filtrar dados para o ente
+    df_filtrado = df[df['nome'] == ente].sort_values(by='ano').copy()
+
+    # Conversão segura para float (caso existam vírgulas)
+    df_filtrado['valor_receita_nao_aplicada'] = pd.to_numeric(
+        df_filtrado['valor_receita_nao_aplicada'].astype(str).str.replace(',', '.'),
+        errors='coerce'
+    )
+    df_filtrado['valor_receita_total_fundeb'] = pd.to_numeric(
+        df_filtrado['valor_receita_total_fundeb'].astype(str).str.replace(',', '.'),
+        errors='coerce'
+    )
+
+    # Calcular o percentual de recursos não utilizados
+    df_filtrado['percentual_nao_utilizado'] = (
+        (df_filtrado['valor_receita_nao_aplicada'] / df_filtrado['valor_receita_total_fundeb']) * 100
+    ).round(1)
+
+    # Estilo do gráfico
+    plt.style.use('dark_background')
+
+    # Cor das barras
+    cor_barras = '#FFD700'  # Amarelo ouro (para destacar "não aplicado")
+
+    # Criar o gráfico
+    fig, ax = plt.subplots(figsize=(8, 6))
+    bars = ax.bar(
+        df_filtrado['ano'].astype(str),
+        df_filtrado['percentual_nao_utilizado'],
+        color=cor_barras
+    )
+
+    # Título e eixos
+    ax.set_title(f'Percentual de Recursos do Fundeb Não Utilizados - {ente}',
+                 color='#FFA07A', fontsize=16)
+    ax.set_ylabel('Percentual (%)', color='#FFA07A', fontsize=12)
+    ax.set_xlabel('Ano', color='#FFA07A', fontsize=12)
+
+    # Estilo dos spines
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    # Estilo dos ticks
+    ax.tick_params(axis='x', colors='#FFA07A', labelsize=12)
+    ax.tick_params(axis='y', colors='#FFA07A', labelsize=12)
+
+    # Definir limite do eixo y até o maior valor + margem (ou até 100% se desejar fixar)
+    limite_y = max(100, df_filtrado['percentual_nao_utilizado'].max() * 1.2)
+    ax.set_ylim(0, limite_y)
+
+    # Inserção dos valores no topo das barras
+    for i, valor in enumerate(df_filtrado['percentual_nao_utilizado']):
+        if pd.notnull(valor):
+            ax.text(
+                i,
+                valor + (limite_y * 0.02),
+                f'{valor:.1f}%',
+                ha='center',
+                color='white',
+                fontsize=10,
+                fontweight='bold'
+            )
+
+    fig.tight_layout()
+    st.pyplot(fig)
+
 
 #===========================
 # PAGINA POVOS TRADICIONAIS

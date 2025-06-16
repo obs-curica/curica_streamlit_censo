@@ -336,24 +336,6 @@ def texto_pan_financiamento_intro():
     Na sequência, apresenta-se uma visão geral desses recursos para cada esfera administrativa.
     """
 
-# MDE
-def texto_pan_financiamento_intro_mde():
-    return """
-    Receita Orçamentária decorrente de tributos. Vinculação da receita de tributos com despesas em MDE.
-    
-    Exercício financeiro.
-    """
-
-def texto_pan_financiamento_analise_mde():
-    return """ """
-
-# Salário Educação
-def texto_pan_financiamento_intro_se():
-    return """ """
-
-def texto_pan_financiamento_analise_se():
-    return """ """
-
 # Fundeb
 def texto_pan_financiamento_fundeb_intro():
     return """
@@ -378,7 +360,16 @@ def texto_pan_financiamento_fundeb_intro():
     segundo as declarações contábeis ([ADI 5791](https://portal.stf.jus.br/noticias/verNoticiaDetalhe.asp?idConteudo=493795&ori=1), 
     [art. 30 da Lei do Fundeb](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=e%20do%20Controle-,Art.%2030,-.%C2%A0%20A%20fiscaliza%C3%A7%C3%A3o%20e)).
 
-    A atribuição do Ministério Público está explicitamente definida no [artigo 32](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=Art.%2032.%C2%A0%20A-,defesa,-da%20ordem%20jur%C3%ADdica) desse Diploma:
+    A distribuição de recursos que compõem os Fundos ocorre de forma automática e o montante varia de acordo com a
+    arrecadação dos impostos que compõe a cesta. Por sua vez, o rateio dos valores se dá em função do número de alunos 
+    matriculados nas respectivas redes de educação básica pública presencial, no âmbito da atuação prioritária de 
+    cada ente federado. Ainda, a distribuição do recurso é feita de forma ponderada por [etapas e modalidades](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/Decreto/D10656.htm#:~:text=A%20da%20Constitui%C3%A7%C3%A3o.-,Art.%202%C2%BA,-Para%20fins%20do) 
+    de ensino na qual o aluno está matriculado, duração da jornada e tipo de estabelecimento, com índices definidos anualmente [(art. 7)](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=e%20das%20Pondera%C3%A7%C3%B5es-,Art.%207%C2%BA,-A%20distribui%C3%A7%C3%A3o%20de).
+    O número de matrículas em cada etapa e modalidade é obtido a partir do :orange-background[Censo Escolar], que é realizado 
+    anualmente pelo INEP.
+    
+    A atribuição do Ministério Público está explicitamente definida no [artigo 32](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=Art.%2032.%C2%A0%20A-,defesa,-da%20ordem%20jur%C3%ADdica) 
+    da Lei do Fundeb, que estabelece que:
     
     "*A defesa da ordem jurídica, do regime democrático, dos interesses sociais e individuais indisponíveis, 
     relacionada ao pleno cumprimento desta Lei, :orange-background[compete ao Ministério Público dos Estados] e 
@@ -388,26 +379,84 @@ def texto_pan_financiamento_fundeb_intro():
     Se existia, este dispositivo retira qualquer dúvida a respeito da atribuição do Ministério Público Estadual 
     na fiscalização dos repasses do Fundeb.
     
-    A distribuição de recursos que compõem os Fundos ocorre de forma automática e se dá em função do número de 
-    alunos matriculados nas respectivas redes de educação básica pública presencial, no âmbito da atuação 
-    prioritária de cada ente federado. Ainda, a distribuição do recurso é feita de forma ponderada pela modalidade
-    de ensino na qual o aluno está matriculado, com índices definidos anualmente [(art. 7)](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=e%20das%20Pondera%C3%A7%C3%B5es-,Art.%207%C2%BA,-A%20distribui%C3%A7%C3%A3o%20de).
-    
     Acompanhe abaixo a evolução dos repasses do Fundeb, com gráficos que mostram a distribuição dos recursos 
-    por ente federado, no tempo.
+    por ente federado, no tempo. Os valores foram extraídos da plataforma SIOPE, do FNDE e foram contabilizados
+    os recursos totais do Fundeb disponíveis para o exercício respectivo. Além do principal, 
+    estão incluídas as complementações VAAF, VAAT e VAAR, explicadas e discriminadas mais abaixo.
+      
+    Estão disponíveis os dados a partir do ano de 2021. Se o ano selecionado não for encontrado na consulta, significa
+    que o Ente atrasou sua prestação de contas.
     """
     
 def texto_pan_financiamento_fundeb_analise():
     return """
-    Análise repasses do FNDE Estado e Municípios.
+    Como explicado acima, o repasse do Fundeb é feito de forma automática e é diretamente proporcional ao número 
+    de matrículas do respectivo sistema de ensino público em sua área de atuação prioritária, definida pela LDB. 
+    Portanto, quanto maior o número de matrículas, maior o repasse. Desse modo, não são contabilizadas as matrículas 
+    de alunos em área de atuação não prioritária, declaradas no Censo Escolar. Por exemplo, as matrículas de alunos 
+    da educação infantil matriculados na rede estadual de ensino não são contabilizados para o repasse ao Estado, 
+    pois suas etapas de atuação prioritárias são os ensinos fundamental e médio.
     
-    Relacionamento com o número de matrículas e o Censo Escolar.
+    Importante enfatizar que o :orange-background[Censo Escolar] é o ponto de partida para o cálculo do repasse
+    do Fundeb e de outros programas do FNDE.
     
-    Os recursos dos Fundos devem ser utilizados no mesmo exercício financeiro, podendo ser utilizado até 10% do total do 
-    repasse no primeiro quadrimestre do ano seguinte.
+    Os recursos do Fundo possuem vinculação constitucional e devem ser utilizados exclusivamente na
+    :orange-background[manutenção e desenvolvimento do ensino (MDE)].
+    
+    É a LDB quem define o que é MDE, no seu [artigo 70](https://www.planalto.gov.br/ccivil_03/leis/L9394compilado.htm#:~:text=das%20autoridades%20competentes.-,Art.%2070.,-Considerar%2Dse%2D%C3%A3o). 
+    Sob o aspecto da fiscalização, este artido é fundamental, pois delimita o que pode ser considerado como despesa 
+    lícita ou ilícita, de acordo com o regramento do Fundeb.
+    
+    De largada, duas condicionantes podem ser analisadas neste momento, a fim de se aferir a conformidade do uso dos 
+    recursos do Fundeb: (1) a aplicação mínima de 70% dos recursos na remuneração dos profissionais da educação e (2) a execução
+    mínima de 90% dos recursos do fundo no mesmo exercício financeiro (anual), com a possibilidade de utilização de até 10% 
+    do total do repasse no primeiro quadrimestre do ano seguinte.
+    
+    Consulte abaixo o desempenho dessas despesas. Basta selecionar o Ente desejado para a geração dos gráficos. Os dados 
+    são extraídos da plataforma SIOPE, do FNDE.    
     """
 
-# FNDE
+# VAAT, VAAF, VAAR
+def texto_pan_financiamento_fundeb_complementacao_intro():
+    return"""
+    O Fundeb é composto por recursos provenientes de tributos estaduais e municipais, mas a União também participa 
+    do financiamento da educação básica pública, por meio de complementações. Essas complementações são divididas em três 
+    categorias: VAAF (Valor Anual Mínimo por Aluno), VAAT (Valor Anual por Aluno do Ensino Técnico) e VAAR (Valor Anual por Aluno 
+    Rural). Essas complementações são importantes para garantir que os recursos sejam distribuídos de forma equitativa entre os 
+    entes federativos, especialmente em regiões com menor capacidade de arrecadação.
+
+    O FNDE define anualmente o "Valor Anual Mínimo por Aluno" (VAAF-MIN) e o valor
+    
+    A seguir, são apresentados gráficos que mostram a evolução dos repasses do Fundeb, incluindo as complementações VAAF, VAAT e VAAR.
+    
+    """
+def texto_pan_financiamento_fundeb_complementacao():
+    return """
+    
+    """
+
+
+# MDE
+def texto_pan_financiamento_intro_mde():
+    return """
+    Receita Orçamentária decorrente de tributos. Vinculação da receita de tributos com despesas em MDE.
+    
+    Exercício financeiro.
+    
+    Definicao de MDE. Lembrar que pode ser considerada como MDE a despesa em áreas de atuação não prioritária.
+    """
+
+def texto_pan_financiamento_analise_mde():
+    return """ """
+
+# Salário Educação
+def texto_pan_financiamento_intro_se():
+    return """ """
+
+def texto_pan_financiamento_analise_se():
+    return """ """
+
+# Programas FNDE
 def texto_pan_financiamento_fnde_intro():
     return """ 
     Os repasses de recursos realizados pelo FNDE podem ser classificados em três categorias: constitucionais, automáticos e voluntários.
