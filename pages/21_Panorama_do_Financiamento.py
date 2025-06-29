@@ -7,21 +7,27 @@ import re
 
 from scripts.load_data import carregar_dados
 
-from scripts.textos import texto_pan_financiamento_intro
-from scripts.textos import texto_pan_financiamento_intro_mde
-from scripts.textos import texto_pan_financiamento_analise_mde
-from scripts.textos import texto_pan_financiamento_intro_se
-from scripts.textos import texto_pan_financiamento_analise_se
-from scripts.textos import texto_pan_financiamento_fundeb_intro
-from scripts.textos import texto_pan_financiamento_fundeb_analise
-from scripts.textos import texto_pan_financiamento_fnde_intro
-from scripts.textos import texto_pan_financiamento_fnde_programas
+from scripts.textos import(
+    texto_pan_financiamento_intro, 
+    texto_pan_financiamento_fundeb_intro,
+    texto_pan_financiamento_fundeb_analise_1,
+    texto_pan_financiamento_fundeb_analise_2,
+    texto_pan_financiamento_fundeb_complementacao_intro,
+    texto_pan_financiamento_intro_mde,
+    texto_pan_financiamento_analise_mde,
+    texto_pan_financiamento_intro_se,
+    texto_pan_financiamento_analise_se,
 
-from scripts.graficos import grafico_fundeb_total_ano
-from scripts.graficos import grafico_fundeb_total_ente
-from scripts.graficos import grafico_indicador_despesa_profissionais
-from scripts.graficos import grafico_percentual_recursos_nao_utilizados
+    texto_pan_financiamento_fnde_intro,
+    texto_pan_financiamento_fnde_programas
+)
 
+from scripts.graficos import(
+    grafico_fundeb_total_ano,
+    grafico_fundeb_total_ente,
+    grafico_indicador_despesa_profissionais,
+    grafico_percentual_recursos_nao_utilizados
+)
 
 # Configuração da página
 st.set_page_config(page_title="Panorama Financiamento", layout="wide", page_icon="🦜")
@@ -73,14 +79,9 @@ with col2:
     
     grafico_fundeb_total_ente(df_panorama_financiamento, entes)
         
-# Gráficos do Fundeb vaat e total
-# funcao aqui
-
-st.write(texto_pan_financiamento_fundeb_analise())
+st.write(texto_pan_financiamento_fundeb_analise_1())
 
 # Gráficos do Fundeb Estado e Municpios sob demanda
-# funcao aqui
-
 entes_disponiveis = sorted(df_panorama_financiamento['nome'].unique())
     
 entes = st.selectbox(
@@ -96,6 +97,13 @@ with col1:
     
 with col2:
     grafico_percentual_recursos_nao_utilizados(df_panorama_financiamento, entes)
+
+st.write(texto_pan_financiamento_fundeb_analise_2())
+
+st.subheader("Complementações do Fundeb: VAAT, VAAF e VAAR")
+
+st.write(texto_pan_financiamento_fundeb_complementacao_intro())
+
 
 #+++++++++
 # Subseção MDE

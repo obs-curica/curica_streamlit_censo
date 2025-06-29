@@ -40,7 +40,11 @@ def texto_home_contextualizacao():
     ser implementadas em toda essa vasta extensão territorial. Surgem, portanto, dificuldades para a construção 
     de infraestrutura, sanemento básico e disponibilização de água potável, lotação de recursos humanos, fornecimento 
     de alimentação escolar, materiais didáticos e materiais de expediente, transporte escolar de alunos e professores, 
-    formações continuadas, acompanhamento pedagógico e gastos com combustível.
+    formações continuadas, acompanhamento pedagógico e gastos com combustível.  
+    
+    Avesso da blusa para  
+    encontrar o caminho de volta...
+    criar uma picada segura nesse cipoal, tabocal espinhoso...
 """
 
 
@@ -328,7 +332,6 @@ def texto_pan_financiamento_intro():
     na Manutenção e Desenvolvimento do Ensino (MDE);
     * o Salário Educação;
     
-    
     Além dessas fontes, há também outros programas e ações executadas dentro da estrutura do **Fundo Nacional de Desenvolvimento 
     da Educação (FNDE)**, autarquia vinculada ao Ministério da Educação, criada no ano de 1968 [(Lei 5.537/68)](https://www.planalto.gov.br/ccivil_03/leis/l5537.htm). 
     Repasses de recursos por meio de programas como o PNLD, PNAE, PNATE, PDDE e o próprio Fundeb consolidam sua atuação.
@@ -339,7 +342,7 @@ def texto_pan_financiamento_intro():
 # Fundeb
 def texto_pan_financiamento_fundeb_intro():
     return """
-    O financiamento da educação básica pública no Brasil passou por importantes transformações nos últimos anos.
+    O financiamento da educação básica pública no Brasil passou por importantes transformações ao longo do tempo.
     Em 1996, foi criado o Fundef (Fundo de Manutenção e Desenvolvimento do Ensino Fundamental e de Valorização do 
     Magistério), voltado exclusivamente para o ensino fundamental. Sua estrutura visava garantir o acesso e a 
     qualidade deste nível de ensino, mas deixava de fora a educação infantil e o ensino médio.  
@@ -360,12 +363,12 @@ def texto_pan_financiamento_fundeb_intro():
     segundo as declarações contábeis ([ADI 5791](https://portal.stf.jus.br/noticias/verNoticiaDetalhe.asp?idConteudo=493795&ori=1), 
     [art. 30 da Lei do Fundeb](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=e%20do%20Controle-,Art.%2030,-.%C2%A0%20A%20fiscaliza%C3%A7%C3%A3o%20e)).
 
-    A distribuição de recursos que compõem os Fundos ocorre de forma automática e o montante varia de acordo com a
+    A distribuição dos recursos que compõem os Fundos ocorre de forma automática e o montante varia de acordo com a
     arrecadação dos impostos que compõe a cesta. Por sua vez, o rateio dos valores se dá em função do número de alunos 
     matriculados nas respectivas redes de educação básica pública presencial, no âmbito da atuação prioritária de 
-    cada ente federado. Ainda, a distribuição do recurso é feita de forma ponderada por [etapas e modalidades](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/Decreto/D10656.htm#:~:text=A%20da%20Constitui%C3%A7%C3%A3o.-,Art.%202%C2%BA,-Para%20fins%20do) 
+    cada ente Federativo. Ainda, a distribuição do recurso é feita de forma ponderada por [etapas e modalidades](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/Decreto/D10656.htm#:~:text=A%20da%20Constitui%C3%A7%C3%A3o.-,Art.%202%C2%BA,-Para%20fins%20do) 
     de ensino na qual o aluno está matriculado, duração da jornada e tipo de estabelecimento, com índices definidos anualmente [(art. 7)](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=e%20das%20Pondera%C3%A7%C3%B5es-,Art.%207%C2%BA,-A%20distribui%C3%A7%C3%A3o%20de).
-    O número de matrículas em cada etapa e modalidade é obtido a partir do :orange-background[Censo Escolar], que é realizado 
+    O número de matrículas em cada etapa e modalidade é obtido a partir do :orange-background[Censo Escolar], que também é realizado 
     anualmente pelo INEP.
     
     A atribuição do Ministério Público está explicitamente definida no [artigo 32](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=Art.%2032.%C2%A0%20A-,defesa,-da%20ordem%20jur%C3%ADdica) 
@@ -380,15 +383,17 @@ def texto_pan_financiamento_fundeb_intro():
     na fiscalização dos repasses do Fundeb.
     
     Acompanhe abaixo a evolução dos repasses do Fundeb, com gráficos que mostram a distribuição dos recursos 
-    por ente federado, no tempo. Os valores foram extraídos da plataforma SIOPE, do FNDE e foram contabilizados
+    por ente Federativo, no tempo. Os valores foram extraídos da plataforma SIOPE, do FNDE e foram contabilizados
     os recursos totais do Fundeb disponíveis para o exercício respectivo. Além do principal, 
     estão incluídas as complementações VAAF, VAAT e VAAR, explicadas e discriminadas mais abaixo.
       
-    Estão disponíveis os dados a partir do ano de 2021. Se o ano selecionado não for encontrado na consulta, significa
-    que o Ente atrasou sua prestação de contas.
+    Estão disponíveis os dados a partir do ano de 2021. O nome Acre refere-se à Secretaria Estadual de Educação 
+    e foi mantido assim por ser o padrão adotado nos documentos oficiais do FNDE e do Tesouro Nacional.
+    Se não forem encontrados dados para o ano selecionado na consulta, significa que o Ente atrasou sua prestação 
+    de contas e é um indicativo para a atuação do Ministério Público. 
     """
     
-def texto_pan_financiamento_fundeb_analise():
+def texto_pan_financiamento_fundeb_analise_1():
     return """
     Como explicado acima, o repasse do Fundeb é feito de forma automática e é diretamente proporcional ao número 
     de matrículas do respectivo sistema de ensino público em sua área de atuação prioritária, definida pela LDB. 
@@ -404,7 +409,7 @@ def texto_pan_financiamento_fundeb_analise():
     :orange-background[manutenção e desenvolvimento do ensino (MDE)].
     
     É a LDB quem define o que é MDE, no seu [artigo 70](https://www.planalto.gov.br/ccivil_03/leis/L9394compilado.htm#:~:text=das%20autoridades%20competentes.-,Art.%2070.,-Considerar%2Dse%2D%C3%A3o). 
-    Sob o aspecto da fiscalização, este artido é fundamental, pois delimita o que pode ser considerado como despesa 
+    Sob o aspecto da fiscalização, este artigo é fundamental, pois delimita o que pode ser considerado como despesa 
     lícita ou ilícita, de acordo com o regramento do Fundeb.
     
     De largada, duas condicionantes podem ser analisadas neste momento, a fim de se aferir a conformidade do uso dos 
@@ -413,24 +418,90 @@ def texto_pan_financiamento_fundeb_analise():
     do total do repasse no primeiro quadrimestre do ano seguinte.
     
     Consulte abaixo o desempenho dessas despesas. Basta selecionar o Ente desejado para a geração dos gráficos. Os dados 
-    são extraídos da plataforma SIOPE, do FNDE.    
+    são extraídos da plataforma [SIOPE](https://www.fnde.gov.br/siope/o_que_e.jsp) - Sistema de Informações sobre 
+    Orçamentos Públicos em Educação, do FNDE.
     """
+
+def texto_pan_financiamento_fundeb_analise_2():
+    return """
+    De plano, basta consultar os dados da esfera administrativa desejada e conferir se o percentual mínimo de 70% de 
+    gastos com a remuneração dos profissionais da educação foi atingido. Na sequência, verica-se se o percentual
+    máximo de 10% de reprogramação de recursos de um exercício para o próximo foi respeitado. O descumprimento de quaisquer
+    desses percentuais implica em responsabilidade criminal dos gestores, tema elaborado mais adiante. Fácil, não é?
+    
+    Entretanto, é muito importante inferir os fatos que estão por trás desses números. A primeira análise interessante é
+    verificar se há algum valor que destoa dos demais. Aí, as perguntas vêm naturalmente: O que aconteceu neste ano? 
+    Era ano eleitoral? Houve uma mudança de gestão? Houve impugnação de algum certame licitatório? Houve evento 
+    climático extremo? Dentre os repasses do Fundeb, existem receitas vinculadas ao cumprimento de metas de qualidade 
+    não atingidas? Ou, ainda, houve mudança de legislativa? 
+    
+    A nova Lei do Fundeb entrou em vigor em dezembro de 2020 e estabeleceu um escalonamento progressivo de 6 anos para sua 
+    completa implementação, em especial os percentuais de transferência de recursos da União para Estados e Municípios [(art. 41)](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=Disposi%C3%A7%C3%B5es%20Transit%C3%B3rias-,Art.%2041.,-A%20complementa%C3%A7%C3%A3o%20da).
+    Logo, se tudo correr bem, é de se esperar um aumento progressivo nos valores dos gráficos, certo? Isso aconteceu no 
+    Município de interesse? Se a legislação prevê esse aumento progressivo, o que explica a queda dos valores recebidos 
+    de um ano para outro? Se há queda no valor do repasse e o número de profissionais permanecer o mesmo de um ano para 
+    o outro, o percentual gasto com sua remuneração deve aumentar, correto?
+    
+    Outra análise possível é a comparação entre os próprios percentuais analisados. Há correlação entre eles? Ou seja, 
+    quanto maior um, menor o outro?
+    
+    Uma última sugestão de análise muito interessante é a comparação entre Municípios de mesmo porte populacional e características
+    geográficas semelhantes. Há semelhanças na comparação ou algum deles destoa dos demais? Se um Município consegue 
+    bons resultados, porque o outro não atingiu percentuais semelhantes? Experimente iniciar comparando os Municípios de 
+    Santa Rosa do Purus e Jordão. Que te parece?
+    
+    Em qualquer caso, é plausível estabelecer duas conclusões: quanto maior o gasto com a remuneração dos profissionais,
+    menor a chance de reprogramação de recursos do Fundeb para o exercício seguinte. Entretanto, quanto maior este gasto, 
+    menor o valor disponível para a execução de outras despesas de MDE, como a construção e reforma de escolas.
+    
+    As respostas às demais perguntas sugeridas exigem a coleção de mais peças do quebra-cabeças e cada Panorama dará sua 
+    contribuição, a seu tempo. De qualquer maneira, de posse dos dados aqui analisados, insta-se que o usuário retorne 
+    à página do Panorama da Rede de Ensino e à página do Panorama de Recursos Humanos e prossiga com as comparações. 
+    Esse exercício é fundamental para a compreensão da estrutura da rede analisada e consequente exorcismo das assombrações 
+    da "reserva do possível" e da "discrionariedade admnistrativa". O debate é sobre legalidade.
+    Adiante.
+    """
+
 
 # VAAT, VAAF, VAAR
 def texto_pan_financiamento_fundeb_complementacao_intro():
     return"""
-    O Fundeb é composto por recursos provenientes de tributos estaduais e municipais, mas a União também participa 
-    do financiamento da educação básica pública, por meio de complementações. Essas complementações são divididas em três 
-    categorias: VAAF (Valor Anual Mínimo por Aluno), VAAT (Valor Anual por Aluno do Ensino Técnico) e VAAR (Valor Anual por Aluno 
-    Rural). Essas complementações são importantes para garantir que os recursos sejam distribuídos de forma equitativa entre os 
-    entes federativos, especialmente em regiões com menor capacidade de arrecadação.
-
-    O FNDE define anualmente o "Valor Anual Mínimo por Aluno" (VAAF-MIN) e o valor
+    O Fundeb é composto por recursos provenientes de tranferência e arrecadação de impostos estaduais e municipais, mas a 
+    União também participa do financiamento da educação básica pública por meio de complementações. A partir da Lei 14.113/2020, 
+    essas complementações pela União devem atingir gradativamente o total de 23% do total dos repasses de Estados e Municípios 
+    ao Fundo até o ano de 2023. A novidade é que, além de uma maior contribuição da União, a complementação do Fundeb possui 
+    um caracter **redistributivo**, beneficiando os Entes Federativos que possuem uma arrecadação menor.
+        
+    Agora há [três modalidades](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=Complementa%C3%A7%C3%A3o%20da%20Uni%C3%A3o-,Art.%204%C2%BA,-A%20Uni%C3%A3o%20complementar%C3%A1) 
+    diferentes de complementação, que contribuem com diferentes requisitos e proporções, para se atingir o repasse mínimo de 23% 
+    pela União. São elas:
+    
+    * Complementação **VAAF** (Valor Aluno Ano Fundeb), proporção de **10%**, 
+    * Complementação **VAAT** (Valor Aluno Ano Total), proporção de **10,5%**,
+    * Complementação **VAAR** (Valor Aluno Ano Resultado), proporção de **2,5%**.
+    
+    **VAAF**  
+    A atual complementação VAAF segue os mesmos critérios de sua versão anterior. Para o seu cálculo, o FNDE define anualmente 
+    o "Valor Anual Mínimo por Aluno" (VAAF-MIN), igual para toda a rede de ensino pública brasileira. Então, os entes 
+    federativos que não atingirem este valor mínimo com os repasses do Fundeb são beneficados com a complementação VAAF. Em 
+    razão da maior vocação redistributiva do novo Fundeb, poucos Estados recebem esta complementação, pois já são atendidos 
+    de outra forma.
+    
+    **VAAT**  
+    A complementação VAAT é novidade instituída pelo novo Fundeb e possui natureza essencialmente redistributiva, pois contempla
+    as redes de ensino com baixa arrecadação. O cálculo do VAAT é definido especificamente para cada ente federativo e leva
+    em conta todas as receitas vinculadas à educação, dividadas pelo número de matrículas e suas ponderações legais.
+    
+    
+    
+    **VAAR**
     
     A seguir, são apresentados gráficos que mostram a evolução dos repasses do Fundeb, incluindo as complementações VAAF, VAAT e VAAR.
     
+    
+    
     """
-def texto_pan_financiamento_fundeb_complementacao():
+def texto_pan_financiamento_fundeb_complementacao_analise():
     return """
     
     """
