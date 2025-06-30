@@ -458,7 +458,7 @@ def texto_pan_financiamento_fundeb_analise_2():
     contribuição, a seu tempo. De qualquer maneira, de posse dos dados aqui analisados, insta-se que o usuário retorne 
     à página do Panorama da Rede de Ensino e à página do Panorama de Recursos Humanos e prossiga com as comparações. 
     Esse exercício é fundamental para a compreensão da estrutura da rede analisada e consequente exorcismo das assombrações 
-    da "reserva do possível" e da "discrionariedade admnistrativa". O debate é sobre legalidade.
+    da "reserva do possível" e da "discrionariedade administrativa". O debate é sobre legalidade.
     Adiante.
     """
 
@@ -466,13 +466,13 @@ def texto_pan_financiamento_fundeb_analise_2():
 # VAAT, VAAF, VAAR
 def texto_pan_financiamento_fundeb_complementacao_intro():
     return"""
-    O Fundeb é composto por recursos provenientes de tranferência e arrecadação de impostos estaduais e municipais, mas a 
+    O Fundeb é composto por recursos provenientes de tranferência e arrecadação de impostos federais, estaduais e municipais, mas a 
     União também participa do financiamento da educação básica pública por meio de complementações. A partir da Lei 14.113/2020, 
     essas complementações pela União devem atingir gradativamente o total de 23% do total dos repasses de Estados e Municípios 
-    ao Fundo até o ano de 2023. A novidade é que, além de uma maior contribuição da União, a complementação do Fundeb possui 
-    um caracter **redistributivo**, beneficiando os Entes Federativos que possuem uma arrecadação menor.
+    ao Fundo até o ano de 2026. A novidade é que, além de uma maior contribuição da União, a complementação do Fundeb possui 
+    um caracter **redistributivo**, beneficiando os Entes Federativos que possuem uma arrecadação tributária menor.
         
-    Agora há [três modalidades](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=Complementa%C3%A7%C3%A3o%20da%20Uni%C3%A3o-,Art.%204%C2%BA,-A%20Uni%C3%A3o%20complementar%C3%A1) 
+    Agora, há [três modalidades](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=Complementa%C3%A7%C3%A3o%20da%20Uni%C3%A3o-,Art.%204%C2%BA,-A%20Uni%C3%A3o%20complementar%C3%A1) 
     diferentes de complementação, que contribuem com diferentes requisitos e proporções, para se atingir o repasse mínimo de 23% 
     pela União. São elas:
     
@@ -480,21 +480,24 @@ def texto_pan_financiamento_fundeb_complementacao_intro():
     * Complementação **VAAT** (Valor Aluno Ano Total), proporção de **10,5%**,
     * Complementação **VAAR** (Valor Aluno Ano Resultado), proporção de **2,5%**.
     
-    **VAAF**  
+    [**VAAF**](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=da%20autoridade%20competente.-,Art.%205%C2%BA,-A%20complementa%C3%A7%C3%A3o%20da)  
     A atual complementação VAAF segue os mesmos critérios de sua versão anterior. Para o seu cálculo, o FNDE define anualmente 
-    o "Valor Anual Mínimo por Aluno" (VAAF-MIN), igual para toda a rede de ensino pública brasileira. Então, os entes 
-    federativos que não atingirem este valor mínimo com os repasses do Fundeb são beneficados com a complementação VAAF. Em 
-    razão da maior vocação redistributiva do novo Fundeb, poucos Estados recebem esta complementação, pois já são atendidos 
-    de outra forma.
+    o "Valor Anual Mínimo por Aluno" (VAAF-MIN), igual para toda a rede de ensino pública brasileira. Então, os Estados que não 
+    atingirem esse valor mínimo com os repasses do Fundeb são beneficados com a complementação VAAF. Em razão da maior vocação 
+    redistributiva do Fundo, poucos Estados recebem esta complementação, pois já atingem o valor mínimo.
     
-    **VAAT**  
+    [**VAAT**](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=da%20autoridade%20competente.-,Art.%205%C2%BA,-A%20complementa%C3%A7%C3%A3o%20da)  
     A complementação VAAT é novidade instituída pelo novo Fundeb e possui natureza essencialmente redistributiva, pois contempla
-    as redes de ensino com baixa arrecadação. O cálculo do VAAT é definido especificamente para cada ente federativo e leva
-    em conta todas as receitas vinculadas à educação, dividadas pelo número de matrículas e suas ponderações legais.
+    as redes de ensino com baixa arrecadação tributária. Diferente do VAAF, o cálculo do VAAT é feito por ente federativo. Cada Estado e 
+    Município terá o seu VAAT calculado e, se não atingir o valor mínimo do VAAT definido nacionalmente (VAAT-MIN), recebe a complementação.  
+    Entretanto, para que o ente federativo faça jus ao repasse, deve ter prestado contas e executado as despesas de acordo com 
+    a legislação [(art. 13,  §4º, da Lei 14.113/2020)](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=Minist%C3%A9rio%20da%20Educa%C3%A7%C3%A3o.-,%C2%A7%204%C2%BA,-Somente%20s%C3%A3o%20habilitados).
     
     
     
-    **VAAR**
+    [**VAAR**](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=da%20autoridade%20competente.-,Art.%205%C2%BA,-A%20complementa%C3%A7%C3%A3o%20da)
+    Somente a partir do ano de 2023.
+    
     
     A seguir, são apresentados gráficos que mostram a evolução dos repasses do Fundeb, incluindo as complementações VAAF, VAAT e VAAR.
     
