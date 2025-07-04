@@ -13,8 +13,9 @@ from scripts.textos import(
     texto_pan_financiamento_fundeb_analise_1,
     texto_pan_financiamento_fundeb_analise_2,
     texto_pan_financiamento_fundeb_complementacao_intro,
-    texto_pan_financiamento_intro_mde,
-    texto_pan_financiamento_analise_mde,
+    texto_pan_financiamento_fundeb_complementacao_analise,
+    texto_pan_financiamento_receita_minima_impostos_intro,
+    texto_pan_financiamento_receita_minima_impostos_analise,
     texto_pan_financiamento_intro_se,
     texto_pan_financiamento_analise_se,
 
@@ -26,7 +27,9 @@ from scripts.graficos import(
     grafico_fundeb_total_ano,
     grafico_fundeb_total_ente,
     grafico_indicador_despesa_profissionais,
-    grafico_percentual_recursos_nao_utilizados
+    grafico_percentual_recursos_nao_utilizados,
+    grafico_valor_repasse_fundeb,
+    grafico_complementacoes_fundeb
 )
 
 # Configuração da página
@@ -81,7 +84,7 @@ with col2:
         
 st.write(texto_pan_financiamento_fundeb_analise_1())
 
-# Gráficos do Fundeb Estado e Municpios sob demanda
+# Gráficos do Fundeb Estado e Municipios sob demanda
 entes_disponiveis = sorted(df_panorama_financiamento['nome'].unique())
     
 entes = st.selectbox(
@@ -104,11 +107,34 @@ st.subheader("Complementações do Fundeb: VAAT, VAAF e VAAR")
 
 st.write(texto_pan_financiamento_fundeb_complementacao_intro())
 
+entes_disponiveis = sorted(df_panorama_financiamento['nome'].unique())
+    
+entes = st.selectbox(
+    "Selecione o ente:",
+    options=entes_disponiveis,
+    key="complementacao_ente"
+)
+
+col1, col2 = st.columns(2)
+
+with col1:
+    grafico_valor_repasse_fundeb(df_panorama_financiamento, entes)
+
+with col2:
+    grafico_complementacoes_fundeb(df_panorama_financiamento, entes)
+    
+st.write(texto_pan_financiamento_fundeb_complementacao_analise())
+
 
 #+++++++++
 # Subseção MDE
-st.header("Manutenção e Desenvolvimento do Ensino - MDE")
+st.header("Receita mínima proveniente de impostos")
 
+st.write(texto_pan_financiamento_receita_minima_impostos_intro())
+
+
+
+st.write(texto_pan_financiamento_receita_minima_impostos_analise())
 
 #++++++++
 # Subseção Salário Educação

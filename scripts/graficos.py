@@ -1,9 +1,9 @@
 
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
-
+import pandas as pd
 import streamlit as st
-
+import numpy as np
 
 #============================
 # PAGINA PANORAMA GERAL
@@ -1072,10 +1072,6 @@ def grafico_indicador_despesa_profissionais(df, ente):
     st.pyplot(fig)
 
 # Gráfico de barras vertical com o indicador de receita não executada
-import matplotlib.pyplot as plt
-import streamlit as st
-import pandas as pd
-
 def grafico_percentual_recursos_nao_utilizados(df, ente):
     """
     Gera um gráfico de barras verticais mostrando, ano a ano, o percentual dos recursos
@@ -1151,6 +1147,130 @@ def grafico_percentual_recursos_nao_utilizados(df, ente):
                 fontsize=10,
                 fontweight='bold'
             )
+
+    fig.tight_layout()
+    st.pyplot(fig)
+
+# Gráfico de barras para o repasse do Fundeb
+def grafico_valor_repasse_fundeb(df, ente):
+    """
+    Gera um gráfico de barras verticais mostrando a evolução do valor repassado do Fundeb
+    ao longo dos anos para o ente federado selecionado, em milhões de reais.
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas 'nome', 'ano' e 'valor_repasse_fundeb'.
+    ente : str
+        Nome do Município ou Estado selecionado pelo usuário.
+    """
+   
+    # Filtrar dados do ente
+    df_filtrado = df[df['nome'] == ente].sort_values(by='ano').copy()
+
+    # Conversão segura para float
+    df_filtrado['valor_repasse_fundeb'] = pd.to_numeric(
+        df_filtrado['valor_repasse_fundeb'].astype(str).str.replace(',', '.'),
+        errors='coerce'
+    )
+
+    # Converter para milhões
+    df_filtrado['valor_milhoes'] = df_filtrado['valor_repasse_fundeb'] / 1_000_000
+
+    # Estilo do gráfico
+    plt.style.use('dark_background')
+
+    # Cor das barras
+    cor_barras = '#006400'
+
+    # Criar gráfico
+    fig, ax = plt.subplots(figsize=(8, 6))
+    ax.bar(df_filtrado['ano'].astype(str), df_filtrado['valor_milhoes'], color=cor_barras)
+
+    # Título e eixos
+    ax.set_title(f'Evolução do Repasse do Fundeb - {ente}', color='#FFA07A', fontsize=16)
+    ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=12)
+    ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=12)
+
+    # Estilo dos eixos
+    ax.tick_params(axis='x', colors='#FFA07A', labelsize=12)
+    ax.tick_params(axis='y', colors='#FFA07A', labelsize=12)
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    # Inserção dos valores no topo das barras
+    for i, valor in enumerate(df_filtrado['valor_milhoes']):
+        if pd.notnull(valor):
+            ax.text(
+                i,
+                valor + (df_filtrado['valor_milhoes'].max() * 0.02),
+                f'R$ {valor:.1f} mi',
+                ha='center',
+                color='white',
+                fontsize=10,
+                fontweight='bold'
+            )
+
+    fig.tight_layout()
+    st.pyplot(fig)
+
+# Grafico de barras complementações
+def grafico_complementacoes_fundeb(df, ente):
+    """
+    Gera um gráfico de barras agrupadas com os valores das complementações do Fundeb
+    (VAAF, VAAT, VAAR), ao longo dos anos, para o ente selecionado.
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame com colunas: 'nome', 'ano', 'valor_receita_vaaf', 'valor_receita_vaat', 'valor_receita_vaar'
+    ente : str
+        Nome do Município ou Estado selecionado pelo usuário.
+    """
+
+    # Filtrar e ordenar os dados
+    df_filtrado = df[df['nome'] == ente].sort_values(by='ano').copy()
+
+    # Conversão segura para float
+    for col in ['valor_receita_vaaf', 'valor_receita_vaat', 'valor_receita_vaar']:
+        df_filtrado[col] = pd.to_numeric(
+            df_filtrado[col].astype(str).str.replace(',', '.'),
+            errors='coerce'
+        ) / 1_000_000  # Converter para milhões
+
+    # Estilo do gráfico
+    plt.style.use('dark_background')
+    fig, ax = plt.subplots(figsize=(8, 6))
+
+    # Largura e posição das barras agrupadas
+    anos = df_filtrado['ano'].astype(str)
+    x = np.arange(len(anos))
+    largura = 0.25
+
+    # Cores conforme padrão visual
+    cor_vaaf = '#006400'   # Verde escuro
+    cor_vaat = '#FFA500'   # Laranja
+    cor_vaar = '#00BFFF'   # Azul claro
+
+    # Plotagem
+    ax.bar(x - largura, df_filtrado['valor_receita_vaaf'], width=largura, label='VAAF', color=cor_vaaf)
+    ax.bar(x,            df_filtrado['valor_receita_vaat'], width=largura, label='VAAT', color=cor_vaat)
+    ax.bar(x + largura, df_filtrado['valor_receita_vaar'], width=largura, label='VAAR', color=cor_vaar)
+
+    # Título e rótulos
+    ax.set_title(f'Complementações do Fundeb por Ano - {ente}', color='#FFA07A', fontsize=16)
+    ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=12)
+    ax.set_xlabel('Fonte: Siope', color='#FFA07A', fontsize=12)
+    ax.set_xticks(x)
+    ax.set_xticklabels(anos)
+
+    # Estilo dos eixos
+    ax.tick_params(colors='#FFA07A', labelsize=12)
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    # Legenda
+    ax.legend(loc='upper left', frameon=False, fontsize=10)
 
     fig.tight_layout()
     st.pyplot(fig)

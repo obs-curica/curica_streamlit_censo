@@ -415,7 +415,8 @@ def texto_pan_financiamento_fundeb_analise_1():
     De largada, duas condicionantes podem ser analisadas neste momento, a fim de se aferir a conformidade do uso dos 
     recursos do Fundeb: (1) a aplicação mínima de 70% dos recursos na remuneração dos profissionais da educação e (2) a execução
     mínima de 90% dos recursos do fundo no mesmo exercício financeiro (anual), com a possibilidade de utilização de até 10% 
-    do total do repasse no primeiro quadrimestre do ano seguinte.
+    do total do repasse no primeiro quadrimestre do ano seguinte. Ressalva-se que os valores recebidos PELA complementação 
+    VAAR não é integram a base de cálculo para a contabilização do percentual mínimo da remuneração profissional.
     
     Consulte abaixo o desempenho dessas despesas. Basta selecionar o Ente desejado para a geração dos gráficos. Os dados 
     são extraídos da plataforma [SIOPE](https://www.fnde.gov.br/siope/o_que_e.jsp) - Sistema de Informações sobre 
@@ -452,7 +453,7 @@ def texto_pan_financiamento_fundeb_analise_2():
     
     Em qualquer caso, é plausível estabelecer duas conclusões: quanto maior o gasto com a remuneração dos profissionais,
     menor a chance de reprogramação de recursos do Fundeb para o exercício seguinte. Entretanto, quanto maior este gasto, 
-    menor o valor disponível para a execução de outras despesas de MDE, como a construção e reforma de escolas.
+    menor o valor disponível para a execução de outras despesas em MDE, como a construção e reforma de escolas.
     
     As respostas às demais perguntas sugeridas exigem a coleção de mais peças do quebra-cabeças e cada Panorama dará sua 
     contribuição, a seu tempo. De qualquer maneira, de posse dos dados aqui analisados, insta-se que o usuário retorne 
@@ -484,35 +485,62 @@ def texto_pan_financiamento_fundeb_complementacao_intro():
     A atual complementação VAAF segue os mesmos critérios de sua versão anterior. Para o seu cálculo, o FNDE define anualmente 
     o "Valor Anual Mínimo por Aluno" (VAAF-MIN), igual para toda a rede de ensino pública brasileira. Então, os Estados que não 
     atingirem esse valor mínimo com os repasses do Fundeb são beneficados com a complementação VAAF. Em razão da maior vocação 
-    redistributiva do Fundo, poucos Estados recebem esta complementação, pois já atingem o valor mínimo.
+    redistributiva do Fundo, poucos Estados recebem esta complementação, pois já atingem o valor mínimo ([art. 12 da Lei 14.113/20](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=Complementa%C3%A7%C3%A3o%20da%20Uni%C3%A3o-,Art.%2012,-.%C2%A0%20A%20complementa%C3%A7%C3%A3o%2DVAAF)).
+    Em qualquer caso, os valores recebidos nesta modalidade de complementação devem ser destinados exclusivamente a despesas com 
+    manutenção e desenvolvimento do ensino (MDE).
     
     [**VAAT**](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=da%20autoridade%20competente.-,Art.%205%C2%BA,-A%20complementa%C3%A7%C3%A3o%20da)  
     A complementação VAAT é novidade instituída pelo novo Fundeb e possui natureza essencialmente redistributiva, pois contempla
     as redes de ensino com baixa arrecadação tributária. Diferente do VAAF, o cálculo do VAAT é feito por ente federativo. Cada Estado e 
     Município terá o seu VAAT calculado e, se não atingir o valor mínimo do VAAT definido nacionalmente (VAAT-MIN), recebe a complementação.  
-    Entretanto, para que o ente federativo faça jus ao repasse, deve ter prestado contas e executado as despesas de acordo com 
-    a legislação [(art. 13,  §4º, da Lei 14.113/2020)](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=Minist%C3%A9rio%20da%20Educa%C3%A7%C3%A3o.-,%C2%A7%204%C2%BA,-Somente%20s%C3%A3o%20habilitados).
+    Entretanto, para que o ente federativo faça jus ao repasse, deve ter cumprido a condicionalidade de prestação de contas e 
+    execução das despesas de acordo com a legislação [(art. 13,  §4º, da Lei 14.113/2020)](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=Minist%C3%A9rio%20da%20Educa%C3%A7%C3%A3o.-,%C2%A7%204%C2%BA,-Somente%20s%C3%A3o%20habilitados).
+    Esta modalidade de complementação exige que os valores recebidos sejam destinados para despesas de capital, na proporção de 15%, e 
+    com despesas com educação infantil, para os Municípios, na proporção de 50%. O restante deve ser destinado para despesas em MDE [(arts. 27 e 28)](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=despesas%20de%20capital.-,Art.%2028,-.%C2%A0%20Realizada%20a%20distribui%C3%A7%C3%A3o).
     
-    
-    
-    [**VAAR**](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=da%20autoridade%20competente.-,Art.%205%C2%BA,-A%20complementa%C3%A7%C3%A3o%20da)
-    Somente a partir do ano de 2023.
-    
-    
-    A seguir, são apresentados gráficos que mostram a evolução dos repasses do Fundeb, incluindo as complementações VAAF, VAAT e VAAR.
-    
-    
-    
+    [**VAAR**](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=da%20autoridade%20competente.-,Art.%205%C2%BA,-A%20complementa%C3%A7%C3%A3o%20da)  
+    Por fim, a complementação VAAR também é outra inovação legislativa e garante o repasse ao ente federativo que cumpriu as 
+    condicionalidades de melhoria de gestão, de atendimento, aprendizagem e redução das desigualdades ([art. 14 da Lei do Fundeb](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/lei/l14113.htm#:~:text=da%20autoridade%20competente.-,Art.%205%C2%BA,-A%20complementa%C3%A7%C3%A3o%20da)).  
+    Os repasses dessa complementação se iniciaram a partir do ano de 2023, para atender a implementação progressiva da nova política de 
+    financiamento educacional.  
+    O art. 14 apresenta as cinco condicionalidades que devem ser atingidas pela rede educacional. Salienta-se as condicionalidades
+    II e III, que dizem respeito à participação de no mínimo 80% dos alunos da rede na prova do Sistema de Avaliação da Educação Básica
+    (SAEB) e a redução das desigualdades educacionais e socioeconômicas. Ambas são calculadas pelo INEP, com base nos dados fornecidos 
+    ao **Censo Escolar** e nas avaliações do SAEB.
+        
+    A seguir, são apresentados gráficos que discriminam a evolução dos repasses do Fundeb e as respectivas complementações VAAF, VAAT e VAAR, 
+    a partir do ano de 2021.
     """
+    
 def texto_pan_financiamento_fundeb_complementacao_analise():
     return """
+    Note que os valores dos repasses do Fundeb crescem com consistência, refletindo a implementação gradual da nova política de
+    financiamento da educação. Em especial, refletem também o momento econômico.  
     
+    Entretanto, o quadro muda quando se olha para as complementações. Nenhum ente federativo recebeu repasse da complementação VAAF pois,
+    como dito antes, são poucos os Estados que não atingem o valor mínimo do VAAF. Entretanto, as complementações VAAT e VAAR são interessantes
+    de serem observadas, em especial por causa de suas condicionalidades. 
+    
+    No que diz respeito à complementação VAAT, o seu não recebimento pelo ente é indicativo de ausência de prestação de contas e aponta
+    para o cometimento de crime de responsabilidade do Prefeito. Como exemplo, pode-se verificar o Município de Bujari, que foi inabilitado
+    pelo FNDE para receber a complementação nos anos de 2021 a 2023, pela não prestação das contas. A informação atualizada a respeito
+    das prestações de contas dos entes é encontrada na plataforma [SIOPE](https://www.fnde.gov.br/siope/recibosTransmissao.do).
+    
+    Por sua vez, o não recebimento da complementação VAAR é indicativo de descumprimento de normas de organização administrativa escolar, má 
+    cobertura da rede, falta de participação de alunos nas avaliações do SAEB, preenchimento incorreto do Censo Escolar, ou baixo rendimento
+    dos alunos, segundo os critérios da avaliação nacional.
+    
+    Portanto, mais do que recursos, as complementações auxiliam no diagnóstico da rede escolar que deve ser fiscalizada e aponta possíveis
+    falhas de gestão que podem ser endereçadas com base na legalidade, ou na falta dela, dos atos praticados pela administração escolar. 
     """
 
 
 # MDE
-def texto_pan_financiamento_intro_mde():
+def texto_pan_financiamento_receita_minima_impostos_intro():
     return """
+    
+    
+    
     Receita Orçamentária decorrente de tributos. Vinculação da receita de tributos com despesas em MDE.
     
     Exercício financeiro.
@@ -520,8 +548,9 @@ def texto_pan_financiamento_intro_mde():
     Definicao de MDE. Lembrar que pode ser considerada como MDE a despesa em áreas de atuação não prioritária.
     """
 
-def texto_pan_financiamento_analise_mde():
-    return """ """
+def texto_pan_financiamento_receita_minima_impostos_analise():
+    return """ analise
+    """
 
 # Salário Educação
 def texto_pan_financiamento_intro_se():
