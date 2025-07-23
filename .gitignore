@@ -17,6 +17,7 @@ __pycache__/
 .venv/
 env/
 venv/
+venv_curica/
 
 # Arquivos de ambiente e configuração locais
 *.env
