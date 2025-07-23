@@ -1275,6 +1275,150 @@ def grafico_complementacoes_fundeb(df, ente):
     fig.tight_layout()
     st.pyplot(fig)
 
+# Gráfico de barras receita impostos
+def grafico_valor_receita_impostos(df, ente):
+    """
+    Gera um gráfico de barras verticais com os valores da receita de impostos
+    ao longo dos anos para o ente selecionado.
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas 'nome', 'ano' e 'valor_receita_impostos'.
+    ente : str
+        Nome do Município ou Estado selecionado pelo usuário.
+    """
+
+    # Filtrar e ordenar os dados
+    df_filtrado = df[df['nome'] == ente].sort_values(by='ano').copy()
+
+    # Conversão segura para float
+    df_filtrado['valor_receita_impostos'] = pd.to_numeric(
+        df_filtrado['valor_receita_impostos'].astype(str).str.replace(',', '.'),
+        errors='coerce'
+    )
+
+    # Converter para milhões
+    df_filtrado['valor_milhoes'] = df_filtrado['valor_receita_impostos'] / 1_000_000
+
+    # Estilo
+    plt.style.use('dark_background')
+    fig, ax = plt.subplots(figsize=(8, 6))
+
+    # Cor da barra
+    cor_barras = '#006400'
+
+    # Plot
+    ax.bar(df_filtrado['ano'].astype(str), df_filtrado['valor_milhoes'], color=cor_barras)
+
+    # Eixos e título
+    ax.set_title(f'Total da Receita de Impostos - {ente}', color='#FFA07A', fontsize=16)
+    ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=12)
+    ax.set_xlabel('Fonte: Siope', color='#FFA07A', fontsize=12)
+
+    # Estilo dos ticks e spines
+    ax.tick_params(axis='x', colors='#FFA07A', labelsize=12)
+    ax.tick_params(axis='y', colors='#FFA07A', labelsize=12)
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    # Rótulos no topo das barras
+    for i, valor in enumerate(df_filtrado['valor_milhoes']):
+        if pd.notnull(valor):
+            ax.text(
+                i,
+                valor + (df_filtrado['valor_milhoes'].max() * 0.02),
+                f'R$ {valor:.1f} mi',
+                ha='center',
+                color='white',
+                fontsize=10,
+                fontweight='bold'
+            )
+
+    fig.tight_layout()
+    st.pyplot(fig)
+
+
+# Gráfico de barras agregadas para a receita mínima de impostos
+import matplotlib.pyplot as plt
+import streamlit as st
+import pandas as pd
+import numpy as np
+
+def grafico_valores_despesa_minima_impostos(df, ente):
+    """
+    Gera um gráfico de barras agrupadas mostrando, por ano, o valor mínimo a ser aplicado em MDE
+    e a despesa total liquidada com impostos para o ente selecionado.
+    Caso a despesa não atinja o mínimo, a barra de despesa será colorida em vermelho.
+    """
+
+    # Filtrar dados do ente
+    df_filtrado = df[df['nome'] == ente].sort_values(by='ano').copy()
+
+    # Conversão segura para float e milhões
+    for col in ['valor_minimo_mde', 'valor_total_despesa_impostos']:
+        df_filtrado[col] = pd.to_numeric(
+            df_filtrado[col].astype(str).str.replace(',', '.'),
+            errors='coerce'
+        ) / 1_000_000
+
+    # Eixo X
+    anos = df_filtrado['ano'].astype(str)
+    x = np.arange(len(anos))
+    largura = 0.35
+
+    # Estilo visual
+    plt.style.use('dark_background')
+    fig, ax = plt.subplots(figsize=(8, 6))
+
+    # Cores
+    cor_mde = '#00BFFF'            # Azul claro
+    cor_despesa_ok = '#FFA500'     # Laranja
+    cor_despesa_ruim = '#FF0000'   # Vermelho
+
+    # Determinar cores das barras de despesa com base na comparação
+    cores_despesa = [
+        cor_despesa_ruim if mde > despesa else cor_despesa_ok
+        for mde, despesa in zip(df_filtrado['valor_minimo_mde'], df_filtrado['valor_total_despesa_impostos'])
+    ]
+
+    # Plotar barras
+    ax.bar(x - largura/2, df_filtrado['valor_minimo_mde'], width=largura, label='Mínimo MDE', color=cor_mde)
+    ax.bar(x + largura/2, df_filtrado['valor_total_despesa_impostos'], width=largura, label='Despesa com Impostos', color=cores_despesa)
+
+    # Título e eixos
+    ax.set_title(f'MDE x Despesa Total com Impostos - {ente}', color='#FFA07A', fontsize=16)
+    ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=12)
+    ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=12)
+    ax.set_xticks(x)
+    ax.set_xticklabels(anos)
+
+    # Eixos e bordas
+    ax.tick_params(colors='#FFA07A', labelsize=12)
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    # Cálculo do limite do eixo Y
+    valor_maximo = max(df_filtrado[['valor_minimo_mde', 'valor_total_despesa_impostos']].max())
+    ax.set_ylim(top=valor_maximo * 1.15)
+
+    # Rótulos dinâmicos nas barras
+    for i, (mde, despesa) in enumerate(zip(df_filtrado['valor_minimo_mde'], df_filtrado['valor_total_despesa_impostos'])):
+        if pd.notnull(mde):
+            ax.text(x[i] - largura/2, mde + valor_maximo * 0.015, f'{mde:.1f}',
+                    ha='center', color='white', fontsize=9, fontweight='bold')
+        if pd.notnull(despesa):
+            ax.text(x[i] + largura/2, despesa + valor_maximo * 0.015, f'{despesa:.1f}',
+                    ha='center', color='white', fontsize=9, fontweight='bold')
+
+    # Legenda
+    ax.legend(loc='upper left', frameon=False, fontsize=10)
+
+    fig.tight_layout()
+    st.pyplot(fig)
+
+
+
 
 #===========================
 # PAGINA POVOS TRADICIONAIS

@@ -29,7 +29,9 @@ from scripts.graficos import(
     grafico_indicador_despesa_profissionais,
     grafico_percentual_recursos_nao_utilizados,
     grafico_valor_repasse_fundeb,
-    grafico_complementacoes_fundeb
+    grafico_complementacoes_fundeb,
+    grafico_valor_receita_impostos,
+    grafico_valores_despesa_minima_impostos
 )
 
 # Configuração da página
@@ -132,7 +134,21 @@ st.header("Receita mínima proveniente de impostos")
 
 st.write(texto_pan_financiamento_receita_minima_impostos_intro())
 
+entes_disponiveis = sorted(df_panorama_financiamento['nome'].unique())
+    
+entes = st.selectbox(
+    "Selecione o ente:",
+    options=entes_disponiveis,
+    key="receita_impostos_ente"
+)
 
+col1, col2 = st.columns(2)
+
+with col1:
+    grafico_valor_receita_impostos(df_panorama_financiamento, entes)
+    
+with col2:
+    grafico_valores_despesa_minima_impostos(df_panorama_financiamento, entes)
 
 st.write(texto_pan_financiamento_receita_minima_impostos_analise())
 

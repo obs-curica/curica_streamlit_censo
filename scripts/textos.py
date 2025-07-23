@@ -415,8 +415,8 @@ def texto_pan_financiamento_fundeb_analise_1():
     De largada, duas condicionantes podem ser analisadas neste momento, a fim de se aferir a conformidade do uso dos 
     recursos do Fundeb: (1) a aplicação mínima de 70% dos recursos na remuneração dos profissionais da educação e (2) a execução
     mínima de 90% dos recursos do fundo no mesmo exercício financeiro (anual), com a possibilidade de utilização de até 10% 
-    do total do repasse no primeiro quadrimestre do ano seguinte. Ressalva-se que os valores recebidos PELA complementação 
-    VAAR não é integram a base de cálculo para a contabilização do percentual mínimo da remuneração profissional.
+    do total do repasse no primeiro quadrimestre do ano seguinte. Ressalva-se que os valores recebidos pela complementação 
+    VAAR não integram a base de cálculo para a contabilização do percentual mínimo da remuneração profissional.
     
     Consulte abaixo o desempenho dessas despesas. Basta selecionar o Ente desejado para a geração dos gráficos. Os dados 
     são extraídos da plataforma [SIOPE](https://www.fnde.gov.br/siope/o_que_e.jsp) - Sistema de Informações sobre 
@@ -426,7 +426,7 @@ def texto_pan_financiamento_fundeb_analise_1():
 def texto_pan_financiamento_fundeb_analise_2():
     return """
     De plano, basta consultar os dados da esfera administrativa desejada e conferir se o percentual mínimo de 70% de 
-    gastos com a remuneração dos profissionais da educação foi atingido. Na sequência, verica-se se o percentual
+    gastos com a remuneração dos profissionais da educação foi atingido. Na sequência, verifica-se se o percentual
     máximo de 10% de reprogramação de recursos de um exercício para o próximo foi respeitado. O descumprimento de quaisquer
     desses percentuais implica em responsabilidade criminal dos gestores, tema elaborado mais adiante. Fácil, não é?
     
@@ -519,9 +519,9 @@ def texto_pan_financiamento_fundeb_complementacao_analise():
     
     Entretanto, o quadro muda quando se olha para as complementações. Nenhum ente federativo recebeu repasse da complementação VAAF pois,
     como dito antes, são poucos os Estados que não atingem o valor mínimo do VAAF. Entretanto, as complementações VAAT e VAAR são interessantes
-    de serem observadas, em especial por causa de suas condicionalidades. 
+    de serem observadas, **em especial por causa de suas condicionalidades**. 
     
-    No que diz respeito à complementação VAAT, o seu não recebimento pelo ente é indicativo de ausência de prestação de contas e aponta
+    No que diz respeito à complementação VAAT, o seu não recebimento pelo ente é **indicativo de ausência de prestação de contas** e aponta
     para o cometimento de crime de responsabilidade do Prefeito. Como exemplo, pode-se verificar o Município de Bujari, que foi inabilitado
     pelo FNDE para receber a complementação nos anos de 2021 a 2023, pela não prestação das contas. A informação atualizada a respeito
     das prestações de contas dos entes é encontrada na plataforma [SIOPE](https://www.fnde.gov.br/siope/recibosTransmissao.do).
@@ -538,18 +538,27 @@ def texto_pan_financiamento_fundeb_complementacao_analise():
 # MDE
 def texto_pan_financiamento_receita_minima_impostos_intro():
     return """
+    Este tópico trata de uma vinculação da receita proveniente de impostos a despesas com MDE, assim definidas no [art. 70](https://www.planalto.gov.br/ccivil_03/leis/L9394compilado.htm#:~:text=das%20autoridades%20competentes.-,Art.%2070,-.%20Considerar%2Dse%2D%C3%A3o) 
+    da LDB.
     
+    Como explicado anteriormente, o [art. 212](https://www.planalto.gov.br/ccivil_03/constituicao/constituicaocompilado.htm#:~:text=Art.%20212.-,A%20Uni%C3%A3o%20aplicar%C3%A1,-%2C%20anualmente%2C%20nunca%20menos)
+    da Constituição Federal determina a Estados e Municípios a aplicação **mínima** de 25% da receita proveniente de impostos em despesas de MDE. 
+    Desse total, 20% são destinados à composição do Fundeb. Os **5% restantes** são contabilizados a partir dos **elementos de despesa 
+    atribuídos a MDE**, discriminados nas resppectivas prestações de contas.  
+    Portanto, o seu cálculo leva em conta o total da arrecadação proveniente de impostos e o total das despesas em MDE, que deve atingir 
+    o mínimo de 5% naquele exercício financeiro. Como explicado anteriormente, este valor irá variar de acordo com a arrecadação 
+    tributária do ente federativo.  
     
-    
-    Receita Orçamentária decorrente de tributos. Vinculação da receita de tributos com despesas em MDE.
-    
-    Exercício financeiro.
-    
-    Definicao de MDE. Lembrar que pode ser considerada como MDE a despesa em áreas de atuação não prioritária.
+    Consulte abaixo o total de arrecadação proveniente de impostos e o total de despesas em MDE para o cálculo da receita mínima de 5% em impostos. 
+    Para a criação do gráfico, foi considerado o valor empenhado como despesa em MDE para o exercício, pois é o maior parâmetro possível. 
+    Os dados foram extraídos da plataforma SIOPE, do FNDE, e estão disponíveis a partir do ano de 2021.    
     """
 
 def texto_pan_financiamento_receita_minima_impostos_analise():
-    return """ analise
+    return """
+    É importante lembrar que há uma diferença entre a vinculação da receita destinada ao Fundeb e a receita mínima de impostos para MDE.
+    Se no Fundeb são permitidas despesas em MDE **somente nas áreas de atuação prioritária**, a receita mínima de 5% proveninente de impostos 
+    pode ser executada em áreas não prioritárias, mas sempre em MDE.
     """
 
 # Salário Educação
