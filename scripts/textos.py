@@ -466,7 +466,7 @@ def texto_pan_financiamento_fundeb_analise_2():
 
 # VAAT, VAAF, VAAR
 def texto_pan_financiamento_fundeb_complementacao_intro():
-    return"""
+    return """
     O Fundeb é composto por recursos provenientes de tranferência e arrecadação de impostos federais, estaduais e municipais, mas a 
     União também participa do financiamento da educação básica pública por meio de complementações. A partir da Lei 14.113/2020, 
     essas complementações pela União devem atingir gradativamente o total de 23% do total dos repasses de Estados e Municípios 
@@ -538,13 +538,13 @@ def texto_pan_financiamento_fundeb_complementacao_analise():
 # MDE
 def texto_pan_financiamento_receita_minima_impostos_intro():
     return """
-    Este tópico trata de uma vinculação da receita proveniente de impostos a despesas com MDE, assim definidas no [art. 70](https://www.planalto.gov.br/ccivil_03/leis/L9394compilado.htm#:~:text=das%20autoridades%20competentes.-,Art.%2070,-.%20Considerar%2Dse%2D%C3%A3o) 
+    Este tópico trata da vinculação da receita proveniente de impostos a despesas com MDE, assim definidas no [art. 70](https://www.planalto.gov.br/ccivil_03/leis/L9394compilado.htm#:~:text=das%20autoridades%20competentes.-,Art.%2070,-.%20Considerar%2Dse%2D%C3%A3o) 
     da LDB.
     
     Como explicado anteriormente, o [art. 212](https://www.planalto.gov.br/ccivil_03/constituicao/constituicaocompilado.htm#:~:text=Art.%20212.-,A%20Uni%C3%A3o%20aplicar%C3%A1,-%2C%20anualmente%2C%20nunca%20menos)
-    da Constituição Federal determina a Estados e Municípios a aplicação **mínima** de 25% da receita proveniente de impostos em despesas de MDE. 
+    da Constituição Federal determina a Estados e Municípios a aplicação **mínima** de 25% da receita proveniente de impostos em despesas com MDE. 
     Desse total, 20% são destinados à composição do Fundeb. Os **5% restantes** são contabilizados a partir dos **elementos de despesa 
-    atribuídos a MDE**, discriminados nas resppectivas prestações de contas.  
+    atribuídos a MDE**, discriminados nas respectivas prestações de contas.  
     Portanto, o seu cálculo leva em conta o total da arrecadação proveniente de impostos e o total das despesas em MDE, que deve atingir 
     o mínimo de 5% naquele exercício financeiro. Como explicado anteriormente, este valor irá variar de acordo com a arrecadação 
     tributária do ente federativo.  
