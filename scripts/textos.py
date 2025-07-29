@@ -384,8 +384,8 @@ def texto_pan_financiamento_fundeb_intro():
     
     Acompanhe abaixo a evolução dos repasses do Fundeb, com gráficos que mostram a distribuição dos recursos 
     por ente Federativo, no tempo. Os valores foram extraídos da plataforma SIOPE, do FNDE e foram contabilizados
-    os recursos totais do Fundeb disponíveis para o exercício respectivo. Além do principal, 
-    estão incluídas as complementações VAAF, VAAT e VAAR, explicadas e discriminadas mais abaixo.
+    os recursos totais do Fundeb disponíveis para o [exercício financeiro](https://www.congressonacional.leg.br/legislacao-e-publicacoes/glossario-orcamentario/-/orcamentario/termo/exercicio_financeiro) 
+    respectivo. Além do principal, estão incluídas as complementações VAAF, VAAT e VAAR, explicadas e discriminadas mais abaixo.
       
     Estão disponíveis os dados a partir do ano de 2021. O nome Acre refere-se à Secretaria Estadual de Educação 
     e foi mantido assim por ser o padrão adotado nos documentos oficiais do FNDE e do Tesouro Nacional.
@@ -406,7 +406,8 @@ def texto_pan_financiamento_fundeb_analise_1():
     do Fundeb e de outros programas do FNDE.
     
     Os recursos do Fundo possuem vinculação constitucional e devem ser utilizados exclusivamente na
-    :orange-background[manutenção e desenvolvimento do ensino (MDE)].
+    :orange-background[manutenção e desenvolvimento do ensino (MDE)], classificação particular de [natureza de despesa](https://www.congressonacional.leg.br/legislacao-e-publicacoes/glossario-orcamentario/-/orcamentario/termo/classificacao_de_natureza_de_despesa)
+    que terá reflexos contábeis.
     
     É a LDB quem define o que é MDE, no seu [artigo 70](https://www.planalto.gov.br/ccivil_03/leis/L9394compilado.htm#:~:text=das%20autoridades%20competentes.-,Art.%2070.,-Considerar%2Dse%2D%C3%A3o). 
     Sob o aspecto da fiscalização, este artigo é fundamental, pois delimita o que pode ser considerado como despesa 
@@ -414,9 +415,12 @@ def texto_pan_financiamento_fundeb_analise_1():
     
     De largada, duas condicionantes podem ser analisadas neste momento, a fim de se aferir a conformidade do uso dos 
     recursos do Fundeb: (1) a aplicação mínima de 70% dos recursos na remuneração dos profissionais da educação e (2) a execução
-    mínima de 90% dos recursos do fundo no mesmo exercício financeiro (anual), com a possibilidade de utilização de até 10% 
-    do total do repasse no primeiro quadrimestre do ano seguinte. Ressalva-se que os valores recebidos pela complementação 
-    VAAR não integram a base de cálculo para a contabilização do percentual mínimo da remuneração profissional.
+    mínima de 90% dos recursos do fundo no mesmo [exercício financeiro](https://www.congressonacional.leg.br/legislacao-e-publicacoes/glossario-orcamentario/-/orcamentario/termo/exercicio_financeiro) 
+    (anual), com a possibilidade de utilização de até 10% do total do repasse no primeiro quadrimestre do ano seguinte. Ressalva-se que 
+    os valores recebidos pela complementação VAAR não integram a base de cálculo para a contabilização do percentual mínimo da remuneração 
+    profissional. Além disso, tomou-se por base os valores [empenhados](https://www.congressonacional.leg.br/legislacao-e-publicacoes/glossario-orcamentario/-/orcamentario/termo/empenho)
+    e não os valores [liquidados ou efetivamente pagos](https://www.congressonacional.leg.br/legislacao-e-publicacoes/glossario-orcamentario/-/orcamentario/termo/estagio_da_despesa), 
+    pois o empenho é o ato que vincula a receita à despesa e será sempre o maior valor possível.
     
     Consulte abaixo o desempenho dessas despesas. Basta selecionar o Ente desejado para a geração dos gráficos. Os dados 
     são extraídos da plataforma [SIOPE](https://www.fnde.gov.br/siope/o_que_e.jsp) - Sistema de Informações sobre 
@@ -542,31 +546,80 @@ def texto_pan_financiamento_receita_minima_impostos_intro():
     da LDB.
     
     Como explicado anteriormente, o [art. 212](https://www.planalto.gov.br/ccivil_03/constituicao/constituicaocompilado.htm#:~:text=Art.%20212.-,A%20Uni%C3%A3o%20aplicar%C3%A1,-%2C%20anualmente%2C%20nunca%20menos)
-    da Constituição Federal determina a Estados e Municípios a aplicação **mínima** de 25% da receita proveniente de impostos em despesas com MDE. 
+    da Constituição Federal determina a Estados e Municípios a aplicação **mínima** de 25% da receita proveniente de impostos em despesas 
+    com MDE.  
     Desse total, 20% são destinados à composição do Fundeb. Os **5% restantes** são contabilizados a partir dos **elementos de despesa 
     atribuídos a MDE**, discriminados nas respectivas prestações de contas.  
     Portanto, o seu cálculo leva em conta o total da arrecadação proveniente de impostos e o total das despesas em MDE, que deve atingir 
     o mínimo de 5% naquele exercício financeiro. Como explicado anteriormente, este valor irá variar de acordo com a arrecadação 
     tributária do ente federativo.  
     
-    Consulte abaixo o total de arrecadação proveniente de impostos e o total de despesas em MDE para o cálculo da receita mínima de 5% em impostos. 
-    Para a criação do gráfico, foi considerado o valor empenhado como despesa em MDE para o exercício, pois é o maior parâmetro possível. 
+    Consulte abaixo o total de arrecadação proveniente de impostos e o total de despesas em MDE para o cálculo da receita mínima de 5% em 
+    impostos. 
+    Para a criação do gráfico, foi considerado o valor [empenhado](https://www.congressonacional.leg.br/legislacao-e-publicacoes/glossario-orcamentario/-/orcamentario/termo/empenho) 
+    como despesa em MDE para o exercício, pois é o maior parâmetro possível.  
     Os dados foram extraídos da plataforma SIOPE, do FNDE, e estão disponíveis a partir do ano de 2021.    
     """
 
 def texto_pan_financiamento_receita_minima_impostos_analise():
     return """
+    Agora ficou fácil verificar se o ente federativo atingiu o mínimo de 5% de receitas provenientes de impostos para a educação, em despesas 
+    com MDE.  
+    
     É importante lembrar que há uma diferença entre a vinculação da receita destinada ao Fundeb e a receita mínima de impostos para MDE.
     Se no Fundeb são permitidas despesas em MDE **somente nas áreas de atuação prioritária**, a receita mínima de 5% proveninente de impostos 
-    pode ser executada em áreas não prioritárias, mas sempre em MDE.
+    pode ser executada em áreas não prioritárias, mas sempre em MDE.  
+    O que deve ficar claro é que o não cumprimento do mínimo legal, para além de aspectos formais ou criminais, impacta diretamente a 
+    qualidade da educação, pois reflete a disponibilidade de recursos materiais e humanos para prestação do seviço público.  
+    
+    Outro ponto de atenção é que os entes federativos devem apresentar seus Relatórios Resumidos Execução Orçamentária (RREO) 
+    **bimestralmente**, durante o exercício. Assim, invés de aguardar o julgamento das contas pelo Tribunal de Contas Estadual, é
+    possível consultar esses relatórios parciais e verificar se o ente está cumprindo com a vinculação mínima de 5% da receita de impostos
+    em despesas com MDE durante o exercício. Basta acessar a plataforma do [SIOPE](https://www.fnde.gov.br/siope/relatorioRREOMunicipal2006.do), 
+    e procurar pelo RREO do ente em questão. Por fim, o descumprimento da determinação será endereçada adiante.
     """
+    
+      
 
 # Salário Educação
-def texto_pan_financiamento_intro_se():
-    return """ """
+def texto_pan_financiamento_salario_educacao_intro():
+    return """
+    O Salário-Educação também possui uma longa história no financiamento da educação pública brasileira. Foi criado no ano de 1964 e, 
+    atualmente, possui previsão constitucional ([art. 212, §5°](https://www.planalto.gov.br/ccivil_03/constituicao/ConstituicaoCompilado.htm#:~:text=outros%20recursos%20or%C3%A7ament%C3%A1rios.-,%C2%A7%205%C2%BA,-A%20educa%C3%A7%C3%A3o%20b%C3%A1sica)),
+    com regulamentação pelas Leis [9.424/96](https://www.planalto.gov.br/ccivil_03/LEIS/L9424compilado.htm) e [9.766/98](https://www.planalto.gov.br/ccivil_03/LEIS/L9766.htm).
+    Diferente do Fundeb, que é financiado por meio de impostos, o Salário-Educação é financiado por meio de contribuições sociais, com 
+    alíquota de 2,5% sobre a folha de salários das empresas. Do total da arrecadação líquida, 10% são destinados ao FNDE para financiamento
+    projetos, programas e ações da educação básica. Os outros 90% são rateados entre a União, Estados e Municípios, na proporção de 1/3 
+    para a União e 2/3 para os Estados e Municípios, proporcionalmente ao número de alunos matriculados no respectivo sistema de ensino ([art. 9° do Decreto 6003/2006](https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/decreto/D6003.htm#:~:text=ao%20da%20arrecada%C3%A7%C3%A3o.-,Art.%C2%A09,-o%C2%A0%C2%A0O%20montante)). 
+    A quota da União também é destinada para financiamento de programas, projetos e ações educacionais voltados à redução das desigualdades 
+    regionais. **Estados e Municípios**, por sua vez, devem utilizar a receita proveniente do **Salário-Educação exclusivamente com MDE**, 
+    vedado o seu uso para pagamento de pessoal.
+    """
 
-def texto_pan_financiamento_analise_se():
-    return """ """
+def texto_pan_financiamento_salario_educacao_analise():
+    return """
+    A comparação das receitas entre os exercícios financeiros permite identificar um incremento significativo no repasse no ano de 2024. 
+    O motivo para este salto é que, até o ano de 2023, o FNDE utilizava como critério não somente o número de alunos matriculados no respectivo
+    sistema de ensino, mas a origem da arrecadação. O montante arrecadado a partir da contribuição social em cada Estado da Federação lá 
+    permanecia para o rateio sobre o número de matrículas de seus respectivos sistemas de ensino. Essa metodologia fomenta as desigualdades 
+    regionais, pois Estados com maior arrecadação recebem valores maiores, mesmo que o número de matrículas seja menor. 
+    
+    No ano de 2009 foi interposta a [ADPF 188](https://portal.stf.jus.br/processos/detalhe.asp?incidente=3698566) 
+    para que os repasses da Salário-Educação obedecessem somente o critério do número de matrículas, independentemente da origem da 
+    arrecadação. Ela foi julgada procedente pelo STF no ano de 2022, fixando a tese de que “À luz da Emenda Constitucional 53/2006, é 
+    incompatível com a ordem constitucional vigente a adoção, para fins de repartição das quotas estaduais e municipais referentes ao 
+    salário-educação, do critério legal de unidade federada em que realizada a arrecadação desse tributo, devendo-se observar unicamente 
+    o parâmetro quantitativo de alunos matriculados no sistema de educação básica”.
+    
+    Esse julgamento eleva a importância do Salário-Educação como fonte de financiamento da educação, em especial para os Estados com menor 
+    arrecadação, pois permite à contribuição atingir a sua finalidade de atender a educação básica dos alunos brasileiros, indepente do 
+    lugar onde vivem.
+    
+    Com relação à fiscalização, o Salário-Educação é um recurso vinculado constitucionalmente e deve ser utilizado exclusivamente em MDE.
+    Os repasses são depositados em conta específica de cada ente federativo para movimentação dessa receita, embora haja menos transparência
+    e controle social, quando comparado com a legislação do Fundeb. A prestação de contas é feita perante os Tribunais de Contas Estaduais. 
+    Como consequência, fica firmada a atribuição do Ministério Público Estadual para a fiscalização dessa fonte de receita.
+    """
 
 # Programas FNDE
 def texto_pan_financiamento_fnde_intro():
@@ -579,4 +632,6 @@ def texto_pan_financiamento_fnde_intro():
     """
 
 def texto_pan_financiamento_fnde_programas():
-    return """ """
+    return """
+    
+    """

@@ -16,9 +16,8 @@ from scripts.textos import(
     texto_pan_financiamento_fundeb_complementacao_analise,
     texto_pan_financiamento_receita_minima_impostos_intro,
     texto_pan_financiamento_receita_minima_impostos_analise,
-    texto_pan_financiamento_intro_se,
-    texto_pan_financiamento_analise_se,
-
+    texto_pan_financiamento_salario_educacao_intro,
+    texto_pan_financiamento_salario_educacao_analise,
     texto_pan_financiamento_fnde_intro,
     texto_pan_financiamento_fnde_programas
 )
@@ -31,7 +30,9 @@ from scripts.graficos import(
     grafico_valor_repasse_fundeb,
     grafico_complementacoes_fundeb,
     grafico_valor_receita_impostos,
-    grafico_valores_despesa_minima_impostos
+    grafico_valores_despesa_minima_impostos,
+    grafico_receita_salario_educacao_ano,
+    grafico_receita_salario_educacao_ente
 )
 
 # Configuração da página
@@ -129,7 +130,7 @@ st.write(texto_pan_financiamento_fundeb_complementacao_analise())
 
 
 #+++++++++
-# Subseção MDE
+# Subseção Receita Impostos 5%
 st.header("Receita mínima proveniente de impostos")
 
 st.write(texto_pan_financiamento_receita_minima_impostos_intro())
@@ -154,8 +155,40 @@ st.write(texto_pan_financiamento_receita_minima_impostos_analise())
 
 #++++++++
 # Subseção Salário Educação
-st.header("Salário Educação")
+st.header("Salário-Educação")
 
+st.write(texto_pan_financiamento_salario_educacao_intro())
+
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.subheader("Salário-Educação por Ano")
+    anos_disponiveis = sorted(df_panorama_financiamento['ano'].unique())
+    ano_mais_recente = max(anos_disponiveis)
+
+    ano = st.selectbox(
+        "Selecione o ano:",
+        options=anos_disponiveis,
+        index=anos_disponiveis.index(ano_mais_recente),
+        key="salario_educacao_ano"
+    )
+
+    grafico_receita_salario_educacao_ano(df_panorama_financiamento, ano)
+
+with col2:
+    st.subheader("Salário-Educação por Ente")
+    entes_disponiveis = sorted(df_panorama_financiamento['nome'].unique())
+    
+    entes = st.selectbox(
+        "Selecione o ente:",
+        options=entes_disponiveis,
+        key="salario_educacao_ente"
+    )
+
+    grafico_receita_salario_educacao_ente(df_panorama_financiamento, entes)
+    
+st.write(texto_pan_financiamento_salario_educacao_analise())
 
 
 

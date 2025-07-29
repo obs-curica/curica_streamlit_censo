@@ -1340,11 +1340,6 @@ def grafico_valor_receita_impostos(df, ente):
 
 
 # Gráfico de barras agregadas para a receita mínima de impostos
-import matplotlib.pyplot as plt
-import streamlit as st
-import pandas as pd
-import numpy as np
-
 def grafico_valores_despesa_minima_impostos(df, ente):
     """
     Gera um gráfico de barras agrupadas mostrando, por ano, o valor mínimo a ser aplicado em MDE
@@ -1384,10 +1379,10 @@ def grafico_valores_despesa_minima_impostos(df, ente):
 
     # Plotar barras
     ax.bar(x - largura/2, df_filtrado['valor_minimo_mde'], width=largura, label='Mínimo MDE', color=cor_mde)
-    ax.bar(x + largura/2, df_filtrado['valor_total_despesa_impostos'], width=largura, label='Despesa com Impostos', color=cores_despesa)
+    ax.bar(x + largura/2, df_filtrado['valor_total_despesa_impostos'], width=largura, label='Despesa MDE Impostos', color=cores_despesa)
 
     # Título e eixos
-    ax.set_title(f'MDE x Despesa Total com Impostos - {ente}', color='#FFA07A', fontsize=16)
+    ax.set_title(f'Mínimo MDE x Despesa MDE Impostos - {ente}', color='#FFA07A', fontsize=16)
     ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=12)
     ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=12)
     ax.set_xticks(x)
@@ -1413,6 +1408,137 @@ def grafico_valores_despesa_minima_impostos(df, ente):
 
     # Legenda
     ax.legend(loc='upper left', frameon=False, fontsize=10)
+
+    fig.tight_layout()
+    st.pyplot(fig)
+
+def grafico_receita_salario_educacao_ano(df, ano):
+    """
+    Gera um gráfico de barras horizontal com o total de receita do Salário-Educação por Município e Estado, para o ano selecionado.
+    Os valores são convertidos e apresentados em milhões de reais (R$ mi).
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas 'nome', 'ano' e 'valor_receita_salario_educacao'.
+    ano : int
+        Ano selecionado pelo usuário na interface Streamlit.
+    """
+    # Filtra e ordena os dados
+    df_filtrado = df[df['ano'] == ano].copy()
+    df_filtrado.sort_values(by='valor_receita_salario_educacao', ascending=True, inplace=True)
+
+    # Conversão para milhões
+    df_filtrado['valor_milhoes'] = df_filtrado['valor_receita_salario_educacao'] / 1_000_000
+
+    # Gradiente de verde (verde claro -> verde escuro)
+    cmap = mcolors.LinearSegmentedColormap.from_list('verde_gradiente', ['#90ee90', '#006400'])
+    norm = plt.Normalize(vmin=df_filtrado['valor_milhoes'].min(),
+                         vmax=df_filtrado['valor_milhoes'].max())
+    cores = [cmap(norm(v)) for v in df_filtrado['valor_milhoes']]
+
+    # Estilo escuro
+    plt.style.use('dark_background')
+    fig, ax = plt.subplots(figsize=(12, max(6, 0.48 * len(df_filtrado))))
+
+    # Gráfico
+    ax.barh(df_filtrado['nome'], df_filtrado['valor_milhoes'], color=cores)
+
+    # Título e eixos
+    ax.set_title('Total da Receita do Salário-Educação (R$ milhões)', color='#FFA07A', fontsize=30)
+    
+    # Estilo dos ticks e spines
+    ax.tick_params(colors='#FFA07A', labelsize=20)
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    # Limite dinâmico do eixo X
+    max_valor = df_filtrado['valor_milhoes'].max()
+    limite_superior = max_valor * 1.3
+    ax.set_xlim(right=limite_superior)
+    
+    # Reduz o espaçamento superior e inferior
+    n_barras = len(df_filtrado)
+    ax.set_ylim(-0.7, n_barras - 0.3)
+
+
+    # Alinha o spine direito com o limite superior dinâmico
+    ax.spines['right'].set_position(('data', limite_superior * 1))  # ajusta a posição do spine direito para o limite superior + 2%
+    
+    # Inserir rótulos nas barras (em milhões com uma casa decimal)
+    for i, valor in enumerate(df_filtrado['valor_milhoes']):
+        deslocamento = limite_superior * 0.01
+        ax.text(valor + deslocamento, i, f"R$ {valor:,.1f} mi",
+                color='white', va='center', fontsize=17, fontweight='bold')
+
+    fig.tight_layout()
+    st.pyplot(fig)
+
+
+#Gráfico de barras Salário Educação
+def grafico_receita_salario_educacao_ente(df, ente):
+    """
+    Gera um gráfico de barras verticais mostrando, por ano, a receita do salário educação
+    para o ente selecionado, com altura dinâmica e rótulos bem posicionados.
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame com as colunas 'nome', 'ano', 'valor_receita_salario_educacao'.
+    ente : str
+        Nome do Município ou Estado selecionado.
+    """
+
+    # Filtrar dados do ente
+    df_filtrado = df[df['nome'] == ente].sort_values(by='ano').copy()
+
+    # Conversão segura para float (milhões)
+    df_filtrado['valor_receita_salario_educacao'] = pd.to_numeric(
+        df_filtrado['valor_receita_salario_educacao'].astype(str).str.replace(',', '.'),
+        errors='coerce'
+    ) / 1_000_000
+
+    # Eixo X e valores
+    anos = df_filtrado['ano'].astype(str)
+    valores = df_filtrado['valor_receita_salario_educacao']
+    x = np.arange(len(anos))
+
+    # Estilo
+    plt.style.use('dark_background')
+    fig, ax = plt.subplots(figsize=(7, 6))
+
+    # Cor padrão do projeto
+    cor_verde = '#006400'
+
+    # Plotar barras
+    ax.bar(anos, valores, color=cor_verde)
+
+    # Título e eixos
+    ax.set_title(f'Receita do Salário-Educação - {ente}', color='#FFA07A', fontsize=16)
+    ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=12)
+    
+
+    # Estilo dos eixos
+    ax.tick_params(colors='#FFA07A', labelsize=12)
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    # Limite dinâmico do eixo Y
+    valor_maximo = valores.max()
+    ax.set_ylim(top=valor_maximo * 1.15)
+
+    # Rótulos no topo das barras com deslocamento proporcional
+    for i, valor in enumerate(valores):
+        if pd.notnull(valor):
+            ax.text(
+                i,
+                valor + valor_maximo * 0.015,
+                f'{valor:.1f}',
+                ha='center',
+                color='white',
+                fontsize=9,
+                fontweight='bold'
+            )
 
     fig.tight_layout()
     st.pyplot(fig)
