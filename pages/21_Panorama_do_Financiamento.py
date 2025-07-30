@@ -191,9 +191,14 @@ with col2:
 st.write(texto_pan_financiamento_salario_educacao_analise())
 
 
-
-
 #++++++++
-# Subseção Programas do FNDE
+# Subseção Programas, Projetos e Ações do FNDE
+st.header("Fundo Nacional de Desenvolvimento da Educação (FNDE)")
+
+st.write(texto_pan_financiamento_fnde_intro())
+
+
+
+
 st.subheader("Deficiências na execução dos recursos disponibilizados pelo FNDE")
 st.write("conluir o financimento apresentando os programas e a não utilização de recursos. Aí fazer a chamada para os outros panoramas.")

@@ -572,16 +572,15 @@ def texto_pan_financiamento_receita_minima_impostos_analise():
     O que deve ficar claro é que o não cumprimento do mínimo legal, para além de aspectos formais ou criminais, impacta diretamente a 
     qualidade da educação, pois reflete a disponibilidade de recursos materiais e humanos para prestação do seviço público.  
     
-    Outro ponto de atenção é que os entes federativos devem apresentar seus Relatórios Resumidos Execução Orçamentária (RREO) 
+    Outro ponto de atenção é que os entes federativos devem apresentar seus Relatórios Resumidos de Execução Orçamentária (RREO) 
     **bimestralmente**, durante o exercício. Assim, invés de aguardar o julgamento das contas pelo Tribunal de Contas Estadual, é
     possível consultar esses relatórios parciais e verificar se o ente está cumprindo com a vinculação mínima de 5% da receita de impostos
-    em despesas com MDE durante o exercício. Basta acessar a plataforma do [SIOPE](https://www.fnde.gov.br/siope/relatorioRREOMunicipal2006.do), 
-    e procurar pelo RREO do ente em questão. Por fim, o descumprimento da determinação será endereçada adiante.
+    em despesas com MDE durante o exercício. O RREO bimestral serve de guia para uma atuação preventiva. Basta acessar a plataforma do 
+    [SIOPE](https://www.fnde.gov.br/siope/relatorioRREOMunicipal2006.do), e procurar pelo RREO do ente em questão. Por fim, o 
+    descumprimento da determinação será endereçada adiante.
     """
     
-      
-
-# Salário Educação
+# Salário-Educação
 def texto_pan_financiamento_salario_educacao_intro():
     return """
     O Salário-Educação também possui uma longa história no financiamento da educação pública brasileira. Foi criado no ano de 1964 e, 
@@ -590,10 +589,11 @@ def texto_pan_financiamento_salario_educacao_intro():
     Diferente do Fundeb, que é financiado por meio de impostos, o Salário-Educação é financiado por meio de contribuições sociais, com 
     alíquota de 2,5% sobre a folha de salários das empresas. Do total da arrecadação líquida, 10% são destinados ao FNDE para financiamento
     projetos, programas e ações da educação básica. Os outros 90% são rateados entre a União, Estados e Municípios, na proporção de 1/3 
-    para a União e 2/3 para os Estados e Municípios, proporcionalmente ao número de alunos matriculados no respectivo sistema de ensino ([art. 9° do Decreto 6003/2006](https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/decreto/D6003.htm#:~:text=ao%20da%20arrecada%C3%A7%C3%A3o.-,Art.%C2%A09,-o%C2%A0%C2%A0O%20montante)). 
-    A quota da União também é destinada para financiamento de programas, projetos e ações educacionais voltados à redução das desigualdades 
-    regionais. **Estados e Municípios**, por sua vez, devem utilizar a receita proveniente do **Salário-Educação exclusivamente com MDE**, 
-    vedado o seu uso para pagamento de pessoal.
+    para a União e 2/3 para os Estados e Municípios. O rateio é proporcional  ao número de alunos matriculados no respectivo sistema de 
+    ensino ([art. 9° do Decreto 6003/2006](https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/decreto/D6003.htm#:~:text=ao%20da%20arrecada%C3%A7%C3%A3o.-,Art.%C2%A09,-o%C2%A0%C2%A0O%20montante)),
+    assim declarado no :orange-background[Censo Escolar]. A quota da União também é destinada para financiamento de programas, projetos e 
+    ações educacionais voltados à redução das desigualdades regionais. **Estados e Municípios**, por sua vez, devem utilizar a receita 
+    proveniente do **Salário-Educação exclusivamente com MDE**, vedado o seu uso para pagamento de pessoal.
     """
 
 def texto_pan_financiamento_salario_educacao_analise():
@@ -612,8 +612,8 @@ def texto_pan_financiamento_salario_educacao_analise():
     o parâmetro quantitativo de alunos matriculados no sistema de educação básica”.
     
     Esse julgamento eleva a importância do Salário-Educação como fonte de financiamento da educação, em especial para os Estados com menor 
-    arrecadação, pois permite à contribuição atingir a sua finalidade de atender a educação básica dos alunos brasileiros, indepente do 
-    lugar onde vivem.
+    arrecadação, pois permite à contribuição atingir a sua finalidade de atender a educação básica dos alunos brasileiros, independentemente 
+    do lugar onde vivem.
     
     Com relação à fiscalização, o Salário-Educação é um recurso vinculado constitucionalmente e deve ser utilizado exclusivamente em MDE.
     Os repasses são depositados em conta específica de cada ente federativo para movimentação dessa receita, embora haja menos transparência
@@ -625,10 +625,19 @@ def texto_pan_financiamento_salario_educacao_analise():
 def texto_pan_financiamento_fnde_intro():
     return """ 
     Os repasses de recursos realizados pelo FNDE podem ser classificados em três categorias: constitucionais, automáticos e voluntários.
-    Os repasses constitucionais, como o Fundeb, são obrigatórios e definidos pela Constituição Federal. Os repasses automáticos são 
-    transferidos diretamente para os entes federativos ou escolas, mediante adesão e cumprimento de critérios legais, sem necessidade 
-    de convênio(ex: PNATE, PNAE). Já os repasses voluntários dependem da celebração de convênios ou termos de compromisso, sendo utilizados para 
-    apoiar projetos específicos aprovados tecnicamente (ex: Proinfância).
+    Os repasses constitucionais, como o Fundeb e o Salário-Educação, são obrigatórios e definidos pela Constituição Federal. Os repasses 
+    automáticos são transferidos diretamente para os entes federativos ou escolas, mediante adesão e cumprimento de critérios legais, sem 
+    ecessidade de convênio(ex: PNATE, PNAE). Já os repasses voluntários dependem da celebração de convênios ou termos de compromisso, 
+    sendo utilizados para apoiar projetos específicos aprovados tecnicamente (ex: Proinfância).
+    
+    
+    
+    ### Links
+    ([Relatorios Gestao FNDE](https://www.gov.br/fnde/pt-br/acesso-a-informacao/transparencia-e-prestacao-de-contas/relatorio-de-gestao-1))
+    
+    ([PAR](https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2007/decreto/d6094.htm))
+    
+    
     """
 
 def texto_pan_financiamento_fnde_programas():
