@@ -40,10 +40,15 @@ from scripts.graficos import(
 st.set_page_config(page_title="Panorama Financiamento", layout="wide", page_icon="🦜")
 
 # Carregar dados
-url = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_financiamento/df_panorama_financiamento.csv"
-df_panorama_financiamento = carregar_dados(url)
+url_panorama_financiamento = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_financiamento/df_panorama_financiamento.csv"
+df_panorama_financiamento = carregar_dados(url_panorama_financiamento)
 df_panorama_financiamento['nome'] = df_panorama_financiamento['nome'].astype(str)
 
+url_receita_fnde = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_financiamento/df_receita_fnde.csv"
+df_receita_fnde = carregar_dados(url_receita_fnde)
+
+url_despesas_fnde = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_financiamento/df_despesas_fnde.csv"
+df_despesas_fnde = carregar_dados(url_despesas_fnde)
 
 
 st.title("💲 Considerações Gerais sobre o Financiamento da Educação Básica")
