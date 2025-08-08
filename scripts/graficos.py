@@ -888,6 +888,62 @@ def grafico_escolas_por_dependencia_localizacao_municipio(df, ano_censo, municip
 # PAGINA PANORAMA FINANCIAMENTO
 #=============================
 
+# Gráfico de barras vertical com receita do FNDE por ano
+def grafico_fnde_receita_total(df):
+    """
+    Gera um gráfico de barras verticais mostrando a evolução da receita total do FNDE ao longo dos anos.
+    Os valores são exibidos em bilhões de reais (R$ bi).
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas 'Ano' e 'Pago'.
+    """
+    # Ordenar por ano
+    df_filtrado = df.sort_values(by='Ano').copy()
+
+    # Converter valores para bilhões
+    df_filtrado['Pago_bi'] = df_filtrado['Pago'] / 1_000_000_000
+
+    # Estilo escuro
+    plt.style.use('dark_background')
+
+    # Cor padrão (verde escuro para manter padrão visual financeiro)
+    cor_barras = '#006400'
+
+    # Criar gráfico
+    fig, ax = plt.subplots(figsize=(9, 6))
+    ax.bar(df_filtrado['Ano'].astype(str), df_filtrado['Pago_bi'], color=cor_barras)
+
+    # Título e rótulos
+    ax.set_title('Evolução dos Recursos Pagos pelo FNDE', color='#FFA07A', fontsize=20)
+    ax.set_ylabel('Valor em bilhões de R$ (bi)', color='#FFA07A', fontsize=14)
+    ax.set_xlabel('Ano', color='#FFA07A', fontsize=14)
+
+    # Estilo dos spines
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    # Ticks
+    ax.tick_params(axis='x', colors='#FFA07A', labelsize=12)
+    ax.tick_params(axis='y', colors='#FFA07A', labelsize=12)
+
+    # Inserir valores no topo das barras
+    max_valor = df_filtrado['Pago_bi'].max()
+    for i, valor in enumerate(df_filtrado['Pago_bi']):
+        ax.text(
+            i,
+            valor + (max_valor * 0.01),
+            f'{valor:.2f}',
+            ha='center',
+            color='white',
+            fontsize=10,
+            fontweight='bold'
+        )
+
+    fig.tight_layout()
+    st.pyplot(fig)
+
 # Função gráfico de barras horizontal fundeb por ano
 def grafico_fundeb_total_ano(df, ano):
     """
@@ -950,6 +1006,7 @@ def grafico_fundeb_total_ano(df, ano):
 
     fig.tight_layout()
     st.pyplot(fig)
+
 
 # Função gráfico fundeb ente
 def grafico_fundeb_total_ente(df, ente):

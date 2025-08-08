@@ -12,6 +12,13 @@
 
 ## Página Panorama Financiamento
 
+* Receitas FNDE
+  Painel do Orçamento Federal.
+  -> dataframes raw extraído: 
+    df_receita_fnde.csv
+    Processado no notebook df_receita_fnde.ipynb
+
+
 * Repasses Fundeb
   Tesouro Nacional.
   Link: https://sisweb.tesouro.gov.br/apex/f?p=2600:1
