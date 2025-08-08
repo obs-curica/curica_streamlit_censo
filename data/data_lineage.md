@@ -8,16 +8,42 @@
         Link: https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-escolar
         -> dataframes processados: df_panorama_geral.csv, df_panorama_agua.csv
 
+
+
+## Página Panorama Financiamento
+
 * Repasses Fundeb
   Tesouro Nacional.
   Link: https://sisweb.tesouro.gov.br/apex/f?p=2600:1
   -> dataframes processados: df_fundeb_estado.csv, df_fundeb_municipios.csv, df_fundeb_ac_completo.csv
 
 * Relatórios Resumidos de Execução Orçamentária, RREO's:
-  
+  SIOPE
   Link: https://www.fnde.gov.br/siope/o_que_e.jsp
+
+  -> dataframes raw extraídos:
+    df_rreo_parser.csv
   
-  -> dataframes processados: df_panorama_financiamento
+  -> dataframes processados: df_panorama_financiamento.csv
+    Primeiro foi utilizado o pipeline do parser e então o notebook df_financiamento.ipynb para processar os dados.
+
+* Receitas provenientes do FNDE:
+  Painel do Orçamento Federal.
+  Link: https://www1.siop.planejamento.gov.br/QvAJAXZfc/opendoc.htm?document=IAS%2FExecucao_Orcamentaria.qvw&host=QVS%40pqlk04&anonymous=true?lang=en-US&opendocqs=
+
+  -> dataframes raw extraídos: 
+      df_receitas_mec_2019_2024.csv, df_receita_fnde_total_2019_2024.csv, df_receita_fnde_fonte_2019_2024.csv
+
+
+* Emendas parlamentares:
+  Painel do Orçamento Federal.
+  Link: https://www1.siop.planejamento.gov.br/QvAJAXZfc/opendoc.htm?document=IAS%2FExecucao_Orcamentaria.qvw&host=QVS%40pqlk04&anonymous=true?lang=en-US&opendocqs=
+  
+  -> dataframes raw extraídos: 
+      df_emendas_geral_2019_2024.csv, df_emendas_mec_2019_2024.csv
+  
+  -> dataframes processados: 
+
 
 # Referências bibliográficas
 

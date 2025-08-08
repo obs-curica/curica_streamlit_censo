@@ -9,6 +9,8 @@ from scripts.load_data import carregar_dados
 
 from scripts.textos import(
     texto_pan_financiamento_intro, 
+    texto_pan_financiamento_fnde_intro,
+    texto_pan_financiamento_fnde_analise,
     texto_pan_financiamento_fundeb_intro,
     texto_pan_financiamento_fundeb_analise_1,
     texto_pan_financiamento_fundeb_analise_2,
@@ -18,8 +20,7 @@ from scripts.textos import(
     texto_pan_financiamento_receita_minima_impostos_analise,
     texto_pan_financiamento_salario_educacao_intro,
     texto_pan_financiamento_salario_educacao_analise,
-    texto_pan_financiamento_fnde_intro,
-    texto_pan_financiamento_fnde_programas
+    texto_pan_financiamento_fnde_programas_intro
 )
 
 from scripts.graficos import(
@@ -49,6 +50,19 @@ st.title("💲 Considerações Gerais sobre o Financiamento da Educação Básic
 
 # texto introdutório financiamento
 st.write(texto_pan_financiamento_intro())
+
+#++++++++
+# Subsção FNDE
+st.header("O Fundo Nacional de Desenvolvimento da Educação (FNDE)")
+
+st.write(texto_pan_financiamento_fnde_intro())
+
+
+
+
+st.write(texto_pan_financiamento_fnde_analise())
+
+
 
 #++++++++
 # Subseção Fundeb
@@ -193,9 +207,9 @@ st.write(texto_pan_financiamento_salario_educacao_analise())
 
 #++++++++
 # Subseção Programas, Projetos e Ações do FNDE
-st.header("Fundo Nacional de Desenvolvimento da Educação (FNDE)")
+st.header("Outras Receitas provenientes do FNDE")
 
-st.write(texto_pan_financiamento_fnde_intro())
+
 
 
 

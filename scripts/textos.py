@@ -332,11 +332,42 @@ def texto_pan_financiamento_intro():
     na Manutenção e Desenvolvimento do Ensino (MDE);
     * o Salário Educação;
     
-    Além dessas fontes, há também outros programas e ações executadas dentro da estrutura do **Fundo Nacional de Desenvolvimento 
-    da Educação (FNDE)**, autarquia vinculada ao Ministério da Educação, criada no ano de 1968 [(Lei 5.537/68)](https://www.planalto.gov.br/ccivil_03/leis/l5537.htm). 
-    Repasses de recursos por meio de programas como o PNLD, PNAE, PNATE, PDDE e o próprio Fundeb consolidam sua atuação.
+    Além dessas fontes, há também outros programas e ações destinados a promoção da educação básica, como o PNLD, PNAE, PNATE, PDDE. Essas 
+    siglas serão detalhadas mais adiante, mas é importante destacar que todas essas fontes de financiamento são geridas pelo Fundo Nacional 
+    de Desenvolvimento da Educação ([FNDE](https://www.gov.br/fnde/pt-br)), autarquia vinculada ao Ministério da Educação.
+        
+    O estudo desse Panorama apresentará uma visão geral do orçamento do FNDE, para que se possa compreender a dimensão dos recursos
+    destinados à educação básica pública no Brasil. Em seguida, o estudo procura descer para a realidade local, inciando o detalhamento
+    dessas principais fontes para cada ente federativo, sem pretensão alguma de exaurimento do tema. Determinados programas e ações 
+    serão minuciosamente abordados em Panoramas específicos.
+    """
+
+# FNDE
+def texto_pan_financiamento_fnde_intro():
+    return """ 
+    O Fundo Nacional de Desenvolvimento da Educação (FNDE) foi criado pelo Decreto-Lei nº 872/69, que alterou a [Lei 5.537/68](https://www.planalto.gov.br/ccivil_03/leis/l5537.htm). 
+    Eles conferem ao FNDE a personalidade jurídica de autarquia vinculada ao Ministério da Educação, com o objetivo de captar recursos para o 
+    financiamento do ensino e bolsas de estudo. A legislação de regência foi recepcionada pela Constituição Federal de 1988 e permanece
+    em vigor, com atualizações legislativas. É ele quem executa a maior parte dos recursos do orçamento federal destinados à educação básica, 
+    além de realizar a gestão dos repasses das receitas constitucionais.
     
-    Na sequência, apresenta-se uma visão geral desses recursos para cada esfera administrativa.
+    Os repasses de recursos realizados pelo FNDE podem ser classificados em três categorias: constitucionais, automáticos e voluntários.
+    Os repasses constitucionais, como o Fundeb e o Salário-Educação, são obrigatórios e definidos pela Constituição Federal. Os repasses 
+    automáticos são transferidos diretamente para os entes federativos ou escolas, mediante adesão e cumprimento de critérios legais, sem 
+    necessidade de convênio (ex: PNATE, PNAE). Já os repasses voluntários dependem adesão expressa dos entes federativos ou 
+    [unidades executoras](https://portal.mec.gov.br/ultimas-noticias/214-296700251/13118-escola-deve-criar-unidade-executora-para-receber-recursos), 
+    a celebração de convênios ou de termos de compromisso. O Programa Dinheiro Direto na Escola (PDDE) é um exemplo de repasse 
+    voluntário, que necessita de adesão expressa.
+    
+    Portanto, além da gestão dos repasses do Fundeb e do Salário-Educação, o FNDE também é responsável por gerir 
+    outros programas e ações que visam o apoio à educação e possuem regulações próprias para adesão.
+    
+    Veja abaixo a evolução do orçamento do FNDE, bem como a distribuição dos recursos por categoria de repasse.
+    """
+    
+def texto_pan_financiamento_fnde_analise():
+    return """
+    Análise.
     """
 
 # Fundeb
@@ -467,7 +498,6 @@ def texto_pan_financiamento_fundeb_analise_2():
     Adiante.
     """
 
-
 # VAAT, VAAF, VAAR
 def texto_pan_financiamento_fundeb_complementacao_intro():
     return """
@@ -537,7 +567,6 @@ def texto_pan_financiamento_fundeb_complementacao_analise():
     Portanto, mais do que recursos, as complementações auxiliam no diagnóstico da rede escolar que deve ser fiscalizada e aponta possíveis
     falhas de gestão que podem ser endereçadas com base na legalidade, ou na falta dela, dos atos praticados pela administração escolar. 
     """
-
 
 # MDE
 def texto_pan_financiamento_receita_minima_impostos_intro():
@@ -621,26 +650,14 @@ def texto_pan_financiamento_salario_educacao_analise():
     Como consequência, fica firmada a atribuição do Ministério Público Estadual para a fiscalização dessa fonte de receita.
     """
 
-# Programas FNDE
-def texto_pan_financiamento_fnde_intro():
-    return """ 
-    Os repasses de recursos realizados pelo FNDE podem ser classificados em três categorias: constitucionais, automáticos e voluntários.
-    Os repasses constitucionais, como o Fundeb e o Salário-Educação, são obrigatórios e definidos pela Constituição Federal. Os repasses 
-    automáticos são transferidos diretamente para os entes federativos ou escolas, mediante adesão e cumprimento de critérios legais, sem 
-    ecessidade de convênio(ex: PNATE, PNAE). Já os repasses voluntários dependem da celebração de convênios ou termos de compromisso, 
-    sendo utilizados para apoiar projetos específicos aprovados tecnicamente (ex: Proinfância).
-    
-    
+# Outras receitas do FNDE
+def texto_pan_financiamento_fnde_programas_intro():
+    return """
     
     ### Links
     ([Relatorios Gestao FNDE](https://www.gov.br/fnde/pt-br/acesso-a-informacao/transparencia-e-prestacao-de-contas/relatorio-de-gestao-1))
     
     ([PAR](https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2007/decreto/d6094.htm))
-    
-    
-    """
 
-def texto_pan_financiamento_fnde_programas():
-    return """
     
     """
