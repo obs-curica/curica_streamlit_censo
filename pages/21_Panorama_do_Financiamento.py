@@ -25,6 +25,7 @@ from scripts.textos import(
 
 from scripts.graficos import(
     grafico_fnde_receita_total,
+    grafico_fnde_acoes,
     grafico_fundeb_total_ano,
     grafico_fundeb_total_ente,
     grafico_indicador_despesa_profissionais,
@@ -64,7 +65,25 @@ st.header("O Fundo Nacional de Desenvolvimento da Educação (FNDE)")
 
 st.write(texto_pan_financiamento_fnde_intro())
 
-grafico_fnde_receita_total(df_receita_fnde)
+col1, col2 = st.columns(2)
+
+with col1:
+    grafico_fnde_receita_total(df_receita_fnde)
+    
+with col2:
+    
+    anos_disponiveis = sorted(df_despesas_fnde['Ano'].unique())
+    ano_mais_recente = max(anos_disponiveis)
+
+    ano = st.selectbox(
+        "Selecione o ano:",
+        options=anos_disponiveis,
+        index=anos_disponiveis.index(ano_mais_recente),
+        key="fnde_ano"
+    )
+
+    grafico_fnde_acoes(df_despesas_fnde, ano)
+
 
 
 st.write(texto_pan_financiamento_fnde_analise())

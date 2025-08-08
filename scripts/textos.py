@@ -362,7 +362,7 @@ def texto_pan_financiamento_fnde_intro():
     Portanto, além da gestão dos repasses do Fundeb e do Salário-Educação, o FNDE também é responsável por gerir 
     outros programas e ações que visam o apoio à educação e possuem regulações próprias para adesão.
     
-    Veja abaixo a evolução do orçamento do FNDE, bem como a distribuição dos recursos por categoria de repasse.
+    Veja abaixo a evolução do orçamento do FNDE, bem como a distribuição dos recursos por categoria de repasse feito pela Autarquia.
     """
     
 def texto_pan_financiamento_fnde_analise():

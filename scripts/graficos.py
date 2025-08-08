@@ -916,9 +916,9 @@ def grafico_fnde_receita_total(df):
     ax.bar(df_filtrado['Ano'].astype(str), df_filtrado['Pago_bi'], color=cor_barras)
 
     # Título e rótulos
-    ax.set_title('Evolução dos Recursos Pagos pelo FNDE', color='#FFA07A', fontsize=20)
+    ax.set_title('Evolução da Receita do FNDE', color='#FFA07A', fontsize=20)
     ax.set_ylabel('Valor em bilhões de R$ (bi)', color='#FFA07A', fontsize=14)
-    ax.set_xlabel('Ano', color='#FFA07A', fontsize=14)
+    ax.set_xlabel('Fonte: Painel do Orçamento Federal', color='#FFA07A', fontsize=14)
 
     # Estilo dos spines
     for spine in ax.spines.values():
@@ -943,6 +943,75 @@ def grafico_fnde_receita_total(df):
 
     fig.tight_layout()
     st.pyplot(fig)
+
+# Gráfico FNDE despesas
+def grafico_fnde_acoes(df, ano):
+    """
+    Gera um gráfico de barras horizontais com a dotação atual das ações do FNDE no ano selecionado.
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas 'Ano', 'Ação' e 'Dotação Atual (R$)'
+    ano : int
+        Ano para o qual o gráfico será filtrado
+    """
+
+    # Filtrar o DataFrame pelo ano selecionado
+    df_filtrado = df[df["Ano"] == ano].copy()
+
+    # Remover valores nulos ou negativos
+    df_filtrado = df_filtrado[df_filtrado["Dotação Atual (R$)"] > 0]
+
+    # Ordenar pelo valor
+    df_filtrado = df_filtrado.sort_values(by="Dotação Atual (R$)", ascending=True)
+
+    # Converter para bilhões
+    df_filtrado["Dotação (bi)"] = df_filtrado["Dotação Atual (R$)"] / 1_000_000_000
+
+    # Gradiente da cor verde para branco
+    cor_inicio = "#FFFFFF"  # Verde escuro
+    cor_fim = "#006400"     # Branco
+    cmap = mcolors.LinearSegmentedColormap.from_list("verde_para_branco", [cor_inicio, cor_fim])
+    norm = mcolors.Normalize(vmin=df_filtrado["Dotação (bi)"].min(), vmax=df_filtrado["Dotação (bi)"].max())
+    cores = [cmap(norm(v)) for v in df_filtrado["Dotação (bi)"]]
+
+    # Plot
+    plt.style.use('dark_background')
+    fig, ax = plt.subplots(figsize=(10, 5.5))
+
+    ax.barh(df_filtrado["Ação"], df_filtrado["Dotação (bi)"], color=cores)
+
+    # Título e rótulos
+    ax.set_title(f"Detalhamento por Ação - {ano}", color="#FFA07A", fontsize=18)
+    ax.set_xlabel("Fonte: Relatório de Gestão do FNDE", color="#FFA07A", fontsize=14)
+    ax.set_ylabel("Valor em bilhões de R$ (bi)", color="#FFA07A", fontsize=14)
+
+    # Estilo dos eixos
+    ax.tick_params(axis='x', colors='#FFA07A')
+    ax.tick_params(axis='y', colors='#FFA07A')
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    # Ajuste do eixo X com margem para texto
+    max_valor = df_filtrado["Dotação (bi)"].max()
+    ax.set_xlim(0, max_valor * 1.15)
+
+    # Inserir valores nas barras
+    for i, valor in enumerate(df_filtrado["Dotação (bi)"]):
+        ax.text(
+            valor + max_valor * 0.01,
+            i,
+            f"{valor:.2f}",
+            color="white",
+            va="center",
+            fontsize=10
+        )
+
+    fig.tight_layout(pad=2.0)
+    st.pyplot(fig)
+
+
 
 # Função gráfico de barras horizontal fundeb por ano
 def grafico_fundeb_total_ano(df, ano):
