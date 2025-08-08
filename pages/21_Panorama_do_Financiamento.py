@@ -47,7 +47,7 @@ df_panorama_financiamento['nome'] = df_panorama_financiamento['nome'].astype(str
 
 url_receita_fnde = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_financiamento/df_receita_fnde.csv"
 df_receita_fnde = carregar_dados(url_receita_fnde)
-#df_receita_fnde['Pago'] = df_receita_fnde['Pago'].astype(float)
+
 
 url_despesas_fnde = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_financiamento/df_despesas_fnde.csv"
 df_despesas_fnde = carregar_dados(url_despesas_fnde)
@@ -64,7 +64,7 @@ st.header("O Fundo Nacional de Desenvolvimento da Educação (FNDE)")
 
 st.write(texto_pan_financiamento_fnde_intro())
 
-#grafico_fnde_receita_total(df_receita_fnde)
+grafico_fnde_receita_total(df_receita_fnde)
 
 
 st.write(texto_pan_financiamento_fnde_analise())

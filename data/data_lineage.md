@@ -18,6 +18,14 @@
     df_receita_fnde.csv
     Processado no notebook df_receita_fnde.ipynb
 
+* Despesas FNDE
+  Relatórios de Gestão do FNDE.
+  Link: https://www.gov.br/fnde/pt-br/acesso-a-informacao/transparencia-e-prestacao-de-contas/relatorio-de-gestao-1
+  Parser "despesas_fnde"
+  -> dataframes raw extraído: 
+    df_despesas_fnde.csv
+    Processado no notebook df_despesas_fnde.ipynb
+
 
 * Repasses Fundeb
   Tesouro Nacional.
