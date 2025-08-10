@@ -379,7 +379,9 @@ def texto_pan_financiamento_fnde_analise():
     
     Feita a devida introdução, passa-se a análise dessas receitas na educação básica pública do Estado do Acre. Serão destacadas as fontes
     de receita mais relevantes para o financiamento do serviço público na ponta, ou seja, aquelas que impactam diretamente as condições
-    materiais e humanas de oferta da educação básica pública local.    
+    materiais e humanas de oferta da educação básica pública local. Os dados foram extraídos dos Relatórios Resumidos de Execução Orçamentária,
+    ([RREO - art. 165, § 3º CF](https://www.planalto.gov.br/ccivil_03/constituicao/ConstituicaoCompilado.htm#:~:text=DOS%20OR%C3%87AMENTOS-,Art.%20165,-.%20Leis%20de%20iniciativa)),
+    disponíveis para consulta na platoforma [SIOPE](https://www.fnde.gov.br/siope/o_que_e.jsp). 
     """
 
 # Fundeb
