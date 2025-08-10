@@ -92,7 +92,7 @@ st.write(texto_pan_financiamento_fnde_analise())
 
 #++++++++
 # Subseção Fundeb
-st.header("O Fundeb")
+st.header("Fundeb")
 st.write(texto_pan_financiamento_fundeb_intro())
 
 col1, col2 = st.columns(2)

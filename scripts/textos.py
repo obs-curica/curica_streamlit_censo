@@ -337,7 +337,7 @@ def texto_pan_financiamento_intro():
     de Desenvolvimento da Educação ([FNDE](https://www.gov.br/fnde/pt-br)), autarquia vinculada ao Ministério da Educação.
         
     O estudo desse Panorama apresentará uma visão geral do orçamento do FNDE, para que se possa compreender a dimensão dos recursos
-    destinados à educação básica pública no Brasil. Em seguida, o estudo procura descer para a realidade local, inciando o detalhamento
+    destinados à educação básica pública no Brasil. Em seguida, procura-se descer para a realidade local, inciando o detalhamento
     dessas principais fontes para cada ente federativo, sem pretensão alguma de exaurimento do tema. Determinados programas e ações 
     serão minuciosamente abordados em Panoramas específicos.
     """
@@ -354,7 +354,7 @@ def texto_pan_financiamento_fnde_intro():
     Os repasses de recursos realizados pelo FNDE podem ser classificados em três categorias: constitucionais, automáticos e voluntários.
     Os repasses constitucionais, como o Fundeb e o Salário-Educação, são obrigatórios e definidos pela Constituição Federal. Os repasses 
     automáticos são transferidos diretamente para os entes federativos ou escolas, mediante adesão e cumprimento de critérios legais, sem 
-    necessidade de convênio (ex: PNATE, PNAE). Já os repasses voluntários dependem adesão expressa dos entes federativos ou 
+    necessidade de convênio (ex: PNAE, PNATE). Já os repasses voluntários dependem de adesão expressa dos entes federativos ou 
     [unidades executoras](https://portal.mec.gov.br/ultimas-noticias/214-296700251/13118-escola-deve-criar-unidade-executora-para-receber-recursos), 
     a celebração de convênios ou de termos de compromisso. O Programa Dinheiro Direto na Escola (PDDE) é um exemplo de repasse 
     voluntário, que necessita de adesão expressa.
@@ -367,7 +367,19 @@ def texto_pan_financiamento_fnde_intro():
     
 def texto_pan_financiamento_fnde_analise():
     return """
-    Análise.
+    O gráfico da evolução do orçamento do FNDE revela o crescimento significativo dos recursos destinados à educação básica pública no 
+    Brasil, que se deve em grande medida à nova configuração do Fundeb, que passou a ser permanente e constitucional. A contribuição da 
+    União mais que dobrou nos primeiros anos de vigência do novo Fundeb. É importante lembrar que a arrecadação também reflete momentos 
+    econômicos. Note a evidente queda do orçamento durante a pandemia de Covid-19, no ano de 2020.
+    
+    Por sua vez, o gráfico de distribuição dos recursos por categoria permite uma visão geral da missão do FNDE, que envolve a  transferência 
+    de recursos para Estados e Municípios, bem como a gestão de programas voltados ao suporte da educação básica pública. O gráfico mostra 
+    ainda que a maior parte dos recursos é destinada ao Fundeb e ao Salário-Educação, que são obrigatórios e definidos pela Constituição 
+    Federal. FIES, PNAE, PDDE e PNATE também são programas de destaque.
+    
+    Feita a devida introdução, passa-se a análise dessas receitas na educação básica pública do Estado do Acre. Serão destacadas as fontes
+    de receita mais relevantes para o financiamento do serviço público na ponta, ou seja, aquelas que impactam diretamente as condições
+    materiais e humanas de oferta da educação básica pública local.    
     """
 
 # Fundeb
