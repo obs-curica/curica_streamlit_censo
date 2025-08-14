@@ -666,7 +666,7 @@ def texto_pan_financiamento_salario_educacao_analise():
     """
 
 # Outras receitas do FNDE
-def texto_pan_financiamento_fnde_programas_intro():
+def texto_pan_financiamento_receitas_adicionais_intro():
     return """
     Além das transferências constitucionais obrigatórias, Estados e Municípios também recebem recursos provenientes de [operações de 
     crédito](https://www.congressonacional.leg.br/legislacao-e-publicacoes/glossario-orcamentario/-/orcamentario/termo/operacao_de_credito) 
@@ -696,8 +696,29 @@ def texto_pan_financiamento_fnde_programas_intro():
     Visualize abaixo o gráfico que mostra os valores recebidos por categoria de receitas ainda não discriminadas nos tópicos anteriores.
     """
     
-def texto_pan_financiamento_fnde_programas_analise():
+def texto_pan_financiamento_receitas_adicionais_analise():
     return """
+    Esse gráfico possui muitas informações relevantes, e deve ser analisado com paciência e atenção. A primeira análise é a comparação 
+    individual de cada ente, no tempo. Note que o valor de cada uma das receitas varia de ano para ano. O natural então é se perguntar os
+    motivos para essa variação. Respostas possíveis são a mudança na arrecadação de tributos, momento econômico, mudança na metodologia de
+    cálculo. 
     
+    Como foi visto no início, as receitas do FNDE estão aumentando ano a ano. Logo,  a expectativa é de que as receitas adicionais repassadas 
+    a Estados e Municípios também aumentem, concorda?
+    
+    Nesse caso, a diminuição da receita no tempo pode ser um indicativo de **falha grave na gestão**. Tome a receita do PNAE, por exemplo. 
+    Ele é um repasse automático que leva em conta o número de alunos. Entretanto, existem condicionalidades que devem ser observadas pelos 
+    entes na execução do programa. O descumprimento dessas condicionalidades pode levar à diminuição ou mesmo a suspensão do repasse no ano 
+    seguinte. Esse foi o caso da Secretaria Estadual de Educação, por exemplo.
+    
+    Outra receita interessante de se analisar é aquela proveniente de convênios celebrados com o FNDE. Se não existem receitas dessa fonte, é
+    sinal de que o ente não está participando do PAR, pois esse programa é executado mediante celebração de convênio. O mesmo vale para os 
+    recursos do PDDE. Eles são captados mediante adesão do ente ao programa específico. Se não existem recursos dessa fonte, é sinal de que 
+    há omissão grave na gestão educacional em acessa-los. Insiste-se que cada um dos programas citados serão minuciosamente analisados nos 
+    Panoramas temáticos. Por hora, o foco é apenas uma introdução às possibilidades de análise.
+    
+    Nessa picada, vamos analisar o impacto da gestão na captação do PDDE pelos entes?
     
     """
+    
+

@@ -20,7 +20,8 @@ from scripts.textos import(
     texto_pan_financiamento_receita_minima_impostos_analise,
     texto_pan_financiamento_salario_educacao_intro,
     texto_pan_financiamento_salario_educacao_analise,
-    texto_pan_financiamento_fnde_programas_intro
+    texto_pan_financiamento_receitas_adicionais_intro,
+    texto_pan_financiamento_receitas_adicionais_analise,
 )
 
 from scripts.graficos import(
@@ -35,7 +36,8 @@ from scripts.graficos import(
     grafico_valor_receita_impostos,
     grafico_valores_despesa_minima_impostos,
     grafico_receita_salario_educacao_ano,
-    grafico_receita_salario_educacao_ente
+    grafico_receita_salario_educacao_ente,
+    grafico_receitas_adicionais_por_ente_ano
 )
 
 # Configuração da página
@@ -235,7 +237,30 @@ st.write(texto_pan_financiamento_salario_educacao_analise())
 # Subseção Programas, Projetos e Ações do FNDE
 st.header("Outras fontes de receita")
 
-st.write(texto_pan_financiamento_fnde_programas_intro())
+st.write(texto_pan_financiamento_receitas_adicionais_intro())
+
+col1, col2 = st.columns(2)
+
+with col1:
+    entes_disponiveis = sorted(df_panorama_financiamento['nome'].unique())
+    entes = st.selectbox(
+        "Selecione o ente:",
+        options=entes_disponiveis,
+        key="outras_receitas_ente"
+    )
+
+    anos_disponiveis = sorted(df_panorama_financiamento['ano'].unique())
+    ano_mais_recente = max(anos_disponiveis)
+    ano = st.selectbox(
+        "Selecione o ano:",
+        options=anos_disponiveis,
+        index=anos_disponiveis.index(ano_mais_recente),
+        key="outras_receitas_ano"
+    )
+
+    grafico_receitas_adicionais_por_ente_ano(df_panorama_financiamento, entes, ano)
+    
+st.write(texto_pan_financiamento_receitas_adicionais_analise())
 
 
 

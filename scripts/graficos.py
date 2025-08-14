@@ -4,6 +4,7 @@ import matplotlib.colors as mcolors
 import pandas as pd
 import streamlit as st
 import numpy as np
+from utils import COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO
 
 #============================
 # PAGINA PANORAMA GERAL
@@ -1011,8 +1012,6 @@ def grafico_fnde_acoes(df, ano):
     fig.tight_layout(pad=2.0)
     st.pyplot(fig)
 
-
-
 # Função gráfico de barras horizontal fundeb por ano
 def grafico_fundeb_total_ano(df, ano):
     """
@@ -1075,7 +1074,6 @@ def grafico_fundeb_total_ano(df, ano):
 
     fig.tight_layout()
     st.pyplot(fig)
-
 
 # Função gráfico fundeb ente
 def grafico_fundeb_total_ente(df, ente):
@@ -1464,7 +1462,6 @@ def grafico_valor_receita_impostos(df, ente):
     fig.tight_layout()
     st.pyplot(fig)
 
-
 # Gráfico de barras agregadas para a receita mínima de impostos
 def grafico_valores_despesa_minima_impostos(df, ente):
     """
@@ -1600,7 +1597,6 @@ def grafico_receita_salario_educacao_ano(df, ano):
     fig.tight_layout()
     st.pyplot(fig)
 
-
 #Gráfico de barras Salário Educação
 def grafico_receita_salario_educacao_ente(df, ente):
     """
@@ -1669,13 +1665,91 @@ def grafico_receita_salario_educacao_ente(df, ente):
     fig.tight_layout()
     st.pyplot(fig)
 
+# Gráfico de barras horizontal de outras receitas
+def grafico_receitas_adicionais_por_ente_ano(df, ente, ano):
+    """
+    Gera um gráfico de barras horizontais com as receitas adicionais por tipo,
+    para um determinado ente e ano.
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas de receitas adicionais e identificação por ente e ano.
+    ente : str
+        Nome do ente (município ou estado).
+    ano : int
+        Ano de referência dos dados.
+    """
+
+    # Lista de colunas que serão exibidas no gráfico
+    colunas_receitas = [
+        "valor_receita_pdde",
+        "valor_receita_pnae",
+        "valor_receita_pnate",
+        "valor_receita_outras_fnde",
+        "valor_receita_convenios",
+        "valor_receita_royalties",
+        "valor_receita_operacao_credito",
+        "valor_receita_outras_outras"
+    ]
+
+    # Filtrar o DataFrame
+    df_filtrado = df[(df["nome"] == ente) & (df["ano"] == ano)]
+
+    if df_filtrado.empty:
+        st.warning(f"Não há dados disponíveis para o ente '{ente}' no ano {ano}.")
+        return
+
+    # Selecionar apenas as colunas de interesse
+    df_valores = df_filtrado[colunas_receitas].T.copy()
+    df_valores.columns = ["valor"]
+    df_valores["valor_mi"] = df_valores["valor"] / 1_000_000
+
+    # Renomear para nomes amigáveis
+    df_valores["fonte"] = df_valores.index.map(lambda col: COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO.get(col, col))
+
+    # Ordenar valores crescentes
+    df_valores = df_valores.sort_values(by="valor_mi", ascending=True)
+
+    # Gradiente verde → branco
+    cor_inicio = "#FFFFFF"
+    cor_fim = "#006400"
+    cmap = mcolors.LinearSegmentedColormap.from_list("verde_para_branco", [cor_inicio, cor_fim])
+    norm = mcolors.Normalize(vmin=df_valores["valor_mi"].min(), vmax=df_valores["valor_mi"].max())
+    cores = [cmap(norm(v)) for v in df_valores["valor_mi"]]
+
+    # Estilo escuro
+    plt.style.use("dark_background")
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    ax.barh(df_valores["fonte"], df_valores["valor_mi"], color=cores)
+
+    # Estilo do gráfico
+    ax.set_title(f"Receitas Adicionais da Educação - {ente} ({ano})", color="#FFA07A", fontsize=18)
+    ax.set_xlabel("Fonte: SIOPE", color="#FFA07A", fontsize=14)
+    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=14)
+
+    # Ticks e spines
+    ax.tick_params(axis='x', colors='#FFA07A')
+    ax.tick_params(axis='y', colors='#FFA07A')
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    # Espaço para rótulos
+    max_valor = df_valores["valor_mi"].max()
+    ax.set_xlim(0, max_valor * 1.15)
+
+    for i, valor in enumerate(df_valores["valor_mi"]):
+        ax.text(valor + (max_valor * 0.01), i, f"R$ {valor:.2f} mi", color="white", va="center", fontsize=10)
+
+    fig.tight_layout(pad=2.0)
+    st.pyplot(fig)
 
 
 
 #===========================
 # PAGINA POVOS TRADICIONAIS
 #===========================
-
 # Função gráfico de barras total de matriculas por localizacao diferenciada
 def grafico_matriculas_por_localizacao_diferenciada(df, ano_censo):
     """
