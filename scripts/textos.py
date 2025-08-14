@@ -369,8 +369,8 @@ def texto_pan_financiamento_fnde_analise():
     return """
     O gráfico da evolução do orçamento do FNDE revela o crescimento significativo dos recursos destinados à educação básica pública no 
     Brasil, que se deve em grande medida à nova configuração do Fundeb, que passou a ser permanente e constitucional. A contribuição da 
-    União mais que dobrou nos primeiros anos de vigência do novo Fundeb. É importante lembrar que a arrecadação também reflete momentos 
-    econômicos. Note a evidente queda do orçamento durante a pandemia de Covid-19, no ano de 2020.
+    União mais que dobrou nos primeiros anos de vigência do novo Fundeb. É importante lembrar que a arrecadação também reflete escolhas
+    pol[iticas e momentos econômicos. Note a evidente queda do orçamento durante a pandemia de Covid-19, no ano de 2020.
     
     Por sua vez, o gráfico de distribuição dos recursos por categoria permite uma visão geral da missão do FNDE, que envolve a  transferência 
     de recursos para Estados e Municípios, bem como a gestão de programas voltados ao suporte da educação básica pública. O gráfico mostra 
@@ -379,8 +379,9 @@ def texto_pan_financiamento_fnde_analise():
     
     Feita a devida introdução, passa-se a análise dessas receitas na educação básica pública do Estado do Acre. Serão destacadas as fontes
     de receita mais relevantes para o financiamento do serviço público na ponta, ou seja, aquelas que impactam diretamente as condições
-    materiais e humanas de oferta da educação básica pública local. Os dados foram extraídos dos Relatórios Resumidos de Execução Orçamentária,
-    ([RREO - art. 165, § 3º CF](https://www.planalto.gov.br/ccivil_03/constituicao/ConstituicaoCompilado.htm#:~:text=DOS%20OR%C3%87AMENTOS-,Art.%20165,-.%20Leis%20de%20iniciativa)),
+    materiais e humanas de oferta da educação básica pública local. A perscpectiva prática para subsidiar as políticas atuação das Promotorias 
+    de Justiça do interior do Estado também estará presente. Os dados apresentados abaixo foram extraídos dos **Relatórios Resumidos de 
+    Execução Orçamentária**, ([RREO - art. 165, § 3º CF](https://www.planalto.gov.br/ccivil_03/constituicao/ConstituicaoCompilado.htm#:~:text=DOS%20OR%C3%87AMENTOS-,Art.%20165,-.%20Leis%20de%20iniciativa)),
     disponíveis para consulta na platoforma [SIOPE](https://www.fnde.gov.br/siope/o_que_e.jsp). 
     """
 
@@ -667,11 +668,36 @@ def texto_pan_financiamento_salario_educacao_analise():
 # Outras receitas do FNDE
 def texto_pan_financiamento_fnde_programas_intro():
     return """
+    Além das transferências constitucionais obrigatórias, Estados e Municípios também recebem recursos provenientes de [operações de 
+    crédito](https://www.congressonacional.leg.br/legislacao-e-publicacoes/glossario-orcamentario/-/orcamentario/termo/operacao_de_credito) 
+    e [royalties do petróleo](https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/lei/l12858.htm). 
     
-    ### Links
-    ([Relatorios Gestao FNDE](https://www.gov.br/fnde/pt-br/acesso-a-informacao/transparencia-e-prestacao-de-contas/relatorio-de-gestao-1))
+    Ainda, recebem repasses suplementares do FNDE a partir de [ações e programas](https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas) 
+    de apoio à educação. Cada programa procura endereçar uma necessidade específica, com  regulamentação própria. Guardando o viés prático 
+    deste trabalho, esses programas serão escrutinados nos respectivos Panoramas temáticos. Entretanto, uma breve introdução é necessária 
+    para que se compreenda a importância desses recursos e o seu potencial de impacto para o quadro local. 
     
-    ([PAR](https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2007/decreto/d6094.htm))
-
+    O Programa Nacional de Alimentação Escolar ([PNAE](https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2009/lei/l11947.htm)) e o
+    Programa de Apoio ao Transporte Escolar ([PNATE](https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/lei/l10.880.htm)) são
+    recursos de transferência automática e levam em conta o número de alunos matriculados no respectivo sistema de ensino, declarados 
+    no :orange-background[Censo Escolar]. 
+    
+    Outro programa de destaque é o Plano de Ações Articuladas (PAR - [Decreto 6094/2007](https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2007/decreto/d6094.htm) e
+    [Lei 12.695/12](https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2012/lei/l12695.htm)), que se propõe a oferecer apoio técnico e
+    financeiro aos Estados e Municípios, com o objetivo de promover a melhoria da qualidade da educação. Para acessar os recursos do PAR, 
+    os entes federativos devem elaborar um diagnóstico e respectivo plano de ação, para celebração de **convênios** com o FNDE. Os recursos 
+    do PAR contemplam quatro eixos de atuação: gestão educacional, formação de profissionais de educação, práticas pedagógicas e avaliação e
+    infraestrutura física e recursos pedagógicos.
+    
+    Por fim, é necessário destacar o Programa Dinheiro Direto na Escola ([PDDE](https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2009/lei/l11947.htm)), 
+    que tem como objetivo prestar assistência financeira suplementar às escolas públicas, mediante adesão. As escolas contempladas são 
+    definidas anualmente pelo FNDE a partir dos dados do :orange-background[Censo Escolar].
+    
+    Visualize abaixo o gráfico que mostra os valores recebidos por categoria de receitas ainda não discriminadas nos tópicos anteriores.
+    """
+    
+def texto_pan_financiamento_fnde_programas_analise():
+    return """
+    
     
     """

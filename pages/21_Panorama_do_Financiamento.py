@@ -233,9 +233,9 @@ st.write(texto_pan_financiamento_salario_educacao_analise())
 
 #++++++++
 # Subseção Programas, Projetos e Ações do FNDE
-st.header("Outras Receitas provenientes do FNDE")
+st.header("Outras fontes de receita")
 
-
+st.write(texto_pan_financiamento_fnde_programas_intro())
 
 
 

@@ -14,7 +14,7 @@
 
 * Receitas FNDE
   Painel do Orçamento Federal.
-  -> dataframes raw extraído: 
+  -> dataframe raw extraído: 
     df_receita_fnde.csv
     Processado no notebook df_receita_fnde.ipynb
 
@@ -22,10 +22,9 @@
   Relatórios de Gestão do FNDE.
   Link: https://www.gov.br/fnde/pt-br/acesso-a-informacao/transparencia-e-prestacao-de-contas/relatorio-de-gestao-1
   Parser "despesas_fnde"
-  -> dataframes raw extraído: 
+  -> dataframe raw extraído: 
     df_despesas_fnde.csv
     Processado no notebook df_despesas_fnde.ipynb
-
 
 * Repasses Fundeb
   Tesouro Nacional.
@@ -36,7 +35,7 @@
   SIOPE
   Link: https://www.fnde.gov.br/siope/o_que_e.jsp
 
-  -> dataframes raw extraídos:
+  -> dataframe raw extraídos:
     df_rreo_parser.csv
   
   -> dataframes processados: df_panorama_financiamento.csv
@@ -58,6 +57,18 @@
       df_emendas_geral_2019_2024.csv, df_emendas_mec_2019_2024.csv
   
   -> dataframes processados: 
+
+
+## Página Panorama Infraestrutura
+
+* PAR
+  SIMEC - Transparência Pública - Obras FNDE
+  Link: https://simec.mec.gov.br/painelObras/index.php
+  
+  -> dataframe raw extraído: 
+    df_simec_obras_par.csv
+
+
 
 
 # Referências bibliográficas
