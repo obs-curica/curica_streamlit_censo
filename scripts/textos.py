@@ -632,7 +632,7 @@ def texto_pan_financiamento_salario_educacao_intro():
     com regulamentação pelas Leis [9.424/96](https://www.planalto.gov.br/ccivil_03/LEIS/L9424compilado.htm) e [9.766/98](https://www.planalto.gov.br/ccivil_03/LEIS/L9766.htm).
     Diferente do Fundeb, que é financiado por meio de impostos, o Salário-Educação é financiado por meio de contribuições sociais, com 
     alíquota de 2,5% sobre a folha de salários das empresas. Do total da arrecadação líquida, 10% são destinados ao FNDE para financiamento
-    projetos, programas e ações da educação básica. Os outros 90% são rateados entre a União, Estados e Municípios, na proporção de 1/3 
+    de projetos, programas e ações da educação básica. Os outros 90% são rateados entre a União, Estados e Municípios, na proporção de 1/3 
     para a União e 2/3 para os Estados e Municípios. O rateio é proporcional  ao número de alunos matriculados no respectivo sistema de 
     ensino ([art. 9° do Decreto 6003/2006](https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/decreto/D6003.htm#:~:text=ao%20da%20arrecada%C3%A7%C3%A3o.-,Art.%C2%A09,-o%C2%A0%C2%A0O%20montante)),
     assim declarado no :orange-background[Censo Escolar]. A quota da União também é destinada para financiamento de programas, projetos e 
@@ -726,10 +726,26 @@ def texto_pan_financiamento_receitas_adicionais_analise():
     programa específico. Se não existem recursos dessa fonte, é sinal de que há omissão grave na gestão educacional em acessa-los. 
     Quer ver o tamanho da toca desse coelho?
     """
-    
-    def texto_pan_financiamento_execucao_pdde_intro():
-        return """
-        
-        """
-    
 
+def texto_pan_financiamento_execucao_pdde_intro():
+    return """
+    Percebe-se nos gráficos acima que o PDDE aparenta ter um repasse pequeno, quando comparado com os demais programas. Entretanto, os dados 
+    acima dizem respeito somente aos repasses do PDDE destinados diretamente ao CNPJ dos entes federativos e não reflete o potencial do 
+    programa. Como o próprio nome diz, o PDDE é um programa de execução direta, ou seja, os recursos são repassados diretamente às Unidades
+    Executoras, ou seja, às escolas, por meio de pessoas jurídicas constituídas para esse fim. Ele  possui diversas modalidades, como 
+    infraestrutura, saneamento básico e ensino rural. Todos os anos o FNDE reserva parte de seu orçamento para o programa e o disponibiliza 
+    para acesso do respectivo sistema de ensino, mediante adesão. Eis o problema: grande parte do recurso disponibilizado pelo FNDE não é
+    acessado pelos entes federativos. 
+    
+    Acompanhe abaixo a dimensão do problema, para o exercício financeiro do ano de 2024.
+    """
+
+def texto_pan_financiamento_execucao_pdde_analise():
+    return """
+    Os dados foram extraídos do [Painel de Monitoramento do PDDE](https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/monitore-o-pdde-1),
+    do FNDE. Eles retratam um quadro crônico de subutilização do programa em todo o Estado do Acre. 
+    
+    Esse é somente um exemplo geral da falha de gestão dos sistemas de ensino do Estado e enfatiza-se novamente que os programas serão 
+    cuidadosamente analisados nos Panoramas temáticos específicos.
+    
+    """

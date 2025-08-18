@@ -23,6 +23,8 @@ from scripts.textos import(
     texto_pan_financiamento_salario_educacao_analise,
     texto_pan_financiamento_receitas_adicionais_intro,
     texto_pan_financiamento_receitas_adicionais_analise,
+    texto_pan_financiamento_execucao_pdde_intro,
+    texto_pan_financiamento_execucao_pdde_analise
 )
 
 from scripts.graficos import(
@@ -46,16 +48,22 @@ from scripts.graficos import(
 st.set_page_config(page_title="Panorama Financiamento", layout="wide", page_icon="🦜")
 
 # Carregar dados
+# df_panorama_financiamento
 url_panorama_financiamento = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_financiamento/df_panorama_financiamento.csv"
 df_panorama_financiamento = carregar_dados(url_panorama_financiamento)
 df_panorama_financiamento['nome'] = df_panorama_financiamento['nome'].astype(str)
 
+# df_receita_fnde
 url_receita_fnde = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_financiamento/df_receita_fnde.csv"
 df_receita_fnde = carregar_dados(url_receita_fnde)
 
-
+# df_despesas_fnde
 url_despesas_fnde = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_financiamento/df_despesas_fnde.csv"
 df_despesas_fnde = carregar_dados(url_despesas_fnde)
+
+# df_execucao_pdde
+url_execucao_pdde = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_financiamento/df_execucao_pdde.csv"
+df_execucao_pdde = carregar_dados(url_execucao_pdde)
 
 # Título da página
 st.title("💲 Considerações Gerais sobre o Financiamento da Educação Básica")
@@ -273,11 +281,11 @@ with col2:
     # Código do selectbox para categorias de receita adicional
     # Lista técnica das categorias de receita adicional
     colunas_receitas = [
-        "valor_receita_pdde",
         "valor_receita_pnae",
         "valor_receita_pnate",
-        "valor_receita_outras_fnde",
+        "valor_receita_pdde",
         "valor_receita_convenios",
+        "valor_receita_outras_fnde",
         "valor_receita_royalties",
         "valor_receita_operacao_credito",
         "valor_receita_outras_outras"
@@ -300,5 +308,23 @@ with col2:
     
 st.write(texto_pan_financiamento_receitas_adicionais_analise())
 
-st.subheader("Exemplo de deficiências na execução dos recursos disponibilizados pelo FNDE")
-st.write("conluir o financimento apresentando os programas e a não utilização de recursos. Aí fazer a chamada para os outros panoramas.")
+st.subheader("Exemplo de deficiência na execução do recurso do PDDE")
+
+st.write(texto_pan_financiamento_execucao_pdde_intro())
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.write("")
+
+with col2:
+    st.write("")
+
+st.write(texto_pan_financiamento_execucao_pdde_analise())
+
+
+
+st.subheader("Emendas Parlamentares")
+
+
+st.subheader("Geração de relatórios")
