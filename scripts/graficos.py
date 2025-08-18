@@ -1745,6 +1745,88 @@ def grafico_receitas_adicionais_por_ente_ano(df, ente, ano):
     fig.tight_layout(pad=2.0)
     st.pyplot(fig)
 
+def grafico_receitas_adicionais_evolucao(df, ente, categoria):
+    """
+    Gera um gráfico de barras verticais com a evolução temporal de uma receita adicional específica.
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame contendo colunas de receitas adicionais e identificação por ente e ano.
+    ente : str
+        Nome do ente (município ou estado).
+    categoria : str
+        Nome da coluna da categoria de receita adicional (ex: 'valor_receita_pdde').
+    """
+    # Lista de categorias válidas
+    colunas_receitas = [
+        "valor_receita_pdde",
+        "valor_receita_pnae",
+        "valor_receita_pnate",
+        "valor_receita_outras_fnde",
+        "valor_receita_convenios",
+        "valor_receita_royalties",
+        "valor_receita_operacao_credito",
+        "valor_receita_outras_outras"
+    ]
+
+    if categoria not in colunas_receitas:
+        st.error(f"A categoria '{categoria}' não é reconhecida como uma receita adicional válida.")
+        return
+
+    # Filtrar o DataFrame
+    df_filtrado = df[df["nome"] == ente][["ano", categoria]].copy()
+
+    if df_filtrado.empty:
+        st.warning(f"Não há dados disponíveis para o ente '{ente}'.")
+        return
+
+    # Conversão para milhões
+    df_filtrado["valor_mi"] = df_filtrado[categoria] / 1_000_000
+    df_filtrado["ano_str"] = df_filtrado["ano"].astype(str)
+    df_filtrado = df_filtrado.sort_values(by="ano")
+
+    # Nome legível da categoria
+    nome_legivel = COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO.get(categoria, categoria)
+
+    # Estilo e figura
+    plt.style.use("dark_background")
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    # Plot
+    bars = ax.bar(df_filtrado["ano_str"], df_filtrado["valor_mi"], color="#006400")
+
+    # Rótulos no topo
+    for bar in bars:
+        altura = bar.get_height()
+        ax.text(
+            bar.get_x() + bar.get_width() / 2,
+            altura + 0.03,
+            f"R$ {altura:.2f} mi",
+            ha='center',
+            va='bottom',
+            color="white",
+            fontsize=10
+        )
+
+    # Título e eixos
+    ax.set_title(f"Evolução da Receita de {nome_legivel} - {ente}", color="#FFA07A", fontsize=18)
+    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=14)
+    ax.set_xlabel("Fonte: SIOPE", color="#FFA07A", fontsize=14)
+
+    # Estilo dos eixos
+    ax.tick_params(axis='x', colors='#FFA07A')
+    ax.tick_params(axis='y', colors='#FFA07A')
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    # Ajustar eixo y com epsilon e mínimo de 1.0
+    y_max = max(df_filtrado["valor_mi"].max(), 1.0)
+    ax.set_ylim(0.001, y_max * 1.15)
+
+    fig.tight_layout(pad=2.0)
+    st.pyplot(fig)
+
 
 
 #===========================

@@ -6,6 +6,7 @@ import os
 import re
 
 from scripts.load_data import carregar_dados
+from scripts.utils import COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO
 
 from scripts.textos import(
     texto_pan_financiamento_intro, 
@@ -37,7 +38,8 @@ from scripts.graficos import(
     grafico_valores_despesa_minima_impostos,
     grafico_receita_salario_educacao_ano,
     grafico_receita_salario_educacao_ente,
-    grafico_receitas_adicionais_por_ente_ano
+    grafico_receitas_adicionais_por_ente_ano,
+    grafico_receitas_adicionais_evolucao
 )
 
 # Configuração da página
@@ -246,7 +248,7 @@ with col1:
     entes = st.selectbox(
         "Selecione o ente:",
         options=entes_disponiveis,
-        key="outras_receitas_ente"
+        key="outras_receitas_geral_ente"
     )
 
     anos_disponiveis = sorted(df_panorama_financiamento['ano'].unique())
@@ -255,15 +257,48 @@ with col1:
         "Selecione o ano:",
         options=anos_disponiveis,
         index=anos_disponiveis.index(ano_mais_recente),
-        key="outras_receitas_ano"
+        key="outras_receitas_geral_ano"
     )
 
     grafico_receitas_adicionais_por_ente_ano(df_panorama_financiamento, entes, ano)
     
+with col2:
+    entes_disponiveis = sorted(df_panorama_financiamento['nome'].unique())
+    entes = st.selectbox(
+        "Selecione o ente:",
+        options=entes_disponiveis,
+        key="outras_receitas_evolucao_ente"
+    )
+    
+    # Código do selectbox para categorias de receita adicional
+    # Lista técnica das categorias de receita adicional
+    colunas_receitas = [
+        "valor_receita_pdde",
+        "valor_receita_pnae",
+        "valor_receita_pnate",
+        "valor_receita_outras_fnde",
+        "valor_receita_convenios",
+        "valor_receita_royalties",
+        "valor_receita_operacao_credito",
+        "valor_receita_outras_outras"
+    ]
+    
+    # Cria dicionário invertido para mapeamento reverso
+    NOMES_RENOMEADOS_INV = {v: k for k, v in COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO.items() if k in colunas_receitas}
+    
+    # Opções legíveis
+    opcoes_legiveis = list(NOMES_RENOMEADOS_INV.keys())
+    
+    # Seletor com nome amigável
+    categoria_legivel = st.selectbox("Selecione a categoria de receita adicional:", opcoes_legiveis)
+    
+    # Converter de volta para nome técnico
+    categoria_tecnica = NOMES_RENOMEADOS_INV[categoria_legivel]
+    
+    # Chamada do gráfico com nome técnico
+    grafico_receitas_adicionais_evolucao(df_panorama_financiamento, entes, categoria_tecnica)
+    
 st.write(texto_pan_financiamento_receitas_adicionais_analise())
 
-
-
-
-st.subheader("Deficiências na execução dos recursos disponibilizados pelo FNDE")
+st.subheader("Exemplo de deficiências na execução dos recursos disponibilizados pelo FNDE")
 st.write("conluir o financimento apresentando os programas e a não utilização de recursos. Aí fazer a chamada para os outros panoramas.")

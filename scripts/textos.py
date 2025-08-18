@@ -693,32 +693,43 @@ def texto_pan_financiamento_receitas_adicionais_intro():
     que tem como objetivo prestar assistência financeira suplementar às escolas públicas, mediante adesão. As escolas contempladas são 
     definidas anualmente pelo FNDE a partir dos dados do :orange-background[Censo Escolar].
     
-    Visualize abaixo o gráfico que mostra os valores recebidos por categoria de receitas ainda não discriminadas nos tópicos anteriores.
+    Visualize abaixo os gráficos que mostram os valores recebidos por categoria de receitas ainda não discriminadas nos tópicos anteriores, 
+    conforme constam nos RREOs respectivos.
     """
     
 def texto_pan_financiamento_receitas_adicionais_analise():
     return """
-    Esse gráfico possui muitas informações relevantes, e deve ser analisado com paciência e atenção. A primeira análise é a comparação 
+    Esses gráficos possuem muitas informações relevantes e devem ser analisados com paciência e atenção. A primeira análise é a comparação 
     individual de cada ente, no tempo. Note que o valor de cada uma das receitas varia de ano para ano. O natural então é se perguntar os
     motivos para essa variação. Respostas possíveis são a mudança na arrecadação de tributos, momento econômico, mudança na metodologia de
     cálculo. 
     
-    Como foi visto no início, as receitas do FNDE estão aumentando ano a ano. Logo,  a expectativa é de que as receitas adicionais repassadas 
+    Como foi visto no início, as receitas do FNDE estão aumentando ano a ano. Logo, a expectativa é de que as receitas adicionais repassadas 
     a Estados e Municípios também aumentem, concorda?
     
-    Nesse caso, a diminuição da receita no tempo pode ser um indicativo de **falha grave na gestão**. Tome a receita do PNAE, por exemplo. 
-    Ele é um repasse automático que leva em conta o número de alunos. Entretanto, existem condicionalidades que devem ser observadas pelos 
-    entes na execução do programa. O descumprimento dessas condicionalidades pode levar à diminuição ou mesmo a suspensão do repasse no ano 
-    seguinte. Esse foi o caso da Secretaria Estadual de Educação, por exemplo.
+    Nesse caso, a diminuição da receita no tempo pode ser um indicativo de **falha grave na gestão do sistema de ensino**. Tome a receita 
+    do PNAE, por exemplo. Ele é um repasse automático que leva em conta o número de alunos da rede. O seu orçamento global também tem 
+    aumentado. Entretanto, existem condicionalidades que devem ser observadas pelos entes na execução do programa. O descumprimento dessas 
+    condicionalidades pode levar à diminuição ou mesmo à suspensão do repasse no ano seguinte. Portanto, se o repasse desse recurso está 
+    diminuindo para determinado ente federativo, ou o número de alunos matriculados está diminuindo, ou o ente está descumprindo as 
+    condicionalidades do programa. Vamos tomar como exemplo o caso emblemático da Secretaria Estadual de Educação. Esse sistema de ensino
+    recebeu mais de 13 milhões de reais do PNAE no ano de 2021 e foi para **ZERO** no ano de 2022. Embora a evasão escolar seja um problema grave a
+    ser enfrentado, o número de alunos matriculados no sistema não foi a zero. Essa queda na receita do PNAE é um indicativo de falha grave
+    na execução do programa. A evasão e a alimentação escolar serão tratados em panoramas temáticos específicos, mas o que se quer evidenciar
+    neste momento é que essa metodologia pode ser estendida para todos os outros programas do FNDE. A análise da receita se torna um 
+    indicador de desempenho da gestão educacional que superam argumentos que invocam a discricionariedade administrativa.
     
-    Outra receita interessante de se analisar é aquela proveniente de convênios celebrados com o FNDE. Se não existem receitas dessa fonte, é
-    sinal de que o ente não está participando do PAR, pois esse programa é executado mediante celebração de convênio. O mesmo vale para os 
-    recursos do PDDE. Eles são captados mediante adesão do ente ao programa específico. Se não existem recursos dessa fonte, é sinal de que 
-    há omissão grave na gestão educacional em acessa-los. Insiste-se que cada um dos programas citados serão minuciosamente analisados nos 
-    Panoramas temáticos. Por hora, o foco é apenas uma introdução às possibilidades de análise.
-    
-    Nessa picada, vamos analisar o impacto da gestão na captação do PDDE pelos entes?
-    
+    Insiste-se que cada um dos programas citados serão minuciosamente analisados nos Panoramas temáticos. Por hora, o foco é apenas uma 
+    introdução às possibilidades de análise. Nessa picada, outra receita interessante de se analisar é aquela proveniente de convênios 
+    celebrados com o FNDE. Se não existem receitas em dessa fonte, é sinal de que o ente não está participando do PAR, pois esse programa 
+    é executado mediante celebração de convênio. O mesmo vale para os recursos do PDDE. Eles são captados mediante adesão do ente ao 
+    programa específico. Se não existem recursos dessa fonte, é sinal de que há omissão grave na gestão educacional em acessa-los. 
+    Quer ver o tamanho da toca desse coelho?
     """
+    
+    def texto_pan_financiamento_execucao_pdde_intro():
+        return """
+        
+        """
     
 
