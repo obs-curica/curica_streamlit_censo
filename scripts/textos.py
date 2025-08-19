@@ -748,4 +748,5 @@ def texto_pan_financiamento_execucao_pdde_analise():
     Esse é somente um exemplo geral da falha de gestão dos sistemas de ensino do Estado e enfatiza-se novamente que os programas serão 
     cuidadosamente analisados nos Panoramas temáticos específicos.
     
+    Retomar a discussao dos anexos e pq tarauacá está bem na foto.
     """

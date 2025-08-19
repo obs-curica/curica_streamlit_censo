@@ -41,7 +41,9 @@ from scripts.graficos import(
     grafico_receita_salario_educacao_ano,
     grafico_receita_salario_educacao_ente,
     grafico_receitas_adicionais_por_ente_ano,
-    grafico_receitas_adicionais_evolucao
+    grafico_receitas_adicionais_evolucao,
+    grafico_execucao_pdde_valores,
+    grafico_execucao_pdde_porcentagem
 )
 
 # Configuração da página
@@ -315,10 +317,41 @@ st.write(texto_pan_financiamento_execucao_pdde_intro())
 col1, col2 = st.columns(2)
 
 with col1:
-    st.write("")
+    entes_disponiveis = sorted(df_execucao_pdde['nome'].unique())
+    entes = st.selectbox(
+        "Selecione o ente:",
+        options=entes_disponiveis,
+        key="execucao_pdde_valores_ente"
+    )
+
+    anos_disponiveis = sorted(df_execucao_pdde['ano'].unique())
+    ano_mais_recente = max(anos_disponiveis)
+    ano = st.selectbox(
+        "Selecione o ano:",
+        options=anos_disponiveis,
+        index=anos_disponiveis.index(ano_mais_recente),
+        key="execucao_pdde_valores_ano"
+    )
+    
+    grafico_execucao_pdde_valores(df_execucao_pdde, ano, entes)
+    
+    
 
 with col2:
+    anos_disponiveis = sorted(df_execucao_pdde['ano'].unique())
+    ano_mais_recente = max(anos_disponiveis)
+    ano = st.selectbox(
+        "Selecione o ano:",
+        options=anos_disponiveis,
+        index=anos_disponiveis.index(ano_mais_recente),
+        key="execucao_pdde_porcentagem_ano"
+    )
+    
+    grafico_execucao_pdde_porcentagem(df_execucao_pdde, ano)
+    
     st.write("")
+
+
 
 st.write(texto_pan_financiamento_execucao_pdde_analise())
 

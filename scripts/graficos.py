@@ -1827,6 +1827,139 @@ def grafico_receitas_adicionais_evolucao(df, ente, categoria):
     fig.tight_layout(pad=2.0)
     st.pyplot(fig)
 
+def grafico_execucao_pdde_valores(df, ano, ente):
+    """
+    Gera um gráfico de barras verticais comparando saldos disponibilizado, executado e não utilizado
+    para um determinado ente e ano.
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas 'ano', 'nome', 'saldo_disponibilizado',
+        'saldo_executado', 'saldo_nao_utilizado'
+    ano : int
+        Ano de referência
+    ente : str
+        Nome do município ou estado
+    """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+
+    # Filtrar o DataFrame
+    df_filtrado = df[(df["ano"] == ano) & (df["nome"] == ente)]
+
+    if df_filtrado.empty:
+        st.warning(f"Não há dados disponíveis para {ente} no ano de {ano}.")
+        return
+
+    # Valores em milhões
+    valores_mi = [
+        df_filtrado["saldo_disponibilizado"].values[0] / 1_000_000,
+        df_filtrado["saldo_executado"].values[0] / 1_000_000,
+        df_filtrado["saldo_nao_utilizado"].values[0] / 1_000_000
+    ]
+    categorias = ["Disponibilizado", "Executado", "Não utilizado"]
+    cores = ["#4682B4", "#32CD32", "#FFA500"]  # azul, verde, laranja
+
+    # Estilo
+    plt.style.use("dark_background")
+    fig, ax = plt.subplots(figsize=(8, 5.5))
+
+    # Plot
+    bars = ax.bar(categorias, valores_mi, color=cores)
+    
+    # Ajuste de altura do eixo Y
+    y_max = max(valores_mi)
+    ax.set_ylim(0, y_max * 1.2)
+
+
+    # Rótulos
+    for bar, valor in zip(bars, valores_mi):
+        ax.text(
+            bar.get_x() + bar.get_width() / 2,
+            bar.get_height() + max(valores_mi) * 0.03,
+            f"R$ {valor:.2f} mi",
+            ha="center",
+            va="bottom",
+            color="white",
+            fontsize=10
+        )
+
+    # Título e eixos
+    ax.set_title(f"Execução de Recursos - {ente} ({ano})", color="#FFA07A", fontsize=18)
+    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=14)
+    ax.set_xlabel("Fonte: Painel de Monitoramento do PDDE - FNDE", color="#FFA07A", fontsize=12)
+
+    # Estilo dos eixos
+    ax.tick_params(axis="x", colors="#FFA07A")
+    ax.tick_params(axis="y", colors="#FFA07A")
+    for spine in ax.spines.values():
+        spine.set_color("#FFA07A")
+
+    # Legenda
+    ax.legend(bars, categorias, loc="upper right", frameon=False, labelcolor="white")
+
+    fig.tight_layout()
+    st.pyplot(fig)
+
+def grafico_execucao_pdde_porcentagem(df, ano):
+    """
+    Gera um gráfico de barras horizontais com a porcentagem de execução dos recursos do PDDE
+    para todos os entes em um determinado ano.
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas 'ano', 'nome', e 'porcentagem_execucao' (0.00 a 1.00).
+    ano : int
+        Ano de referência
+    """
+    
+    # Filtrar por ano
+    df_filtrado = df[df["ano"] == ano][["nome", "porcentagem_execucao"]].dropna()
+
+    if df_filtrado.empty:
+        st.warning(f"Não há dados disponíveis para o ano de {ano}.")
+        return
+
+    # Ordenar por porcentagem crescente
+    df_filtrado = df_filtrado.sort_values(by="porcentagem_execucao", ascending=True)
+
+    # Gradiente verde → vermelho
+    cmap = mcolors.LinearSegmentedColormap.from_list("verde_vermelho", ["#8B0000", "#006400",])
+    norm = mcolors.Normalize(vmin=0, vmax=1)
+    cores = [cmap(norm(v)) for v in df_filtrado["porcentagem_execucao"]]
+
+    # Estilo e plot
+    plt.style.use("dark_background")
+    fig, ax = plt.subplots(figsize=(10, 8))
+
+    ax.barh(df_filtrado["nome"], df_filtrado["porcentagem_execucao"] * 100, color=cores)
+
+    # Rótulos nas barras
+    for i, valor in enumerate(df_filtrado["porcentagem_execucao"]):
+        ax.text(
+            valor * 100 + 1,
+            i,
+            f"{valor * 100:.1f}%",
+            va="center",
+            color="white",
+            fontsize=9
+        )
+
+    # Estilo dos eixos
+    ax.set_title(f"Execução Percentual dos Recursos do PDDE - {ano}", color="#FFA07A", fontsize=18)
+    ax.set_ylabel("Porcentagem de Execução (%)", color="#FFA07A", fontsize=14)
+    ax.set_xlabel("Fonte: Painel de Monitoramento do PDDE - FNDE", color="#FFA07A", fontsize=14)
+    
+    ax.tick_params(axis="x", colors="#FFA07A")
+    ax.tick_params(axis="y", colors="#FFA07A")
+    for spine in ax.spines.values():
+        spine.set_color("#FFA07A")
+
+    ax.set_xlim(0, 100)  # de 0% a 100%
+    fig.tight_layout()
+    st.pyplot(fig)
 
 
 #===========================
