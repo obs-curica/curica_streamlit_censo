@@ -334,8 +334,6 @@ with col1:
     )
     
     grafico_execucao_pdde_valores(df_execucao_pdde, ano, entes)
-    
-    
 
 with col2:
     anos_disponiveis = sorted(df_execucao_pdde['ano'].unique())
@@ -348,10 +346,6 @@ with col2:
     )
     
     grafico_execucao_pdde_porcentagem(df_execucao_pdde, ano)
-    
-    st.write("")
-
-
 
 st.write(texto_pan_financiamento_execucao_pdde_analise())
 
@@ -359,5 +353,6 @@ st.write(texto_pan_financiamento_execucao_pdde_analise())
 
 st.subheader("Emendas Parlamentares")
 
+st.subheader("Conclusão")
 
 st.subheader("Geração de relatórios")

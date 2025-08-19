@@ -737,16 +737,36 @@ def texto_pan_financiamento_execucao_pdde_intro():
     para acesso do respectivo sistema de ensino, mediante adesão. Eis o problema: grande parte do recurso disponibilizado pelo FNDE não é
     acessado pelos entes federativos. 
     
-    Acompanhe abaixo a dimensão do problema, para o exercício financeiro do ano de 2024.
+    Acompanhe abaixo a dimensão do caso, para o exercício financeiro do ano de 2024.
     """
 
 def texto_pan_financiamento_execucao_pdde_analise():
     return """
     Os dados foram extraídos do [Painel de Monitoramento do PDDE](https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/monitore-o-pdde-1),
-    do FNDE. Eles retratam um quadro crônico de subutilização do programa em todo o Estado do Acre. 
+    do FNDE, e retratam um quadro crônico de subutilização do programa em todo o Estado do Acre. Anos anteriores serão incluídos 
+    posteriormente, mas a vista é a mesma: falha na gestão educacional em acessar os recursos disponibilizados pelo FNDE.
     
-    Esse é somente um exemplo geral da falha de gestão dos sistemas de ensino do Estado e enfatiza-se novamente que os programas serão 
-    cuidadosamente analisados nos Panoramas temáticos específicos.
+    A maior parte dos recursos do programa simplesmente não é acessada pelos entes federativos que, para dar conta da demanda, acabam por
+    utilizar recursos de outras fontes para algo que poderia ser atendido com o PDDE. E, lógico, essa falha opera em cascata, pois o recurso
+    poderia ser utilizado para atender outras finalidades. 
     
-    Retomar a discussao dos anexos e pq tarauacá está bem na foto.
+    Nesse ponto, outra reflexão se faz necessária. Vamos retomar o problema das :red-background[**escolas anexas**], que foi introduzido no 
+    Panorama da Rede de Ensino. Como foi dito, essas escolas simplesmente não aparecem no Censo Escolar e estão vinculadas a uma escola sede, 
+    que é a que possui a **Unidade Executora própria** e pode acessar os recursos do PDDE. Como as escolas anexas não aparecem oficialmente, 
+    o FNDE também não as contabiliza para o repasse de seus programas. Com isso, conclui-se que **os valores que deixam de ser acessados 
+    pelos sistemas de ensino são ainda maiores do que aqueles que estão oficialmente contabilizados e explicitados nos gráficos acima**.
+    
+    Veja na prática os efeitos da constituição de escolas anexas: Tarauacá, o terceiro maior Município do Acre, possuía aproximadamente 16 
+    mil alunos matriculados em sua rede, no ano de 2024. Feijó, seu Município vizinho, possuía 12 mil, nos mesmos termos. Entretanto, 
+    enquanto Feijó cadastrou 142 escolas no Censo Escolar, Tarauacá declarou somente 92. Agora compare nos gráficos acima o impacto dessa 
+    má escolha administrativa. O recurso disponibilizado pelo FNDE para o PDDE em Tarauacá foi expressivamente menor do que o de Feijó, que
+    possui um número menor de alunos matriculados em sua rede de ensino.
+    
+    Por fim, ressalta-se que esse quadro é somente um exemplo geral da falha de gestão dos sistemas de ensino do Estado do Acre  e 
+    enfatiza-se, novamente, que os programas serão cuidadosamente analisados nos Panoramas temáticos específicos.
+    """
+
+def texto_conclusao():
+    return"""
+    O objetivo é sensibilizar.
     """
