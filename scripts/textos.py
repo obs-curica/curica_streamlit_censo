@@ -783,5 +783,26 @@ def texto_pan_financiamento_emendas_intro():
 
 def texto_pan_fin_consideracoes_finais():
     return"""
-    O objetivo é sensibilizar.
+    O Panorama do Financiamento apresentou uma análise sistematizada dos recursos destinados à educação básica pública no estado do Acre, com 
+    ênfase nos repasses do Fundeb e nas transferências automáticas e voluntárias realizadas pelo Fundo Nacional de Desenvolvimento da Educação 
+    (FNDE). Por meio da consolidação de dados financeiros e indicadores de execução orçamentária, foram identificadas variações relevantes entre 
+    entes federativos e ao longo dos anos, revelando fragilidades na efetiva aplicação dos recursos disponíveis.
+
+    A visualização comparativa dos saldos disponibilizados, executados e não utilizados permitiu evidenciar a existência de obstáculos à plena 
+    utilização dos recursos, o que compromete, em última instância, a garantia do direito à educação de qualidade. Tais achados reforçam a 
+    importância do planejamento orçamentário integrado, da capacitação técnica das gestões locais e do fortalecimento das instâncias de controle 
+    social. Na medida em que se demonstra a existência de falhas na gestão, a discussão sobre a reserva do possível é afastada e se evidencia a
+    espaço para ação do Ministério Público na defesa de direitos indisponíveis.
+
+    As informações aqui sistematizadas dialogam diretamente com os demais eixos temáticos abordados pelo Observatório Curica, notadamente aqueles 
+    relativos à infraestrutura das redes de ensino e à oferta educacional voltada aos povos e populações tradicionais. O objetivo priuncipal deste
+    Panorama é sensibilizar os usuários a prosseguirem na navegação pelos demais panoramas, de modo a obter uma compreensão ampla, articulada e 
+    territorializada da realidade educacional acreana.
+    """
+    
+def texto_pan_fin_relatorio_intro():
+    return"""
+    Nesta subseção, você pode gerar relatórios com os valores utilizados neste Panorama, úteis para diminuir a abstração dos gráficos a iniciar 
+    a materialização dos trabalhos. **Eles podem ser baixados pelo usuario**. Basta selecionar os filtros desejados e clicar no botão de 
+    download, que aparece ao passar o cursor do mouse sobre a tabela gerada.
     """

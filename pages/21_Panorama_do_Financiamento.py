@@ -26,7 +26,8 @@ from scripts.textos import(
     texto_pan_financiamento_execucao_pdde_intro,
     texto_pan_financiamento_execucao_pdde_analise,
     texto_pan_financiamento_emendas_intro,
-    texto_pan_fin_consideracoes_finais
+    texto_pan_fin_consideracoes_finais,
+    texto_pan_fin_relatorio_intro
 )
 
 from scripts.graficos import(
@@ -352,10 +353,55 @@ with col2:
 st.write(texto_pan_financiamento_execucao_pdde_analise())
 
 
-
 st.header("Emendas Parlamentares")
 st.write(texto_pan_financiamento_emendas_intro())
 
+
 st.header("Considerações finais")
+st.write(texto_pan_fin_consideracoes_finais())
+
+
+from utils import COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO
 
 st.header("Geração de relatórios")
+st.write(texto_pan_fin_relatorio_intro())
+
+with st.form("form_pan_fin_relatorio"):
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        entes_disponiveis = sorted(df_panorama_financiamento['nome'].unique())
+        entes = st.selectbox(
+            "Selecione o ente:",
+            options=entes_disponiveis,
+            key="relatorio_valores_ente"
+        )
+
+    with col2:
+        anos_disponiveis = sorted(df_panorama_financiamento['ano'].unique())
+        ano_mais_recente = max(anos_disponiveis)
+        ano = st.selectbox(
+            "Selecione o ano:",
+            options=anos_disponiveis,
+            index=anos_disponiveis.index(ano_mais_recente),
+            key="relatorio_valores_ano"
+        )
+
+    submitted = st.form_submit_button("Gerar Dados")
+
+    if submitted:
+        # Filtrar o DataFrame
+        df_filtrado = df_panorama_financiamento[
+            (df_panorama_financiamento["nome"] == entes) &
+            (df_panorama_financiamento["ano"] == ano)
+        ].copy()
+
+        if df_filtrado.empty:
+            st.warning("Não há dados disponíveis para o ente e ano selecionados.")
+        else:
+            # Renomear as colunas com base no dicionário do projeto
+            df_renomeado = df_filtrado.rename(columns=COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO)
+
+            st.subheader(f"Dados Financeiros - {entes} ({ano})")
+            st.dataframe(df_renomeado)
