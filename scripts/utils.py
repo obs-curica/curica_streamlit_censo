@@ -1,3 +1,17 @@
+import pandas as pd
+import streamlit as st
+
+
+# Função para carregar os dados para páginas do projeto
+@st.cache_data
+def carregar_dados(url):
+    """Carrega dados de um arquivo CSV a partir de uma URL fornecida."""
+    import pandas as pd
+    import streamlit as st
+        # Carregar os dados diretamente do link fornecido
+    df = pd.read_csv(url, delimiter=';', encoding='utf-8', low_memory=False)
+    
+    return df
 
 
 # Dicionário de renomeação de colunas para exibição amigável ao usuário

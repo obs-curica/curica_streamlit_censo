@@ -5,7 +5,7 @@ import matplotlib.colors as mcolors
 import os
 import re
 
-from scripts.load_data import carregar_dados
+from scripts.utils import carregar_dados
 
 from scripts.textos import texto_pan_rede_intro
 from scripts.textos import texto_pan_rede_caracterizacao

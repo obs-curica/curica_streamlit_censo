@@ -5,9 +5,9 @@ import matplotlib.colors as mcolors
 import os
 import re
 
-from scripts.load_data import carregar_dados_agua
+
 from scripts.graficos import plot_agua_potavel_por_municipio
-from scripts.load_data import carregar_dados
+from scripts.utils import carregar_dados
 
 # Configuração visual
 plt.style.use('dark_background')

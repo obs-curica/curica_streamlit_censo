@@ -5,7 +5,7 @@ import matplotlib.colors as mcolors
 import os
 import re
 
-from scripts.load_data import carregar_dados
+from scripts.utils import carregar_dados
 from scripts.utils import COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO
 
 from scripts.textos import(
@@ -24,7 +24,9 @@ from scripts.textos import(
     texto_pan_financiamento_receitas_adicionais_intro,
     texto_pan_financiamento_receitas_adicionais_analise,
     texto_pan_financiamento_execucao_pdde_intro,
-    texto_pan_financiamento_execucao_pdde_analise
+    texto_pan_financiamento_execucao_pdde_analise,
+    texto_pan_financiamento_emendas_intro,
+    texto_pan_fin_consideracoes_finais
 )
 
 from scripts.graficos import(
@@ -351,8 +353,9 @@ st.write(texto_pan_financiamento_execucao_pdde_analise())
 
 
 
-st.subheader("Emendas Parlamentares")
+st.header("Emendas Parlamentares")
+st.write(texto_pan_financiamento_emendas_intro())
 
-st.subheader("Conclusão")
+st.header("Considerações finais")
 
-st.subheader("Geração de relatórios")
+st.header("Geração de relatórios")

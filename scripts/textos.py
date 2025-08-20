@@ -751,10 +751,11 @@ def texto_pan_financiamento_execucao_pdde_analise():
     poderia ser utilizado para atender outras finalidades. 
     
     Nesse ponto, outra reflexão se faz necessária. Vamos retomar o problema das :red-background[**escolas anexas**], que foi introduzido no 
-    Panorama da Rede de Ensino. Como foi dito, essas escolas simplesmente não aparecem no Censo Escolar e estão vinculadas a uma escola sede, 
-    que é a que possui a **Unidade Executora própria** e pode acessar os recursos do PDDE. Como as escolas anexas não aparecem oficialmente, 
-    o FNDE também não as contabiliza para o repasse de seus programas. Com isso, conclui-se que **os valores que deixam de ser acessados 
-    pelos sistemas de ensino são ainda maiores do que aqueles que estão oficialmente contabilizados e explicitados nos gráficos acima**.
+    Panorama da Rede de Ensino. Como foi dito, essas escolas simplesmente não aparecem no Censo Escolar e estão vinculadas a uma escola polo ou 
+    sede, que é aquela que possui a **Unidade Executora própria** e pode acessar os recursos do PDDE. Como as escolas anexas não aparecem 
+    oficialmente para o FNDE, o órgão não as contabiliza para o repasse de seus programas. Com isso, conclui-se que **os valores que deixam de 
+    ser acessados pelos sistemas de ensino são ainda maiores do que aqueles que estão oficialmente contabilizados e explicitados nos gráficos 
+    acima**.
     
     Veja na prática os efeitos da constituição de escolas anexas: Tarauacá, o terceiro maior Município do Acre, possuía aproximadamente 16 
     mil alunos matriculados em sua rede, no ano de 2024. Feijó, seu Município vizinho, possuía 12 mil, nos mesmos termos. Entretanto, 
@@ -765,8 +766,22 @@ def texto_pan_financiamento_execucao_pdde_analise():
     Por fim, ressalta-se que esse quadro é somente um exemplo geral da falha de gestão dos sistemas de ensino do Estado do Acre  e 
     enfatiza-se, novamente, que os programas serão cuidadosamente analisados nos Panoramas temáticos específicos.
     """
+    
+def texto_pan_financiamento_emendas_intro():
+    return """
+    As Emendas Parlamentares ganharam posição de destaque na imprensa e na execução do Orçamento Público brasileiro em razão das vultosas somas 
+    destinadas a essa espécie de transferência orçamentária. Embora a votação do Orçamento Público seja função do Poder Legislativo, a execução 
+    direta do orçamento a partir de Emendas Parlamentares trata-se de **função atípica**, pois a execução do Orçamento é **função típica do Poder 
+    Executivo**. O aumento do destaque dessa função atípica se iniciou no ano de 2015, quando foi criado o "Orçamento Impositivo", que obriga 
+    o Poder Executivo a destinar os recursos do Orçamento para a execução das Emendas Parlamentares. Entratanto, no ano de 2019 elas foram 
+    significativamente ampliadas e, no ano de 2021, criou-se o "Orçamento Secreto", falado. Sem discutir a constitucionalidade dessa modalidade
+    de receita, o fato é que há grande discriocionariedade no processo de destinação dessas Emendas. No que toca à educação, foram destinados
+    cerca de R$ 136 milhões à educação pública pelos parlamentares federais, no ano de 2024. Dada a expressividade dos valores, esses recursos
+    serão pormenorizados em um futuro próximo. Por hora, as fontes de receita aqui tratadas dão um início robusto para a compreensão do tema
+    do financiamento da educação pública. 
+    """
 
-def texto_conclusao():
+def texto_pan_fin_consideracoes_finais():
     return"""
     O objetivo é sensibilizar.
     """
