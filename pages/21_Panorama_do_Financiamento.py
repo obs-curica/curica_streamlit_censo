@@ -353,10 +353,6 @@ with col2:
 st.write(texto_pan_financiamento_execucao_pdde_analise())
 
 
-st.header("Emendas Parlamentares")
-st.write(texto_pan_financiamento_emendas_intro())
-
-
 st.header("Considerações finais")
 st.write(texto_pan_fin_consideracoes_finais())
 

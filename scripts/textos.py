@@ -767,7 +767,6 @@ def texto_pan_financiamento_execucao_pdde_analise():
     enfatiza-se, novamente, que os programas serão cuidadosamente analisados nos Panoramas temáticos específicos.
     """
     
-def texto_pan_financiamento_emendas_intro():
     return """
     As Emendas Parlamentares ganharam posição de destaque na imprensa e na execução do Orçamento Público brasileiro em razão das vultosas somas 
     destinadas a essa espécie de transferência orçamentária. Embora a votação do Orçamento Público seja função do Poder Legislativo, a execução 
