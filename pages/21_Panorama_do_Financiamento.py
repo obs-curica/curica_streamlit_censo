@@ -25,7 +25,6 @@ from scripts.textos import(
     texto_pan_financiamento_receitas_adicionais_analise,
     texto_pan_financiamento_execucao_pdde_intro,
     texto_pan_financiamento_execucao_pdde_analise,
-    texto_pan_financiamento_emendas_intro,
     texto_pan_fin_consideracoes_finais,
     texto_pan_fin_relatorio_intro
 )

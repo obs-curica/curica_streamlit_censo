@@ -766,20 +766,7 @@ def texto_pan_financiamento_execucao_pdde_analise():
     Por fim, ressalta-se que esse quadro é somente um exemplo geral da falha de gestão dos sistemas de ensino do Estado do Acre  e 
     enfatiza-se, novamente, que os programas serão cuidadosamente analisados nos Panoramas temáticos específicos.
     """
-    
-    return """
-    As Emendas Parlamentares ganharam posição de destaque na imprensa e na execução do Orçamento Público brasileiro em razão das vultosas somas 
-    destinadas a essa espécie de transferência orçamentária. Embora a votação do Orçamento Público seja função do Poder Legislativo, a execução 
-    direta do orçamento a partir de Emendas Parlamentares trata-se de **função atípica**, pois a execução do Orçamento é **função típica do Poder 
-    Executivo**. O aumento do destaque dessa função atípica se iniciou no ano de 2015, quando foi criado o "Orçamento Impositivo", que obriga 
-    o Poder Executivo a destinar os recursos do Orçamento para a execução das Emendas Parlamentares. Entratanto, no ano de 2019 elas foram 
-    significativamente ampliadas e, no ano de 2021, criou-se o "Orçamento Secreto", falado. Sem discutir a constitucionalidade dessa modalidade
-    de receita, o fato é que há grande discriocionariedade no processo de destinação dessas Emendas. No que toca à educação, foram destinados
-    cerca de R$ 136 milhões à educação pública pelos parlamentares federais, no ano de 2024. Dada a expressividade dos valores, esses recursos
-    serão pormenorizados em um futuro próximo. Por hora, as fontes de receita aqui tratadas dão um início robusto para a compreensão do tema
-    do financiamento da educação pública. 
-    """
-
+        
 def texto_pan_fin_consideracoes_finais():
     return"""
     O Panorama do Financiamento apresentou uma análise sistematizada dos recursos destinados à educação básica pública no estado do Acre, com 
