@@ -25,7 +25,9 @@ from scripts.textos import(
     texto_pan_financiamento_receitas_adicionais_analise,
     texto_pan_financiamento_execucao_pdde_intro,
     texto_pan_financiamento_execucao_pdde_analise,
-    texto_pan_fin_consideracoes_finais,
+    texto_pan_financiamento_responsabilidade_criminal,
+    texto_pan_fin_consideracoes_finais_intro,
+    texto_pan_fin_consideracoes_finais_analise,
     texto_pan_fin_relatorio_intro
 )
 
@@ -45,7 +47,8 @@ from scripts.graficos import(
     grafico_receitas_adicionais_por_ente_ano,
     grafico_receitas_adicionais_evolucao,
     grafico_execucao_pdde_valores,
-    grafico_execucao_pdde_porcentagem
+    grafico_execucao_pdde_porcentagem,
+    grafico_receita_total_educacao
 )
 
 # Configuração da página
@@ -352,11 +355,28 @@ with col2:
 st.write(texto_pan_financiamento_execucao_pdde_analise())
 
 
+st.header("Responsabilização dos gestores")
+st.write(texto_pan_financiamento_responsabilidade_criminal())
+
 st.header("Considerações finais")
-st.write(texto_pan_fin_consideracoes_finais())
+st.write(texto_pan_fin_consideracoes_finais_intro())
+
+col1, col2 = st.columns(2)
+with col1:
+    entes_disponiveis = sorted(df_execucao_pdde['nome'].unique())
+    entes = st.selectbox(
+        "Selecione o ente:",
+        options=entes_disponiveis,
+        key="consideracoes_ente"
+    )
+    
+    grafico_receita_total_educacao(df_panorama_financiamento, entes)
+    
+    
 
 
-from utils import COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO
+st.write(texto_pan_fin_consideracoes_finais_analise())
+
 
 st.header("Geração de relatórios")
 st.write(texto_pan_fin_relatorio_intro())

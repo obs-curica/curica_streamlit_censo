@@ -729,8 +729,8 @@ def texto_pan_financiamento_receitas_adicionais_analise():
 
 def texto_pan_financiamento_execucao_pdde_intro():
     return """
-    Percebe-se nos gráficos acima que o PDDE aparenta ter um repasse pequeno, quando comparado com os demais programas. Entretanto, os dados 
-    acima dizem respeito somente aos repasses do PDDE destinados diretamente ao CNPJ dos entes federativos e não reflete o potencial do 
+    Percebe-se nos gráficos acima que o PDDE aparenta ter um repasse pequeno, quando comparado com os demais programas. Entretanto, esses dados 
+    dizem respeito somente aos repasses do PDDE destinados diretamente ao CNPJ dos entes federativos e não reflete o potencial do 
     programa. Como o próprio nome diz, o PDDE é um programa de execução direta, ou seja, os recursos são repassados diretamente às Unidades
     Executoras, ou seja, às escolas, por meio de pessoas jurídicas constituídas para esse fim. Ele  possui diversas modalidades, como 
     infraestrutura, saneamento básico e ensino rural. Todos os anos o FNDE reserva parte de seu orçamento para o programa e o disponibiliza 
@@ -766,24 +766,77 @@ def texto_pan_financiamento_execucao_pdde_analise():
     Por fim, ressalta-se que esse quadro é somente um exemplo geral da falha de gestão dos sistemas de ensino do Estado do Acre  e 
     enfatiza-se, novamente, que os programas serão cuidadosamente analisados nos Panoramas temáticos específicos.
     """
-        
-def texto_pan_fin_consideracoes_finais():
+
+def texto_pan_financiamento_responsabilidade_criminal():
+    return"""
+    Embora esse Panorama apenas arranhe a casca do tema, já é possível obter dados e documentos concretos para atuações incisivas das 
+    Promotorias de Justiça, quando necessário. As falhas de gestão possuem julgamento eleitoral. Entretanto, em tempos de lei de improbidade 
+    administrativa descafeínada, procedimentos criminais dão conta da responsabilização. O conhecido [Decreto 201/67](https://www.planalto.gov.br/ccivil_03/decreto-lei/del0201.htm) 
+    estabelece os crimes de responsabilidade de **Prefeitos**, sujeitos a julgamento pelo Poder Judiciário. Seus incisos V e VII trazem
+    as seguintes condutas de interesse:
+    
+    *V - ordenar ou efetuar despesas não autorizadas por lei, ou realizá-las em desacordo com as normas financeiras pertinentes;*
+    
+    *VII - Deixar de prestar contas, no devido tempo, ao órgão competente, da aplicação de recursos, empréstimos subvenções ou 
+    auxílios internos ou externos, recebidos a qualquer titulo;*
+
+    As informações financeiras tratadas acima já permitem a responsabilização de Prefeitos nos casos de não aplicação dos mínimos legais.
+    Por exemplo, a despesa mínima com 70% do Fundeb na remuneração de servidores da educação, ou a despesa mínima de 5% proveniente da 
+    arrecadação de impostos em ações de manutenção e desenvolvimento do ensino ([MDE](https://www.planalto.gov.br/ccivil_03/leis/L9394compilado.htm#:~:text=das%20autoridades%20competentes.-,Art.%2070,-.%20Considerar%2Dse%2D%C3%A3o)) 
+    estão tipificadas no inciso V. Ainda, qualquer despesa com os recursos citados que não contemplarem a manutenção e desenvolvimento do 
+    ensino também caracterizam o tipo do inciso citado. As receitas provenientes do VAAT, VAAF e VAAR também possuem vinculação específica e 
+    seu uso indevido faz incidir este dispositivo. Sua aferição é simples de ser feita e será tratada nos panoramas temáticos pertinentes. 
+    
+    A omissão no envio dos Relatórios Resumidos de Execução Orçamentária (RREO) também pode caracterizar o crime do inciso VII. Relembre-se 
+    que a obrigação do envio é bimestral e pode ser verificada diretamente na página do SIOPE. 
+    
+    Para outros gestores que não o Prefeito, há o crime do artigo [359-D](https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm)
+    do Código Penal se apresenta:
+    
+    *Ordenar despesa não autorizada por lei:*
+    
+    *Pena – reclusão, de 1 (um) a 4 (quatro) anos.*
+    
+    Esse artigo é norma penal em branco que deve ser integrado pela legislação de regência específica da dotação orçamentária. O interessante 
+    é que os recursos destinados à educação são, em regra, vinculados a uma ação específica. Os programas do FNDE também possuem regramento
+    próprio que deve ser observado.Logo, a ordenação de despesa em desacordo com as normas de regência caracteriza o crime citado. Os RREOs 
+    já apontam todo o caminho.
+    """
+
+def texto_pan_fin_consideracoes_finais_intro():
     return"""
     O Panorama do Financiamento apresentou uma análise sistematizada dos recursos destinados à educação básica pública no estado do Acre, com 
-    ênfase nos repasses do Fundeb e nas transferências automáticas e voluntárias realizadas pelo Fundo Nacional de Desenvolvimento da Educação 
-    (FNDE). Por meio da consolidação de dados financeiros e indicadores de execução orçamentária, foram identificadas variações relevantes entre 
-    entes federativos e ao longo dos anos, revelando fragilidades na efetiva aplicação dos recursos disponíveis.
-
-    A visualização comparativa dos saldos disponibilizados, executados e não utilizados permitiu evidenciar a existência de obstáculos à plena 
-    utilização dos recursos, o que compromete, em última instância, a garantia do direito à educação de qualidade. Tais achados reforçam a 
-    importância do planejamento orçamentário integrado, da capacitação técnica das gestões locais e do fortalecimento das instâncias de controle 
-    social. Na medida em que se demonstra a existência de falhas na gestão, a discussão sobre a reserva do possível é afastada e se evidencia a
-    espaço para ação do Ministério Público na defesa de direitos indisponíveis.
+    ênfase nos repasses do Fundeb e nas transferências automáticas e voluntárias realizadas pelo Fundo Nacional de Desenvolvimento da 
+    Educação (FNDE). Por meio da consolidação de dados financeiros e indicadores de execução orçamentária, foram identificadas variações 
+    relevantes ao se comparar dados entre os entes federativos e, também, ao longo do tempo, revelando fragilidades na efetiva aplicação dos 
+    recursos disponíveis.
+    
+    A pergunta inicialmente levantada no início deste Panorama busca uma reflexão sobre a suficiência dos recursos disponíveis para a 
+    oferta do ensino básico: 
+    
+    Reserva do possível ou mínimo existencial? 
+    
+    Seguem os valores anuais totais dos recursos executados pelos entes federativos, excluídos os valores de repasses do PDDE destinados 
+    diretamente às escolas.
+    """
+    
+def texto_pan_fin_consideracoes_finais_analise():
+    return""" 
+    Sem dúvida, as necessidades e expectativas educacionais superam qualquer valor disponibilizado. Entretanto, não é possível afirmar que 
+    não são ofertados recursos financeiros para a execução do mínimo esperado. A visualização comparativa dos saldos disponibilizados, executados e não utilizados permitiu evidenciar a existência de obstáculos à 
+    plena utilização dos recursos, o que compromete, em última instância, a garantia do direito à educação de qualidade. Em especial, 
+    ressalta-se a existência de recursos que simplesmente não são acessados pelos respectivos sistemas de ensino. Desse modo, fica difícil
+    sustentar o argumento da reserva do possível.
+    
+    Tais achados reforçam a importância do planejamento orçamentário integrado, da capacitação técnica das gestões locais e do fortalecimento das 
+    instâncias de controle social. Na medida em que se demonstra a existência de falhas na gestão, a discussão sobre a reserva do possível 
+    é afastada e se evidencia a espaço para ação do Ministério Público na defesa de direitos indisponíveis.
 
     As informações aqui sistematizadas dialogam diretamente com os demais eixos temáticos abordados pelo Observatório Curica, notadamente aqueles 
     relativos à infraestrutura das redes de ensino e à oferta educacional voltada aos povos e populações tradicionais. O objetivo priuncipal deste
     Panorama é sensibilizar os usuários a prosseguirem na navegação pelos demais panoramas, de modo a obter uma compreensão ampla, articulada e 
     territorializada da realidade educacional acreana.
+    
     """
     
 def texto_pan_fin_relatorio_intro():
