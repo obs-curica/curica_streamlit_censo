@@ -823,20 +823,20 @@ def texto_pan_fin_consideracoes_finais_intro():
 def texto_pan_fin_consideracoes_finais_analise():
     return""" 
     Sem dúvida, as necessidades e expectativas educacionais superam qualquer valor disponibilizado. Entretanto, não é possível afirmar que 
-    não são ofertados recursos financeiros para a execução do mínimo esperado. A visualização comparativa dos saldos disponibilizados, executados e não utilizados permitiu evidenciar a existência de obstáculos à 
-    plena utilização dos recursos, o que compromete, em última instância, a garantia do direito à educação de qualidade. Em especial, 
-    ressalta-se a existência de recursos que simplesmente não são acessados pelos respectivos sistemas de ensino. Desse modo, fica difícil
-    sustentar o argumento da reserva do possível.
+    não são ofertados recursos financeiros para a execução do mínimo esperado. A visualização comparativa dos saldos disponibilizados, 
+    executados e não utilizados permitiu evidenciar a existência de obstáculos à plena utilização dos recursos, o que compromete, em última 
+    instância, a garantia do direito à educação de qualidade. Em especial, ressalta-se a existência de recursos que simplesmente não são 
+    acessados pelos respectivos sistemas de ensino. 
     
-    Tais achados reforçam a importância do planejamento orçamentário integrado, da capacitação técnica das gestões locais e do fortalecimento das 
-    instâncias de controle social. Na medida em que se demonstra a existência de falhas na gestão, a discussão sobre a reserva do possível 
-    é afastada e se evidencia a espaço para ação do Ministério Público na defesa de direitos indisponíveis.
+    Tais achados reforçam a importância do planejamento orçamentário integrado, da capacitação técnica das gestões locais e do fortalecimento 
+    das instâncias de controle social. Na medida em que se demonstra a existência de falhas na gestão, a discussão sobre a reserva do 
+    possível é afastada e se evidencia o espaço para ação institucional do Ministério Público na defesa de direitos indisponíveis.
 
-    As informações aqui sistematizadas dialogam diretamente com os demais eixos temáticos abordados pelo Observatório Curica, notadamente aqueles 
-    relativos à infraestrutura das redes de ensino e à oferta educacional voltada aos povos e populações tradicionais. O objetivo priuncipal deste
-    Panorama é sensibilizar os usuários a prosseguirem na navegação pelos demais panoramas, de modo a obter uma compreensão ampla, articulada e 
-    territorializada da realidade educacional acreana.
-    
+    Embora já seja possível extrair linhas de ação concretas a partir dos dados aqui sistematizados, eles também dialogam diretamente com 
+    os demais eixos temáticos abordados pelo Observatório Curica, notadamente aqueles relativos à infraestrutura das redes de ensino e à 
+    oferta educacional voltada aos povos e populações tradicionais, o dito ensino rural. Não perca de vista o objetivo principal deste 
+    Panorama, que é sensibilizar os usuários a prosseguirem na navegação pelos demais panoramas, de modo a obter uma compreensão articulada 
+    e territorializada da realidade educacional acreana.
     """
     
 def texto_pan_fin_relatorio_intro():
