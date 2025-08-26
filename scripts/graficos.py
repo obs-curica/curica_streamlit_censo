@@ -1165,7 +1165,7 @@ def grafico_indicador_despesa_profissionais(df, ente):
     ax.set_title(f'Despesa com Profissionais da Educação Fundeb - {ente}',
                  color='#FFA07A', fontsize=15)
     ax.set_ylabel('Indicador (%)', color='#FFA07A', fontsize=12)
-    ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=12)
+    ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=10)
 
     # Estilo dos spines
     for spine in ax.spines.values():
@@ -1247,8 +1247,8 @@ def grafico_percentual_recursos_nao_utilizados(df, ente):
     # Título e eixos
     ax.set_title(f'Recursos Não Utilizados Fundeb - {ente}',
                  color='#FFA07A', fontsize=15)
-    ax.set_ylabel('Percentual (%)', color='#FFA07A', fontsize=12)
-    ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=12)
+    ax.set_ylabel('Percentual (%)', color='#FFA07A', fontsize=10)
+    ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=10)
 
     ax.tick_params(axis='x', colors='#FFA07A', labelsize=12)
     ax.tick_params(axis='y', colors='#FFA07A', labelsize=12)
@@ -1313,8 +1313,8 @@ def grafico_valor_repasse_fundeb(df, ente):
 
     # Título e eixos
     ax.set_title(f'Evolução do Repasse do Fundeb - {ente}', color='#FFA07A', fontsize=16)
-    ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=12)
-    ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=12)
+    ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=10)
+    ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=10)
 
     # Estilo dos eixos
     ax.tick_params(axis='x', colors='#FFA07A', labelsize=12)
@@ -1383,8 +1383,8 @@ def grafico_complementacoes_fundeb(df, ente):
 
     # Título e rótulos
     ax.set_title(f'Complementações do Fundeb por Ano - {ente}', color='#FFA07A', fontsize=16)
-    ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=12)
-    ax.set_xlabel('Fonte: Siope', color='#FFA07A', fontsize=12)
+    ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=10)
+    ax.set_xlabel('Fonte: Siope', color='#FFA07A', fontsize=10)
     ax.set_xticks(x)
     ax.set_xticklabels(anos)
 
@@ -1437,8 +1437,8 @@ def grafico_valor_receita_impostos(df, ente):
 
     # Eixos e título
     ax.set_title(f'Total da Receita de Impostos - {ente}', color='#FFA07A', fontsize=16)
-    ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=12)
-    ax.set_xlabel('Fonte: Siope', color='#FFA07A', fontsize=12)
+    ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=10)
+    ax.set_xlabel('Fonte: Siope', color='#FFA07A', fontsize=10)
 
     # Estilo dos ticks e spines
     ax.tick_params(axis='x', colors='#FFA07A', labelsize=12)
@@ -1506,8 +1506,8 @@ def grafico_valores_despesa_minima_impostos(df, ente):
 
     # Título e eixos
     ax.set_title(f'Mínimo MDE x Despesa MDE Impostos - {ente}', color='#FFA07A', fontsize=16)
-    ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=12)
-    ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=12)
+    ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=10)
+    ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=10)
     ax.set_xticks(x)
     ax.set_xticklabels(anos)
 
@@ -1568,8 +1568,9 @@ def grafico_receita_salario_educacao_ano(df, ano):
     ax.barh(df_filtrado['nome'], df_filtrado['valor_milhoes'], color=cores)
 
     # Título e eixos
-    ax.set_title('Total da Receita do Salário-Educação (R$ milhões)', color='#FFA07A', fontsize=30)
-    
+    ax.set_title('Total da Receita do Salário-Educação (R$ milhões)', color='#FFA07A', fontsize=23)
+    ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=15)
+    ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=15)
     # Estilo dos ticks e spines
     ax.tick_params(colors='#FFA07A', labelsize=20)
     for spine in ax.spines.values():
@@ -1627,7 +1628,7 @@ def grafico_receita_salario_educacao_ente(df, ente):
 
     # Estilo
     plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(7, 6))
+    fig, ax = plt.subplots(figsize=(7, 6.45))
 
     # Cor padrão do projeto
     cor_verde = '#006400'
@@ -1636,12 +1637,12 @@ def grafico_receita_salario_educacao_ente(df, ente):
     ax.bar(anos, valores, color=cor_verde)
 
     # Título e eixos
-    ax.set_title(f'Receita do Salário-Educação - {ente}', color='#FFA07A', fontsize=16)
-    ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=12)
-    
+    ax.set_title(f'Receita do Salário-Educação - {ente}', color='#FFA07A', fontsize=14)
+    ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=9)
+    ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=9)
 
     # Estilo dos eixos
-    ax.tick_params(colors='#FFA07A', labelsize=12)
+    ax.tick_params(colors='#FFA07A', labelsize=11)
     for spine in ax.spines.values():
         spine.set_color('#FFA07A')
 
@@ -1655,10 +1656,10 @@ def grafico_receita_salario_educacao_ente(df, ente):
             ax.text(
                 i,
                 valor + valor_maximo * 0.015,
-                f'{valor:.1f}',
+                f'R$ {valor:.1f} mi',
                 ha='center',
                 color='white',
-                fontsize=9,
+                fontsize=10,
                 fontweight='bold'
             )
 
@@ -1720,18 +1721,17 @@ def grafico_receitas_adicionais_por_ente_ano(df, ente, ano):
 
     # Estilo escuro
     plt.style.use("dark_background")
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(10, 7))
 
     ax.barh(df_valores["fonte"], df_valores["valor_mi"], color=cores)
 
     # Estilo do gráfico
     ax.set_title(f"Receitas Adicionais da Educação - {ente} ({ano})", color="#FFA07A", fontsize=18)
-    ax.set_xlabel("Fonte: SIOPE", color="#FFA07A", fontsize=14)
-    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=14)
+    ax.set_xlabel("Fonte: SIOPE", color="#FFA07A", fontsize=11)
+    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=11)
 
     # Ticks e spines
-    ax.tick_params(axis='x', colors='#FFA07A')
-    ax.tick_params(axis='y', colors='#FFA07A')
+    ax.tick_params(colors='#FFA07A', labelsize=14)
     for spine in ax.spines.values():
         spine.set_color('#FFA07A')
 
@@ -1740,7 +1740,7 @@ def grafico_receitas_adicionais_por_ente_ano(df, ente, ano):
     ax.set_xlim(0, max_valor * 1.15)
 
     for i, valor in enumerate(df_valores["valor_mi"]):
-        ax.text(valor + (max_valor * 0.01), i, f"R$ {valor:.2f} mi", color="white", va="center", fontsize=10)
+        ax.text(valor + (max_valor * 0.01), i, f"R${valor:.2f}mi", color="white", va="center", fontweight='bold', fontsize=10)
 
     fig.tight_layout(pad=2.0)
     st.pyplot(fig)
@@ -1791,7 +1791,7 @@ def grafico_receitas_adicionais_evolucao(df, ente, categoria):
 
     # Estilo e figura
     plt.style.use("dark_background")
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(10, 7))
 
     # Plot
     bars = ax.bar(df_filtrado["ano_str"], df_filtrado["valor_mi"], color="#006400")
@@ -1806,17 +1806,17 @@ def grafico_receitas_adicionais_evolucao(df, ente, categoria):
             ha='center',
             va='bottom',
             color="white",
-            fontsize=10
+            fontweight='bold',
+            fontsize=13
         )
 
     # Título e eixos
     ax.set_title(f"Evolução da Receita de {nome_legivel} - {ente}", color="#FFA07A", fontsize=18)
-    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=14)
-    ax.set_xlabel("Fonte: SIOPE", color="#FFA07A", fontsize=14)
+    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=11)
+    ax.set_xlabel("Fonte: SIOPE", color="#FFA07A", fontsize=11)
 
     # Estilo dos eixos
-    ax.tick_params(axis='x', colors='#FFA07A')
-    ax.tick_params(axis='y', colors='#FFA07A')
+    ax.tick_params(colors='#FFA07A', labelsize=14)
     for spine in ax.spines.values():
         spine.set_color('#FFA07A')
 
@@ -1882,16 +1882,17 @@ def grafico_execucao_pdde_valores(df, ano, ente):
             ha="center",
             va="bottom",
             color="white",
-            fontsize=10
+            fontweight='bold',
+            fontsize=11
         )
 
     # Título e eixos
-    ax.set_title(f"Execução de Recursos - {ente} ({ano})", color="#FFA07A", fontsize=18)
-    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=14)
-    ax.set_xlabel("Fonte: Painel de Monitoramento do PDDE - FNDE", color="#FFA07A", fontsize=12)
+    ax.set_title(f"Execução dos Recursos do PDDE - {ente} ({ano})", color="#FFA07A", fontsize=14)
+    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=10)
+    ax.set_xlabel("Fonte: Painel de Monitoramento do PDDE - FNDE", color="#FFA07A", fontsize=10)
 
     # Estilo dos eixos
-    ax.tick_params(axis="x", colors="#FFA07A")
+    ax.tick_params(axis="x", colors="#FFA07A", labelsize=12)
     ax.tick_params(axis="y", colors="#FFA07A")
     for spine in ax.spines.values():
         spine.set_color("#FFA07A")
@@ -1944,16 +1945,17 @@ def grafico_execucao_pdde_porcentagem(df, ano):
             f"{valor * 100:.1f}%",
             va="center",
             color="white",
-            fontsize=9
+            fontweight='bold',
+            fontsize=10
         )
 
     # Estilo dos eixos
     ax.set_title(f"Execução Percentual dos Recursos do PDDE - {ano}", color="#FFA07A", fontsize=18)
-    ax.set_ylabel("Porcentagem de Execução (%)", color="#FFA07A", fontsize=14)
-    ax.set_xlabel("Fonte: Painel de Monitoramento do PDDE - FNDE", color="#FFA07A", fontsize=14)
+    ax.set_ylabel("Porcentagem de Execução (%)", color="#FFA07A", fontsize=12)
+    ax.set_xlabel("Fonte: Painel de Monitoramento do PDDE - FNDE", color="#FFA07A", fontsize=12)
     
-    ax.tick_params(axis="x", colors="#FFA07A")
-    ax.tick_params(axis="y", colors="#FFA07A")
+    ax.tick_params(colors="#FFA07A", labelsize=13)
+    
     for spine in ax.spines.values():
         spine.set_color("#FFA07A")
 
@@ -2009,16 +2011,16 @@ def grafico_receita_total_educacao(df, ente):
             f"R$ {valor:.1f} mi",
             ha="center",
             color="white",
-            fontsize=10
+            fontweight="bold",
+            fontsize=13
         )
 
     # Título e eixos
     ax.set_title(f"Receita Total para Educação - {ente}", color="#FFA07A", fontsize=18)
-    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=14)
-    ax.set_xlabel("Ano", color="#FFA07A", fontsize=14)
+    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=11)
+    ax.set_xlabel("Fonte: SIOPE", color="#FFA07A", fontsize=11)
 
-    ax.tick_params(axis='x', colors='#FFA07A')
-    ax.tick_params(axis='y', colors='#FFA07A')
+    ax.tick_params(colors='#FFA07A', labelsize=13)    
     for spine in ax.spines.values():
         spine.set_color('#FFA07A')
 

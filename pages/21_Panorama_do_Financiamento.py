@@ -315,7 +315,7 @@ with col2:
     
 st.write(texto_pan_financiamento_receitas_adicionais_analise())
 
-st.subheader("Exemplo de deficiência na execução do recurso do PDDE")
+st.subheader("Exemplo de deficiência na execução dos recursos do PDDE")
 
 st.write(texto_pan_financiamento_execucao_pdde_intro())
 

@@ -771,7 +771,7 @@ def texto_pan_financiamento_responsabilidade_criminal():
     return"""
     Embora esse Panorama apenas arranhe a casca do tema, já é possível obter dados e documentos concretos para atuações incisivas das 
     Promotorias de Justiça, quando necessário. As falhas de gestão possuem julgamento eleitoral. Entretanto, em tempos de lei de improbidade 
-    administrativa descafeínada, procedimentos criminais dão conta da responsabilização. O conhecido [Decreto 201/67](https://www.planalto.gov.br/ccivil_03/decreto-lei/del0201.htm) 
+    administrativa descafeínada, procedimentos criminais dão conta da responsabilização. O conhecido [artigo 1º do Decreto 201/67](https://www.planalto.gov.br/ccivil_03/decreto-lei/del0201.htm) 
     estabelece os crimes de responsabilidade de **Prefeitos**, sujeitos a julgamento pelo Poder Judiciário. Seus incisos V e VII trazem
     as seguintes condutas de interesse:
     
@@ -790,16 +790,16 @@ def texto_pan_financiamento_responsabilidade_criminal():
     A omissão no envio dos Relatórios Resumidos de Execução Orçamentária (RREO) também pode caracterizar o crime do inciso VII. Relembre-se 
     que a obrigação do envio é bimestral e pode ser verificada diretamente na página do SIOPE. 
     
-    Para outros gestores que não o Prefeito, há o crime do artigo [359-D](https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm)
-    do Código Penal se apresenta:
+    Para outros gestores que não o Prefeito, há o crime do [artigo 359-D do Código Penal](https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm)
+    se apresenta:
     
-    *Ordenar despesa não autorizada por lei:*
+    *Art. 359-D - Ordenar despesa não autorizada por lei:*
     
     *Pena – reclusão, de 1 (um) a 4 (quatro) anos.*
     
     Esse artigo é norma penal em branco que deve ser integrado pela legislação de regência específica da dotação orçamentária. O interessante 
     é que os recursos destinados à educação são, em regra, vinculados a uma ação específica. Os programas do FNDE também possuem regramento
-    próprio que deve ser observado.Logo, a ordenação de despesa em desacordo com as normas de regência caracteriza o crime citado. Os RREOs 
+    próprio que deve ser observado. Logo, a ordenação de despesa em desacordo com as normas de regência caracteriza o crime citado. Os RREOs 
     já apontam todo o caminho.
     """
 
@@ -824,7 +824,7 @@ def texto_pan_fin_consideracoes_finais_analise():
     return""" 
     Sem dúvida, as necessidades e expectativas educacionais superam qualquer valor disponibilizado. Entretanto, não é possível afirmar que 
     não são ofertados recursos financeiros para a execução do mínimo esperado. A visualização comparativa dos saldos disponibilizados, 
-    executados e não utilizados permitiu evidenciar a existência de obstáculos à plena utilização dos recursos, o que compromete, em última 
+    executados e não utilizados permitiu observar a existência de obstáculos à plena utilização dos recursos, o que compromete, em última 
     instância, a garantia do direito à educação de qualidade. Em especial, ressalta-se a existência de recursos que simplesmente não são 
     acessados pelos respectivos sistemas de ensino. 
     
