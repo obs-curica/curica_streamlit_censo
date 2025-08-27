@@ -317,6 +317,9 @@ st.write(texto_pan_financiamento_receitas_adicionais_analise())
 
 st.subheader("Exemplo de deficiência na execução dos recursos do PDDE")
 
+
+#++++++++
+# Subseção PDDE
 st.write(texto_pan_financiamento_execucao_pdde_intro())
 
 col1, col2 = st.columns(2)
@@ -355,9 +358,14 @@ with col2:
 st.write(texto_pan_financiamento_execucao_pdde_analise())
 
 
+#++++++++
+# Subseção Responsabilidade Criminal
 st.header("Responsabilização dos gestores")
 st.write(texto_pan_financiamento_responsabilidade_criminal())
 
+
+#++++++++
+# Subseção Considerações finais
 st.header("Considerações finais")
 st.write(texto_pan_fin_consideracoes_finais_intro())
 
@@ -372,51 +380,158 @@ with col1:
     
     grafico_receita_total_educacao(df_panorama_financiamento, entes)
     
-    
-
-
 st.write(texto_pan_fin_consideracoes_finais_analise())
 
 
+#++++++++
+# Subseção Relatórios
 st.header("Geração de relatórios")
 st.write(texto_pan_fin_relatorio_intro())
 
-with st.form("form_pan_fin_relatorio"):
+
+# Relatório "Dados Financeiros"
+with st.form("pan_fin_form_dados_financeiros"):
+
+    st.subheader("Dados Financeiros")
 
     col1, col2 = st.columns(2)
 
     with col1:
-        entes_disponiveis = sorted(df_panorama_financiamento['nome'].unique())
-        entes = st.selectbox(
+        entes_disponiveis = sorted(df_panorama_financiamento["nome"].unique())
+        ente_selecionado = st.selectbox(
             "Selecione o ente:",
             options=entes_disponiveis,
-            key="relatorio_valores_ente"
+            key="relatorio_financiamento_ente"
         )
 
     with col2:
-        anos_disponiveis = sorted(df_panorama_financiamento['ano'].unique())
-        ano_mais_recente = max(anos_disponiveis)
-        ano = st.selectbox(
-            "Selecione o ano:",
+        anos_disponiveis = sorted(df_panorama_financiamento["ano"].unique())
+        anos_selecionados = st.multiselect(
+            "Selecione o(s) ano(s):",
             options=anos_disponiveis,
-            index=anos_disponiveis.index(ano_mais_recente),
-            key="relatorio_valores_ano"
+            default=[max(anos_disponiveis)],
+            key="relatorio_financiamento_anos"
         )
 
+    # Botão de submissão
     submitted = st.form_submit_button("Gerar Dados")
 
     if submitted:
-        # Filtrar o DataFrame
+        # Filtrar o DataFrame corretamente
         df_filtrado = df_panorama_financiamento[
-            (df_panorama_financiamento["nome"] == entes) &
-            (df_panorama_financiamento["ano"] == ano)
+            (df_panorama_financiamento["nome"] == ente_selecionado) &
+            (df_panorama_financiamento["ano"].isin(anos_selecionados))
         ].copy()
 
         if df_filtrado.empty:
             st.warning("Não há dados disponíveis para o ente e ano selecionados.")
         else:
-            # Renomear as colunas com base no dicionário do projeto
             df_renomeado = df_filtrado.rename(columns=COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO)
 
-            st.subheader(f"Dados Financeiros - {entes} ({ano})")
+            st.subheader(f"Dados Financeiros - {ente_selecionado} ({', '.join(map(str, anos_selecionados))})")
+            st.dataframe(df_renomeado)
+
+
+# Relatório "Descumprimento da despesa com profissionai da educação"
+with st.form("pan_fin_form_remuneracao_profissionais"):
+
+    st.subheader("Descumprimento da despesa mínima com profissionais da educação")
+    st.write("Dados disponíveis a partir do ano de 2021")
+
+    submitted = st.form_submit_button("Gerar Dados")
+
+    if submitted:
+        # Garantir que a coluna esteja numérica
+        df = df_panorama_financiamento.copy()
+        df["indicador_despesa_fundeb_profissionais"] = pd.to_numeric(
+            df["indicador_despesa_fundeb_profissionais"].astype(str).str.replace(",", "."),
+            errors="coerce"
+        )
+
+        # Filtrar por descumprimento (< 70%) a partir de 2021
+        df_filtrado = df[
+            (df["ano"] >= 2021) &
+            (df["indicador_despesa_fundeb_profissionais"] < 70)
+        ][["nome", "cod_ibge", "ano", "indicador_despesa_fundeb_profissionais"]].copy()
+
+        if df_filtrado.empty:
+            st.warning("Não houve descumprimento para os anos disponíveis.")
+        else:
+            # Renomear colunas com base no dicionário do projeto
+            df_renomeado = df_filtrado.rename(columns=COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO)
+
+            st.subheader("Entes que descumpriram o gasto mínimo de 70% com remuneração dos profissionais da educação")
+            st.dataframe(df_renomeado)
+
+# Relatório "Descumprimento da despesa mínima em MDE"
+with st.form("pan_fin_form_despesa_MDE"):
+
+    st.subheader("Descumprimento da despesa mínima com MDE")
+    st.write("Dados disponíveis a partir do ano de 2021")
+
+    submitted = st.form_submit_button("Gerar Dados")
+
+    if submitted:
+        # Copiar o DataFrame
+        df = df_panorama_financiamento.copy()
+
+        # Garantir que as colunas estejam numéricas
+        colunas_mde = ["valor_minimo_mde", "valor_total_despesa_impostos"]
+        for col in colunas_mde:
+            df[col] = pd.to_numeric(
+                df[col].astype(str).str.replace(",", "."),
+                errors="coerce"
+            )
+
+        # Filtrar entes que não atingiram o mínimo
+        df_filtrado = df[
+            (df["ano"] >= 2021) &
+            (df["valor_total_despesa_impostos"] < df["valor_minimo_mde"])
+        ][["nome", "cod_ibge", "ano", "valor_total_despesa_impostos", "valor_minimo_mde"]].copy()
+
+        if df_filtrado.empty:
+            st.warning("Não houve descumprimento para os anos disponíveis.")
+        else:
+            # Renomear colunas com base no dicionário do projeto
+            df_renomeado = df_filtrado.rename(columns=COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO)
+
+            st.subheader("Entes que descumpriram o gasto mínimo com MDE")
+            st.dataframe(df_renomeado)
+
+
+#+++++++++++++++++++++++++++
+# Corrigir este percentual. O calculo está errado
+# Relatório Máximo de 10% de reprogramação
+with st.form("pan_fin_form_reprogramacao"):
+
+    st.subheader("Descumprimento do máximo de 10% de superávit no exercício")
+    st.write("Dados disponíveis a partir do ano de 2021")
+
+    submitted = st.form_submit_button("Gerar Dados")
+
+    if submitted:
+        # Copiar o DataFrame
+        df = df_panorama_financiamento.copy()
+
+        # Garantir que as colunas estejam numéricas
+        colunas_mde = ["valor_minimo_mde", "valor_total_despesa_impostos"]
+        for col in colunas_mde:
+            df[col] = pd.to_numeric(
+                df[col].astype(str).str.replace(",", "."),
+                errors="coerce"
+            )
+
+        # Filtrar entes que não atingiram o mínimo
+        df_filtrado = df[
+            (df["ano"] >= 2021) &
+            (df["valor_total_despesa_impostos"] < df["valor_minimo_mde"])
+        ][["nome", "cod_ibge", "ano", "valor_total_despesa_impostos", "valor_minimo_mde"]].copy()
+
+        if df_filtrado.empty:
+            st.warning("Não houve descumprimento para os anos disponíveis.")
+        else:
+            # Renomear colunas com base no dicionário do projeto
+            df_renomeado = df_filtrado.rename(columns=COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO)
+
+            st.subheader("Entes que descumpriram o gasto mínimo com MDE")
             st.dataframe(df_renomeado)

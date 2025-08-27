@@ -28,7 +28,7 @@ COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO = {
     "valor_receita_total_fundeb": "Total Fundeb",
     "valor_total_despesa_impostos": "Despesa MDE Impostos",
     "valor_receita_nao_aplicada": "Receita Fundeb Não Aplicada",
-    "indicador_despesa_fundeb_profissionais": "% Gasto c/ Profissionais",
+    "indicador_despesa_fundeb_profissionais": "% Gasto com Profissionais",
     "valor_receita_salario_educacao": "Receita Salário-Educação",
     "valor_receita_pnae": "PNAE",
     "valor_receita_pdde": "PDDE",
