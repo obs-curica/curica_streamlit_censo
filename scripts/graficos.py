@@ -1199,33 +1199,24 @@ def grafico_percentual_recursos_nao_utilizados(df, ente):
     """
     Gera um gráfico de barras verticais mostrando, ano a ano, o percentual dos recursos
     do Fundeb não utilizados (restos a pagar), para o ente selecionado.
+    Utiliza diretamente a coluna 'indicador_receita_nao_aplicada' (valores já percentuais).
     """
     import matplotlib.pyplot as plt
     import streamlit as st
     import pandas as pd
 
-    # Função segura para conversão
-    def to_float(col):
-        return pd.to_numeric(
-            col.astype(str).str.replace(',', '.').str.replace(' ', '').str.strip(),
-            errors='coerce'
-        )
-
     # Filtrar dados
     df_filtrado = df[df['nome'] == ente].sort_values(by='ano').copy()
 
     # Conversão robusta
-    df_filtrado['valor_receita_nao_aplicada'] = to_float(df_filtrado['valor_receita_nao_aplicada'])
-    df_filtrado['valor_receita_total_fundeb'] = to_float(df_filtrado['valor_receita_total_fundeb'])
-
-    # Calcular percentual
-    df_filtrado['percentual_nao_utilizado'] = (
-        (df_filtrado['valor_receita_nao_aplicada'] / df_filtrado['valor_receita_total_fundeb']) * 100
-    ).round(1)
+    df_filtrado['indicador_receita_nao_aplicada'] = pd.to_numeric(
+        df_filtrado['indicador_receita_nao_aplicada'].astype(str).str.replace(',', '.'),
+        errors='coerce'
+    )
 
     # Verificação de dados
-    if df_filtrado['percentual_nao_utilizado'].isnull().all():
-        st.warning("Não foi possível calcular os percentuais. Verifique os dados de entrada.")
+    if df_filtrado['indicador_receita_nao_aplicada'].isnull().all():
+        st.warning("Não foi possível carregar os percentuais de recursos não utilizados.")
         return
 
     # Estilo
@@ -1235,12 +1226,12 @@ def grafico_percentual_recursos_nao_utilizados(df, ente):
     # Cores condicionais
     cores = [
         '#8B0000' if valor > 10 else '#FFD700'
-        for valor in df_filtrado['percentual_nao_utilizado'].fillna(0)
+        for valor in df_filtrado['indicador_receita_nao_aplicada'].fillna(0)
     ]
 
     bars = ax.bar(
         df_filtrado['ano'].astype(str),
-        df_filtrado['percentual_nao_utilizado'],
+        df_filtrado['indicador_receita_nao_aplicada'],
         color=cores
     )
 
@@ -1256,11 +1247,11 @@ def grafico_percentual_recursos_nao_utilizados(df, ente):
         spine.set_color('#FFA07A')
 
     # Limite eixo y
-    limite_y = max(105, df_filtrado['percentual_nao_utilizado'].max() * 1.2)
+    limite_y = max(105, df_filtrado['indicador_receita_nao_aplicada'].max() * 1.2)
     ax.set_ylim(0, limite_y)
 
     # Rótulos
-    for i, valor in enumerate(df_filtrado['percentual_nao_utilizado']):
+    for i, valor in enumerate(df_filtrado['indicador_receita_nao_aplicada']):
         if pd.notnull(valor):
             ax.text(
                 i,
@@ -1274,6 +1265,7 @@ def grafico_percentual_recursos_nao_utilizados(df, ente):
 
     fig.tight_layout()
     st.pyplot(fig)
+
 
 # Gráfico de barras para o repasse do Fundeb
 def grafico_valor_repasse_fundeb(df, ente):
