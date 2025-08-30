@@ -1482,7 +1482,7 @@ def grafico_valores_despesa_minima_impostos(df, ente):
     fig, ax = plt.subplots(figsize=(8, 6))
 
     # Cores
-    cor_mde = '#00BFFF'            # Azul claro
+    cor_exigido = '#00BFFF'            # Azul claro
     cor_despesa_ok = '#FFA500'     # Laranja
     cor_despesa_ruim = '#FF0000'   # Vermelho
 
@@ -1493,7 +1493,7 @@ def grafico_valores_despesa_minima_impostos(df, ente):
     ]
 
     # Plotar barras
-    ax.bar(x - largura/2, df_filtrado['valor_minimo_mde'], width=largura, label='Mínimo MDE', color=cor_mde)
+    ax.bar(x - largura/2, df_filtrado['valor_minimo_mde'], width=largura, label='Mínimo MDE', color=cor_exigido)
     ax.bar(x + largura/2, df_filtrado['valor_total_despesa_impostos'], width=largura, label='Despesa MDE Impostos', color=cores_despesa)
 
     # Título e eixos
@@ -1526,6 +1526,145 @@ def grafico_valores_despesa_minima_impostos(df, ente):
 
     fig.tight_layout()
     st.pyplot(fig)
+
+def grafico_valores_limite_constitucional(df, ente):
+    """
+    Gera um gráfico de barras agrupadas mostrando, por ano, o valor mínimo a ser aplicado em MDE
+    e a despesa total liquidada com impostos para o ente selecionado.
+    Caso a despesa não atinja o mínimo, a barra de despesa será colorida em vermelho.
+    """
+
+    # Filtrar dados do ente
+    df_filtrado = df[df['nome'] == ente].sort_values(by='ano').copy()
+
+    # Conversão segura para float e milhões
+    for col in ['valor_limite_const_exigido', 'valor_limite_const_aplicado']:
+        df_filtrado[col] = pd.to_numeric(
+            df_filtrado[col].astype(str).str.replace(',', '.'),
+            errors='coerce'
+        ) / 1_000_000
+
+    # Eixo X
+    anos = df_filtrado['ano'].astype(str)
+    x = np.arange(len(anos))
+    largura = 0.35
+
+    # Estilo visual
+    plt.style.use('dark_background')
+    fig, ax = plt.subplots(figsize=(8, 6))
+
+    # Cores
+    cor_exigido = '#00BFFF'            # Azul claro
+    cor_despesa_ok = '#FFA500'     # Laranja
+    cor_despesa_ruim = '#FF0000'   # Vermelho
+
+    # Determinar cores das barras de despesa com base na comparação
+    cores_despesa = [
+        cor_despesa_ruim if mde > despesa else cor_despesa_ok
+        for mde, despesa in zip(df_filtrado['valor_limite_const_exigido'], df_filtrado['valor_limite_const_aplicado'])
+    ]
+
+    # Plotar barras
+    ax.bar(x - largura/2, df_filtrado['valor_limite_const_exigido'], width=largura, label='Mínimo Constitucional exigido', color=cor_exigido)
+    ax.bar(x + largura/2, df_filtrado['valor_limite_const_aplicado'], width=largura, label='Investimento total em MDE', color=cores_despesa)
+
+    # Título e eixos
+    ax.set_title(f'Investimento Mínimo Constitucional - {ente}', color='#FFA07A', fontsize=16)
+    ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=10)
+    ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=10)
+    ax.set_xticks(x)
+    ax.set_xticklabels(anos)
+
+    # Eixos e bordas
+    ax.tick_params(colors='#FFA07A', labelsize=12)
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    # Cálculo do limite do eixo Y
+    valor_maximo = max(df_filtrado[['valor_limite_const_exigido', 'valor_limite_const_aplicado']].max())
+    ax.set_ylim(top=valor_maximo * 1.15)
+
+    # Rótulos dinâmicos nas barras
+    for i, (mde, despesa) in enumerate(zip(df_filtrado['valor_limite_const_exigido'], df_filtrado['valor_limite_const_aplicado'])):
+        if pd.notnull(mde):
+            ax.text(x[i] - largura/2, mde + valor_maximo * 0.015, f'{mde:.1f}',
+                    ha='center', color='white', fontsize=9, fontweight='bold')
+        if pd.notnull(despesa):
+            ax.text(x[i] + largura/2, despesa + valor_maximo * 0.015, f'{despesa:.1f}',
+                    ha='center', color='white', fontsize=9, fontweight='bold')
+
+    # Legenda
+    ax.legend(loc='upper left', frameon=False, fontsize=10)
+
+    fig.tight_layout()
+    st.pyplot(fig)
+
+def grafico_indicador_limite_constitucional(df, ente):
+    """
+    Gera um gráfico de barras verticais mostrando a evolução do indicador de gastos com 
+    a remuneração dos profissionais da educação, ao longo dos anos, para o ente selecionado.
+    """
+
+
+    # Filtrar dados do ente
+    df_filtrado = df[df['nome'] == ente].sort_values(by='ano').copy()
+
+    # Conversão segura para float
+    df_filtrado['indicador_limite_constitucional'] = pd.to_numeric(
+        df_filtrado['indicador_limite_constitucional'].astype(str).str.replace(',', '.'),
+        errors='coerce'
+    )
+
+    # Estilo do gráfico
+    plt.style.use('dark_background')
+
+    # Definir cores condicionais por linha
+    cores = [
+        '#8B0000' if valor < 25 else '#006400'
+        for valor in df_filtrado['indicador_limite_constitucional']
+    ]
+
+    # Plot
+    fig, ax = plt.subplots(figsize=(8, 6))
+    bars = ax.bar(
+        df_filtrado['ano'].astype(str),
+        df_filtrado['indicador_limite_constitucional'],
+        color=cores
+    )
+
+    # Título e eixos
+    ax.set_title(f'Indicador do Mínimo Constitucional - {ente}',
+                 color='#FFA07A', fontsize=15)
+    ax.set_ylabel('Indicador (%)', color='#FFA07A', fontsize=12)
+    ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=10)
+
+    # Estilo dos spines
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    # Estilo dos ticks
+    ax.tick_params(axis='x', colors='#FFA07A', labelsize=12)
+    ax.tick_params(axis='y', colors='#FFA07A', labelsize=12)
+
+    # Limite do eixo Y
+    ax.set_ylim(0, 110)
+
+    # Rótulos de valor nas barras
+    for i, valor in enumerate(df_filtrado['indicador_limite_constitucional']):
+        if pd.notnull(valor):
+            ax.text(
+                i,
+                valor + 2,
+                f'{valor:.1f}%',
+                ha='center',
+                color='white',
+                fontsize=10,
+                fontweight='bold'
+            )
+
+    fig.tight_layout()
+    st.pyplot(fig)
+
 
 def grafico_receita_salario_educacao_ano(df, ano):
     """

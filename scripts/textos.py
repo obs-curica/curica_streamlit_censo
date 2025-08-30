@@ -623,7 +623,32 @@ def texto_pan_financiamento_receita_minima_impostos_analise():
     [SIOPE](https://www.fnde.gov.br/siope/relatorioRREOMunicipal2006.do), e procurar pelo RREO do ente em questão. Por fim, o 
     descumprimento da determinação será endereçada adiante.
     """
+
+# Limite Constitucional
+def texto_pan_financiamento_minimo_constitucional_intro():
+    return """
+    Neste ponto, cabe a análise do cumprimento da exigência constitucional de investimento mínimo de 25% da receita proveniente de impostos 
+    na munutenção e desenvolvimento do ensino ([art. 212 CF](https://www.planalto.gov.br/ccivil_03/constituicao/ConstituicaoCompilado.htm#:~:text=Art.%20212.-,A%20Uni%C3%A3o,-aplicar%C3%A1%2C%20anualmente%2C%20nunca)). 
+    Visualize abaixo os dados, disponíveis a partir do ano de 2021.
+    """
     
+def texto_pan_financiamento_minimo_constitucional_analise():
+    return"""
+    A aplicação da receita mínima de 5% de impostos além do Fundeb, a não utilização da integralidade dos recursos no exercício financeiro 
+    e a inscrição de restos a pagar de exercícios anteriores impactam diretamente no cálculo do cumprimento do mínimo constitucional de 25%. 
+    Por isso, é possível encontrar valores absolutos no primeiro gráfico que apontam para o descumprimento do mínimo exigido, e o indicador 
+    do segundo gráfico aponta o cumprimento do mínimo de 25% exigido.Para simplificar a visualização dos dados, esses cálculos não serão 
+    apresentados de maneira pormenorizada neste momento. Entretanto, eles podem ser facilmente encontrados nos Relatórios de Execução 
+    Orçamentária, dispiníveis no site do [SIOPE](https://www.fnde.gov.br/siope/relatoriosMunicipais.jsp). De qualquer modo, é interessante 
+    notar que essa disparidade pode apontar para problemas de gestão.
+    
+    Por sua vez, o segundo gráfico traz o indicador que leva em conta a contabilização dessas eventos orçamentários e é este segundo gráfico 
+    que deve ser levado em consideração para a aferição do cumprimento do investimento mínimo constitucional. A responsabilização de gestores 
+    pelo descumprimento dessa determinação é endereçado mais abaixo, em tópico específico. Por hora, seguimos com a apresentação da demais 
+    fontes de receita.
+    """
+
+
 # Salário-Educação
 def texto_pan_financiamento_salario_educacao_intro():
     return """

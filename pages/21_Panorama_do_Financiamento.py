@@ -19,6 +19,8 @@ from scripts.textos import(
     texto_pan_financiamento_fundeb_complementacao_analise,
     texto_pan_financiamento_receita_minima_impostos_intro,
     texto_pan_financiamento_receita_minima_impostos_analise,
+    texto_pan_financiamento_minimo_constitucional_intro,
+    texto_pan_financiamento_minimo_constitucional_analise,
     texto_pan_financiamento_salario_educacao_intro,
     texto_pan_financiamento_salario_educacao_analise,
     texto_pan_financiamento_receitas_adicionais_intro,
@@ -42,6 +44,8 @@ from scripts.graficos import(
     grafico_complementacoes_fundeb,
     grafico_valor_receita_impostos,
     grafico_valores_despesa_minima_impostos,
+    grafico_valores_limite_constitucional,
+    grafico_indicador_limite_constitucional,
     grafico_receita_salario_educacao_ano,
     grafico_receita_salario_educacao_ente,
     grafico_receitas_adicionais_por_ente_ano,
@@ -211,6 +215,33 @@ with col2:
     grafico_valores_despesa_minima_impostos(df_panorama_financiamento, entes)
 
 st.write(texto_pan_financiamento_receita_minima_impostos_analise())
+
+
+#++++++++
+# Subseção Mínimo Constitucional
+
+st.header("Mínimo Constitucional")
+
+st.write(texto_pan_financiamento_minimo_constitucional_intro())
+
+entes_disponiveis = sorted(df_panorama_financiamento['nome'].unique())
+    
+entes = st.selectbox(
+    "Selecione o ente:",
+    options=entes_disponiveis,
+    key="minimo_constitucional_ente"
+)
+
+col1, col2 = st.columns(2)
+
+with col1:
+    grafico_valores_limite_constitucional(df_panorama_financiamento, entes)
+    
+with col2:
+    grafico_indicador_limite_constitucional(df_panorama_financiamento, entes)
+
+st.write(texto_pan_financiamento_minimo_constitucional_analise())
+
 
 #++++++++
 # Subseção Salário Educação
@@ -432,7 +463,7 @@ with st.form("pan_fin_form_dados_financeiros"):
             st.dataframe(df_renomeado)
 
 
-# Relatório "Descumprimento da despesa com profissionai da educação"
+# Relatório "Descumprimento da despesa com profissionais da educação"
 with st.form("pan_fin_form_remuneracao_profissionais"):
 
     st.subheader("Descumprimento da despesa mínima com profissionais da educação")
@@ -514,7 +545,7 @@ with st.form("pan_fin_form_reprogramacao"):
         df = df_panorama_financiamento.copy()
 
         # Garantir que as colunas estejam numéricas
-        colunas_mde = ["valor_minimo_mde", "valor_total_despesa_impostos"]
+        colunas_mde = ["indicador_receita_nao_aplicada"]
         for col in colunas_mde:
             df[col] = pd.to_numeric(
                 df[col].astype(str).str.replace(",", "."),
@@ -524,8 +555,8 @@ with st.form("pan_fin_form_reprogramacao"):
         # Filtrar entes que não atingiram o mínimo
         df_filtrado = df[
             (df["ano"] >= 2021) &
-            (df["valor_total_despesa_impostos"] < df["valor_minimo_mde"])
-        ][["nome", "cod_ibge", "ano", "valor_total_despesa_impostos", "valor_minimo_mde"]].copy()
+            (df["indicador_receita_nao_aplicada"] > 10)
+        ][["nome", "cod_ibge", "ano", "valor_repasse_fundeb", "valor_total_despesa_impostos", "valor_minimo_mde", "indicador_receita_nao_aplicada"]].copy()
 
         if df_filtrado.empty:
             st.warning("Não houve descumprimento para os anos disponíveis.")
