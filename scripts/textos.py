@@ -636,13 +636,13 @@ def texto_pan_financiamento_minimo_constitucional_analise():
     return"""
     A aplicação da receita mínima de 5% de impostos além do Fundeb, a não utilização da integralidade dos recursos no exercício financeiro 
     e a inscrição de restos a pagar de exercícios anteriores impactam diretamente no cálculo do cumprimento do mínimo constitucional de 25%. 
-    Por isso, é possível encontrar valores absolutos no primeiro gráfico que apontam para o descumprimento do mínimo exigido, e o indicador 
-    do segundo gráfico aponta o cumprimento do mínimo de 25% exigido.Para simplificar a visualização dos dados, esses cálculos não serão 
-    apresentados de maneira pormenorizada neste momento. Entretanto, eles podem ser facilmente encontrados nos Relatórios de Execução 
-    Orçamentária, dispiníveis no site do [SIOPE](https://www.fnde.gov.br/siope/relatoriosMunicipais.jsp). De qualquer modo, é interessante 
-    notar que essa disparidade pode apontar para problemas de gestão.
+    Por isso, é possível encontrar valores absolutos no primeiro gráfico que apontam para o descumprimento do mínimo exigido, com o indicador 
+    do segundo gráfico apontando para o cumprimento da aplicação de 25% exigida.Para simplificar a visualização dos dados, esses cálculos não 
+    serão apresentados de maneira pormenorizada neste momento. Entretanto, eles podem ser facilmente encontrados nos Relatórios Resumidos 
+    de Execução Orçamentária (RREOs), dispiníveis no site do [SIOPE](https://www.fnde.gov.br/siope/relatoriosMunicipais.jsp). De qualquer 
+    modo, é interessante notar que essa disparidade pode apontar para problemas de gestão.
     
-    Por sua vez, o segundo gráfico traz o indicador que leva em conta a contabilização dessas eventos orçamentários e é este segundo gráfico 
+    Por sua vez, o segundo gráfico traz o indicador que leva em conta a contabilização desses eventos orçamentários e é este segundo gráfico 
     que deve ser levado em consideração para a aferição do cumprimento do investimento mínimo constitucional. A responsabilização de gestores 
     pelo descumprimento dessa determinação é endereçado mais abaixo, em tópico específico. Por hora, seguimos com a apresentação da demais 
     fontes de receita.

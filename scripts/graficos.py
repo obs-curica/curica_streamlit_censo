@@ -1990,7 +1990,7 @@ def grafico_execucao_pdde_valores(df, ano, ente):
         df_filtrado["saldo_nao_utilizado"].values[0] / 1_000_000
     ]
     categorias = ["Disponibilizado", "Executado", "Não utilizado"]
-    cores = ["#4682B4", "#32CD32", "#FFA500"]  # azul, verde, laranja
+    cores = ["#4682B4", "#006400", "#FFA500"]  # azul, verde, laranja
 
     # Estilo
     plt.style.use("dark_background")
@@ -2129,7 +2129,7 @@ def grafico_receita_total_educacao(df, ente):
 
     # Estilo
     plt.style.use("dark_background")
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(10, 7))
 
     cor_verde = "#006400"
     bars = ax.bar(df_filtrado["ano"].astype(str), df_filtrado["valor_mi"], color=cor_verde)
