@@ -56,8 +56,17 @@
   -> dataframes raw extraídos: 
       df_emendas_geral_2019_2024.csv, df_emendas_mec_2019_2024.csv
   
-  -> dataframes processados: 
+  -> dataframes processados: n/a
 
+
+## Página Panorama Água Potável
+
+* Microdados do Censo Escolar
+  Dados abertos do Inep.
+  Link: https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-escolar
+
+  -> dataframes raw extraídos: 
+    df_panorama_agua.csv
 
 ## Página Panorama Infraestrutura
 

@@ -13,6 +13,50 @@ def carregar_dados(url):
     
     return df
 
+# Dicionário de renomeação de colunas para exibição amigável ao usuário
+# Dicionário de renomeação de colunas do Censo Escolar
+COLUNAS_RENOMEADAS_CENSO = {
+    "NU_ANO_CENSO": "Ano do Censo",
+    "SG_UF": "UF",
+    "CO_UF": "Código UF",
+    "NO_MUNICIPIO": "Município",
+    "CO_MUNICIPIO": "Código Município",
+    "NO_ENTIDADE": "Nome da Escola",
+    "CO_ENTIDADE": "Código da Escola",
+    "TP_DEPENDENCIA": "Dependência Administrativa",
+    "TP_LOCALIZACAO": "Localização",
+    "TP_LOCALIZACAO_DIFERENCIADA": "Loc. Diferenciada",
+    "DS_ENDERECO": "Endereço",
+    "NU_ENDERECO": "Número",
+    "DS_COMPLEMENTO": "Complemento",
+    "NO_BAIRRO": "Bairro",
+    "CO_CEP": "CEP",
+    "NU_DDD": "DDD",
+    "NU_TELEFONE": "Telefone",
+    "TP_SITUACAO_FUNCIONAMENTO": "Situação de Funcionamento",
+    "CO_ESCOLA_SEDE_VINCULADA": "Escola Sede Vinculada",
+    "IN_LOCAL_FUNC_PREDIO_ESCOLAR": "Funciona em Prédio Escolar",
+    "TP_OCUPACAO_PREDIO_ESCOLAR": "Ocupação Prédio Escolar",
+    "IN_AGUA_POTAVEL": "Água Potável",
+    "IN_AGUA_REDE_PUBLICA": "Água Rede Pública",
+    "IN_AGUA_POCO_ARTESIANO": "Água Poço Artesiano",
+    "IN_AGUA_CACIMBA": "Água Cacimba",
+    "IN_AGUA_FONTE_RIO": "Água de Fonte ou Rio",
+    "IN_AGUA_INEXISTENTE": "Sem Abastecimento de Água",
+    "IN_AGUA_CARRO_PIPA": "Água por Carro Pipa",
+    "IN_ENERGIA_REDE_PUBLICA": "Energia Rede Pública",
+    "IN_ENERGIA_GERADOR_FOSSIL": "Energia Gerador Fóssil",
+    "IN_ENERGIA_RENOVAVEL": "Energia Renovável",
+    "IN_ENERGIA_INEXISTENTE": "Sem Energia",
+    "IN_ESGOTO_REDE_PUBLICA": "Esgoto Rede Pública",
+    "IN_ESGOTO_FOSSA_SEPTICA": "Esgoto Fossa Séptica",
+    "IN_ESGOTO_FOSSA_COMUM": "Esgoto Fossa Comum",
+    "IN_ESGOTO_FOSSA": "Esgoto Fossa (outros)",
+    "IN_ESGOTO_INEXISTENTE": "Sem Esgoto",
+    "IN_BANHEIRO": "Banheiro",
+    "IN_COZINHA": "Cozinha"
+}
+
 
 # Dicionário de renomeação de colunas para exibição amigável ao usuário
 COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO = {
@@ -46,8 +90,6 @@ COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO = {
     "valor_total_receita_educacao": "Total Receita Educação",
     "tipo_ente": "Tipo de Ente"
 }
-
-
 
 def renomear_colunas_financiamento(df):
     """
