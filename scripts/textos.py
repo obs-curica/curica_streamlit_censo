@@ -648,7 +648,6 @@ def texto_pan_financiamento_minimo_constitucional_analise():
     fontes de receita.
     """
 
-
 # Salário-Educação
 def texto_pan_financiamento_salario_educacao_intro():
     return """
@@ -828,6 +827,7 @@ def texto_pan_financiamento_responsabilidade_criminal():
     já apontam todo o caminho.
     """
 
+# Considerações finais
 def texto_pan_fin_consideracoes_finais_intro():
     return"""
     O Panorama do Financiamento apresentou uma análise sistematizada dos recursos destinados à educação básica pública no estado do Acre, com 
@@ -863,10 +863,60 @@ def texto_pan_fin_consideracoes_finais_analise():
     Panorama, que é sensibilizar os usuários a prosseguirem na navegação pelos demais panoramas, de modo a obter uma compreensão articulada 
     e territorializada da realidade educacional acreana.
     """
-    
+
+# Relatórios    
 def texto_pan_fin_relatorio_intro():
     return"""
     Nesta subseção, você pode gerar relatórios com os valores utilizados neste Panorama, úteis para diminuir a abstração dos gráficos a iniciar 
     a materialização dos trabalhos. **Eles podem ser baixados pelo usuario**. Basta selecionar os filtros desejados e clicar no botão de 
     download, que aparece ao passar o cursor do mouse sobre a tabela gerada.
+    """
+
+#==========================
+# PÁGINA FINANCIAMENTO REDE
+#==========================
+
+def texto_pan_agua_intro():
+    return """
+    É interessante pensar que o acesso à água potável na Amazônia, uma das maiores concentrações de água doce do planeta, possa ser um 
+    problema de saúde pública crônico ([ANA, 2024](https://www.gov.br/ana/pt-br/assuntos/gestao-das-aguas/panorama-das-aguas/regioes-hidrograficas/regiao-hidrografica-amazonica)). 
+    Entretanto, essa é a realidade das periferias urbanas da amazônicas e das comunidades afastadas dessas cidades. 
+    
+    Conforme discutido no Panorama da Rede de Ensino, as políticas públicas educacionais enfrentam grandes desafios logísticos e climáticos, 
+    pois devem ser implementadas em toda essa vasta e diversa extensão territorial da Amazônia Acreana. Surgem, portanto, desafios para a 
+    construção de infraestrutura e oferta de saneamento básico, em especial, a água potável.      
+    
+    Por outro lado, ficou demonstrado no Panorama do Financiamento que existem recursos financeiros disponibilizados para os sistemas de 
+    ensino estaduais e municipais que não são acessados por eles. Ou seja, há problemas de gestão que impedem a plena utilização dos recursos
+    disponíveis e que comprometem a oferta do ensino público de qualidade.
+    
+    A fim de discutir o problema da oferta de água potável pelos sistemas de ensino do Acre, este Panorama se propõe à análise de sua 
+    oferta nas escolas da rede pública de ensino. Para esta finalidade, os dados do Censo Escolar serão utilizados como fonte primária de 
+    informações. Entretanto, com o propósito de enriquecer a análise, ampliar o debate e **apresentar soluções**, esses dados serão 
+    problematizados e cruzados com outras bases de dados disponíveis. Bora!
+    """
+    
+def texto_pan_agua_metodologia():
+    return """
+    Para a definição e justificativa da metodologia adotada neste Panorama, retoma-se um dos objetivos principais do Observatório Curica, que 
+    é o de oferecer subsídios técnicos para a atuação do Ministério Público na defesa do direito à educação de qualidade, em especial para as
+    Promotorias do interior do Estado. Para tanto, é necessário que os dados e análises aqui apresentados sejam facilmente compreendidos e, 
+    mais ainda, ofereçam subsídios práticos para a atuação ministerial. Com isso, quer-se dizer uma ação eficiente, que ataque o problema de
+    maneira célere e onde é mais necessário.
+    
+    Desse modo, a análise da oferta de água potável se inicia com a apresentação dos dados brutos do Censo Escolar para, então, 
+    problematiza-los segundo a experiência prática de campo. 
+    
+    A partir dessa problematização, será apresentado o Programa Dinheiro Direto na Escola - Água ([PDDE - Água](https://www.gov.br/mec/pt-br/pdde/pdde-equidade/pdde-agua)), 
+    do FNDE, que disponibiliza recursos financeiros para a construção de sistemas de abastecimento de água potável e saneamento básico nas 
+    escolas públicas.
+    """
+
+def texto_pan_agua_dados_brutos_intro():
+    return """
+    Como prometido, a seguir serão apresentados os dados brutos do Censo Escolar, referentes à oferta de água potável nas escolas da rede 
+    pública de ensino do Acre. Esses dados são declarados anualmente pelos sistemas de ensino e estão disponíveis para consulta pública 
+    no site do [INEP](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-escolar). No questionário do Censo
+    há uma pergunta específica sobre a oferta de água potável na escola, que exige uma resposta simples: **sim ou não**. As repostas são
+    apresentadas abaixo. Estão disponíveis os dados a partir do ano de 2019.
     """
