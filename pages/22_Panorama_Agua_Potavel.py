@@ -16,11 +16,17 @@ from scripts.textos import(texto_pan_agua_intro,
                            texto_pan_agua_dados_brutos_intro
 )
 
+from scripts.graficos import grafico_agua_dados_brutos
 
 # Configuração visual
 plt.style.use('dark_background')
 COR_TEXTO = '#FFA07A'
 CORES_BARRAS = ['#B0E0E6', '#FFC107']
+
+# Corregar dados
+url_df_panorama_agua = 'https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_agua/df_panorama_agua.csv'
+df_panorama_agua = carregar_dados(url_df_panorama_agua)
+#df_panorama_agua = df_panorama_agua.astype(str)
 
 st.set_page_config(page_title="Panorama Água Potável", layout="wide", page_icon="🦜")
 
@@ -38,3 +44,4 @@ st.write(texto_pan_agua_metodologia())
 st.header('Oferta de água potável segundo os dados brutos do Censo Escolar')
 st.write(texto_pan_agua_dados_brutos_intro())
 
+grafico_agua_dados_brutos(df_panorama_agua, ano_censo=2024)

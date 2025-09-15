@@ -2165,6 +2165,70 @@ def grafico_receita_total_educacao(df, ente):
 # PAGINA PANORAMA ÁGUA
 #==========================
     
+def grafico_agua_dados_brutos(df, ano_censo):
+    """
+    Gera um gráfico de barras verticais mostrando o total de escolas
+    que fornecem ou não fornecem água potável em determinado ano.
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas 'NU_ANO_CENSO' e 'IN_AGUA_POTAVEL'.
+    ano_censo : int
+        Ano do censo escolar selecionado pelo usuário.
+    """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+
+    # Filtrar DataFrame pelo ano
+    df_filtrado = df[df["NU_ANO_CENSO"] == ano_censo]
+
+    if df_filtrado.empty:
+        st.warning(f"Não há dados disponíveis para o ano {ano_censo}.")
+        return
+
+    # Contagem das respostas
+    contagem = df_filtrado["IN_AGUA_POTAVEL"].value_counts().sort_index(ascending=False)
+    contagem.index = contagem.index.map({1: "Fornece", 0: "Não Fornece"})
+
+    # Cores fixas conforme solicitado
+    cores = ["#B0E0E6" if idx == "Fornece" else "#FFC107" for idx in contagem.index]
+
+    # Estilo escuro
+    plt.style.use("dark_background")
+    fig, ax = plt.subplots(figsize=(8, 6))
+
+    # Barras
+    bars = ax.bar(contagem.index, contagem.values, color=cores)
+
+    # Inserir valores nas barras
+    for i, valor in enumerate(contagem.values):
+        ax.text(
+            i,
+            valor + (contagem.max() * 0.02),
+            str(valor),
+            ha="center",
+            color="white",
+            fontweight="bold",
+            fontsize=14
+        )
+
+    # Título e eixos
+    ax.set_title(f"Fornecimento de Água Potável ({ano_censo})", color="#FFA07A", fontsize=20)
+    ax.set_ylabel("Número de Escolas", color="#FFA07A", fontsize=12)
+
+    # Estilo dos spines
+    for spine in ax.spines.values():
+        spine.set_color("#FFA07A")
+
+    # Estilo dos ticks
+    ax.tick_params(axis="x", colors="#FFA07A", labelsize=14)
+    ax.tick_params(axis="y", colors="#FFA07A", labelsize=14)
+
+    ax.set_ylim(0, contagem.max() * 1.2)
+
+    fig.tight_layout()
+    st.pyplot(fig)
 
 
 
