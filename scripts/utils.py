@@ -54,7 +54,8 @@ COLUNAS_RENOMEADAS_CENSO = {
     "IN_ESGOTO_FOSSA": "Esgoto Fossa (outros)",
     "IN_ESGOTO_INEXISTENTE": "Sem Esgoto",
     "IN_BANHEIRO": "Banheiro",
-    "IN_COZINHA": "Cozinha"
+    "IN_COZINHA": "Cozinha",
+    "QT_MAT_BAS": "Número de Matrículas"
 }
 
 

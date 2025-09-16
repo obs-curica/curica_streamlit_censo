@@ -13,10 +13,15 @@ from scripts.utils import(carregar_dados,
 
 from scripts.textos import(texto_pan_agua_intro,
                            texto_pan_agua_metodologia,
-                           texto_pan_agua_dados_brutos_intro
+                           texto_pan_agua_dados_brutos_intro,
+                           texto_pan_agua_dados_brutos_analise_01
 )
 
-from scripts.graficos import grafico_agua_dados_brutos
+from scripts.graficos import (grafico_agua_total_dados_brutos,
+                              grafico_escolas_sem_agua_por_municipio,
+                              grafico_alunos_por_disponibilidade_agua,
+                              grafico_dependencia_escolas_sem_agua
+)
 
 # Configuração visual
 plt.style.use('dark_background')
@@ -44,4 +49,41 @@ st.write(texto_pan_agua_metodologia())
 st.header('Oferta de água potável segundo os dados brutos do Censo Escolar')
 st.write(texto_pan_agua_dados_brutos_intro())
 
-grafico_agua_dados_brutos(df_panorama_agua, ano_censo=2024)
+# Selectbox do ano do Censo Escolar
+anos_disponiveis = sorted(df_panorama_agua['NU_ANO_CENSO'].unique())
+ano_mais_recente = max(anos_disponiveis)
+
+ano_censo = st.selectbox(
+    "Selecione o ano do Censo Escolar:",
+    options=anos_disponiveis,
+    index=anos_disponiveis.index(ano_mais_recente),
+    key="agua_dados_brutos"
+)
+
+# Divide a tela em duas colunas e plota os gráficos
+col1, col2 = st.columns(2)
+
+with col1:
+    grafico_agua_total_dados_brutos(df_panorama_agua, ano_censo=ano_censo)
+    
+with col2:
+    grafico_escolas_sem_agua_por_municipio(df_panorama_agua, ano_censo=ano_censo)
+
+st.write(texto_pan_agua_dados_brutos_analise_01())
+
+# Selectbox do ano do Censo Escolar
+anos_disponiveis = sorted(df_panorama_agua['NU_ANO_CENSO'].unique())
+ano_mais_recente = max(anos_disponiveis)
+
+ano_censo = st.selectbox(
+    "Selecione o ano do Censo Escolar:",
+    options=anos_disponiveis,
+    index=anos_disponiveis.index(ano_mais_recente),
+    key="agua_dados_brutos_localizacao"
+)
+
+# Divide a tela em duas colunas e plota os gráficos
+col1, col2 = st.columns(2)
+
+with col1:
+    grafico_dependencia_escolas_sem_agua(df_panorama_agua, ano_censo=2024)

@@ -2164,8 +2164,9 @@ def grafico_receita_total_educacao(df, ente):
 #==========================
 # PAGINA PANORAMA ÁGUA
 #==========================
-    
-def grafico_agua_dados_brutos(df, ano_censo):
+
+# Gráfico de barras vertical total de escolas que fornecem ou não fornecem água potável
+def grafico_agua_total_dados_brutos(df, ano_censo):
     """
     Gera um gráfico de barras verticais mostrando o total de escolas
     que fornecem ou não fornecem água potável em determinado ano.
@@ -2196,7 +2197,7 @@ def grafico_agua_dados_brutos(df, ano_censo):
 
     # Estilo escuro
     plt.style.use("dark_background")
-    fig, ax = plt.subplots(figsize=(8, 6))
+    fig, ax = plt.subplots(figsize=(8, 7.5))
 
     # Barras
     bars = ax.bar(contagem.index, contagem.values, color=cores)
@@ -2214,15 +2215,16 @@ def grafico_agua_dados_brutos(df, ano_censo):
         )
 
     # Título e eixos
-    ax.set_title(f"Fornecimento de Água Potável ({ano_censo})", color="#FFA07A", fontsize=20)
+    ax.set_title(f"Fornecimento de Água Potável - {ano_censo}", color="#FFA07A", fontsize=20)
     ax.set_ylabel("Número de Escolas", color="#FFA07A", fontsize=12)
+    ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=12)
 
     # Estilo dos spines
     for spine in ax.spines.values():
         spine.set_color("#FFA07A")
 
     # Estilo dos ticks
-    ax.tick_params(axis="x", colors="#FFA07A", labelsize=14)
+    ax.tick_params(axis="x", colors="#FFA07A", labelsize=16)
     ax.tick_params(axis="y", colors="#FFA07A", labelsize=14)
 
     ax.set_ylim(0, contagem.max() * 1.2)
@@ -2230,6 +2232,201 @@ def grafico_agua_dados_brutos(df, ano_censo):
     fig.tight_layout()
     st.pyplot(fig)
 
+# Gráfico de barras horizontal total de escolas sem água potável por município
+def grafico_escolas_sem_agua_por_municipio(df, ano_censo):
+    """
+    Gera gráfico de barras horizontais mostrando o total de escolas
+    sem água potável por município, no ano selecionado.
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas 'NU_ANO_CENSO', 'IN_AGUA_POTAVEL' e 'NO_MUNICIPIO'.
+    ano_censo : int
+        Ano do censo escolar selecionado pelo usuário.
+    """
+    import matplotlib.pyplot as plt
+    import matplotlib.colors as mcolors
+    import matplotlib.cm as cm
+    import streamlit as st
+
+    # Filtrar dados do ano e escolas sem água potável
+    df_filtrado = df[
+        (df["NU_ANO_CENSO"] == ano_censo) & 
+        (df["IN_AGUA_POTAVEL"] == 0)
+    ]
+
+    if df_filtrado.empty:
+        st.warning(f"Não há registros de escolas sem água potável em {ano_censo}.")
+        return
+
+    # Agrupar por município
+    contagem = df_filtrado["NO_MUNICIPIO"].value_counts().sort_values(ascending=True)
+
+    # Criar gradiente entre azul e amarelo (crescente)
+    cor_inicio = "#B0E0E6"
+    cor_fim = "#FFC107"
+    cmap = mcolors.LinearSegmentedColormap.from_list("gradiente_agua", [cor_inicio, cor_fim])
+    norm = mcolors.Normalize(vmin=0, vmax=len(contagem) - 1)
+    cores = [cmap(norm(i)) for i in range(len(contagem))]
+
+    # Estilo
+    plt.style.use("dark_background")
+    fig, ax = plt.subplots(figsize=(10, max(5, len(contagem) * 0.45)))
+
+    # Plotar barras horizontais
+    barras = ax.barh(contagem.index, contagem.values, color=cores)
+
+    # Rótulos ao final de cada barra
+    for barra, valor in zip(barras, contagem.values):
+        ax.text(
+            valor + max(contagem.values) * 0.01,
+            barra.get_y() + barra.get_height() / 2,
+            str(valor),
+            va="center",
+            ha="left",
+            color="white",
+            fontweight="bold",
+            fontsize=12
+        )
+
+    # Título e eixos
+    ax.set_title(f"Escolas sem Água Potável por Município - {ano_censo}", color="#FFA07A", fontsize=22, pad=10)
+    ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=15)
+
+    # Estilo visual do projeto
+    ax.tick_params(colors="#FFA07A", labelsize=15)
+    for spine in ax.spines.values():
+        spine.set_color("#FFA07A")
+
+    fig.tight_layout()
+    st.pyplot(fig)
+
+# Gráfico de barras horizontal total de alunos matriculados em escolas que fornecem ou não fornecem água potável
+def grafico_alunos_por_disponibilidade_agua(df, ano_censo):
+    """
+    Gera gráfico de barras horizontais com o total de alunos matriculados
+    em escolas que fornecem e que não fornecem água potável.
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame com colunas 'NU_ANO_CENSO', 'IN_AGUA_POTAVEL' e 'QT_MAT_BAS'.
+    ano_censo : int
+        Ano do censo escolar a ser considerado.
+    """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    import pandas as pd
+
+    # Filtrar dados do ano
+    df_filtrado = df[df["NU_ANO_CENSO"] == ano_censo]
+
+    if df_filtrado.empty:
+        st.warning(f"Não há dados disponíveis para o ano {ano_censo}.")
+        return
+
+    # Garantir que QT_MAT_BAS seja numérico
+    df_filtrado["QT_MAT_BAS"] = pd.to_numeric(df_filtrado["QT_MAT_BAS"], errors="coerce").fillna(0)
+
+    # Agrupar soma de alunos por fornecimento de água potável
+    soma_alunos = df_filtrado.groupby("IN_AGUA_POTAVEL")["QT_MAT_BAS"].sum().sort_index(ascending=False)
+    soma_alunos.index = soma_alunos.index.map({1: "Fornece", 0: "Não Fornece"})
+
+    # Cores fixas
+    cores = ["#B0E0E6" if idx == "Fornece" else "#FFC107" for idx in soma_alunos.index]
+
+    # Estilo do projeto
+    plt.style.use("dark_background")
+    fig, ax = plt.subplots(figsize=(10, 4.5))
+
+    # Plotagem
+    barras = ax.barh(soma_alunos.index, soma_alunos.values, color=cores)
+
+    # Rótulos ao final
+    for bar, valor in zip(barras, soma_alunos.values):
+        ax.text(
+            valor + (soma_alunos.max() * 0.01),
+            bar.get_y() + bar.get_height() / 2,
+            f"{int(valor):,}".replace(",", "."),
+            va="center", ha="left",
+            color="white", fontweight="bold", fontsize=13
+        )
+
+    # Título e eixos
+    ax.set_title(f"Alunos por Disponibilidade de Água Potável — {ano_censo}", color="#FFA07A", fontsize=18)
+    ax.set_xlabel("Número total de alunos", color="#FFA07A", fontsize=12)
+
+    ax.tick_params(colors="#FFA07A", labelsize=12)
+    for spine in ax.spines.values():
+        spine.set_color("#FFA07A")
+
+    fig.tight_layout()
+    st.pyplot(fig)
+
+# Gráfico de barras vertical total de escolas sem água potável por localização (urbana ou rural)
+def grafico_dependencia_escolas_sem_agua(df, ano_censo):
+    """
+    Gera gráfico de barras verticais com o total de escolas sem água potável,
+    classificadas por localização (urbana ou rural), para o ano selecionado.
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas 'NU_ANO_CENSO', 'IN_AGUA_POTAVEL' e 'TP_LOCALIZACAO'.
+    ano_censo : int
+        Ano do Censo Escolar selecionado.
+    """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+
+    # Filtra escolas sem água potável no ano especificado
+    df_filtrado = df[
+        (df["NU_ANO_CENSO"] == ano_censo) &
+        (df["IN_AGUA_POTAVEL"] == 0)
+    ]
+
+    if df_filtrado.empty:
+        st.warning(f"Não há escolas sem água potável em {ano_censo}.")
+        return
+
+    # Contagem por localização
+    contagem = df_filtrado["TP_LOCALIZACAO"].value_counts().reindex([1, 2], fill_value=0)
+    contagem.index = contagem.index.map({1: "Urbana", 2: "Rural"})
+    cores = ["#B0E0E6", "#FFC107"]
+
+    # Estilo visual do projeto
+    plt.style.use("dark_background")
+    fig, ax = plt.subplots(figsize=(7, 5))
+
+    barras = ax.bar(contagem.index, contagem.values, color=cores)
+
+    # Rótulos nas barras
+    for bar, valor in zip(barras, contagem.values):
+        ax.text(
+            bar.get_x() + bar.get_width() / 2,
+            valor + max(contagem.values) * 0.02,
+            f"{valor:,}".replace(",", "."),
+            ha="center",
+            va="bottom",
+            color="white",
+            fontsize=13,
+            fontweight="bold"
+        )
+
+    # Título e eixos
+    ax.set_title(f"Escolas Sem Água Potável por Localização — {ano_censo}", color="#FFA07A", fontsize=16)
+    ax.set_ylabel("Número de Escolas", color="#FFA07A", fontsize=11)
+    ax.set_xlabel("Localização", color="#FFA07A", fontsize=11)
+
+    # Estilo dos eixos
+    ax.tick_params(colors="#FFA07A", labelsize=12)
+    for spine in ax.spines.values():
+        spine.set_color("#FFA07A")
+
+    ax.set_ylim(0, contagem.max() * 1.25)
+    fig.tight_layout()
+    st.pyplot(fig)
 
 
 

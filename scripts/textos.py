@@ -905,18 +905,37 @@ def texto_pan_agua_metodologia():
     maneira célere e onde é mais necessário.
     
     Desse modo, a análise da oferta de água potável se inicia com a apresentação dos dados brutos do Censo Escolar para, então, 
-    problematiza-los segundo a experiência prática de campo. 
-    
-    A partir dessa problematização, será apresentado o Programa Dinheiro Direto na Escola - Água ([PDDE - Água](https://www.gov.br/mec/pt-br/pdde/pdde-equidade/pdde-agua)), 
+    confrontá-los com os próprios dados do Censo Escolar e com a experiência prática de campo. 
+
+    Ao final da análise, será apresentado o Programa Dinheiro Direto na Escola - Água ([PDDE - Água](https://www.gov.br/mec/pt-br/pdde/pdde-equidade/pdde-agua)), 
     do FNDE, que disponibiliza recursos financeiros para a construção de sistemas de abastecimento de água potável e saneamento básico nas 
     escolas públicas.
     """
 
 def texto_pan_agua_dados_brutos_intro():
     return """
-    Como prometido, a seguir serão apresentados os dados brutos do Censo Escolar, referentes à oferta de água potável nas escolas da rede 
-    pública de ensino do Acre. Esses dados são declarados anualmente pelos sistemas de ensino e estão disponíveis para consulta pública 
-    no site do [INEP](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-escolar). No questionário do Censo
-    há uma pergunta específica sobre a oferta de água potável na escola, que exige uma resposta simples: **sim ou não**. As repostas são
-    apresentadas abaixo. Estão disponíveis os dados a partir do ano de 2019.
+    Como prometido, a seguir são apresentados os dados brutos do :orange-background[Censo Escolar], referentes à oferta de água potável 
+    nas escolas da rede pública de ensino do Acre. Esses dados são declarados anualmente pelos sistemas de ensino e estão disponíveis 
+    para consulta pública no site do [INEP](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/censo-escolar). No 
+    questionário do Censo há uma pergunta específica sobre a oferta de água potável na escola, que exige uma resposta simples: **sim ou não**. 
+
+    Essas respostas são apresentadas abaixo, em dois gráficos: no primeiro é explicitado o panorama geral do fornecimento de água potável em 
+    todas as escolas :orange-background[ativas] da rede pública de ensino. O segundo gráfico mostra o ranking do déficit do fornecimento de 
+    água potável em escolas públicas, por Município, somando-se os dados dos sistemas de ensino estadual e municipal respectivos. Estão 
+    disponíveis os dados a partir do ano de 2019.
+    """
+
+def texto_pan_agua_dados_brutos_analise_01():
+    return """
+    Essa exploração preliminar fornece um panorama geral do défict de fornecimento de água potável nas escolas acreanas e alerta para a 
+    necessidade de intervenção das Promotorias de Justiça nesta política pública. Entretanto, antes de aprofundar a análise, é possível
+    mostrar como o fornecimento de água potável é distribuído no território acreano.
+    
+    Retoma-se o Panorama da Rede de Ensino para lembrar que a maioria das escolas da rede pública estão localizadas na dita "zona rural", que compreende as zonas ribeirinhas, indígenas, 
+    unidades de conservação, ramais e projetos de assentamento. Essa distribuição geográfica é um fator importante a ser considerado na
+    análise do fornecimento de água potável, uma vez que as escolas localizadas em áreas mais remotas podem enfrentar desafios adicionais
+    no acesso a esse recurso essencial.
+    
+    Intuitivamente, espera-se que o fornecimento de água potável seja prevalente nas escolas localizadas em áreas urbanas, onde a 
+    infraestrutura e o acesso a equipamentos públicos são facilitados, correto?
     """
