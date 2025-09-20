@@ -2365,7 +2365,7 @@ def grafico_alunos_por_disponibilidade_agua(df, ano_censo):
     st.pyplot(fig)
 
 # Gráfico de barras vertical total de escolas sem água potável por localização (urbana ou rural)
-def grafico_dependencia_escolas_sem_agua(df, ano_censo):
+def grafico_localizacao_escolas_sem_agua(df, ano_censo):
     """
     Gera gráfico de barras verticais com o total de escolas sem água potável,
     classificadas por localização (urbana ou rural), para o ano selecionado.

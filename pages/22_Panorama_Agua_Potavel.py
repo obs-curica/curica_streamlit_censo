@@ -20,7 +20,7 @@ from scripts.textos import(texto_pan_agua_intro,
 from scripts.graficos import (grafico_agua_total_dados_brutos,
                               grafico_escolas_sem_agua_por_municipio,
                               grafico_alunos_por_disponibilidade_agua,
-                              grafico_dependencia_escolas_sem_agua
+                              grafico_localizacao_escolas_sem_agua
 )
 
 # Configuração visual
@@ -86,4 +86,7 @@ ano_censo = st.selectbox(
 col1, col2 = st.columns(2)
 
 with col1:
-    grafico_dependencia_escolas_sem_agua(df_panorama_agua, ano_censo=2024)
+    grafico_alunos_por_disponibilidade_agua(df_panorama_agua, ano_censo=ano_censo)
+
+with col2:
+    grafico_localizacao_escolas_sem_agua(df_panorama_agua, ano_censo=ano_censo)
