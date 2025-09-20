@@ -904,12 +904,15 @@ def texto_pan_agua_metodologia():
     mais ainda, ofereçam subsídios práticos para a atuação ministerial. Com isso, quer-se dizer uma ação eficiente, que ataque o problema de
     maneira célere e onde é mais necessário.
     
-    Desse modo, a análise da oferta de água potável se inicia com a apresentação dos dados brutos do Censo Escolar para, então, 
-    confrontá-los com os próprios dados do Censo Escolar e com a experiência prática de campo. 
+    Desse modo, a análise da oferta de água potável se inicia com a apresentação dos dados brutos do :orange-background[Censo Escolar] para, 
+    então, confrontá-los com os próprios dados do Censo Escolar e com a experiência prática de campo. Esses dados brutos já sofreram um 
+    tratamento inicial, para excluir da análise as escolas inativas e as escolas privadas. Portanto, os números aqui apresentados dizem 
+    respeito somente às escolas ativas da rede pública de ensino do Acre.
 
-    Ao final da análise, será apresentado o Programa Dinheiro Direto na Escola - Água ([PDDE - Água](https://www.gov.br/mec/pt-br/pdde/pdde-equidade/pdde-agua)), 
+    Ao final da análise, é apresentado o Programa Dinheiro Direto na Escola - Água ([PDDE - Água](https://www.gov.br/mec/pt-br/pdde/pdde-equidade/pdde-agua)), 
     do FNDE, que disponibiliza recursos financeiros para a construção de sistemas de abastecimento de água potável e saneamento básico nas 
-    escolas públicas.
+    escolas públicas. Aqui, os dados do Censo Escolar serão cruzados com os dados do PDDE - Água, para identificar possíveis falhas de gestão
+    que impeçam o acesso a esses recursos, bem como apontar soluções para o problema.
     """
 
 def texto_pan_agua_dados_brutos_intro():
@@ -931,11 +934,31 @@ def texto_pan_agua_dados_brutos_analise_01():
     necessidade de intervenção das Promotorias de Justiça nesta política pública. Entretanto, antes de aprofundar a análise, é possível
     mostrar como o fornecimento de água potável é distribuído no território acreano.
     
-    Retoma-se o Panorama da Rede de Ensino para lembrar que a maioria das escolas da rede pública estão localizadas na dita "zona rural", que compreende as zonas ribeirinhas, indígenas, 
-    unidades de conservação, ramais e projetos de assentamento. Essa distribuição geográfica é um fator importante a ser considerado na
-    análise do fornecimento de água potável, uma vez que as escolas localizadas em áreas mais remotas podem enfrentar desafios adicionais
+    Retoma-se o Panorama da Rede de Ensino para lembrar que a maioria dos alunos estão matriculados em escolas localizadas na zona urbana e
+    que a maioria das escolas da rede pública estão localizadas na dita "zona rural", que compreende espaços ribeirinhos, indígenas, unidades 
+    de conservação, ramais e projetos de assentamento. Essa distribuição geográfica é um fator importante a ser considerado na análise do 
+    fornecimento de água potável, uma vez que as escolas localizadas em áreas mais distantes das cidades podem enfrentar desafios adicionais 
     no acesso a esse recurso essencial.
-    
-    Intuitivamente, espera-se que o fornecimento de água potável seja prevalente nas escolas localizadas em áreas urbanas, onde a 
+
+    Intuitivamente, espera-se que o fornecimento de água potável seja prevalente nas escolas localizadas em áreas urbanas, onde a
     infraestrutura e o acesso a equipamentos públicos são facilitados, correto?
+    """
+    
+def texto_pan_agua_dados_brutos_analise_02():
+    return """
+    Correto. Como era de se esperar, o fornecimento de água potável nas escolas reflete o quadro geral de saneamento básico de todo o Estado 
+    do Acre. Dada a dimensão do território acreano e suas peculiaridades logísiticas, esse fornecimento está presente na grande maioria das 
+    escolas localizadas em áreas urbanas. E, se a maioria dos alunos da rede pública está matriculada em escolas urbanas, a maior parte dos 
+    alunos da rede pública está atendida com água potável.
+    
+    Entretanto, o simples fato de existirem escolas localizadas em áreas urbanas que declaram não fornecer água potável é um fato que causa 
+    estranheza e merece uma investigação mais aprofundada. Isso porque a água fornecida em áreas urbanas é, em regra, proveniente do sistema
+    público de abastecimento de água, que costuma oferecer tratamento adequado para o consumo humano.
+    
+    Mais ainda, o dado de que aproximadamente **metade** das escolas rurais fornecem água potável também deve ser olhado com atenção, pois
+    a realidade constatada em atividades de campo demonstra que a maioria dessas escolas não possui acesso a esse recurso.
+    
+    É com essa singela reflexão que se inicia a próxima etapa da análise dos dados, para problematizá-los com a semântica que surge do 
+    confronto dessas informações com outras variáveis do questionário do próprio Censo Escolar e com a experiência prática de campo. Sempre 
+    mirando na atuação prática das Promotorias de Justiça do interior do Estado.
     """

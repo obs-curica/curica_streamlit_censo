@@ -2305,7 +2305,7 @@ def grafico_escolas_sem_agua_por_municipio(df, ano_censo):
 # Gráfico de barras horizontal total de alunos matriculados em escolas que fornecem ou não fornecem água potável
 def grafico_alunos_por_disponibilidade_agua(df, ano_censo):
     """
-    Gera gráfico de barras horizontais com o total de alunos matriculados
+    Gera gráfico de barras verticais com o total de alunos matriculados
     em escolas que fornecem e que não fornecem água potável.
 
     Parâmetros:
@@ -2338,31 +2338,36 @@ def grafico_alunos_por_disponibilidade_agua(df, ano_censo):
 
     # Estilo do projeto
     plt.style.use("dark_background")
-    fig, ax = plt.subplots(figsize=(10, 4.5))
+    fig, ax = plt.subplots(figsize=(8, 6))
 
-    # Plotagem
-    barras = ax.barh(soma_alunos.index, soma_alunos.values, color=cores)
+    # Plotagem vertical
+    barras = ax.bar(soma_alunos.index, soma_alunos.values, color=cores)
 
-    # Rótulos ao final
+    # Rótulos nas barras
     for bar, valor in zip(barras, soma_alunos.values):
         ax.text(
-            valor + (soma_alunos.max() * 0.01),
-            bar.get_y() + bar.get_height() / 2,
+            bar.get_x() + bar.get_width() / 2,
+            valor + (soma_alunos.max() * 0.02),
             f"{int(valor):,}".replace(",", "."),
-            va="center", ha="left",
+            ha="center", va="bottom",
             color="white", fontweight="bold", fontsize=13
         )
 
     # Título e eixos
     ax.set_title(f"Alunos por Disponibilidade de Água Potável — {ano_censo}", color="#FFA07A", fontsize=18)
-    ax.set_xlabel("Número total de alunos", color="#FFA07A", fontsize=12)
+    ax.set_ylabel("Número total de alunos", color="#FFA07A", fontsize=12)
+    ax.set_xlabel("Disponibilidade de Água", color="#FFA07A", fontsize=12)
 
+    # Estilo dos eixos e spines
     ax.tick_params(colors="#FFA07A", labelsize=12)
     for spine in ax.spines.values():
         spine.set_color("#FFA07A")
 
+    ax.set_ylim(0, soma_alunos.max() * 1.25)
+
     fig.tight_layout()
     st.pyplot(fig)
+
 
 # Gráfico de barras vertical total de escolas sem água potável por localização (urbana ou rural)
 def grafico_localizacao_escolas_sem_agua(df, ano_censo):

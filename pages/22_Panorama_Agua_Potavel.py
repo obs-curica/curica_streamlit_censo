@@ -14,7 +14,8 @@ from scripts.utils import(carregar_dados,
 from scripts.textos import(texto_pan_agua_intro,
                            texto_pan_agua_metodologia,
                            texto_pan_agua_dados_brutos_intro,
-                           texto_pan_agua_dados_brutos_analise_01
+                           texto_pan_agua_dados_brutos_analise_01,
+                           texto_pan_agua_dados_brutos_analise_02
 )
 
 from scripts.graficos import (grafico_agua_total_dados_brutos,
@@ -86,7 +87,9 @@ ano_censo = st.selectbox(
 col1, col2 = st.columns(2)
 
 with col1:
-    grafico_alunos_por_disponibilidade_agua(df_panorama_agua, ano_censo=ano_censo)
-
-with col2:
     grafico_localizacao_escolas_sem_agua(df_panorama_agua, ano_censo=ano_censo)
+    
+with col2:
+    grafico_alunos_por_disponibilidade_agua(df_panorama_agua, ano_censo=ano_censo)
+    
+st.write(texto_pan_agua_dados_brutos_analise_02())
