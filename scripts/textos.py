@@ -953,7 +953,7 @@ def texto_pan_agua_dados_brutos_analise_02():
     
     Entretanto, o simples fato de existirem escolas localizadas em áreas urbanas que declaram não fornecer água potável é um fato que causa 
     estranheza e merece uma investigação mais aprofundada. Isso porque a água fornecida em áreas urbanas é, em regra, proveniente do sistema
-    público de abastecimento de água, que costuma oferecer tratamento adequado para o consumo humano.
+    público de abastecimento de água, que costuma oferecer tratamento adequado para a água destinada ao consumo humano.
     
     Mais ainda, o dado de que aproximadamente **metade** das escolas rurais fornecem água potável também deve ser olhado com atenção, pois
     a realidade constatada em atividades de campo demonstra que a maioria dessas escolas não possui acesso a esse recurso.
@@ -961,4 +961,41 @@ def texto_pan_agua_dados_brutos_analise_02():
     É com essa singela reflexão que se inicia a próxima etapa da análise dos dados, para problematizá-los com a semântica que surge do 
     confronto dessas informações com outras variáveis do questionário do próprio Censo Escolar e com a experiência prática de campo. Sempre 
     mirando na atuação prática das Promotorias de Justiça do interior do Estado.
+    """
+    
+def texto_pan_agua_dados_brutos_problematizacao_intro():
+    return """
+    Como adiantado acima, a análise dos dados brutos do Censo Escolar deve ser problematizada, para que se possa extrair deles informações 
+    úteis que retratem da melhor maneira possível a realidade do fornecimento de água potável nas escolas da rede pública. Para isso, a 
+    resposta que afirma se a escola fornece água potável ou não será confrontada com outras variáveis do questionário do Censo Escolar que 
+    informam as fontes de abastecimento de água disponíveis na escola.
+    
+    As fontes de abastecimento listadas no questionário do Censo Escolar são as seguintes:
+    * Rede pública de abastecimento de água;
+    * Poço artesiano;
+    * Cacimba ou poço;
+    * Rio, igarapé, riacho, córrego ou fonte;
+    * Carro pipa;
+    * Inexistente.
+    
+    Desse modo, a resposta sobre a oferta de água potável será confrontada com as fontes de abastecimento declaradas, para verificar a 
+    coerência da resposta. A conclusão sobre a potabilidade ou não da água ofertada é algo que somente análises laboratoriais periódicas 
+    podem afirmar com precisão. Entretanto, é possível estabelecer premissas razoáveis para a análise dos dados a partir de conhecimentos
+    técnicos prévios e da experiência prática de campo. A adoção dessas premissas busca oferecer um panorama mais realista do problema e 
+    também fornecer subsídios práticos para a atuação eficiente das Promotorias de Justiça do interior do Estado.
+    """
+    
+def texto_pan_agua_dados_brutos_problematizacao_premissas():
+    return """
+    
+    
+    As premissas a serem adotadas na análise dos dados sobre a oferta de água potável nas escolas da rede pública são as seguintes:
+
+    1. A água proveniente da rede pública de abastecimento é considerada potável, salvo evidências em contrário.
+    2. A água de poços artesianos é considerada potável, pois retiram a água de aquíferos profundos, que geralmente possuem qualidade superior.
+    3. A água de cacimbas ou poços  é considerada imprópria para o consumo humano, pois retiram a água da superfície ou de aquíferos rasos.
+    4. A água de rios, igarapés, riachos, córregos ou fontes é considerada imprópria para o consumo humano.
+    5. A água fornecida por carro pipa é considerada imprópria para o consumo humano.
+
+    Essas premissas visam a garantir que a análise dos dados seja realizada de forma consistente e que as conclusões sejam baseadas em critérios técnicos e objetivos.
     """
