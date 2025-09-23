@@ -17,7 +17,8 @@ from scripts.textos import(texto_pan_agua_intro,
                            texto_pan_agua_dados_brutos_analise_01,
                            texto_pan_agua_dados_brutos_analise_02,
                            texto_pan_agua_dados_brutos_problematizacao_intro,
-                           texto_pan_agua_dados_brutos_problematizacao_premissas
+                           texto_pan_agua_dados_brutos_problematizacao_premissas,
+                           texto_pan_agua_fontes_intro
 )
 
 from scripts.graficos import (grafico_agua_total_dados_brutos,
@@ -103,3 +104,9 @@ st.write(texto_pan_agua_dados_brutos_problematizacao_intro())
 
 st.subheader('Premissas para o confronto dos dados brutos')
 st.write(texto_pan_agua_dados_brutos_problematizacao_premissas())
+
+st.subheader('Análise dos dados segundo as fontes de abastecimento de água')
+st.write(texto_pan_agua_fontes_intro())
+
+
+# lembrar de dizer que sao dois problemas essenciais: o erro no preenchimento do censo e do problema dos anexos

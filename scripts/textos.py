@@ -980,27 +980,59 @@ def texto_pan_agua_dados_brutos_problematizacao_intro():
     * Carro pipa;
     * Inexistente.
     
-    A conclusão sobre a potabilidade ou não da água ofertada é algo que somente análises laboratoriais periódicas podem afirmar com precisão. 
-    Entretanto, é possível estabelecer premissas razoáveis para a análise dos dados a partir de conhecimentos técnicos prévios e da experiência 
-    prática de campo. A adoção dessas premissas busca oferecer um panorama mais realista do problema e também fornecer subsídios práticos para 
-    a atuação eficiente das Promotorias de Justiça do interior do Estado. A partir da definição dessas premissas, a resposta sobre a oferta de 
-    água potável será confrontada com as fontes de abastecimento declaradas, para verificar a coerência da resposta.
+    A conclusão sobre a potabilidade ou não da água ofertada é algo que somente análises laboratoriais periódicas podem afirmar com 
+    precisão. Entretanto, é possível estabelecer premissas razoáveis para a análise dos dados a partir de conhecimentos técnicos prévios 
+    e da experiência prática de campo. A adoção dessas premissas busca oferecer um panorama mais realista do problema e também fornecer 
+    subsídios práticos para a atuação eficiente das Promotorias de Justiça do interior do Estado. A partir da definição dessas premissas, a 
+    resposta sobre a oferta de água potável será confrontada com as fontes de abastecimento declaradas, para verificar a coerência da 
+    resposta.
     """
     
 def texto_pan_agua_dados_brutos_problematizacao_premissas():
     return """
-    As premissas a serem adotadas na análise dos dados sobre a oferta de água potável nas escolas levam em conta a conformidade semântica entre
+    As premissas adotadas na análise dos dados sobre a oferta de água potável nas escolas levam em conta a conformidade semântica entre
     a resposta sobre a oferta de água potável e se a fonte de abastecimento é potencialmente potável.
     Logo, as premissas são as seguintes:
 
-    1. A água proveniente da rede pública de abastecimento é considerada potável.
-    2. A água de poços artesianos é considerada potável, pois retiram a água de aquíferos profundos, que geralmente possuem qualidade superior.
-    3. A água de cacimbas ou poços é considerada imprópria para o consumo humano, pois retiram a água da superfície ou de aquíferos rasos.
-    4. A água de rios, igarapés, riachos, córregos ou fontes é considerada imprópria para o consumo humano.
-    5. A água fornecida por carro pipa é considerada imprópria para o consumo humano.
+    1. A água proveniente da :orange-background[rede pública] de abastecimento é considerada potável.
+    2. A água de :orange-background[poços artesianos] é considerada potável.
+    3. A água de :orange-background[cacimbas] ou poços é considerada imprópria para o consumo humano.
+    4. A água de :orange-background[rios], igarapés, riachos, córregos ou fontes é considerada imprópria para o consumo humano.
+    5. A água fornecida por :orange-background[carro pipa] é considerada imprópria para o consumo humano.
 
-    A água de poços artesianos é considerada potável, pois retiram a água de aquíferos profundos, que geralmente possuem qualidade superior.
+    A rede pública de abastecimento de água é, ou deveria ser, tratada e monitorada por órgãos públicos competentes, o que permite assumir 
+    para os fins deste estudo que a água fornecida por essa fonte é potável. De regra, a água distribuída por essa fonte atende escolas da
+    zona urbana, áreas rurais próximas às cidades e vilas ou comunidades mais populosas. Ainda, na prática, as escolas localizadas nas
+    zonas urbanas estão sujeitas a um controle social mais efetivo e também estão próximas das sedes das Promotorias de Justiça, o que 
+    facilita a atuação ministerial.
+
+    A água de poços artesianos é considerada potável, pois retiram a água de aquíferos profundos que, geralmente, possuem qualidade 
+    superior. Esta é a **melhor solução** para o abastecimento de água em áreas rurais, pois é barato, de fácil manutenção e pode ser 
+    instalado em qualquer lugar. Ainda, pode ser adequado ao tipo de fornecimento de energia elétrica disponível, pois a água pode ser 
+    bombeada por bombas a combustão ou por energia solar.
     
-    Essas premissas visam a garantir que a análise dos dados seja realizada de forma consistente e que as conclusões sejam baseadas em critérios 
-    técnicos e objetivos.
+    Por sua vez, a cacimba ou o poço amazônico falado, é um poço raso, escavado manualmente, que capta a água de aquíferos rasos ou da 
+    superfície. De regra, as cacimbas são cavadas em locais mais baixos no relevo, não são cercadas e são facilmente acessadas por animais 
+    domésticos ou não. Essa água não recebe tratamento adequado e, mesmo parecendo límpida, é imprópria para o consumo humano. Sem mencionar
+    a necessidade de transporte manual dessa água até o local onde será consumida que, comumente é realizado pelos próprios alunos.
+
+    A água de rios e igarapés pode ser considerada imprópria para o consumo humano por simples constatação visual de sua turbidez.
+
+    Por fim, a qualidade da água fornecida por carros pipa dependerá das condições do transporte e, por óbvio, da fonte onde ela é captada.
+    Na prática, o abastecimento com carros pipa tem ganhado destaque em comunidades rurais com acesso terrestre, em especial em projetos de
+    assentamento, quando da ocorrência de longos períodos de estiagem, como o do ano de 2024.
+
+    Relembra-se que essas premissas são estabelecidas para auxiliar o trabalho das Promotorias de Justiça do interior do Estado, que estão 
+    sobrecarregadas com o trabalho judicial e não dispõem de equipes técnicas especializadas para visitar todas as escolas da rede pública 
+    de ensino. Entretanto, o estudo coloca no mapa escolas com respostas incoerentes, que devem ser fiscalizadas. Aos dados.
     """
+    
+def texto_pan_agua_fontes_intro():
+    return """
+    Agora eu quero ver: como é que a maioria das escolas rurais visitadas pela Promotoria de Justiça não possui acesso a água potável e o 
+    Censo Escolar está mostrando o contrário? Vamos descobrir.  
+    
+    """
+    
+
+# lembrar de dizer que sao dois problemas essenciais: o erro no preenchimento do censo e do problema dos anexos
