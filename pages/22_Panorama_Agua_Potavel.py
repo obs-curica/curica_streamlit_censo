@@ -16,7 +16,8 @@ from scripts.textos import(texto_pan_agua_intro,
                            texto_pan_agua_dados_brutos_intro,
                            texto_pan_agua_dados_brutos_analise_01,
                            texto_pan_agua_dados_brutos_analise_02,
-                           texto_pan_agua_dados_brutos_problematizacao_intro
+                           texto_pan_agua_dados_brutos_problematizacao_intro,
+                           texto_pan_agua_dados_brutos_problematizacao_premissas
 )
 
 from scripts.graficos import (grafico_agua_total_dados_brutos,
@@ -99,3 +100,6 @@ st.write(texto_pan_agua_dados_brutos_analise_02())
 # Subseção Problematização dos dados brutos do Censo Escolar
 st.header('Problematização dos dados brutos do Censo Escolar')
 st.write(texto_pan_agua_dados_brutos_problematizacao_intro())
+
+st.subheader('Premissas para o confronto dos dados brutos')
+st.write(texto_pan_agua_dados_brutos_problematizacao_premissas())
