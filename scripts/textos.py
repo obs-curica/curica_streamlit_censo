@@ -905,14 +905,14 @@ def texto_pan_agua_metodologia():
     maneira célere e onde é mais necessário.
     
     Desse modo, a análise da oferta de água potável se inicia com a apresentação dos dados brutos do :orange-background[Censo Escolar] para, 
-    então, confrontá-los com os próprios dados do Censo Escolar e com a experiência prática de campo. Esses dados brutos já sofreram um 
-    tratamento inicial, para excluir da análise as escolas inativas e as escolas privadas. Portanto, os números aqui apresentados dizem 
-    respeito somente às escolas ativas da rede pública de ensino do Acre.
+    então, confrontá-los com os próprios dados do Censo Escolar a partir de premissas estabelecidas com conhecimentos técnicos prévios e com 
+    a experiência prática de campo. Esses dados brutos já sofreram um tratamento inicial, para excluir da análise as escolas inativas e as 
+    escolas privadas. Portanto, os números aqui apresentados dizem respeito somente às escolas ativas da rede pública de ensino do Acre.
 
     Ao final da análise, é apresentado o Programa Dinheiro Direto na Escola - Água ([PDDE - Água](https://www.gov.br/mec/pt-br/pdde/pdde-equidade/pdde-agua)), 
-    do FNDE, que disponibiliza recursos financeiros para a construção de sistemas de abastecimento de água potável e saneamento básico nas 
-    escolas públicas. Aqui, os dados do Censo Escolar serão cruzados com os dados do PDDE - Água, para identificar possíveis falhas de gestão
-    que impeçam o acesso a esses recursos, bem como apontar soluções para o problema.
+    do FNDE como proposta de solução do problema. Este programa disponibiliza recursos financeiros para a construção de sistemas de 
+    abastecimento de água potável e saneamento básico nas escolas públicas. Aqui, os dados do Censo Escolar serão cruzados com os dados do 
+    PDDE - Água, para identificar possíveis falhas de gestão que impeçam o acesso a esses recursos, bem como apontar soluções para o problema.
     """
 
 def texto_pan_agua_dados_brutos_intro():
@@ -1009,7 +1009,8 @@ def texto_pan_agua_dados_brutos_problematizacao_premissas():
     A água de poços artesianos é considerada potável, pois retiram a água de aquíferos profundos que, geralmente, possuem qualidade 
     superior. Esta é a **melhor solução** para o abastecimento de água em áreas rurais, pois é barato, de fácil manutenção e pode ser 
     instalado em qualquer lugar. Ainda, pode ser adequado ao tipo de fornecimento de energia elétrica disponível, pois a água pode ser 
-    bombeada por bombas a combustão ou por energia solar.
+    bombeada por bombas a combustão ou por energia solar. Entretanto, é importante lembrar que nem todo o subsolo do Acre fornece água
+    de boa qualidade.
     
     Por sua vez, a cacimba ou o poço amazônico falado, é um poço raso, escavado manualmente, que capta a água de aquíferos rasos ou da 
     superfície. De regra, as cacimbas são cavadas em locais mais baixos no relevo, não são cercadas e são facilmente acessadas por animais 
@@ -1020,19 +1021,42 @@ def texto_pan_agua_dados_brutos_problematizacao_premissas():
 
     Por fim, a qualidade da água fornecida por carros pipa dependerá das condições do transporte e, por óbvio, da fonte onde ela é captada.
     Na prática, o abastecimento com carros pipa tem ganhado destaque em comunidades rurais com acesso terrestre, em especial em projetos de
-    assentamento, quando da ocorrência de longos períodos de estiagem, como o do ano de 2024.
+    assentamento, quando da ocorrência de longos períodos de estiagem, como o do ano de 2024. O fato é que, se há necessidade de 
+    abastecimento da escola por meio de carros pipa, é porque a escola não possui sistema de abastecimento de água disponível.
 
     Relembra-se que essas premissas são estabelecidas para auxiliar o trabalho das Promotorias de Justiça do interior do Estado, que estão 
     sobrecarregadas com o trabalho judicial e não dispõem de equipes técnicas especializadas para visitar todas as escolas da rede pública 
     de ensino. Entretanto, o estudo coloca no mapa escolas com respostas incoerentes, que devem ser fiscalizadas. Aos dados.
     """
     
-def texto_pan_agua_fontes_intro():
+def texto_pan_agua_fontes_intro_01():
     return """
     Agora eu quero ver: como é que a maioria das escolas rurais visitadas pela Promotoria de Justiça não possui acesso a água potável e o 
-    Censo Escolar está mostrando o contrário? Vamos descobrir.  
-    
+    Censo Escolar está mostrando o contrário? Vamos descobrir.
+
+    É possível iniciar a análise com a identificação da coerência semântica das respostas dadas ao Censo Escolar à pergunta sobre o 
+    fornecimento de água potável. Apresenta-se abaixo o número de escolas que **afirmam fornecer água potável**, mas que **declaram fontes de 
+    abastecimento de água impróprias para o consumo humano**, segundo as premissas adotadas acima.
+
+    A seleção do ano do Censo Escolar retornará o valor respectivo.
     """
-    
+
+def texto_pan_agua_fontes_intro_02():
+    return """
+      
+      
+    Dadas as premissas acima, todas as escolas localizadas em zonas urbanas e as rurais que declaram fornecer água proveniente de fonte de
+    abastecimento público serão consideradas como fornecedoras de água potável.
+
+    As escolas rurais que declaram fornecer água a partir de poços artesianos também serão consideradas como fornecedoras de água potável
+    ("Fornece").
+
+    Por fim, as escolas rurais que declaram fornecer água a partir de cacimbas, rios, igarapés e carros pipa serão consideradas como 
+    fornecedoras de água imprópria para o consumo humano ("Não fornece").
+
+    Segue o resultado:
+    """
+
+
 
 # lembrar de dizer que sao dois problemas essenciais: o erro no preenchimento do censo e do problema dos anexos

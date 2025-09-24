@@ -18,7 +18,8 @@ from scripts.textos import(texto_pan_agua_intro,
                            texto_pan_agua_dados_brutos_analise_02,
                            texto_pan_agua_dados_brutos_problematizacao_intro,
                            texto_pan_agua_dados_brutos_problematizacao_premissas,
-                           texto_pan_agua_fontes_intro
+                           texto_pan_agua_fontes_intro_01,
+                           texto_pan_agua_fontes_intro_02
 )
 
 from scripts.graficos import (grafico_agua_total_dados_brutos,
@@ -106,7 +107,50 @@ st.subheader('Premissas para o confronto dos dados brutos')
 st.write(texto_pan_agua_dados_brutos_problematizacao_premissas())
 
 st.subheader('Análise dos dados segundo as fontes de abastecimento de água')
-st.write(texto_pan_agua_fontes_intro())
+st.write(texto_pan_agua_fontes_intro_01())
+
+# Consulta das escolas que declaram fornecer água potável de fontes insalubres
+ano_censo = st.selectbox(
+    "Selecione o ano do Censo Escolar:",
+    options=anos_disponiveis,
+    index=anos_disponiveis.index(ano_mais_recente),
+    key="agua_dados_brutos_problematizacao"
+)
+
+# Filtro para urbanas e rurais
+filtro = (
+    (df_panorama_agua["NU_ANO_CENSO"] == ano_censo) &
+#   (df_panorama_agua["TP_LOCALIZACAO"] == 2) &  # Zona rural
+    (df_panorama_agua["IN_AGUA_POTAVEL"] == 1) & (
+        (df_panorama_agua["IN_AGUA_CACIMBA"] == 1) |
+        (df_panorama_agua["IN_AGUA_FONTE_RIO"] == 1) |
+        (df_panorama_agua["IN_AGUA_INEXISTENTE"] == 1) |
+        (df_panorama_agua["IN_AGUA_CARRO_PIPA"] == 1)
+    )
+)
+# Quantidade total
+total_respostas_incoerentes = df_panorama_agua[filtro].shape[0]
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.markdown(f"""
+    ### Total de escolas com respostas incoerentes:
+    # `{total_respostas_incoerentes}`
+    """)
+
+    st.warning(f"⚠️ Total de escolas com respostas incoerentes: {total_respostas_incoerentes}")
+
+    st.markdown(f"""
+    > ### Total de escolas com respostas incoerentes:
+    > # `{total_respostas_incoerentes}`
+    """)
+
+    
+
+
+
+st.write(texto_pan_agua_fontes_intro_02())
 
 
 # lembrar de dizer que sao dois problemas essenciais: o erro no preenchimento do censo e do problema dos anexos
