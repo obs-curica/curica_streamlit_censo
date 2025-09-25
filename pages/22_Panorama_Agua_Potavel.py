@@ -98,6 +98,10 @@ with col2:
     
 st.write(texto_pan_agua_dados_brutos_analise_02())
 
+# Análise dos dados segundo as fontes de abastecimento de água
+st.header('Oferta de água segundo as fontes de abastecimento')
+st.write("")
+
 #++++++++
 # Subseção Problematização dos dados brutos do Censo Escolar
 st.header('Problematização dos dados brutos do Censo Escolar')
@@ -118,7 +122,7 @@ ano_censo = st.selectbox(
 )
 
 # Filtro para urbanas e rurais
-filtro = (
+filtro_fontes_improprias = (
     (df_panorama_agua["NU_ANO_CENSO"] == ano_censo) &
 #   (df_panorama_agua["TP_LOCALIZACAO"] == 2) &  # Zona rural
     (df_panorama_agua["IN_AGUA_POTAVEL"] == 1) & (
@@ -129,24 +133,32 @@ filtro = (
     )
 )
 # Quantidade total
-total_respostas_incoerentes = df_panorama_agua[filtro].shape[0]
+total_respostas_incoerentes_improprias = df_panorama_agua[filtro_fontes_improprias].shape[0]
+
+filtro_fontes_proprias = (
+    (df_panorama_agua["NU_ANO_CENSO"] == ano_censo) &
+#   (df_panorama_agua["TP_LOCALIZACAO"] == 2) &  # Zona rural
+    (df_panorama_agua["IN_AGUA_POTAVEL"] == 0) & (
+        (df_panorama_agua["IN_AGUA_REDE_PUBLICA"] == 1) |
+        (df_panorama_agua["IN_AGUA_POCO_ARTESIANO"] == 1)        
+    )
+)
+
+total_respostas_incoerentes_proprias = df_panorama_agua[filtro_fontes_proprias].shape[0]
 
 col1, col2 = st.columns(2)
 
 with col1:
     st.markdown(f"""
-    ### Total de escolas com respostas incoerentes:
-    # `{total_respostas_incoerentes}`
+    ##### Total de escolas que afirmam fornecer água potável de fontes impróprias:
+    # `{total_respostas_incoerentes_improprias}`
     """)
 
-    st.warning(f"⚠️ Total de escolas com respostas incoerentes: {total_respostas_incoerentes}")
-
+with col2:
     st.markdown(f"""
-    > ### Total de escolas com respostas incoerentes:
-    > # `{total_respostas_incoerentes}`
+    ##### Total de escolas que afirmam não fornecer água potável de fontes próprias:
+    # `{total_respostas_incoerentes_proprias}`
     """)
-
-    
 
 
 

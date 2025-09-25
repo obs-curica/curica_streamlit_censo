@@ -958,10 +958,28 @@ def texto_pan_agua_dados_brutos_analise_02():
     Mais ainda, o dado de que aproximadamente **metade** das escolas rurais fornecem água potável também deve ser olhado com atenção, pois
     a realidade constatada em atividades de campo demonstra que a maioria dessas escolas não possui acesso a esse recurso.
     
+    Neste ponto, é pertinente a demonstração das fontes de abastecimento de água disponíveis nas escolas, para introduzir de maneira 
+    didática a próxima etapa da análise dos dados.
+        
+    
+    """
+    
+def texto_pan_agua_dados_brutos_fontes_intro():
+    return """
+    
+    """
+    
+
+def texto_pan_agua_dados_brutos_fontes_analise():
+    return """
+
+    
     É com essa singela reflexão que se inicia a próxima etapa da análise dos dados, para problematizá-los, a princípio, confrontando as 
     informações apresentadas acima com outras variáveis do questionário do próprio Censo Escolar. Sempre mirando na atuação prática das 
     Promotorias de Justiça do interior do Estado.
     """
+
+    
     
 def texto_pan_agua_dados_brutos_problematizacao_intro():
     return """
@@ -1035,15 +1053,20 @@ def texto_pan_agua_fontes_intro_01():
     Censo Escolar está mostrando o contrário? Vamos descobrir.
 
     É possível iniciar a análise com a identificação da coerência semântica das respostas dadas ao Censo Escolar à pergunta sobre o 
-    fornecimento de água potável. Apresenta-se abaixo o número de escolas que **afirmam fornecer água potável**, mas que **declaram fontes de 
-    abastecimento de água impróprias para o consumo humano**, segundo as premissas adotadas acima.
-
-    A seleção do ano do Censo Escolar retornará o valor respectivo.
+    fornecimento de água potável. Apresenta-se abaixo dois números interessantes:
+    
+    1. o total de escolas que **afirmam fornecer água potável**, mas que **declaram fontes de abastecimento de água impróprias para o 
+    consumo humano**, segundo as premissas adotadas acima;
+    2. o total de escolas que **afirmam não fornecer água potável**, mas que **declaram fontes de abastecimento potáveis**, segundo as 
+    mesmas premissas.
+    
+    A seleção do ano do Censo Escolar retorna o valor respectivo.
+    __________________
     """
 
 def texto_pan_agua_fontes_intro_02():
     return """
-      
+    __________________  
       
     Dadas as premissas acima, todas as escolas localizadas em zonas urbanas e as rurais que declaram fornecer água proveniente de fonte de
     abastecimento público serão consideradas como fornecedoras de água potável.
