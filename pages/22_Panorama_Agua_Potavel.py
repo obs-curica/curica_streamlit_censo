@@ -16,6 +16,8 @@ from scripts.textos import(texto_pan_agua_intro,
                            texto_pan_agua_dados_brutos_intro,
                            texto_pan_agua_dados_brutos_analise_01,
                            texto_pan_agua_dados_brutos_analise_02,
+                           texto_pan_agua_dados_brutos_fontes_intro,
+                           texto_pan_agua_dados_brutos_fontes_analise,
                            texto_pan_agua_dados_brutos_problematizacao_intro,
                            texto_pan_agua_dados_brutos_problematizacao_premissas,
                            texto_pan_agua_fontes_intro_01,
@@ -25,7 +27,8 @@ from scripts.textos import(texto_pan_agua_intro,
 from scripts.graficos import (grafico_agua_total_dados_brutos,
                               grafico_escolas_sem_agua_por_municipio,
                               grafico_alunos_por_disponibilidade_agua,
-                              grafico_localizacao_escolas_sem_agua
+                              grafico_localizacao_escolas_sem_agua,
+                              grafico_abastecimento_agua_por_fonte
 )
 
 # Configuração visual
@@ -100,7 +103,27 @@ st.write(texto_pan_agua_dados_brutos_analise_02())
 
 # Análise dos dados segundo as fontes de abastecimento de água
 st.header('Oferta de água segundo as fontes de abastecimento')
-st.write("")
+st.write(texto_pan_agua_dados_brutos_fontes_intro())
+
+col1, col2 = st.columns(2)
+
+with col1:
+    # Selectbox do ano do Censo Escolar
+    anos_disponiveis = sorted(df_panorama_agua['NU_ANO_CENSO'].unique())
+    ano_mais_recente = max(anos_disponiveis)
+
+    ano_censo = st.selectbox(
+        "Selecione o ano do Censo Escolar:",
+        options=anos_disponiveis,
+        index=anos_disponiveis.index(ano_mais_recente),
+        key="agua_dados_brutos_fontes_abastecimento"
+    )
+
+    grafico_abastecimento_agua_por_fonte(df_panorama_agua, ano_censo=ano_censo)
+
+st.write(texto_pan_agua_dados_brutos_fontes_analise())
+
+
 
 #++++++++
 # Subseção Problematização dos dados brutos do Censo Escolar

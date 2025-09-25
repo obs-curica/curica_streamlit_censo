@@ -960,19 +960,29 @@ def texto_pan_agua_dados_brutos_analise_02():
     
     Neste ponto, é pertinente a demonstração das fontes de abastecimento de água disponíveis nas escolas, para introduzir de maneira 
     didática a próxima etapa da análise dos dados.
-        
-    
     """
     
 def texto_pan_agua_dados_brutos_fontes_intro():
     return """
-    
+    Após perguntar se a escola fornece água potável, o questionário do Censo Escolar também pergunta à rede de ensino qual a **fonte de 
+    abastecimento** da água ofertada. Ele traz as seguintes alternativas:
+
+    * Rede pública de abastecimento de água;
+    * Poço artesiano;
+    * Cacimba ou poço;
+    * Rio, igarapé, riacho, córrego ou fonte;
+    * Carro pipa;
+    * Inexistente.
+
+    Além de conferir um quadro mais preciso sobre o fornecimento de água, esse dado é muito importante para verificar as informações
+    prestadas pelas redes de ensino ao próprio Censo Escolar. Segue, então, a demonstração visual da distribuição dessas fontes de 
+    abastecimento.
     """
     
 
 def texto_pan_agua_dados_brutos_fontes_analise():
     return """
-
+    (...)
     
     É com essa singela reflexão que se inicia a próxima etapa da análise dos dados, para problematizá-los, a princípio, confrontando as 
     informações apresentadas acima com outras variáveis do questionário do próprio Censo Escolar. Sempre mirando na atuação prática das 

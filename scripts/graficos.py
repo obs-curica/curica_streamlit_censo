@@ -2433,6 +2433,88 @@ def grafico_localizacao_escolas_sem_agua(df, ano_censo):
     fig.tight_layout()
     st.pyplot(fig)
 
+def grafico_abastecimento_agua_por_fonte(df, ano_censo):
+    """
+    Gera gráfico de barras verticais com o total de escolas que utilizam
+    cada tipo de fonte de abastecimento de água (valores igual a 1).
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame com colunas binárias de abastecimento de água.
+    ano_censo : int
+        Ano a ser filtrado (NU_ANO_CENSO).
+    """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    from scripts.utils import COLUNAS_RENOMEADAS_CENSO
+
+    # Colunas de interesse
+    colunas_agua = [
+        "IN_AGUA_REDE_PUBLICA",
+        "IN_AGUA_POCO_ARTESIANO",
+        "IN_AGUA_CACIMBA",
+        "IN_AGUA_FONTE_RIO",
+        "IN_AGUA_INEXISTENTE",
+        "IN_AGUA_CARRO_PIPA"
+    ]
+
+    # Filtrar apenas o ano solicitado
+    df_filtrado = df[df["NU_ANO_CENSO"] == ano_censo]
+
+    if df_filtrado.empty:
+        st.warning(f"Não há dados disponíveis para o ano {ano_censo}.")
+        return
+
+    # Contar valores iguais a 1 por coluna
+    contagem = df_filtrado[colunas_agua].apply(lambda col: (col == 1).sum())
+    contagem.rename(index=COLUNAS_RENOMEADAS_CENSO, inplace=True)
+    contagem = contagem.sort_values(ascending=False)
+
+    # Definir cores: azul padrão (#B0E0E6), amarelo para fontes inadequadas
+    cor_padrao = "#B0E0E6"
+    cor_destaque = "#FFC107"
+    colunas_destaque = [
+        "IN_AGUA_CACIMBA",
+        "IN_AGUA_FONTE_RIO",
+        "IN_AGUA_INEXISTENTE",
+        "IN_AGUA_CARRO_PIPA"
+    ]
+    nomes_destaque = [COLUNAS_RENOMEADAS_CENSO[col] for col in colunas_destaque]
+    cores_barras = [cor_destaque if nome in nomes_destaque else cor_padrao for nome in contagem.index]
+
+    # Estilo visual
+    plt.style.use("dark_background")
+    fig, ax = plt.subplots(figsize=(11, 8))
+
+    # Barras com cores condicionais
+    barras = ax.bar(contagem.index, contagem.values, color=cores_barras)
+
+    # Rótulos nas barras
+    for bar, valor in zip(barras, contagem.values):
+        ax.text(
+            bar.get_x() + bar.get_width() / 2,
+            valor + contagem.max() * 0.02,
+            f"{valor:,}".replace(",", "."),
+            ha="center", va="bottom",
+            fontsize=13, fontweight="bold", color="white"
+        )
+
+    # Título e eixos
+    ax.set_title(f"Fontes de Abastecimento de Água - {ano_censo}", color="#FFA07A", fontsize=26)
+    ax.set_ylabel("Número de Escolas", color="#FFA07A", fontsize=17)
+    ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=14)
+
+    # Eixos e contorno
+    ax.tick_params(axis='y', colors="#FFA07A", labelsize=15)
+    ax.tick_params(axis='x', colors="#FFA07A", labelsize=17, rotation=10)
+    for spine in ax.spines.values():
+        spine.set_color("#FFA07A")
+
+    ax.set_ylim(0, contagem.max() * 1.25)
+    fig.tight_layout()
+    st.pyplot(fig)
+
 
 
 #===========================
