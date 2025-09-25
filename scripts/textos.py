@@ -974,23 +974,22 @@ def texto_pan_agua_dados_brutos_fontes_intro():
     * Carro pipa;
     * Inexistente.
 
-    Além de conferir um quadro mais preciso sobre o fornecimento de água, esse dado é muito importante para verificar as informações
-    prestadas pelas redes de ensino ao próprio Censo Escolar. Segue, então, a demonstração visual da distribuição dessas fontes de 
-    abastecimento.
+    Além de conferir um quadro mais preciso sobre o fornecimento de água, esse dado é muito importante para verificar a coerência das 
+    informações prestadas pelas redes de ensino ao próprio Censo Escolar. Segue, então, a demonstração visual da distribuição dessas fontes 
+    de abastecimento.
     """
     
-
 def texto_pan_agua_dados_brutos_fontes_analise():
     return """
-    (...)
+    Quando se observa o fornecimento de água potável nas escolas a partir das fontes de abastecimento, percebe-se de largada uma grande
+    quantidade de estabelecimentos que declaram não possuir fonte de abastecimento de água. E quando se compara esse dado com o número de 
+    escolas que declaram não fornece água potável, a dissonância fica evidente.
     
     É com essa singela reflexão que se inicia a próxima etapa da análise dos dados, para problematizá-los, a princípio, confrontando as 
     informações apresentadas acima com outras variáveis do questionário do próprio Censo Escolar. Sempre mirando na atuação prática das 
     Promotorias de Justiça do interior do Estado.
     """
 
-    
-    
 def texto_pan_agua_dados_brutos_problematizacao_intro():
     return """
     Como adiantado acima, a análise dos dados brutos do Censo Escolar deve ser problematizada, para que se possa extrair deles informações 
@@ -999,28 +998,18 @@ def texto_pan_agua_dados_brutos_problematizacao_intro():
     informam as fontes de abastecimento de água disponíveis na escola. Ou seja, após a resposta para a pergunta sobre o fornecimento de água
     potável pela escola, o Censo Escolar pergunta qual a fonte de abastecimento de água que serve aquela escola.
     
-    As fontes de abastecimento listadas no questionário do Censo Escolar são as seguintes:
-
-    * Rede pública de abastecimento de água;
-    * Poço artesiano;
-    * Cacimba ou poço;
-    * Rio, igarapé, riacho, córrego ou fonte;
-    * Carro pipa;
-    * Inexistente.
-    
-    A conclusão sobre a potabilidade ou não da água ofertada é algo que somente análises laboratoriais periódicas podem afirmar com 
-    precisão. Entretanto, é possível estabelecer premissas razoáveis para a análise dos dados a partir de conhecimentos técnicos prévios 
-    e da experiência prática de campo. A adoção dessas premissas busca oferecer um panorama mais realista do problema e também fornecer 
-    subsídios práticos para a atuação eficiente das Promotorias de Justiça do interior do Estado. A partir da definição dessas premissas, a 
-    resposta sobre a oferta de água potável será confrontada com as fontes de abastecimento declaradas, para verificar a coerência da 
-    resposta.
+    Importante ressaltar que a conclusão sobre a potabilidade ou não da água ofertada é algo que somente análises laboratoriais periódicas 
+    podem afirmar com precisão. Entretanto, é possível estabelecer premissas razoáveis para a análise dos dados a partir de conhecimentos 
+    técnicos prévios e da experiência prática de campo. A adoção dessas premissas busca oferecer um panorama mais realista do problema e 
+    também fornecer subsídios práticos para a atuação eficiente das Promotorias de Justiça do interior do Estado. A partir da definição 
+    dessas premissas, a resposta sobre a oferta de água potável será confrontada com as fontes de abastecimento declaradas, para verificar 
+    a coerência das respostas declaradas ao Censo Escolar.
     """
     
 def texto_pan_agua_dados_brutos_problematizacao_premissas():
     return """
-    As premissas adotadas na análise dos dados sobre a oferta de água potável nas escolas levam em conta a conformidade semântica entre
-    a resposta sobre a oferta de água potável e se a fonte de abastecimento é potencialmente potável.
-    Logo, as premissas são as seguintes:
+    As premissas adotadas na análise dos dados sobre a oferta de água potável nas escolas levam em conta a coerência semântica entre a 
+    resposta sobre a oferta de água potável e se a fonte de abastecimento é potencialmente potável. Logo, as premissas são as seguintes:
 
     1. A água proveniente da :orange-background[rede pública] de abastecimento é considerada potável.
     2. A água de :orange-background[poços artesianos] é considerada potável.
@@ -1032,25 +1021,27 @@ def texto_pan_agua_dados_brutos_problematizacao_premissas():
     para os fins deste estudo que a água fornecida por essa fonte é potável. De regra, a água distribuída por essa fonte atende escolas da
     zona urbana, áreas rurais próximas às cidades e vilas ou comunidades mais populosas. Ainda, na prática, as escolas localizadas nas
     zonas urbanas estão sujeitas a um controle social mais efetivo e também estão próximas das sedes das Promotorias de Justiça, o que 
-    facilita a atuação ministerial.
+    facilita a atuação ministerial célere.
 
-    A água de poços artesianos é considerada potável, pois retiram a água de aquíferos profundos que, geralmente, possuem qualidade 
-    superior. Esta é a **melhor solução** para o abastecimento de água em áreas rurais, pois é barato, de fácil manutenção e pode ser 
-    instalado em qualquer lugar. Ainda, pode ser adequado ao tipo de fornecimento de energia elétrica disponível, pois a água pode ser 
-    bombeada por bombas a combustão ou por energia solar. Entretanto, é importante lembrar que nem todo o subsolo do Acre fornece água
-    de boa qualidade.
+    A água de poços artesianos será considerada potável, pois retiram a água de aquíferos profundos que, geralmente, possuem qualidade 
+    superior. Ressalta-se que esta é a **melhor solução** para o abastecimento de água em áreas rurais, pois é barato, de fácil manutenção 
+    e pode ser instalado em qualquer lugar. Ainda, pode ser adequado ao tipo de fornecimento de energia elétrica disponível, pois a água 
+    pode ser bombeada por bombas a combustão ou por energia solar. Entretanto, é importante lembrar que nem todo o subsolo do Acre fornece 
+    água de boa qualidade.
     
-    Por sua vez, a cacimba ou o poço amazônico falado, é um poço raso, escavado manualmente, que capta a água de aquíferos rasos ou da 
-    superfície. De regra, as cacimbas são cavadas em locais mais baixos no relevo, não são cercadas e são facilmente acessadas por animais 
-    domésticos ou não. Essa água não recebe tratamento adequado e, mesmo parecendo límpida, é imprópria para o consumo humano. Sem mencionar
-    a necessidade de transporte manual dessa água até o local onde será consumida que, comumente é realizado pelos próprios alunos.
+    Por sua vez, a cacimba ou o poço amazônico falado, é um poço raso, de pequeno volume escavado manualmente, que capta a água de aquíferos 
+    rasos ou da superfície. De regra, as cacimbas são cavadas em locais mais baixos no relevo, não são cercadas, são facilmente acessadas 
+    por animais e recebe a água e todo tipo de partículas carreadas pelas chuvas. Essa água não recebe tratamento adequado e, mesmo 
+    parecendo límpida, é imprópria para o consumo humano. Sem mencionar a necessidade de transporte manual dessa água até o local onde será 
+    consumida que, não raras vezes, é realizado pelos próprios alunos.
 
     A água de rios e igarapés pode ser considerada imprópria para o consumo humano por simples constatação visual de sua turbidez.
 
     Por fim, a qualidade da água fornecida por carros pipa dependerá das condições do transporte e, por óbvio, da fonte onde ela é captada.
     Na prática, o abastecimento com carros pipa tem ganhado destaque em comunidades rurais com acesso terrestre, em especial em projetos de
-    assentamento, quando da ocorrência de longos períodos de estiagem, como o do ano de 2024. O fato é que, se há necessidade de 
-    abastecimento da escola por meio de carros pipa, é porque a escola não possui sistema de abastecimento de água disponível.
+    assentamento, quando da ocorrência de longos períodos de estiagem, como o do ano de 2024. O fato é que, se há necessidade de
+    abastecimento da escola por meio de carros pipa em plena Amazônia, é porque a escola não possui sistema de abastecimento de água 
+    disponível.
 
     Relembra-se que essas premissas são estabelecidas para auxiliar o trabalho das Promotorias de Justiça do interior do Estado, que estão 
     sobrecarregadas com o trabalho judicial e não dispõem de equipes técnicas especializadas para visitar todas as escolas da rede pública 
@@ -1077,9 +1068,19 @@ def texto_pan_agua_fontes_intro_01():
 def texto_pan_agua_fontes_intro_02():
     return """
     __________________  
-      
+    Concordo, parece confuso no início, mas basta um pouco de persistência para entender o que está acontecendo. O primeiro número faz
+    referência a uma incoerência grave nas respostas declaradas ao Censo Escolar. Ou seja, essas escolas afirmam fornecer água potável, mas 
+    declaram fontes de abastecimento impróprias para o consumo humano. Se este número for confrontado com o total de escolas que declaram
+    fornecer água potável, teremos uma visão mais clara da situação. Volte no primeiro gráfico apresentado e subtraia o número de escolas
+    que lá declaram fornecer água potável pelo número de escolas que afirmam fornecer água potável, mas que declaram fontes de abastecimento
+    impróprias para o consumo humano. Agora faça o mesmo com o segundo número apresentado acima, mas ao contrário. Subtraia este número do
+    total de escolas que declaram não fornecer água potável. Mudou o panorama? Certamente está mais próximo da realidade de campo.
+    
+    Agora que a metodologia adotada está clara, é possível avançar na análise para lançar mão das premissas estabelecidas acima para traçar
+    um quadro mais realista do fornecimento de água potável nas escolas da rede pública de ensino do Acre. 
+
     Dadas as premissas acima, todas as escolas localizadas em zonas urbanas e as rurais que declaram fornecer água proveniente de fonte de
-    abastecimento público serão consideradas como fornecedoras de água potável.
+    abastecimento público serão consideradas como fornecedoras de água potável ("Fornece").
 
     As escolas rurais que declaram fornecer água a partir de poços artesianos também serão consideradas como fornecedoras de água potável
     ("Fornece").
