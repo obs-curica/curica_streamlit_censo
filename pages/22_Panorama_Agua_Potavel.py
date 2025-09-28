@@ -28,7 +28,8 @@ from scripts.graficos import (grafico_agua_total_dados_brutos,
                               grafico_escolas_sem_agua_por_municipio,
                               grafico_alunos_por_disponibilidade_agua,
                               grafico_localizacao_escolas_sem_agua,
-                              grafico_abastecimento_agua_por_fonte
+                              grafico_abastecimento_agua_por_fonte,
+                              grafico_agua_total_fontes
 )
 
 # Configuração visual
@@ -179,13 +180,28 @@ with col1:
 
 with col2:
     st.markdown(f"""
-    ##### Total de escolas que afirmam não fornecer água potável de fontes próprias:
+    ##### Total de escolas que afirmam não fornecer água potável de fontes potencialmente potáveis:
     # `{total_respostas_incoerentes_proprias}`
     """)
 
-
-
 st.write(texto_pan_agua_fontes_intro_02())
+
+# Divide a tela em duas colunas e plota os gráficos
+col1, col2 = st.columns(2)
+
+with col1:
+    # Selectbox do ano do Censo Escolar
+    anos_disponiveis = sorted(df_panorama_agua['NU_ANO_CENSO'].unique())
+    ano_mais_recente = max(anos_disponiveis)
+
+    ano_censo = st.selectbox(
+        "Selecione o ano do Censo Escolar:",
+        options=anos_disponiveis,
+        index=anos_disponiveis.index(ano_mais_recente),
+        key="agua_total_fontes"
+    )
+    
+    grafico_agua_total_fontes(df_panorama_agua, ano_censo=ano_censo)
 
 
 # lembrar de dizer que sao dois problemas essenciais: o erro no preenchimento do censo e do problema dos anexos

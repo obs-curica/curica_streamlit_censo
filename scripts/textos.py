@@ -964,7 +964,7 @@ def texto_pan_agua_dados_brutos_analise_02():
     
 def texto_pan_agua_dados_brutos_fontes_intro():
     return """
-    Após perguntar se a escola fornece água potável, o questionário do Censo Escolar também pergunta à rede de ensino qual a **fonte de 
+    Após perguntar se a escola fornece água potável, o questionário do Censo Escolar também pergunta à rede de ensino **qual a fonte de 
     abastecimento** da água ofertada. Ele traz as seguintes alternativas:
 
     * Rede pública de abastecimento de água;
@@ -983,7 +983,7 @@ def texto_pan_agua_dados_brutos_fontes_analise():
     return """
     Quando se observa o fornecimento de água potável nas escolas a partir das fontes de abastecimento, percebe-se de largada uma grande
     quantidade de estabelecimentos que declaram não possuir fonte de abastecimento de água. E quando se compara esse dado com o número de 
-    escolas que declaram não fornece água potável, a dissonância fica evidente.
+    escolas que declaram fornecer água potável, a dissonância fica evidente.
     
     É com essa singela reflexão que se inicia a próxima etapa da análise dos dados, para problematizá-los, a princípio, confrontando as 
     informações apresentadas acima com outras variáveis do questionário do próprio Censo Escolar. Sempre mirando na atuação prática das 
@@ -1017,23 +1017,23 @@ def texto_pan_agua_dados_brutos_problematizacao_premissas():
     4. A água de :orange-background[rios], igarapés, riachos, córregos ou fontes é considerada imprópria para o consumo humano.
     5. A água fornecida por :orange-background[carro pipa] é considerada imprópria para o consumo humano.
 
-    A rede pública de abastecimento de água é, ou deveria ser, tratada e monitorada por órgãos públicos competentes, o que permite assumir 
-    para os fins deste estudo que a água fornecida por essa fonte é potável. De regra, a água distribuída por essa fonte atende escolas da
+    A rede pública de abastecimento de água é, ou deveria ser, tratada e monitorada por órgãos públicos competentes, o que permite assumir, 
+    para os fins deste estudo. que a água fornecida por essa fonte é potável. De regra, a água distribuída por essa fonte atende escolas da
     zona urbana, áreas rurais próximas às cidades e vilas ou comunidades mais populosas. Ainda, na prática, as escolas localizadas nas
     zonas urbanas estão sujeitas a um controle social mais efetivo e também estão próximas das sedes das Promotorias de Justiça, o que 
     facilita a atuação ministerial célere.
 
     A água de poços artesianos será considerada potável, pois retiram a água de aquíferos profundos que, geralmente, possuem qualidade 
-    superior. Ressalta-se que esta é a **melhor solução** para o abastecimento de água em áreas rurais, pois é barato, de fácil manutenção 
-    e pode ser instalado em qualquer lugar. Ainda, pode ser adequado ao tipo de fornecimento de energia elétrica disponível, pois a água 
+    superior. Ressalta-se que esta é a **melhor solução** para o abastecimento de água em áreas rurais, pois é barata, de fácil manutenção 
+    e pode ser instalada em qualquer lugar. Ainda, pode ser adequado ao tipo de fornecimento de energia elétrica disponível, pois a água 
     pode ser bombeada por bombas a combustão ou por energia solar. Entretanto, é importante lembrar que nem todo o subsolo do Acre fornece 
     água de boa qualidade.
     
-    Por sua vez, a cacimba ou o poço amazônico falado, é um poço raso, de pequeno volume escavado manualmente, que capta a água de aquíferos 
-    rasos ou da superfície. De regra, as cacimbas são cavadas em locais mais baixos no relevo, não são cercadas, são facilmente acessadas 
-    por animais e recebe a água e todo tipo de partículas carreadas pelas chuvas. Essa água não recebe tratamento adequado e, mesmo 
-    parecendo límpida, é imprópria para o consumo humano. Sem mencionar a necessidade de transporte manual dessa água até o local onde será 
-    consumida que, não raras vezes, é realizado pelos próprios alunos.
+    Por sua vez, a cacimba ou o poço amazônico,'falado', é um poço raso, de pequeno volume, escavado manualmente, que capta a água de 
+    aquíferos rasos ou da superfície. De regra, as cacimbas são cavadas em locais mais baixos no relevo, não são cercadas, são facilmente 
+    acessadas por animais e recebem a água e todo tipo de partículas carreadas pelas chuvas. Essa água não recebe tratamento adequado e, 
+    mesmo parecendo límpida, é imprópria para o consumo humano. Sem mencionar a necessidade de transporte manual dessa água até o local onde 
+    será consumida que, não raras vezes, é realizado pelos próprios alunos.
 
     A água de rios e igarapés pode ser considerada imprópria para o consumo humano por simples constatação visual de sua turbidez.
 
@@ -1045,12 +1045,12 @@ def texto_pan_agua_dados_brutos_problematizacao_premissas():
 
     Relembra-se que essas premissas são estabelecidas para auxiliar o trabalho das Promotorias de Justiça do interior do Estado, que estão 
     sobrecarregadas com o trabalho judicial e não dispõem de equipes técnicas especializadas para visitar todas as escolas da rede pública 
-    de ensino. Entretanto, o estudo coloca no mapa escolas com respostas incoerentes, que devem ser fiscalizadas. Aos dados.
+    de ensino. Entretanto, o estudo coloca no mapa escolas com respostas incoerentes que devem ser fiscalizadas. Aos dados.
     """
     
 def texto_pan_agua_fontes_intro_01():
     return """
-    Agora eu quero ver: como é que a maioria das escolas rurais visitadas pela Promotoria de Justiça não possui acesso a água potável e o 
+    Agora eu quero ver: como é que a maioria das escolas rurais visitadas pela Promotoria de Justiça não possui acesso à água potável e o 
     Censo Escolar está mostrando o contrário? Vamos descobrir.
 
     É possível iniciar a análise com a identificação da coerência semântica das respostas dadas ao Censo Escolar à pergunta sobre o 
@@ -1085,8 +1085,8 @@ def texto_pan_agua_fontes_intro_02():
     As escolas rurais que declaram fornecer água a partir de poços artesianos também serão consideradas como fornecedoras de água potável
     ("Fornece").
 
-    Por fim, as escolas rurais que declaram fornecer água a partir de cacimbas, rios, igarapés e carros pipa serão consideradas como 
-    fornecedoras de água imprópria para o consumo humano ("Não fornece").
+    Por fim, as escolas rurais que declaram fornecer água a partir de fonte inexistente, cacimbas, rios, igarapés e carros pipa serão 
+    consideradas como fornecedoras de água imprópria para o consumo humano ("Não fornece").
 
     Segue o resultado:
     """
