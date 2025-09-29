@@ -1091,6 +1091,9 @@ def texto_pan_agua_fontes_intro_02():
     Segue o resultado:
     """
 
-
+def texto_pan_agua_fontes_analise():
+    return """
+    
+    """
 
 # lembrar de dizer que sao dois problemas essenciais: o erro no preenchimento do censo e do problema dos anexos

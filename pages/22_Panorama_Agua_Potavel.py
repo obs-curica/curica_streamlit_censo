@@ -21,7 +21,8 @@ from scripts.textos import(texto_pan_agua_intro,
                            texto_pan_agua_dados_brutos_problematizacao_intro,
                            texto_pan_agua_dados_brutos_problematizacao_premissas,
                            texto_pan_agua_fontes_intro_01,
-                           texto_pan_agua_fontes_intro_02
+                           texto_pan_agua_fontes_intro_02,
+                           texto_pan_agua_fontes_analise
 )
 
 from scripts.graficos import (grafico_agua_total_dados_brutos,
@@ -203,5 +204,6 @@ with col1:
     
     grafico_agua_total_fontes(df_panorama_agua, ano_censo=ano_censo)
 
+st.write(texto_pan_agua_fontes_analise())
 
 # lembrar de dizer que sao dois problemas essenciais: o erro no preenchimento do censo e do problema dos anexos
