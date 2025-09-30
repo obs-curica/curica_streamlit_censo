@@ -901,13 +901,13 @@ def texto_pan_agua_metodologia():
     Para a definição e justificativa da metodologia adotada neste Panorama, retoma-se um dos objetivos principais do Observatório Curica, que 
     é o de oferecer subsídios técnicos para a atuação do Ministério Público na defesa do direito à educação de qualidade, em especial para as
     Promotorias do interior do Estado. Para tanto, é necessário que os dados e análises aqui apresentados sejam facilmente compreendidos e, 
-    mais ainda, ofereçam subsídios práticos para a atuação ministerial. Com isso, quer-se dizer uma ação eficiente, que ataque o problema de
+    mais ainda, ofereçam soluções práticas para a atuação ministerial. Com isso, quer-se dizer uma ação eficiente, que ataque o problema de
     maneira célere e onde é mais necessário.
     
     Desse modo, a análise da oferta de água potável se inicia com a apresentação dos dados brutos do :orange-background[Censo Escolar] para, 
     então, confrontá-los com os próprios dados do Censo Escolar a partir de premissas estabelecidas com conhecimentos técnicos prévios e com 
     a experiência prática de campo. Esses dados brutos já sofreram um tratamento inicial, para excluir da análise as escolas inativas e as 
-    escolas privadas. Portanto, os números aqui apresentados dizem respeito somente às escolas ativas da rede pública de ensino do Acre.
+    escolas privadas. Portanto, os números aqui apresentados dizem respeito somente às **escolas ativas** da rede pública de ensino do Acre.
 
     Ao final da análise, é apresentado o Programa Dinheiro Direto na Escola - Água ([PDDE - Água](https://www.gov.br/mec/pt-br/pdde/pdde-equidade/pdde-agua)), 
     do FNDE como proposta de solução do problema. Este programa disponibiliza recursos financeiros para a construção de sistemas de 
@@ -1053,8 +1053,8 @@ def texto_pan_agua_fontes_intro_01():
     Agora eu quero ver: como é que a maioria das escolas rurais visitadas pela Promotoria de Justiça não possui acesso à água potável e o 
     Censo Escolar está mostrando o contrário? Vamos descobrir.
 
-    É possível iniciar a análise com a identificação da coerência semântica das respostas dadas ao Censo Escolar à pergunta sobre o 
-    fornecimento de água potável. Apresenta-se abaixo dois números interessantes:
+    É possível iniciar a análise com a identificação da coerência semântica das respostas dadas ao Censo Escolar às perguntas sobre o 
+    fornecimento de água potável e suas fontes de abastecimento. Apresenta-se abaixo dois números interessantes:
     
     1. o total de escolas que **afirmam fornecer água potável**, mas que **declaram fontes de abastecimento de água impróprias para o 
     consumo humano**, segundo as premissas adotadas acima;
@@ -1073,7 +1073,7 @@ def texto_pan_agua_fontes_intro_02():
     declaram fontes de abastecimento impróprias para o consumo humano. Se este número for confrontado com o total de escolas que declaram
     fornecer água potável, teremos uma visão mais clara da situação. Volte no primeiro gráfico apresentado e subtraia o número de escolas
     que lá declaram fornecer água potável pelo número de escolas que afirmam fornecer água potável, mas que declaram fontes de abastecimento
-    impróprias para o consumo humano. Agora faça o mesmo com o segundo número apresentado acima, mas ao contrário. Subtraia este número do
+    impróprias para o consumo humano. Agora faça o mesmo com o segundo número apresentado acima. Subtraia este número do
     total de escolas que declaram não fornecer água potável. Mudou o panorama? Certamente está mais próximo da realidade de campo.
     
     Agora que a metodologia adotada está clara, é possível avançar na análise para lançar mão das premissas estabelecidas acima para traçar
@@ -1093,7 +1093,27 @@ def texto_pan_agua_fontes_intro_02():
 
 def texto_pan_agua_fontes_analise():
     return """
+    A análise que leva em conta as fontes de abastecimento de água declaradas pelas escolas inverteu o panorama inicial, apresentando a
+    informação de que a maioria das escolas da rede pública não fornece água potável à comunidade escolar. Esse quadro aperfeiçoa a análise
+    e apresenta informações mais próximas à realidade encontrada em campo. Mais ainda, aponta o caminho para uma atuação eficiente que 
+    ataca situações críticas de violação de direitos, apontando as escolas que necessitam de **intervenção urgente**.
+
+    As informações colhidas também estão maduras para a reflexão sobre o preenchimento correto do :orange-background[Censo Escolar]. Conforme 
+    introduzido no Panorama da Rede de Ensino e no do Financiamento, as respostas ao questionário do Censo Escolar são essenciais para a 
+    definição de políticas públicas e posterior captação de recursos junto ao FNDE. 
     
+    O estudo evidenciou a incoerência entre a resposta a respeito do fornecimento de água potável pela escola e a sua respectiva fonte de
+    abastecimento, diagnosticando grave falha das gestões escolares ao responderem as perguntas do questionário. Esse erro, além de trazer
+    informações falsas sobre o sistema de ensino, também traz **consequências** para a transferência de recursos públicos, pois o FNDE utiliza
+    essas informações para definir os repasses. Logo, se a escola informa que oferece água potável, o FNDE entende que ela não está elegível
+    para receber recursos de programas que acolhem esta temática. Essa dificuldade será aprofundada na sequência. De plano, verifica-se 
+    que, além da necessidade de intervenção para a garantia do fornecimento de água pelas escolas, é urgente uma intervenção aguda junto 
+    às gestões escolares para que o :orange-background[Censo Escolar] retrate a realidade das escolas da rede pública e não prejudique a
+    captação de recursos.
+
+    Abaixo, o estudo segue buscando a resposta à pergunta que o Observatório busca responder em suas análises. A intervenção do Ministério
+    Público é devida por ser uma questão de legalidade ou não existem recursos financeiros disponíveis e justifica-se o entendimento da
+    reserva do possível?    
     """
 
 # lembrar de dizer que sao dois problemas essenciais: o erro no preenchimento do censo e do problema dos anexos
