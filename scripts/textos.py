@@ -1088,31 +1088,31 @@ def texto_pan_agua_fontes_intro_02():
     Por fim, as escolas rurais que declaram fornecer água a partir de fonte inexistente, cacimbas, rios, igarapés e carros pipa serão 
     consideradas como fornecedoras de água imprópria para o consumo humano ("Não fornece").
 
-    Segue o resultado:
+    O primeiro gráfico traz o resultado geral para o Estado do Acre e o segundo permite a seleção do número total de escolas por Município.
     """
 
 def texto_pan_agua_fontes_analise():
     return """
-    A análise que leva em conta as fontes de abastecimento de água declaradas pelas escolas inverteu o panorama inicial, apresentando a
+    A metodologia que leva em conta as fontes de abastecimento de água declaradas pelas escolas inverteu o panorama inicial, apresentando a
     informação de que a maioria das escolas da rede pública não fornece água potável à comunidade escolar. Esse quadro aperfeiçoa a análise
     e apresenta informações mais próximas à realidade encontrada em campo. Mais ainda, aponta o caminho para uma atuação eficiente que 
     ataca situações críticas de violação de direitos, apontando as escolas que necessitam de **intervenção urgente**.
 
-    As informações colhidas também estão maduras para a reflexão sobre o preenchimento correto do :orange-background[Censo Escolar]. Conforme 
-    introduzido no Panorama da Rede de Ensino e no do Financiamento, as respostas ao questionário do Censo Escolar são essenciais para a 
-    definição de políticas públicas e posterior captação de recursos junto ao FNDE. 
+    As informações colhidas também estão maduras para a reflexão sobre o preenchimento correto do :orange-background[Censo Escolar]. 
+    Conforme introduzido no Panorama da Rede de Ensino e no do Financiamento, as respostas ao questionário do Censo Escolar são essenciais 
+    para a definição de políticas públicas e posterior captação de recursos junto ao FNDE. 
     
-    O estudo evidenciou a incoerência entre a resposta a respeito do fornecimento de água potável pela escola e a sua respectiva fonte de
+    O estudo evidencia a incoerência entre a resposta a respeito do fornecimento de água potável pela escola e a sua respectiva fonte de
     abastecimento, diagnosticando grave falha das gestões escolares ao responderem as perguntas do questionário. Esse erro, além de trazer
-    informações falsas sobre o sistema de ensino, também traz **consequências** para a transferência de recursos públicos, pois o FNDE utiliza
-    essas informações para definir os repasses. Logo, se a escola informa que oferece água potável, o FNDE entende que ela não está elegível
-    para receber recursos de programas que acolhem esta temática. Essa dificuldade será aprofundada na sequência. De plano, verifica-se 
-    que, além da necessidade de intervenção para a garantia do fornecimento de água pelas escolas, é urgente uma intervenção aguda junto 
-    às gestões escolares para que o :orange-background[Censo Escolar] retrate a realidade das escolas da rede pública e não prejudique a
-    captação de recursos.
+    informações falsas sobre o sistema de ensino, também traz **consequências** para a transferência de recursos públicos, pois o FNDE 
+    utiliza essas informações para definir os repasses. Logo, se a escola informa que oferece água potável, o FNDE entende que ela não está 
+    elegível para receber recursos de programas que acolhem esta temática, pois desconsidera as fontes de abastecimento. Essa dificuldade
+    será aprofundada na sequência. De plano, verifica-se que, além da necessidade de intervenção para a garantia do fornecimento de água
+    pelas escolas, é urgente uma intervenção aguda junto às gestões escolares para que o :orange-background[Censo Escolar] retrate a
+    realidade das escolas da rede pública e não prejudique a captação de recursos.
 
     Abaixo, o estudo segue buscando a resposta à pergunta que o Observatório busca responder em suas análises. A intervenção do Ministério
-    Público é devida por ser uma questão de legalidade ou não existem recursos financeiros disponíveis e justifica-se o entendimento da
+    Público é devida por ser uma questão de legalidade ou não existem recursos financeiros disponíveis e se justifica o entendimento da
     reserva do possível?    
     """
 

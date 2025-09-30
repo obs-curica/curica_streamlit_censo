@@ -2596,7 +2596,97 @@ def grafico_agua_total_fontes(df, ano_censo):
     fig.tight_layout()
     st.pyplot(fig)
 
+def grafico_agua_total_fontes_municipios(df, municipio):
+    """
+    Gera gráfico de barras verticais com o total de escolas que fornecem ou não fornecem água potável
+    segundo a localização e fontes de abastecimento, para um municipio específico no último ano disponível.
 
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame com os dados do panorama da água potável.
+    municipio : str
+        Nome do município (coluna NO_MUNICIPIO).
+    """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+
+    # Último ano do Censo
+    ultimo_ano = df["NU_ANO_CENSO"].max()
+
+    # Filtrar pelo ano e pelo municipio selecionado
+    df_filtrado = df[
+        (df["NU_ANO_CENSO"] == ultimo_ano) &
+        (df["NO_MUNICIPIO"] == municipio)
+    ]
+
+    if df_filtrado.empty:
+        st.warning(f"Não há dados disponíveis para o ente '{municipio}' no ano {ultimo_ano}.")
+        return
+
+    # Condições para "Fornece"
+    cond_urbana = df_filtrado["TP_LOCALIZACAO"] == 1
+    cond_rural_com_abastecimento = (
+        (df_filtrado["TP_LOCALIZACAO"] == 2) &
+        (
+            (df_filtrado["IN_AGUA_REDE_PUBLICA"] == 1) |
+            (df_filtrado["IN_AGUA_POCO_ARTESIANO"] == 1)
+        )
+    )
+    total_fornece = (cond_urbana | cond_rural_com_abastecimento).sum()
+
+    # Condições para "Não Fornece"
+    cond_rural_sem_abastecimento = (
+        (df_filtrado["TP_LOCALIZACAO"] == 2) &
+        (
+            (df_filtrado["IN_AGUA_CACIMBA"] == 1) |
+            (df_filtrado["IN_AGUA_FONTE_RIO"] == 1) |
+            (df_filtrado["IN_AGUA_INEXISTENTE"] == 1) |
+            (df_filtrado["IN_AGUA_CARRO_PIPA"] == 1)
+        )
+    )
+    total_nao_fornece = cond_rural_sem_abastecimento.sum()
+
+    # Dados para o gráfico
+    categorias = ["Fornece", "Não Fornece"]
+    valores = [total_fornece, total_nao_fornece]
+    cores = ["#B0E0E6", "#FFC107"]
+
+    # Estilo do gráfico
+    plt.style.use("dark_background")
+    fig, ax = plt.subplots(figsize=(8, 6))
+
+    barras = ax.bar(categorias, valores, color=cores)
+
+    # Rótulos nas barras
+    for bar, valor in zip(barras, valores):
+        ax.text(
+            bar.get_x() + bar.get_width() / 2,
+            valor + max(valores) * 0.02,
+            f"{valor:,}".replace(",", "."),
+            ha="center", va="bottom",
+            fontsize=13, color="white", fontweight="bold"
+        )
+
+    # Título e eixos
+    ax.set_title(
+        f"Fornecimento de Água Potável - {municipio} ({ultimo_ano})",
+        color="#FFA07A",
+        fontsize=20
+    )
+    ax.set_ylabel("Número de Escolas", color="#FFA07A", fontsize=12)
+    ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=12)
+
+    ax.tick_params(axis='x', colors="#FFA07A", labelsize=14)
+    ax.tick_params(axis='y', colors="#FFA07A", labelsize=12)
+    for spine in ax.spines.values():
+        spine.set_color("#FFA07A")
+
+    ax.set_ylim(0, max(valores) * 1.25)
+    fig.tight_layout()
+    st.pyplot(fig)
+
+    
 
 #===========================
 # PAGINA POVOS TRADICIONAIS

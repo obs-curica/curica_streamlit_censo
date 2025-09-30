@@ -30,7 +30,8 @@ from scripts.graficos import (grafico_agua_total_dados_brutos,
                               grafico_alunos_por_disponibilidade_agua,
                               grafico_localizacao_escolas_sem_agua,
                               grafico_abastecimento_agua_por_fonte,
-                              grafico_agua_total_fontes
+                              grafico_agua_total_fontes,
+                              grafico_agua_total_fontes_municipios
 )
 
 # Configuração visual
@@ -203,6 +204,18 @@ with col1:
     )
     
     grafico_agua_total_fontes(df_panorama_agua, ano_censo=ano_censo)
+    
+with col2:
+    # Selectbox do município
+    municipios_disponiveis = sorted(df_panorama_agua['NO_MUNICIPIO'].unique())
+    
+    municipio = st.selectbox(
+        "Selecione o município:",
+        options=municipios_disponiveis,
+        key="agua_total_municipios"
+    )
+    
+    grafico_agua_total_fontes_municipios(df_panorama_agua, municipio=municipio)
 
 st.write(texto_pan_agua_fontes_analise())
 
