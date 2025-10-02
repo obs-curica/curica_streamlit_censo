@@ -219,4 +219,9 @@ with col2:
 
 st.write(texto_pan_agua_fontes_analise())
 
+
+#++++++++
+# Subseção PDDE Água
+st.header('PDDE Água')
+
 # lembrar de dizer que sao dois problemas essenciais: o erro no preenchimento do censo e do problema dos anexos

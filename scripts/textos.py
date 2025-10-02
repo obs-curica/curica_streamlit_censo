@@ -999,11 +999,11 @@ def texto_pan_agua_dados_brutos_problematizacao_intro():
     potável pela escola, o Censo Escolar pergunta qual a fonte de abastecimento de água que serve aquela escola.
     
     Importante ressaltar que a conclusão sobre a potabilidade ou não da água ofertada é algo que somente análises laboratoriais periódicas 
-    podem afirmar com precisão. Entretanto, é possível estabelecer premissas razoáveis para a análise dos dados a partir de conhecimentos 
-    técnicos prévios e da experiência prática de campo. A adoção dessas premissas busca oferecer um panorama mais realista do problema e 
-    também fornecer subsídios práticos para a atuação eficiente das Promotorias de Justiça do interior do Estado. A partir da definição 
-    dessas premissas, a resposta sobre a oferta de água potável será confrontada com as fontes de abastecimento declaradas, para verificar 
-    a coerência das respostas declaradas ao Censo Escolar.
+    podem afirmar com precisão. Entretanto, é possível definir situações de urgência a partir de premissas razoáveis para a análise dos 
+    dados a partir de conhecimentos técnicos prévios e da experiência prática de campo. A adoção dessas premissas busca oferecer um panorama 
+    mais realista do problema e também fornecer subsídios práticos para a atuação eficiente das Promotorias de Justiça do interior do Estado. 
+    A partir da definição dessas premissas, a resposta sobre a oferta de água potável será confrontada com as fontes de abastecimento 
+    declaradas, para verificar a coerência das respostas declaradas ao Censo Escolar.
     """
     
 def texto_pan_agua_dados_brutos_problematizacao_premissas():
@@ -1018,16 +1018,16 @@ def texto_pan_agua_dados_brutos_problematizacao_premissas():
     5. A água fornecida por :orange-background[carro pipa] é considerada imprópria para o consumo humano.
 
     A rede pública de abastecimento de água é, ou deveria ser, tratada e monitorada por órgãos públicos competentes, o que permite assumir, 
-    para os fins deste estudo. que a água fornecida por essa fonte é potável. De regra, a água distribuída por essa fonte atende escolas da
+    para os fins deste estudo, que a água fornecida por essa fonte é potável. De regra, a água distribuída por essa fonte atende escolas da
     zona urbana, áreas rurais próximas às cidades e vilas ou comunidades mais populosas. Ainda, na prática, as escolas localizadas nas
     zonas urbanas estão sujeitas a um controle social mais efetivo e também estão próximas das sedes das Promotorias de Justiça, o que 
     facilita a atuação ministerial célere.
 
     A água de poços artesianos será considerada potável, pois retiram a água de aquíferos profundos que, geralmente, possuem qualidade 
     superior. Ressalta-se que esta é a **melhor solução** para o abastecimento de água em áreas rurais, pois é barata, de fácil manutenção 
-    e pode ser instalada em qualquer lugar. Ainda, pode ser adequado ao tipo de fornecimento de energia elétrica disponível, pois a água 
-    pode ser bombeada por bombas a combustão ou por energia solar. Entretanto, é importante lembrar que nem todo o subsolo do Acre fornece 
-    água de boa qualidade.
+    e pode ser instalada em qualquer lugar. Ainda, o bombeamento pode ser adequado ao tipo de fornecimento de energia elétrica disponível, 
+    por bombas movidas a combustão ou por energia solar. Entretanto, é importante lembrar que nem todo o subsolo do Acre fornece água de 
+    boa qualidade.
     
     Por sua vez, a cacimba ou o poço amazônico,'falado', é um poço raso, de pequeno volume, escavado manualmente, que capta a água de 
     aquíferos rasos ou da superfície. De regra, as cacimbas são cavadas em locais mais baixos no relevo, não são cercadas, são facilmente 
@@ -1054,7 +1054,8 @@ def texto_pan_agua_fontes_intro_01():
     Censo Escolar está mostrando o contrário? Vamos descobrir.
 
     É possível iniciar a análise com a identificação da coerência semântica das respostas dadas ao Censo Escolar às perguntas sobre o 
-    fornecimento de água potável e suas fontes de abastecimento. Apresenta-se abaixo dois números interessantes:
+    fornecimento de água potável e suas fontes de abastecimento, a partir das premissas estabelecidas anteoriormente. Apresenta-se abaixo 
+    dois números interessantes:
     
     1. o total de escolas que **afirmam fornecer água potável**, mas que **declaram fontes de abastecimento de água impróprias para o 
     consumo humano**, segundo as premissas adotadas acima;
@@ -1079,7 +1080,7 @@ def texto_pan_agua_fontes_intro_02():
     Agora que a metodologia adotada está clara, é possível avançar na análise para lançar mão das premissas estabelecidas acima para traçar
     um quadro mais realista do fornecimento de água potável nas escolas da rede pública de ensino do Acre. 
 
-    Dadas as premissas acima, todas as escolas localizadas em zonas urbanas e as rurais que declaram fornecer água proveniente de fonte de
+    Conforme as premissas, todas as escolas localizadas em zonas urbanas e as rurais que declaram fornecer água proveniente de fonte de
     abastecimento público serão consideradas como fornecedoras de água potável ("Fornece").
 
     As escolas rurais que declaram fornecer água a partir de poços artesianos também serão consideradas como fornecedoras de água potável
@@ -1100,7 +1101,7 @@ def texto_pan_agua_fontes_analise():
 
     As informações colhidas também estão maduras para a reflexão sobre o preenchimento correto do :orange-background[Censo Escolar]. 
     Conforme introduzido no Panorama da Rede de Ensino e no do Financiamento, as respostas ao questionário do Censo Escolar são essenciais 
-    para a definição de políticas públicas e posterior captação de recursos junto ao FNDE. 
+    para a definição de políticas públicas e posterior captação de recursos junto ao FNDE, conforme se verá a seguir.
     
     O estudo evidencia a incoerência entre a resposta a respeito do fornecimento de água potável pela escola e a sua respectiva fonte de
     abastecimento, diagnosticando grave falha das gestões escolares ao responderem as perguntas do questionário. Esse erro, além de trazer
@@ -1111,9 +1112,34 @@ def texto_pan_agua_fontes_analise():
     pelas escolas, é urgente uma intervenção aguda junto às gestões escolares para que o :orange-background[Censo Escolar] retrate a
     realidade das escolas da rede pública e não prejudique a captação de recursos.
 
-    Abaixo, o estudo segue buscando a resposta à pergunta que o Observatório busca responder em suas análises. A intervenção do Ministério
-    Público é devida por ser uma questão de legalidade ou não existem recursos financeiros disponíveis e se justifica o entendimento da
-    reserva do possível?    
+    Abaixo, o estudo segue buscando a resposta à pergunta de consequência prática para as intervenções das Promotorias de Justiça do 
+    interior e que será discutida nos Tribunais: a intervenção do Ministério Público é devida por ser uma questão de legalidade ou não 
+    existem recursos financeiros disponíveis e se justifica o entendimento da reserva do possível?    
+    """
+
+def texto_pan_agua_pdde_intro():
+    return """
+    Muitas vezes, ao se endereçar o problema de fornecimento de água potável de uma escola, é possível atender toda a comunidade de seu entorno. Esta é uma política pública de grande impacto social.
+  
+    Nesse rumo, o FNDE disponibiliza o "Programa dinheiro direto na escola" - [PDDE Água](https://www.gov.br/mec/pt-br/areas-de-atuacao/eb/plataforma-pdde-acoes-integradas), que destina recursos financeiros para "garantir o abastecimento de água em condições próprias para o consumo" [(Resolução FNDE nº 2/2021)](https://www.in.gov.br/web/dou/-/resolucao-n-2-de-20-de-abril-de-2021-315695374). Para receber o recurso, a unidade escolar deve:
+    * localizar-se na zona rural;
+    * declarar no censo escolar a inexistência de abastecimento de água potável;
+    * funcionar em prédio próprio;
+    * possuir Unidade Executora própria (UEx);
+    * não ter sido beneficiada anteriormente;
+    * elaborar termo de compromisso.
+  
+    Na prática, as escolas rurais acabam por enfrentar dois impedimentos principais para acessar tal recurso:  
+  
+    O primeiro deles é o erro no preenchimento do censo escolar. Para o acesso ao PDDE Água, a atenção deve recair sobre a localização da escola, sua condição do fornecimento de água potável e se possui prédio prórpio. A análise dos dados do censo escolar demonstra que muitas escolas anotam a condição de água potável a fontes de abastecimento que são impróprias para o consumo, como as cacimbas. Dentro de uma generalização, é possível afirmar que a qualidade da água das cacimbas é melhor que a dos rios e igarapés. Entretanto, não atende os requisitos de potabilidade da [Portaria 888/2021](https://www.in.gov.br/en/web/dou/-/portaria-gm/ms-n-888-de-4-de-maio-de-2021-318461562) do Ministério da Saúde.
+  
+    Para a identificação do problema do preenchimento incorreto do censo escolar, basta listar as escolas que declaram possuir água potável cujas fontes de abastecimento são os rios, igarapés ou cacimbas. Detectado o erro de preenchimento, a Promotoria deve intervir junto à respectiva Secretaria de Educação para corrigir o problema para habilitar a UEx a receber os recursos no ano subsequente.
+  
+    O segundo impedimento é a ausência de unidade executora própria (UEx). Tanto a gestão estadual quanto as municipais recorrem à solução administrativa de criação de "escolas polo" na educação rural indígena e não indígena. As respectivas Secretarias de Educação criam "escolas anexas" a essas escolas polo, somando o número de alunos e servidores desses anexos às escolas polo. Nesta agregação, as escolas anexas não são contabilizadas no censo escolar e não conseguem acessar os recusos do PDDE Água, pois não se constituem em UEx. Somente a escola polo é contabilizada no censo e acaba por acessar este recurso. As demais escolas anexas ficam desatendidas e não é possível identificar esta situação pelo censo escolar, de modo que esses dados não refletem a realidade, violando o direito dos alunos de acesso à água potável.  
+  
+    Para atacar este problema, é possível utilizar a base de dados do FNDE, que possui o cadastro de todas as Uex da rede de ensino alvo. Assim, o cruzamento da base de dados do censo escolar com a base de dados do FNDE permite saber com precisão o número de escolas anexas que existem na zona rural.  
+  
+    De posse dos dados, a Promotoria pode intervir junto à respectiva Secretaria de Educação para a criação da UEx daquela unidade escolar e habilita-la a receber os recursos do PDDE Água. A outra alternativa é o ajuizamento de Ação Civil Pública, demandando o ente para efetivar o fornecimento da água potável com recursos próprios.
     """
 
 # lembrar de dizer que sao dois problemas essenciais: o erro no preenchimento do censo e do problema dos anexos
