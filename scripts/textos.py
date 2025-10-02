@@ -1119,7 +1119,8 @@ def texto_pan_agua_fontes_analise():
 
 def texto_pan_agua_pdde_intro():
     return """
-    Muitas vezes, ao se endereçar o problema de fornecimento de água potável de uma escola, é possível atender toda a comunidade de seu entorno. Esta é uma política pública de grande impacto social.
+    Muitas vezes, ao se endereçar o problema de fornecimento de água potável de uma escola, é possível atender toda a comunidade de seu 
+    entorno. Esta é uma política pública de grande impacto social.
   
     Nesse rumo, o FNDE disponibiliza o "Programa dinheiro direto na escola" - [PDDE Água](https://www.gov.br/mec/pt-br/areas-de-atuacao/eb/plataforma-pdde-acoes-integradas), que destina recursos financeiros para "garantir o abastecimento de água em condições próprias para o consumo" [(Resolução FNDE nº 2/2021)](https://www.in.gov.br/web/dou/-/resolucao-n-2-de-20-de-abril-de-2021-315695374). Para receber o recurso, a unidade escolar deve:
     * localizar-se na zona rural;
