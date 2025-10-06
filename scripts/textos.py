@@ -1126,22 +1126,35 @@ def texto_pan_agua_pdde_intro():
     autogestão escolar e o exercício da cidadania com a participação da comunidade no controle social."
 
     Atualmente, o PDDE possui três modalidades: o PDDE Básico [(Res FNDE 15/2021)](https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/funcionamento/copy_of_RESOLUOPDDEN15DE16DESETEMBRODE2021.pdf), 
-    o PDDE Equidade [(Res FNDE 17/2024)](https://www.in.gov.br/en/web/dou/-/resolucao-n-17-de-15-de-agosto-de-2024-579018624) e o PDDE Qualidade, 
-    com regramentos diversos.
+    o PDDE Equidade [(Res FNDE 17/2024)](https://www.in.gov.br/en/web/dou/-/resolucao-n-17-de-15-de-agosto-de-2024-579018624) e o PDDE 
+    Qualidade, com regramentos diversos. Por sua vez, as duas últimas modalidades possuem diferentes programas dentro delas. Para este 
+    Panorama, interessa o PDDE Equidade, que possui um programa específico para financiar o fornecimento de água potável, esgotamento
+    sanitário e infraestrutura nas escolas do campo. 
 
-    Sabendo da dificuldade de fornecimento de água para as escolas afastadas dos centros urbanos do país, o FNDE disponibiliza o [PDDE Água](https://www.gov.br/mec/pt-br/areas-de-atuacao/eb/plataforma-pdde-acoes-integradas), 
-    modalidade específica do PDDE Equidade, e destina recursos financeiros para "garantir o abastecimento de água em condições próprias para 
-    o consumo" [(Resolução FNDE nº 2/2021)](https://www.in.gov.br/web/dou/-/resolucao-n-2-de-20-de-abril-de-2021-315695374).
-    Esse programa possui um impacto social muito grande pois, além de atender os alunos da escola específica, muitas vezes acaba por atender
-    toda a comunidade do entorno com o equipamento público construído. Esse é um dos maiores programas de saneamento básico do país e,
-    contraditoriamente, é pouco conhecido, tanto por gestores, como pela população.
+    Até o ano de 2024, existiam dois programas distintos dentro da estrutura do PDDE para atender necessidades específicas das escolas 
+    rurais: o "PDDE Água", para o fornecimento de água e esgotamento sanitário, e o PDDE Campo, para a construção e reforma de 
+    infraestrutura das escolas. A partir do ano de 2024, esses dois programas foram unificados no "PDDE Água, Esgotamento Sanitário e 
+    Infraestrutura nas Escolas do Campo, Indígenas e Quilombolas", com a "finalidade de propiciar adequação e benfeitoria na infraestrutura 
+    física das escolas em áreas rurais e garantir o abastecimento de água em condições apropriadas para consumo e o esgotamento sanitário 
+    nas unidades escolares beneficiadas" [(Resolução FNDE nº 17/2024, art. 3º)](https://www.in.gov.br/en/web/dou/-/resolucao-n-17-de-15-de-agosto-de-2024-579018624).
+    Embora o programa também trate do financimento para obras de infraestrutura, a análise abaixo foca no financiamento para o fornecimento 
+    de água.
+    """
+    
+def texto_pan_agua_pdde_agua():
+    return """
+    Como visto nas análises acima, são as escolas rurais que sofrem com a falta de acesso à água potável. Sabendo da dificuldade de 
+    fornecimento de água para as escolas afastadas dos centros urbanos do país, o FNDE disponibiliza o PDDE Água somente para as escolas
+    localizadas na zona rural. Esse programa possui um impacto social muito grande pois, além de atender os alunos de uma escola específica, 
+    muitas vezes acaba atendendo toda a comunidade do entorno com o equipamento público construído. Esse é um dos maiores programas de 
+    saneamento básico do país e, contraditoriamente, é pouco conhecido, tanto por gestores, como pela população.
       
     Para receber o recurso, a unidade escolar deve:
     * localizar-se na zona rural;
     * declarar no censo escolar a inexistência de abastecimento de água potável;
     * funcionar em prédio próprio;
     * possuir Unidade Executora própria (UEx);
-    * não ter sido beneficiada anteriormente;
+    * não ter sido beneficiada no ano anterior;
     * elaborar termo de compromisso.
   
     Na prática, as escolas rurais acabam por enfrentar **três** impedimentos principais para acessar tal recurso:  
