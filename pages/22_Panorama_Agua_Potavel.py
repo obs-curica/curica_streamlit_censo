@@ -22,7 +22,8 @@ from scripts.textos import(texto_pan_agua_intro,
                            texto_pan_agua_dados_brutos_problematizacao_premissas,
                            texto_pan_agua_fontes_intro_01,
                            texto_pan_agua_fontes_intro_02,
-                           texto_pan_agua_fontes_analise
+                           texto_pan_agua_fontes_analise,
+                           texto_pan_agua_pdde_intro
 )
 
 from scripts.graficos import (grafico_agua_total_dados_brutos,
@@ -223,5 +224,7 @@ st.write(texto_pan_agua_fontes_analise())
 #++++++++
 # Subseção PDDE Água
 st.header('PDDE Água')
+
+st.write(texto_pan_agua_pdde_intro())
 
 # lembrar de dizer que sao dois problemas essenciais: o erro no preenchimento do censo e do problema dos anexos

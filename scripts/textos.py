@@ -1119,10 +1119,24 @@ def texto_pan_agua_fontes_analise():
 
 def texto_pan_agua_pdde_intro():
     return """
-    Muitas vezes, ao se endereçar o problema de fornecimento de água potável de uma escola, é possível atender toda a comunidade de seu 
-    entorno. Esta é uma política pública de grande impacto social.
-  
-    Nesse rumo, o FNDE disponibiliza o "Programa dinheiro direto na escola" - [PDDE Água](https://www.gov.br/mec/pt-br/areas-de-atuacao/eb/plataforma-pdde-acoes-integradas), que destina recursos financeiros para "garantir o abastecimento de água em condições próprias para o consumo" [(Resolução FNDE nº 2/2021)](https://www.in.gov.br/web/dou/-/resolucao-n-2-de-20-de-abril-de-2021-315695374). Para receber o recurso, a unidade escolar deve:
+    O Programa Dinheiro Direto na Escola (PDDE) é regulamentado pela [Resolução CD/FNDE/MEC nº 15/2021](https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/funcionamento/copy_of_RESOLUOPDDEN15DE16DESETEMBRODE2021.pdf) 
+    que o define como a "destinação anual, pelo FNDE, de recursos financeiros, em caráter suplementar, as escolas públicas (...) com o 
+    propósito de contribuir para o provimento das necessidades prioritárias dos estabelecimentos educacionais beneficiários que concorram 
+    para a garantia de seu funcionamento e para a promoção de melhorias em sua infraestrutura física e pedagógica, bem como incentivar a 
+    autogestão escolar e o exercício da cidadania com a participação da comunidade no controle social."
+
+    Atualmente, o PDDE possui três modalidades: o PDDE Básico [(Res FNDE 15/2021)](https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/funcionamento/copy_of_RESOLUOPDDEN15DE16DESETEMBRODE2021.pdf), 
+    o PDDE Equidade [(Res FNDE 17/2024)](https://www.in.gov.br/en/web/dou/-/resolucao-n-17-de-15-de-agosto-de-2024-579018624) e o PDDE Qualidade, 
+    com regramentos diversos.
+
+    Sabendo da dificuldade de fornecimento de água para as escolas afastadas dos centros urbanos do país, o FNDE disponibiliza o [PDDE Água](https://www.gov.br/mec/pt-br/areas-de-atuacao/eb/plataforma-pdde-acoes-integradas), 
+    modalidade específica do PDDE Equidade, e destina recursos financeiros para "garantir o abastecimento de água em condições próprias para 
+    o consumo" [(Resolução FNDE nº 2/2021)](https://www.in.gov.br/web/dou/-/resolucao-n-2-de-20-de-abril-de-2021-315695374).
+    Esse programa possui um impacto social muito grande pois, além de atender os alunos da escola específica, muitas vezes acaba por atender
+    toda a comunidade do entorno com o equipamento público construído. Esse é um dos maiores programas de saneamento básico do país e,
+    contraditoriamente, é pouco conhecido, tanto por gestores, como pela população.
+      
+    Para receber o recurso, a unidade escolar deve:
     * localizar-se na zona rural;
     * declarar no censo escolar a inexistência de abastecimento de água potável;
     * funcionar em prédio próprio;
@@ -1130,17 +1144,36 @@ def texto_pan_agua_pdde_intro():
     * não ter sido beneficiada anteriormente;
     * elaborar termo de compromisso.
   
-    Na prática, as escolas rurais acabam por enfrentar dois impedimentos principais para acessar tal recurso:  
+    Na prática, as escolas rurais acabam por enfrentar **três** impedimentos principais para acessar tal recurso:  
   
-    O primeiro deles é o erro no preenchimento do censo escolar. Para o acesso ao PDDE Água, a atenção deve recair sobre a localização da escola, sua condição do fornecimento de água potável e se possui prédio prórpio. A análise dos dados do censo escolar demonstra que muitas escolas anotam a condição de água potável a fontes de abastecimento que são impróprias para o consumo, como as cacimbas. Dentro de uma generalização, é possível afirmar que a qualidade da água das cacimbas é melhor que a dos rios e igarapés. Entretanto, não atende os requisitos de potabilidade da [Portaria 888/2021](https://www.in.gov.br/en/web/dou/-/portaria-gm/ms-n-888-de-4-de-maio-de-2021-318461562) do Ministério da Saúde.
+    O primeiro deles é o **:red-background[erro no preenchimento do censo escolar]**. Para o acesso ao PDDE Água, a atenção deve recair sobre a localização da 
+    escola, sua condição do fornecimento de água potável e se possui prédio prórpio. A análise dos dados do censo escolar demonstra que muitas 
+    escolas anotam a condição de água potável a fontes de abastecimento que são impróprias para o consumo, como as cacimbas, rios ou igarapés. 
+    Dentro de uma generalização, é possível afirmar que a qualidade da água das cacimbas é melhor que a dos rios e igarapés. Entretanto, estão  
+    longe de atender os requisitos de potabilidade da [Portaria 888/2021](https://www.in.gov.br/en/web/dou/-/portaria-gm/ms-n-888-de-4-de-maio-de-2021-318461562) 
+    do Ministério da Saúde.
   
-    Para a identificação do problema do preenchimento incorreto do censo escolar, basta listar as escolas que declaram possuir água potável cujas fontes de abastecimento são os rios, igarapés ou cacimbas. Detectado o erro de preenchimento, a Promotoria deve intervir junto à respectiva Secretaria de Educação para corrigir o problema para habilitar a UEx a receber os recursos no ano subsequente.
+    Para a identificação do problema do preenchimento incorreto do censo escolar, basta listar as escolas que declaram possuir água potável 
+    cujas fontes de abastecimento são os rios, igarapés ou cacimbas. Detectado o erro de preenchimento, a Promotoria deve intervir junto à 
+    respectiva Secretaria de Educação para corrigir o problema para habilitar a UEx a receber os recursos no ano subsequente.
   
-    O segundo impedimento é a ausência de unidade executora própria (UEx). Tanto a gestão estadual quanto as municipais recorrem à solução administrativa de criação de "escolas polo" na educação rural indígena e não indígena. As respectivas Secretarias de Educação criam "escolas anexas" a essas escolas polo, somando o número de alunos e servidores desses anexos às escolas polo. Nesta agregação, as escolas anexas não são contabilizadas no censo escolar e não conseguem acessar os recusos do PDDE Água, pois não se constituem em UEx. Somente a escola polo é contabilizada no censo e acaba por acessar este recurso. As demais escolas anexas ficam desatendidas e não é possível identificar esta situação pelo censo escolar, de modo que esses dados não refletem a realidade, violando o direito dos alunos de acesso à água potável.  
+    O segundo impedimento é a :red-background[ausência de Entidade ou Unidade Executora própria] (UEx).
+    
+    O terceiro impedimento é a soluTanto a gestão estadual quanto as municipais recorrem à solução 
+    administrativa de criação de "escolas polo" na educação rural indígena e não indígena. As respectivas Secretarias de Educação criam 
+    "escolas anexas" a essas escolas polo, somando o número de alunos e servidores desses anexos aos alunos das escolas polo. Nesta agregação, 
+    as escolas anexas não são contabilizadas no censo escolar e não conseguem acessar os recusos do PDDE Água. É como se não existissem.
+    Essa inexistência formal impede que as escolas constituam suas UEx. Somente a escola polo é contabilizada no Censo e pode acessar este 
+    recurso. As demais escolas anexas ficam desatendidas e não é possível identificar esta situação pelo censo escolar, de modo que esses dados 
+    não refletem a realidade, violando o direito dos alunos de acesso à água potável.  
   
-    Para atacar este problema, é possível utilizar a base de dados do FNDE, que possui o cadastro de todas as Uex da rede de ensino alvo. Assim, o cruzamento da base de dados do censo escolar com a base de dados do FNDE permite saber com precisão o número de escolas anexas que existem na zona rural.  
+    Para atacar este problema, é possível utilizar a base de dados do FNDE, que possui o cadastro de todas as Uex da rede de ensino alvo. Assim, 
+    o cruzamento da base de dados do censo escolar com a base de dados do FNDE permite saber com precisão o número de escolas anexas que existem 
+    na zona rural.  
   
-    De posse dos dados, a Promotoria pode intervir junto à respectiva Secretaria de Educação para a criação da UEx daquela unidade escolar e habilita-la a receber os recursos do PDDE Água. A outra alternativa é o ajuizamento de Ação Civil Pública, demandando o ente para efetivar o fornecimento da água potável com recursos próprios.
+    De posse dos dados, a Promotoria pode intervir junto à respectiva Secretaria de Educação para a criação da UEx daquela unidade escolar e 
+    habilita-la a receber os recursos do PDDE Água. A outra alternativa é o ajuizamento de Ação Civil Pública, demandando o ente para efetivar o 
+    fornecimento da água potável com recursos próprios.
     """
 
 # lembrar de dizer que sao dois problemas essenciais: o erro no preenchimento do censo e do problema dos anexos
