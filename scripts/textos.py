@@ -1123,13 +1123,15 @@ def texto_pan_agua_pdde_intro():
     que o define como a "destinação anual, pelo FNDE, de recursos financeiros, em caráter suplementar, as escolas públicas (...) com o 
     propósito de contribuir para o provimento das necessidades prioritárias dos estabelecimentos educacionais beneficiários que concorram 
     para a garantia de seu funcionamento e para a promoção de melhorias em sua infraestrutura física e pedagógica, bem como incentivar a 
-    autogestão escolar e o exercício da cidadania com a participação da comunidade no controle social."
+    autogestão escolar e o exercício da cidadania com a participação da comunidade no controle social.". Como o nome sugere, o PDDE tem 
+    como estratégia a transferência direta de recursos financeiros para as escolas públicas, por meio de suas respectivas Unidades 
+    Executoras, que são responsáveis pela gestão desses recursos.
 
-    Atualmente, o PDDE possui três modalidades: o PDDE Básico [(Res FNDE 15/2021)](https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/funcionamento/copy_of_RESOLUOPDDEN15DE16DESETEMBRODE2021.pdf), 
-    o PDDE Equidade [(Res FNDE 17/2024)](https://www.in.gov.br/en/web/dou/-/resolucao-n-17-de-15-de-agosto-de-2024-579018624) e o PDDE 
-    Qualidade, com regramentos diversos. Por sua vez, as duas últimas modalidades possuem diferentes programas dentro delas. Para este 
-    Panorama, interessa o PDDE Equidade, que possui um programa específico para financiar o fornecimento de água potável, esgotamento
-    sanitário e infraestrutura nas escolas do campo. 
+    Atualmente, o PDDE possui três modalidades: o **PDDE Básico** [(Res FNDE 15/2021)](https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/funcionamento/copy_of_RESOLUOPDDEN15DE16DESETEMBRODE2021.pdf), 
+    o **PDDE Equidade** [(Res FNDE 17/2024)](https://www.in.gov.br/en/web/dou/-/resolucao-n-17-de-15-de-agosto-de-2024-579018624) e o **PDDE 
+    Qualidade**, com regramentos diversos. Por sua vez, as duas últimas modalidades possuem diferentes programas dentro delas. O PDDE 
+    Básico é mais abrangente pode atender todas as escolas públicas. Para este Panorama, interessa o PDDE Equidade, que possui um programa 
+    específico para financiar o fornecimento de água potável, esgotamento sanitário e infraestrutura nas escolas do campo.
 
     Até o ano de 2024, existiam dois programas distintos dentro da estrutura do PDDE para atender necessidades específicas das escolas 
     rurais: o "PDDE Água", para o fornecimento de água e esgotamento sanitário, e o PDDE Campo, para a construção e reforma de 
@@ -1154,7 +1156,7 @@ def texto_pan_agua_pdde_agua():
     * declarar no censo escolar a inexistência de abastecimento de água potável;
     * funcionar em prédio próprio;
     * possuir Unidade Executora própria (UEx);
-    * não ter sido beneficiada no ano anterior;
+    * não ter sido beneficiada no ano anterior pelo programa;
     * elaborar termo de compromisso.
   
     Na prática, as escolas rurais acabam por enfrentar **três** impedimentos principais para acessar tal recurso:  

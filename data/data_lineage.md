@@ -147,6 +147,23 @@ https://cadernosdeestudos.inep.gov.br/ojs3/index.php/cadernos/article/view/6503
 Evasão escolar em terras indígenas
 https://cadernosdeestudos.inep.gov.br/ojs3/index.php/cadernos/article/view/6504
 
+## PDDE
+
+Documentos sobre o PDDE
+https://www.gov.br/mec/pt-br/pdde
+
+https://www.gov.br/mec/pt-br/pdde/pdde-equidade/documentos/
+
+Escolas contempladas com PDDE Equidade
+https://www.gov.br/mec/pt-br/pdde/pdde-equidade/documentos/
+
+
+Resolução FNDE 15/2021 - PDDE Básico
+https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/funcionamento/copy_of_RESOLUOPDDEN15DE16DESETEMBRODE2021.pdf
+
+Resolução FNDE 17/2024 - PDDE Equidade
+https://www.in.gov.br/en/web/dou/-/resolucao-n-17-de-15-de-agosto-de-2024-579018624
+
 # Legislação
 
 LDB
