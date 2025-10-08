@@ -164,6 +164,22 @@ https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pd
 Resolução FNDE 17/2024 - PDDE Equidade
 https://www.in.gov.br/en/web/dou/-/resolucao-n-17-de-15-de-agosto-de-2024-579018624
 
+PDDE e UEx
+https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/ApresentaoPDDE2024PDF.pdf
+
+Manual para constituição de UEx
+https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/manuais/ManualdeOrientaoparaConstituiodeUnidadeExecutoraPropriaUEx.pdf
+
+Guia Execução PDDE
+https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/manuais/GUIADEEXECUODOSRECURSOSDOPDDEv4FINAL_mar_2_2023.pdf
+
+
+https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/comunicados/Novidades_Resoluo15PDDE.pdf
+
+https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/ApresentaoPDDE2024PDF.pdf
+
+
+
 # Legislação
 
 LDB
