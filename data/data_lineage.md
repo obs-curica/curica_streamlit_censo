@@ -135,7 +135,7 @@ https://apet.org.br/artigos/o-fundeb-e-os-minimos-constitucionais-da-educacao/#:
 Metodologia cálculo Fundeb segmentos
 https://cadernosdeestudos.inep.gov.br/ojs3/index.php/cadernos/article/view/6511
 
-PNE
+## PNE
 https://pne.mec.gov.br/images/pdf/pne_conhecendo_20_metas.pdf
 
 Indicadores da Meta 01 do PNE
@@ -156,7 +156,6 @@ https://www.gov.br/mec/pt-br/pdde/pdde-equidade/documentos/
 
 Escolas contempladas com PDDE Equidade
 https://www.gov.br/mec/pt-br/pdde/pdde-equidade/documentos/
-
 
 Resolução FNDE 15/2021 - PDDE Básico
 https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/funcionamento/copy_of_RESOLUOPDDEN15DE16DESETEMBRODE2021.pdf

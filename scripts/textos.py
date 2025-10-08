@@ -909,7 +909,7 @@ def texto_pan_agua_metodologia():
     a experiência prática de campo. Esses dados brutos já sofreram um tratamento inicial, para excluir da análise as escolas inativas e as 
     escolas privadas. Portanto, os números aqui apresentados dizem respeito somente às **escolas ativas** da rede pública de ensino do Acre.
 
-    Ao final da análise, é apresentado o Programa Dinheiro Direto na Escola - Água ([PDDE - Água](https://www.gov.br/mec/pt-br/pdde/pdde-equidade/pdde-agua)), 
+    Ao final da análise, é apresentado o Programa Dinheiro Direto na Escola ([PDDE](https://www.gov.br/mec/pt-br/pdde/pdde-equidade/pdde-agua)), 
     do FNDE como proposta de solução do problema. Este programa disponibiliza recursos financeiros para a construção de sistemas de 
     abastecimento de água potável e saneamento básico nas escolas públicas. Aqui, os dados do Censo Escolar serão cruzados com os dados do 
     PDDE - Água, para identificar possíveis falhas de gestão que impeçam o acesso a esses recursos, bem como apontar soluções para o problema.
@@ -1124,47 +1124,59 @@ def texto_pan_agua_pdde_intro():
     propósito de contribuir para o provimento das necessidades prioritárias dos estabelecimentos educacionais beneficiários que concorram 
     para a garantia de seu funcionamento e para a promoção de melhorias em sua infraestrutura física e pedagógica, bem como incentivar a 
     autogestão escolar e o exercício da cidadania com a participação da comunidade no controle social.". Como o nome sugere, o PDDE tem 
-    como estratégia a transferência direta de recursos financeiros para as escolas públicas, por meio de suas respectivas Unidades 
-    Executoras, que são responsáveis pela gestão desses recursos.
-
-    Atualmente, o PDDE possui três modalidades: o **PDDE Básico** [(Res FNDE 15/2021)](https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/funcionamento/copy_of_RESOLUOPDDEN15DE16DESETEMBRODE2021.pdf), 
-    o **PDDE Equidade** [(Res FNDE 17/2024)](https://www.in.gov.br/en/web/dou/-/resolucao-n-17-de-15-de-agosto-de-2024-579018624) e o **PDDE 
-    Qualidade**, com regramentos diversos. Por sua vez, as duas últimas modalidades possuem diferentes programas dentro delas. O PDDE 
-    Básico é mais abrangente pode atender todas as escolas públicas. Para este Panorama, interessa o PDDE Equidade, que possui um programa 
-    específico para financiar o fornecimento de água potável, esgotamento sanitário e infraestrutura nas escolas do campo.
+    como estratégia a **transferência direta** de recursos financeiros para as escolas públicas, por meio de suas respectivas **Unidades 
+    Executoras**, que são responsáveis pela gestão desses recursos.
 
     Até o ano de 2024, existiam dois programas distintos dentro da estrutura do PDDE para atender necessidades específicas das escolas 
     rurais: o "PDDE Água", para o fornecimento de água e esgotamento sanitário, e o PDDE Campo, para a construção e reforma de 
-    infraestrutura das escolas. A partir do ano de 2024, esses dois programas foram unificados no "PDDE Água, Esgotamento Sanitário e 
-    Infraestrutura nas Escolas do Campo, Indígenas e Quilombolas", com a "finalidade de propiciar adequação e benfeitoria na infraestrutura 
-    física das escolas em áreas rurais e garantir o abastecimento de água em condições apropriadas para consumo e o esgotamento sanitário 
-    nas unidades escolares beneficiadas" [(Resolução FNDE nº 17/2024, art. 3º)](https://www.in.gov.br/en/web/dou/-/resolucao-n-17-de-15-de-agosto-de-2024-579018624).
+    infraestrutura das escolas. Atualmente, o PDDE possui três modalidades: o **PDDE Básico** [(Res FNDE 15/2021)](https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/funcionamento/copy_of_RESOLUOPDDEN15DE16DESETEMBRODE2021.pdf), 
+    o **PDDE Equidade** [(Res FNDE 17/2024)](https://www.in.gov.br/en/web/dou/-/resolucao-n-17-de-15-de-agosto-de-2024-579018624) e o 
+    **PDDE Qualidade**, com regramentos diversos. Por sua vez, as duas últimas modalidades possuem diferentes programas dentro delas. O 
+    PDDE Básico é mais abrangente por atender todas as escolas públicas. Para este Panorama, interessa o PDDE Equidade, que possui um 
+    programa específico para financiar o fornecimento de água potável, esgotamento sanitário e infraestrutura nas escolas do campo.
+
+    A partir do ano de 2024, os programas PDDE Água e PDDE Campo foram unificados dentro da moldura do PDDE Equidade, no programa renomeado
+    de **"PDDE Água, Esgotamento Sanitário e Infraestrutura nas Escolas do Campo, Indígenas e Quilombolas"**, com a "finalidade de propiciar 
+    adequação e benfeitoria na infraestrutura física das escolas em áreas rurais e garantir o abastecimento de água em condições apropriadas 
+    para consumo e o esgotamento sanitário nas unidades escolares beneficiadas" [(Resolução FNDE nº 17/2024, art. 3º)](https://www.in.gov.br/en/web/dou/-/resolucao-n-17-de-15-de-agosto-de-2024-579018624).
     Embora o programa também trate do financimento para obras de infraestrutura, a análise abaixo foca no financiamento para o fornecimento 
     de água.
     """
     
 def texto_pan_agua_pdde_agua():
     return """
-    Como visto nas análises acima, são as escolas rurais que sofrem com a falta de acesso à água potável. Sabendo da dificuldade de 
-    fornecimento de água para as escolas afastadas dos centros urbanos do país, o FNDE disponibiliza o PDDE Água somente para as escolas
-    localizadas na zona rural. Esse programa possui um impacto social muito grande pois, além de atender os alunos de uma escola específica, 
-    muitas vezes acaba atendendo toda a comunidade do entorno com o equipamento público construído. Esse é um dos maiores programas de 
-    saneamento básico do país e, contraditoriamente, é pouco conhecido, tanto por gestores, como pela população.
+    Como visto nas análises acima, são as escolas rurais as que mais sofrem com a falta de acesso à água potável. Sabendo da dificuldade de 
+    fornecimento de água para as escolas afastadas dos centros urbanos do país, o FNDE disponibiliza o PDDE Água, Esgotamento e Infraestrutura 
+    somente para as escolas localizadas na zona rural. Esse programa possui um impacto social muito grande pois, além de atender os alunos de 
+    uma escola específica, muitas vezes acaba atendendo toda a comunidade do entorno com o equipamento público construído. Esse é um dos maiores 
+    programas de saneamento básico do país e, contraditoriamente, é pouco conhecido, tanto por gestores, como pela população.
       
-    Para receber o recurso, a unidade escolar deve:
-    * localizar-se na zona rural;
-    * declarar no censo escolar a inexistência de abastecimento de água potável;
-    * funcionar em prédio próprio;
-    * possuir Unidade Executora própria (UEx);
-    * não ter sido beneficiada no ano anterior pelo programa;
-    * elaborar termo de compromisso.
-  
+    Para receber o recurso, a unidade escolar deve atender os seguintes requisitos:
+    
+    * declaração no Censo Escolar do ano anterior ao do repasse de recursos de que a escola está ativa e com matrícula;
+
+    * declaração no Censo Escolar do ano anterior de que a escola funciona em prédio próprio;
+
+    * declaração no Censo Escolar do ano anterior de que a escola se localiza na zona rural, indígena ou quilombola;
+
+    * possuam Unidade Executora Própria (UEx);
+
+    * não tenham sido beneficiadas no ano anterior;
+
+    * Plano de Atendimento, Ata da reunião e as fotos;
+
+    * para o caso específico da água, a declaração no Censo Escolar de que a escola não fornece água potável, para coerência com o Plano de 
+    Atendimento.
+
+    
+
+
     Na prática, as escolas rurais acabam por enfrentar **três** impedimentos principais para acessar tal recurso:  
   
     O primeiro deles é o **:red-background[erro no preenchimento do censo escolar]**. Para o acesso ao PDDE Água, a atenção deve recair sobre a localização da 
     escola, sua condição do fornecimento de água potável e se possui prédio prórpio. A análise dos dados do censo escolar demonstra que muitas 
     escolas anotam a condição de água potável a fontes de abastecimento que são impróprias para o consumo, como as cacimbas, rios ou igarapés. 
-    Dentro de uma generalização, é possível afirmar que a qualidade da água das cacimbas é melhor que a dos rios e igarapés. Entretanto, estão  
+    Dentro de uma generalização, é possível afirmar que a qualidade da água das cacimbas é melhor que a dos rios e igarapés. Entretanto, estão 
     longe de atender os requisitos de potabilidade da [Portaria 888/2021](https://www.in.gov.br/en/web/dou/-/portaria-gm/ms-n-888-de-4-de-maio-de-2021-318461562) 
     do Ministério da Saúde.
   
@@ -1174,7 +1186,8 @@ def texto_pan_agua_pdde_agua():
   
     O segundo impedimento é a :red-background[ausência de Entidade ou Unidade Executora própria] (UEx).
     
-    O terceiro impedimento é a soluTanto a gestão estadual quanto as municipais recorrem à solução 
+    O terceiro impedimento é a solu
+    Tanto a gestão estadual quanto as municipais recorrem à solução 
     administrativa de criação de "escolas polo" na educação rural indígena e não indígena. As respectivas Secretarias de Educação criam 
     "escolas anexas" a essas escolas polo, somando o número de alunos e servidores desses anexos aos alunos das escolas polo. Nesta agregação, 
     as escolas anexas não são contabilizadas no censo escolar e não conseguem acessar os recusos do PDDE Água. É como se não existissem.
