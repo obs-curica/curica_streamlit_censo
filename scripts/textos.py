@@ -1146,10 +1146,11 @@ def texto_pan_agua_pdde_intro():
 def texto_pan_agua_pdde_agua_intro():
     return """
     Como visto nas análises acima, são as escolas rurais as que mais sofrem com a falta de acesso à água potável. Sabendo da dificuldade de 
-    fornecimento de água para as escolas afastadas dos centros urbanos do país, o FNDE disponibiliza o PDDE Água, Esgotamento e Infraestrutura 
-    somente para as escolas localizadas na zona rural. Esse programa possui um impacto social muito grande pois, além de atender os alunos de 
-    uma escola específica, muitas vezes acaba atendendo toda a comunidade do entorno com o equipamento público construído. Esse é um dos maiores 
-    programas de saneamento básico do país e, contraditoriamente, é pouco conhecido, tanto por gestores, como pela população.
+    fornecimento de água para as escolas afastadas dos centros urbanos do país, o FNDE disponibiliza o PDDE Água, Esgotamento e 
+    Infraestrutura somente para as escolas localizadas na zona rural. Esse programa possui um impacto social muito grande pois, além de 
+    atender os alunos de uma escola específica, muitas vezes acaba atendendo toda a comunidade do entorno com o equipamento público 
+    construído. Esse é um dos maiores programas de saneamento básico do país e, contraditoriamente, é pouco conhecido, tanto por gestores, 
+    como pela população.
       
     Para receber o recurso, a unidade escolar deve atender os seguintes requisitos:
     
@@ -1159,17 +1160,17 @@ def texto_pan_agua_pdde_agua_intro():
     * declaração no Censo Escolar do ano anterior de que a escola funciona em :green-background[prédio próprio];
 
     * declaração no Censo Escolar do ano anterior de que a escola se localiza na :green-background[zona rural], e se possui 
-    :green-background[localização diferenciada] em área de assentamento, Terra Indígena, Comunidade Quilombola ou área onde se localizam povos e 
-    comunidades tradicionais (ribeirinhos ou extrativistas, pex.);
+    :green-background[localização diferenciada] em área de assentamento, Terra Indígena, Comunidade Quilombola ou área onde se localizam 
+    povos e comunidades tradicionais (ribeirinhos ou extrativistas, pex.);
 
-    * possuam :green-background[Unidade Executora] Própria (UEx);
+    * possuam :green-background[Unidade Executora Própria] (UEx);
 
     * não tenham sido beneficiadas no :green-background[ano anterior];
 
     * :green-background[Plano de Atendimento], Ata da reunião e as fotos;
 
-    * para o caso específico da água, a declaração no Censo Escolar de que a escola :green-background[não fornece água potável], para coerência com 
-    o Plano de Atendimento.
+    * para o caso específico da água, a declaração no Censo Escolar de que a escola :green-background[não fornece água potável], e sua 
+    respectiva fonte de abastecimento, para coerência com o Plano de Atendimento.
 
     Por sua vez, os valores do repasse variam de acordo com o número de matrículas da escola. Atualmente, eles estão discriminados na 
     [(Resolução FNDE 17/2024)](https://www.in.gov.br/en/web/dou/-/resolucao-n-17-de-15-de-agosto-de-2024-579018624):
@@ -1178,49 +1179,50 @@ def texto_pan_agua_pdde_agua_intro():
     |----------------|----------------|
     |Até 50 alunos|R$ 30.000,00|
     |De 51 a 150 alunos|R$ 35.000,00|
-    |Acima de 151 alunos|R$ 45.000,00|
+    |Acima de 151 alunos|R$ 45.000,00|  
 
-    Os requisitos acima podem ser resumidos em três:  
-    1- o preenchimento correto do Censo Escolar;  
-    2- a constituição de Unidade Executora própria;  
-    3- a efetiva adesão ao Programa junto ao FNDE.  
+    Em resumo, os requisitos acima podem ser **condensados** em três:  
+
+    **1-** o preenchimento correto do Censo Escolar;  
+    **2-** a constituição de Unidade Executora própria;  
+    **3-** a efetiva adesão ao Programa junto ao FNDE.  
     
     Eles são, ao mesmo tempo, as dificuldades que os sistemas de ensino enfrentam na captação de recursos. Vamos a eles.  
     """
 
 def texto_pan_agua_pdde_agua_requisitos_censo():
     return """
-    Os Panoramas anteriores e os tópicos acima já adiantaram o :red-background[incorreto preenchimento do Censo Escolar] pelos sistemas de ensino. 
-    Agora, o problema será aprofundado para mostrar as consequências desse erro na oferta da educação pública de qualidade. Para o acesso ao PDDE 
-    Água, a atenção deve recair sobre a localização da escola, sua condição do fornecimento de água potável e se possui prédio próprio. Por óbvio, 
-    a escola deve declarar no Censo estar ativa e com matrícula. 
+    Os Panoramas anteriores e os tópicos acima já adiantaram o :red-background[incorreto preenchimento do Censo Escolar] pelos sistemas de 
+    ensino como uma grave falha de gestão. Agora, o problema será aprofundado para mostrar as consequências desse erro na oferta da educação 
+    pública de qualidade. Para o acesso ao PDDE Água, a atenção deve recair sobre a localização da escola, sua condição do fornecimento de 
+    água potável e se possui prédio próprio. Por óbvio, a escola deve declarar no Censo estar ativa e com matrícula. 
     
-    Conforme a argumentação acima, as escolas urbanas possuem fácil acesso a equipamentos públicos para a promoção de um saneamento básico adequado.
-    Por isso, o PDDE Água se destina somente a escolas rurais. Por isso, a localização deve ser declarada com atenção. Mais ainda, a localização 
-    diferenciada também deve ser declarada com atenção, pois a presença dessa condição é critério de preferência no repasse de recursos de diferentes
-    programas do FNDE. Para a realidade amazônica, essa situação é especialmente importante, pois a maioria das escolas rurais está localizada em 
-    alguma das condições diferenciadas.
+    Conforme a argumentação acima, as escolas urbanas possuem fácil acesso a equipamentos públicos para a promoção de um saneamento básico 
+    adequado. Por isso, o PDDE Água se destina somente a escolas rurais. Por esse motivo, a localização deve ser declarada com atenção. Mais 
+    ainda, a localização diferenciada também deve ser declarada com o mesmo cuidado, pois a presença dessa condição é critério de preferência 
+    no repasse de recursos de diferentes programas do FNDE. Para a realidade amazônica, essa situação é especialmente importante, pois a 
+    maioria das escolas rurais está localizada em alguma das condições diferenciadas.
 
-    A não oferta de água potável e a respectiva fonte também devem ser corretamente assinaladas no Censo Escolar, pois não tem sentido para política
-    pública atender uma escola que já fornece água de qualidade para seus alunos. Mais ainda, quando da elaboração do Plano de Atendimento, haverá
-    necessidade de apresentação de justificativa para a construção do poço artesiano. Se a 
+    A não oferta de água potável e a respectiva fonte também devem ser corretamente assinaladas no Censo Escolar, pois não tem sentido para 
+    a política pública atender uma escola que já fornece água de qualidade para seus alunos. A partir da nova regulamentação do PDDE 
+    Equidade, o FNDE realiza uma seleção prévia das escolas que atendem aos critérios de elegibilidade com base nos dados declarados ao 
+    Censo Escolar. Logo, o erro no preenchimento do Censo Escolar pode levar à exclusão da escola do programa, mesmo que ela atenda a todos 
+    os requisitos de fato. Mais ainda, quando da elaboração do Plano de Atendimento, haverá necessidade de apresentação de justificativa 
+    para a construção de sistema de abastecimento, por exemplo. Se a escola declara erroneamente já possuir determinado sistema de 
+    abastecimento, como justificará a aquisição de um novo sistema igual? 
     
-    A análise dos dados do censo escolar demonstra que muitas 
-    escolas anotam a condição de água potável a fontes de abastecimento que são impróprias para o consumo, como as cacimbas, rios ou igarapés. 
-    Dentro de uma generalização, é possível afirmar que a qualidade da água das cacimbas é melhor que a dos rios e igarapés. Entretanto, estão 
-    longe de atender os requisitos de potabilidade da [Portaria 888/2021](https://www.in.gov.br/en/web/dou/-/portaria-gm/ms-n-888-de-4-de-maio-de-2021-318461562) 
-    do Ministério da Saúde.
-    
-    O primeiro deles é o **:red-background[erro no preenchimento do censo escolar]**. 
+    Por fim, o número de matrículas também deve ser declarado corretamente, pois é o critério utilizado para definir o valor do repasse.
 
-    Para a identificação do problema do preenchimento incorreto do censo escolar, basta listar as escolas que declaram possuir água potável 
-    cujas fontes de abastecimento são os rios, igarapés ou cacimbas. Detectado o erro de preenchimento, a Promotoria deve intervir junto à 
-    respectiva Secretaria de Educação para corrigir o problema para habilitar a UEx a receber os recursos no ano subsequente.
+    Logo, o preenchimento correto do Censo Escolar é condição essencial para o acesso a este e outros programas do FNDE. A detecção de erros 
+    em seu preenchimento é o ponto de partida essencial para qualquer intervenção junto às Secretarias de Educação, pois tudo gira em torno 
+    desse dado.
     """
 
 def texto_pan_agua_pdde_agua_requisitos_uex():
     return """
-    O segundo impedimento é a :red-background[ausência de Entidade ou Unidade Executora própria] (UEx).
+    O segundo requisito que impede o acesso das escolas ao PDDE água é a :red-background[ausência de Unidade Executora própria] (UEx). Para
+    compreender esse problema, é necessário definir o que é uma **Unidade Executora** e diferenciá-la da **Entidade Executora** (EEx). A 
+    Unidade Executora 
     
     O terceiro impedimento é a solução adm...
     Tanto a gestão estadual quanto as municipais recorrem à solução 
