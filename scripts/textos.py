@@ -1220,13 +1220,46 @@ def texto_pan_agua_pdde_agua_requisitos_censo():
 
 def texto_pan_agua_pdde_agua_requisitos_uex():
     return """
-    O segundo requisito que impede o acesso das escolas ao PDDE água é a :red-background[ausência de Unidade Executora própria] (UEx). Para
-    compreender esse problema, é necessário definir o que é uma **Unidade Executora** e diferenciá-la da **Entidade Executora** (EEx). A 
-    Unidade Executora 
+    O segundo requisito que impede o acesso das escolas ao PDDE Água é a :red-background[ausência de Unidade Executora própria] (UEx). Para
+    compreender esse problema, é necessário definir o que é uma **Unidade Executora** e diferenciá-la da **Entidade Executora** (EEx). Esses
+    conceitos estão definidos na [Resolução FNDE 15/2021](https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/funcionamento/copy_of_RESOLUOPDDEN15DE16DESETEMBRODE2021.pdf).
+
+    Entidade Executora (EEx) é a pessoa jurídica de **direito público**, Prefeituras ou Secretarias de Educação, que representam escolas 
+    públicas com **até 50 (cinquenta) alunos**. Além de efetivar o repasse dos recursos do PDDE às escolas representadas, as EEx são 
+    responsáveis por apoiar, técnica e financeiramente, as UEx representativas de suas escolas, bem como por acompanhar, fiscalizar e 
+    controlar a execução dos recursos repassados.
+
+    A Unidade Executora (UEx) é uma "organização da sociedade civil com personalidade jurídica de **direito privado**, sem fins lucrativos, 
+    constituída com a finalidade de representar uma unidade escolar pública ou um consórcio de unidades escolares públicas, integrada por 
+    membros da comunidade escolar e comumente denominadas de caixa escolar, conselho escolar, associação de pais e mestres, círculo de pais 
+    e mestres, dentre outras denominações." O processo para sua constituição é o mesmo para qualquer associação sem fins lucrativos (art. 
+    8º). Escolas **com mais de 50 alunos são obrigadas a constituir sua própria UEx** para acessar os recursos do PDDE (art. 7º). Já as 
+    escolas com até 50 alunos podem optar por constituir sua própria UEx, vincular-se a uma UEx comum por meio de Consórcio (art. 8º) ou ser 
+    representada por uma Entidade Executora. A formação de consórcio deve respeitar as disposições da [Lei 11.107/2005](https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2005/lei/l11107.htm).
+    O MEC disponibiliza um [Manual de Orientação para a Constituição de UEx](https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/manuais/ManualdeOrientaoparaConstituiodeUnidadeExecutoraPropriaUEx.pdf)
+    para auxiliar as escolas nesse processo.
+
+    A escola que integra um Consórcio ou é representada por uma EEx consegue acessar os recursos do PDDE Básico. **Entretanto, o PDDE Água, 
+    Esgotamento e Infraestrutura exige que a escola possua UEx própria**. Logo, escolas com até 50 alunos que optarem por serem 
+    representadas por uma Entidade Executora ou Consórcio não poderão acessar os recursos do PDDE Água. 
     
-    O terceiro impedimento é a solução adm...
-    Tanto a gestão estadual quanto as municipais recorrem à solução 
-    administrativa de criação de "escolas polo" na educação rural indígena e não indígena. As respectivas Secretarias de Educação criam 
+    Gráfico aqui?
+    
+    
+    """
+
+def texto_pan_agua_pdde_agua_requisitos_uex_analise():
+    return """
+    
+    """
+
+def texto_pan_agua_pdde_agua_requisitos_uex_anexos():
+    return """
+    E não pára por aí.
+    Existe mais um problema que advém de escolhas administrativas de gestão das Secretarias de Educação, que será discutido a seguir.
+
+    Tanto a gestão estadual quanto as municipais recorrem à solução administrativa de criação de "escolas polo" na educação do campo 
+    indígena e não indígena. As respectivas Secretarias de Educação criam 
     "escolas anexas" a essas escolas polo, somando o número de alunos e servidores desses anexos aos alunos das escolas polo. Nesta agregação, 
     as escolas anexas não são contabilizadas no censo escolar e não conseguem acessar os recusos do PDDE Água. É como se não existissem.
     Essa inexistência formal impede que as escolas constituam suas UEx. Somente a escola polo é contabilizada no Censo e pode acessar este 
@@ -1240,7 +1273,13 @@ def texto_pan_agua_pdde_agua_requisitos_uex():
     De posse dos dados, a Promotoria pode intervir junto à respectiva Secretaria de Educação para a criação da UEx daquela unidade escolar e 
     habilita-la a receber os recursos do PDDE Água. A outra alternativa é o ajuizamento de Ação Civil Pública, demandando o ente para efetivar o 
     fornecimento da água potável com recursos próprios.
+    
+    UEx e EEX "garantir livre acesso às suas dependências a representantes do FNDE, do Tribunal de
+    Contas da União – TCU, do Sistema de Controle Interno do Poder Executivo Federal e do Ministério
+    Público, prestando-lhes esclarecimentos e fornecendo-lhes documentos requeridos, quando em
+    missão de acompanhamento, fiscalização e auditoria."
     """
+
 
 def texto_pan_agua_pdde_agua_requisitos_plano():
     return """

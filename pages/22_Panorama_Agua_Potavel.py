@@ -27,6 +27,8 @@ from scripts.textos import(texto_pan_agua_intro,
                            texto_pan_agua_pdde_agua_intro,
                            texto_pan_agua_pdde_agua_requisitos_censo,
                            texto_pan_agua_pdde_agua_requisitos_uex,
+                           texto_pan_agua_pdde_agua_requisitos_uex_analise,
+                           texto_pan_agua_pdde_agua_requisitos_uex_anexos,
                            texto_pan_agua_pdde_agua_requisitos_plano
 )
 
@@ -36,7 +38,8 @@ from scripts.graficos import (grafico_agua_total_dados_brutos,
                               grafico_localizacao_escolas_sem_agua,
                               grafico_abastecimento_agua_por_fonte,
                               grafico_agua_total_fontes,
-                              grafico_agua_total_fontes_municipios
+                              grafico_agua_total_fontes_municipios,
+                              grafico_escolas_uex_por_ano
 )
 
 # Configuração visual
@@ -47,7 +50,9 @@ CORES_BARRAS = ['#B0E0E6', '#FFC107']
 # Corregar dados
 url_df_panorama_agua = 'https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_agua/df_panorama_agua.csv'
 df_panorama_agua = carregar_dados(url_df_panorama_agua)
-#df_panorama_agua = df_panorama_agua.astype(str)
+
+url_df_uex = 'https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/pdde_info/df_uex.csv'
+df_uex = carregar_dados(url_df_uex)
 
 st.set_page_config(page_title="Panorama Água Potável", layout="wide", page_icon="🦜")
 
@@ -233,11 +238,31 @@ st.write(texto_pan_agua_pdde_intro())
 st.header('PDDE Água, Esgotamento Sanitário e Infraestrutura')
 st.write(texto_pan_agua_pdde_agua_intro())
 
-st.subheader("Preenchimento do Censo Escolar")
+st.subheader("Preenchimento correto do Censo Escolar")
 st.write(texto_pan_agua_pdde_agua_requisitos_censo())
 
 st.subheader("Unidade Executora própria vs. Entidades Executoras")
 st.write(texto_pan_agua_pdde_agua_requisitos_uex())
+
+col1, col2 = st.columns(2)
+with col1:
+    # Selectbox do ano
+    anos_disponiveis = sorted(df_uex['Ano'].unique())
+    ano_mais_recente = max(anos_disponiveis)
+
+    ano_uex = st.selectbox(
+        "Selecione o ano:",
+        options=anos_disponiveis,
+        index=anos_disponiveis.index(ano_mais_recente),
+        key="agua_uex_ano"
+    )
+
+    grafico_escolas_uex_por_ano(df_panorama_agua, df_uex, ano=ano_uex)
+
+st.write(texto_pan_agua_pdde_agua_requisitos_uex_analise())
+
+st.subheader("Escolas Anexas")
+st.write(texto_pan_agua_pdde_agua_requisitos_uex_anexos())
 
 st.subheader("Plano de Atendimento")
 st.write(texto_pan_agua_pdde_agua_requisitos_plano())

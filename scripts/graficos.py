@@ -2685,6 +2685,92 @@ def grafico_agua_total_fontes_municipios(df, municipio):
     ax.set_ylim(0, max(valores) * 1.25)
     fig.tight_layout()
     st.pyplot(fig)
+    
+def grafico_escolas_uex_por_ano(df_agua, df_uex, ano):
+    """
+    Gera gráfico de barras verticais comparando:
+    1. Total de escolas ativas no Censo Escolar;
+    2. Total de escolas com CNPJ de Unidade Executora (UEX);
+    3. Total de UEX únicas cadastradas;
+    4. Total de UEX únicas vinculadas a escolas localizadas na zona rural.
+
+    Parâmetros:
+    -----------
+    df_agua : pd.DataFrame
+        DataFrame do panorama da água potável (Censo Escolar), com a coluna 'NU_ANO_CENSO' e 'CO_ENTIDADE'.
+    df_uex : pd.DataFrame
+        DataFrame das Unidades Executoras, com a coluna 'CNPJ UEX', 'Código Escola' e 'Localização'.
+    ano : int
+        Ano a ser considerado para o filtro dos dois DataFrames.
+    """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+
+    # Filtrar os DataFrames pelo ano informado
+    df_agua_filtrado = df_agua[df_agua["NU_ANO_CENSO"] == ano]
+    df_uex_filtrado = df_uex[df_uex["Ano"] == ano] if "Ano" in df_uex.columns else df_uex
+
+    # Total de escolas ativas no Censo
+    total_escolas_censo = df_agua_filtrado["CO_ENTIDADE"].nunique()
+
+    # Total de escolas com CNPJ UEX informado (não nulo)
+    total_escolas_com_uex = df_uex_filtrado[df_uex_filtrado["CNPJ UEX"].notna()]["Código Escola"].nunique()
+
+    # Total de UEX únicas
+    total_uex_unicas = df_uex_filtrado["CNPJ UEX"].dropna().nunique()
+
+    # Total de UEX únicas em escolas da zona rural
+    df_rural = df_uex_filtrado[
+        (df_uex_filtrado["Localização"].str.lower() == "rural") &
+        (df_uex_filtrado["CNPJ UEX"].notna())
+    ]
+    total_uex_rural = df_rural["CNPJ UEX"].nunique()
+
+    # Dados do gráfico
+    categorias = [
+        "Escolas no Censo Escolar",
+        "Escolas vinculadas a UEx",
+        "UEx únicas",
+        "UEx de Escolas Rurais"
+    ]
+    valores = [
+        total_escolas_censo,
+        total_escolas_com_uex,
+        total_uex_unicas,
+        total_uex_rural
+    ]
+    cores = ["#B0E0E6", "#90CAF9", "#FFC107", "#FF0000"]
+
+    # Estilo visual
+    plt.style.use("dark_background")
+    fig, ax = plt.subplots(figsize=(11, 7))
+
+    barras = ax.bar(categorias, valores, color=cores)
+
+    # Rótulos nas barras
+    for bar, valor in zip(barras, valores):
+        ax.text(
+            bar.get_x() + bar.get_width() / 2,
+            valor + max(valores) * 0.02,
+            f"{valor:,}".replace(",", "."),
+            ha="center", va="bottom",
+            fontsize=13, color="white", fontweight="bold"
+        )
+
+    # Título e eixos
+    ax.set_title(f"Escolas e Unidades Executoras - {ano}", color="#FFA07A", fontsize=18)
+    ax.set_xlabel("Fonte: Censo Escolar e PDDE Info", color="#FFA07A", fontsize=10)
+
+    ax.tick_params(axis='x', colors="#FFA07A", labelsize=13)
+    ax.tick_params(axis='y', colors="#FFA07A", labelsize=13)
+    for spine in ax.spines.values():
+        spine.set_color("#FFA07A")
+
+    ax.set_ylim(0, max(valores) * 1.25)
+    fig.tight_layout()
+    st.pyplot(fig)
+
+
 
     
 
