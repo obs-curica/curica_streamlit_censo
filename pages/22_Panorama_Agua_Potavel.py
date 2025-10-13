@@ -266,3 +266,7 @@ st.write(texto_pan_agua_pdde_agua_requisitos_uex_anexos())
 
 st.subheader("Efetiva adesão ao Programa")
 st.write(texto_pan_agua_pdde_agua_requisitos_adesao())
+
+
+
+# Relatorio das escolas com mais de 50 alunos que nao possuem UEx

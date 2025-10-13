@@ -2718,8 +2718,12 @@ def grafico_escolas_uex_por_ano(df_agua, df_uex, ano):
     total_escolas_com_uex = df_uex_filtrado[df_uex_filtrado["CNPJ UEX"].notna()]["Código Escola"].nunique()
 
     # Total de UEX únicas
-    total_uex_unicas = df_uex_filtrado["CNPJ UEX"].dropna().nunique()
-
+    df_uex_unicas = df_uex_filtrado[
+        (df_uex_filtrado["CNPJ UEX"].dropna().nunique()) &
+        (df_uex_filtrado["CNPJ UEX"] != df_uex_filtrado["CNPJ EEX"])
+    ]
+    total_uex_unicas = df_uex_unicas["CNPJ UEX"].nunique()
+    
     # Total escolas rurais
     total_escolas_rurais = df_agua_filtrado[df_agua_filtrado["TP_LOCALIZACAO"] == 2]["CO_ENTIDADE"].nunique()
     
@@ -2765,7 +2769,7 @@ def grafico_escolas_uex_por_ano(df_agua, df_uex, ano):
         )
 
     # Título e eixos
-    ax.set_title(f"Escolas e Unidades Executoras - {ano}", color="#FFA07A", fontsize=18)
+    ax.set_title(f"Escolas e Unidades Executoras - {ano}", color="#FFA07A", fontsize=24)
     ax.set_xlabel("Fonte: Censo Escolar e PDDE Info", color="#FFA07A", fontsize=10)
 
     ax.tick_params(axis='x', colors="#FFA07A", labelsize=13)

@@ -1255,49 +1255,53 @@ def texto_pan_agua_pdde_agua_requisitos_uex_analise():
     Aqui se inicia a compreensão técnica do problema da falta de oferta de água potável nas escolas da rede pública de ensino do Acre. O 
     gráfico acima mostra que a maioria das escolas rurais simplesmente não possui UEx própria. Logo, essas escolas ficam impedidas de 
     acessar os recursos do PDDE Água e, por consequência, não conseguem oferecer água potável para seus alunos. Importante ressaltar que o 
-    número de UEx das escolas rurais foi obtido a partir da base de dados do PDDE Info, selecionando os CNPJs das UEx únicos do campo
-    respectivo, excluídos aqueles que remetem ao CNPJ de suas respectivas Entidades Executoras, ou seja, o CNPJ do Município ou da 
-    Secretaria de Educação, pois estes não constituem UEx própria. 
+    número de UEx únicas foi obtido a partir da base de dados do PDDE Info, selecionando os CNPJs únicos das UEx do campo respectivo, 
+    excluídos aqueles que remetem ao CNPJ de suas respectivas Entidades Executoras, ou seja, ao CNPJ do Município ou da Secretaria de 
+    Educação, pois estes não constituem UEx própria. 
     
     Percebe-se, portanto, que existe grande montante de recursos financeiros disponíveis para o fornecimento de água potável nas escolas 
     rurais da rede pública de ensino do Acre, mas que não são acessados por elas devido a falha grave de gestão por parte das Secretarias de 
     Educação. Estas, por sua vez, possuem o dever legal de prestar apoio técnico às gestões escolares de sua rede de ensino para garantir a 
     constituição de UEx próprias. É urgente a necessidade de intervenção das Promotorias de Justiça do interior do Estado junto às 
     respectivas Secretarias de Educação no sentido de exigir delas a prestação desse apoio técnico para a constituição de UEx próprias pelas 
-    escolas rurais, para que elas possam acessar os recursos do PDDE Água, Esgotamento e Infraestrutura.
+    escolas rurais, para que elas possam acessar os recursos do PDDE Água, Esgotamento e Infraestrutura ([art. 6º, alínea "k", da Res FNDE 
+    15/2021](https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/funcionamento/copy_of_RESOLUOPDDEN15DE16DESETEMBRODE2021.pdf)).
     """
 
 def texto_pan_agua_pdde_agua_requisitos_uex_anexos():
     return """
-    E não pára por aí.
-    Existe mais um problema que advém de escolhas administrativas de gestão das Secretarias de Educação, que será discutido a seguir.
+    Infelizmente, os problemas não param por aí. Existe mais uma inconsistência que advém de escolhas administrativas de gestão das 
+    Secretarias de Educação, que será discutida a seguir.
 
-    Tanto a gestão estadual quanto as municipais recorrem à solução administrativa de criação de "escolas polo" na educação do campo 
-    indígena e não indígena. As respectivas Secretarias de Educação criam 
-    "escolas anexas" a essas escolas polo, somando o número de alunos e servidores desses anexos aos alunos das escolas polo. Nesta agregação, 
-    as escolas anexas não são contabilizadas no censo escolar e não conseguem acessar os recusos do PDDE Água. É como se não existissem.
-    Essa inexistência formal impede que as escolas constituam suas UEx. Somente a escola polo é contabilizada no Censo e pode acessar este 
-    recurso. As demais escolas anexas ficam desatendidas e não é possível identificar esta situação pelo censo escolar, de modo que esses dados 
-    não refletem a realidade, violando o direito dos alunos de acesso à água potável.  
-  
-    Para atacar este problema, é possível utilizar a base de dados do FNDE, que possui o cadastro de todas as Uex da rede de ensino alvo. Assim, 
-    o cruzamento da base de dados do censo escolar com a base de dados do FNDE permite saber com precisão o número de escolas anexas que existem 
-    na zona rural.  
-  
-    De posse dos dados, a Promotoria pode intervir junto à respectiva Secretaria de Educação para a criação da UEx daquela unidade escolar e 
-    habilita-la a receber os recursos do PDDE Água. A outra alternativa é o ajuizamento de Ação Civil Pública, demandando o ente para efetivar o 
-    fornecimento da água potável com recursos próprios.
+    Tanto a gestão estadual quanto as municipais recorrem à solução administrativa de criação de "escolas polo" e suas respectivas 
+    :red-background["escolas anexas"] na educação do campo, indígena e não indígena. Assim, os alunos e servidores das escolas anexas são 
+    contabilizados no Censo Escolar como se estivessem matriculados na escola polo. Não há menção ao prédio das escolas anexas, que existem 
+    na prática, mas não são declarados no Censo Escolar. Para o FNDE, essas escolas simplesmente não existem. Essa "inexistência formal" 
+    impede que as escolas constituam suas UEx. Somente a escola polo é contabilizada no Censo e pode acessar os repasses do FNDE. As demais 
+    escolas anexas ficam desatendidas não acessam o PDDE Água.
+
+    A princípio, não é possível identificar esta situação por meio das bases de dados oficiais, de modo que esses dados não refletem a
+    realidade da rede de ensino. No entanto, é possível inferir a existência de casos extremos do emprego desta prática ao se comparar as 
+    redes de ensino de Municípios com número de alunos semelhantes, mas com disparidade no número de escolas. Essa questão foi antecipada no 
+    Panorama da Rede de Ensino, quando se fez um primeiro alerta para o problema. Lá fica evidente o caso do Município de Tarauacá, que 
+    possui um número de escolas muito inferior ao do Município de Feijó, o que indica um abuso dessa prática.
     
-    UEx e EEX "garantir livre acesso às suas dependências a representantes do FNDE, do Tribunal de
-    Contas da União – TCU, do Sistema de Controle Interno do Poder Executivo Federal e do Ministério
-    Público, prestando-lhes esclarecimentos e fornecendo-lhes documentos requeridos, quando em
-    missão de acompanhamento, fiscalização e auditoria."
+    Essa prática será abordada às minúcias no Panorama da Infraestrutura. Por hora, fica o alerta de que essa escolha administrativa de 
+    gestão se soma ao problema da falta de UEx própria, agravando a dificuldade de acesso das escolas rurais aos recursos do PDDE Água e 
+    acaba por violar o direito à educação de qualidade dos alunos dessas escolas.
     """
-
 
 def texto_pan_agua_pdde_agua_requisitos_adesao():
     return """
     Falar do plano de atendimento aqui.
     """
 
-# lembrar de dizer que sao dois problemas essenciais: o erro no preenchimento do censo e do problema dos anexos
+def pan_agua_consideracoes_finais():
+    return """
+    Considerações finais.
+    
+    UEx e EEX "garantir livre acesso às suas dependências a representantes do FNDE, do Tribunal de
+    Contas da União – TCU, do Sistema de Controle Interno do Poder Executivo Federal e do Ministério
+    Público, prestando-lhes esclarecimentos e fornecendo-lhes documentos requeridos, quando em
+    missão de acompanhamento, fiscalização e auditoria."
+    """
