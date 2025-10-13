@@ -2692,7 +2692,8 @@ def grafico_escolas_uex_por_ano(df_agua, df_uex, ano):
     1. Total de escolas ativas no Censo Escolar;
     2. Total de escolas com CNPJ de Unidade Executora (UEX);
     3. Total de UEX únicas cadastradas;
-    4. Total de UEX únicas vinculadas a escolas localizadas na zona rural.
+    4. Total de escolas rurais no Censo;
+    5. Total de UEX únicas vinculadas a escolas localizadas na zona rural.
 
     Parâmetros:
     -----------
@@ -2719,27 +2720,33 @@ def grafico_escolas_uex_por_ano(df_agua, df_uex, ano):
     # Total de UEX únicas
     total_uex_unicas = df_uex_filtrado["CNPJ UEX"].dropna().nunique()
 
+    # Total escolas rurais
+    total_escolas_rurais = df_agua_filtrado[df_agua_filtrado["TP_LOCALIZACAO"] == 2]["CO_ENTIDADE"].nunique()
+    
     # Total de UEX únicas em escolas da zona rural
     df_rural = df_uex_filtrado[
         (df_uex_filtrado["Localização"].str.lower() == "rural") &
-        (df_uex_filtrado["CNPJ UEX"].notna())
+        (df_uex_filtrado["CNPJ UEX"].notna()) &
+        (df_uex_filtrado["CNPJ UEX"] != df_uex_filtrado["CNPJ EEX"])
     ]
     total_uex_rural = df_rural["CNPJ UEX"].nunique()
 
     # Dados do gráfico
     categorias = [
-        "Escolas no Censo Escolar",
+        "Escolas Ativas",
         "Escolas vinculadas a UEx",
         "UEx únicas",
-        "UEx de Escolas Rurais"
+        "Escolas Rurais",
+        "UEx Escolas Rurais"
     ]
     valores = [
         total_escolas_censo,
         total_escolas_com_uex,
         total_uex_unicas,
+        total_escolas_rurais,
         total_uex_rural
     ]
-    cores = ["#B0E0E6", "#90CAF9", "#FFC107", "#FF0000"]
+    cores = ["#B0E0E6", "#90CAF9", "#FFC107", "#006400", "#FF0000"]
 
     # Estilo visual
     plt.style.use("dark_background")

@@ -29,7 +29,7 @@ from scripts.textos import(texto_pan_agua_intro,
                            texto_pan_agua_pdde_agua_requisitos_uex,
                            texto_pan_agua_pdde_agua_requisitos_uex_analise,
                            texto_pan_agua_pdde_agua_requisitos_uex_anexos,
-                           texto_pan_agua_pdde_agua_requisitos_plano
+                           texto_pan_agua_pdde_agua_requisitos_adesao
 )
 
 from scripts.graficos import (grafico_agua_total_dados_brutos,
@@ -264,5 +264,5 @@ st.write(texto_pan_agua_pdde_agua_requisitos_uex_analise())
 st.subheader("Escolas Anexas")
 st.write(texto_pan_agua_pdde_agua_requisitos_uex_anexos())
 
-st.subheader("Plano de Atendimento")
-st.write(texto_pan_agua_pdde_agua_requisitos_plano())
+st.subheader("Efetiva adesão ao Programa")
+st.write(texto_pan_agua_pdde_agua_requisitos_adesao())

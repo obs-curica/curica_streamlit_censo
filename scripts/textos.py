@@ -1243,14 +1243,28 @@ def texto_pan_agua_pdde_agua_requisitos_uex():
     Esgotamento e Infraestrutura exige que a escola possua UEx própria**. Logo, escolas com até 50 alunos que optarem por serem 
     representadas por uma Entidade Executora ou Consórcio não poderão acessar os recursos do PDDE Água. 
     
-    Gráfico aqui?
-    
-    
+    Como anda, então, a constituição de UEx pelas escolas da rede pública de ensino do Acre? O gráfico abaixo utiliza os dados do Censo
+    Escolar e do PDDE Info para responder a essa pergunta. Os dados do Censo Escolar trazem o número total de escolas ativas. Os dados do
+    PDDE Info são trabalhados para contabilizar as escolas que possuem sua UEx própria ou estão vinculadas a uma Entidade Executora ou 
+    Consórcio. Então, o gráfico apresenta o número total de escolas que possuem UEX própria. Após, apresenta-se o total de escolas rurais e 
+    o número delas que possuem UEx própria.
     """
 
 def texto_pan_agua_pdde_agua_requisitos_uex_analise():
     return """
+    Aqui se inicia a compreensão técnica do problema da falta de oferta de água potável nas escolas da rede pública de ensino do Acre. O 
+    gráfico acima mostra que a maioria das escolas rurais simplesmente não possui UEx própria. Logo, essas escolas ficam impedidas de 
+    acessar os recursos do PDDE Água e, por consequência, não conseguem oferecer água potável para seus alunos. Importante ressaltar que o 
+    número de UEx das escolas rurais foi obtido a partir da base de dados do PDDE Info, selecionando os CNPJs das UEx únicos do campo
+    respectivo, excluídos aqueles que remetem ao CNPJ de suas respectivas Entidades Executoras, ou seja, o CNPJ do Município ou da 
+    Secretaria de Educação, pois estes não constituem UEx própria. 
     
+    Percebe-se, portanto, que existe grande montante de recursos financeiros disponíveis para o fornecimento de água potável nas escolas 
+    rurais da rede pública de ensino do Acre, mas que não são acessados por elas devido a falha grave de gestão por parte das Secretarias de 
+    Educação. Estas, por sua vez, possuem o dever legal de prestar apoio técnico às gestões escolares de sua rede de ensino para garantir a 
+    constituição de UEx próprias. É urgente a necessidade de intervenção das Promotorias de Justiça do interior do Estado junto às 
+    respectivas Secretarias de Educação no sentido de exigir delas a prestação desse apoio técnico para a constituição de UEx próprias pelas 
+    escolas rurais, para que elas possam acessar os recursos do PDDE Água, Esgotamento e Infraestrutura.
     """
 
 def texto_pan_agua_pdde_agua_requisitos_uex_anexos():
@@ -1281,9 +1295,9 @@ def texto_pan_agua_pdde_agua_requisitos_uex_anexos():
     """
 
 
-def texto_pan_agua_pdde_agua_requisitos_plano():
+def texto_pan_agua_pdde_agua_requisitos_adesao():
     return """
-    
+    Falar do plano de atendimento aqui.
     """
 
 # lembrar de dizer que sao dois problemas essenciais: o erro no preenchimento do censo e do problema dos anexos
