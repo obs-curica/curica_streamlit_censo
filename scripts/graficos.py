@@ -2781,6 +2781,99 @@ def grafico_escolas_uex_por_ano(df_agua, df_uex, ano):
     fig.tight_layout()
     st.pyplot(fig)
 
+# Este gráfico não foi incluído na página porque precisa fazer um ajuste pq o nome dos Muncípios não coincide entre os dois datasets.
+def grafico_uex_por_municipio(df_uex, municipio):
+    """
+    Gera gráfico de barras verticais com dados das Unidades Executoras (UEx)
+    para um município específico no ano mais recente disponível.
+
+    Parâmetros:
+    -----------
+    df_uex : pd.DataFrame
+        DataFrame contendo informações das Unidades Executoras.
+        Espera-se que contenha as colunas: 'Ano', 'Município', 'Código Escola',
+        'CNPJ UEX', 'CNPJ EEX', 'Localização'.
+    municipio : str
+        Nome do município a ser filtrado.
+    """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+
+    # Determinar o ano mais recente
+    ano_mais_recente = df_uex["Ano"].max()
+
+    # Filtrar pelo ano e município
+    df_mun = df_uex[
+        (df_uex["Ano"] == ano_mais_recente) &
+        (df_uex["Municipio"].str.upper() == municipio.upper())
+    ]
+
+    if df_mun.empty:
+        st.warning(f"Não há dados disponíveis para o município '{municipio}' no ano {ano_mais_recente}.")
+        return
+
+    # Total de escolas com UEx
+    total_escolas_com_uex = df_mun[df_mun["CNPJ UEX"].notna()]["Código Escola"].nunique()
+
+    # Total de UEx únicas
+    total_uex_unicas = df_mun[
+        (df_mun["CNPJ UEX"].notna()) &
+        (df_mun["CNPJ UEX"] != df_mun["CNPJ EEX"])
+    ]["CNPJ UEX"].nunique()
+
+    # Total de escolas rurais com UEx
+    total_uex_rural = df_mun[
+        (df_mun["Localização"].str.lower() == "rural") &
+        (df_mun["CNPJ UEX"].notna()) &
+        (df_mun["CNPJ UEX"] != df_mun["CNPJ EEX"])
+    ]["CNPJ UEX"].nunique()
+
+    # Dados do gráfico
+    categorias = [
+        "Escolas com UEx",
+        "UEx únicas",
+        "UEx em Escolas Rurais"
+    ]
+    valores = [
+        total_escolas_com_uex,
+        total_uex_unicas,
+        total_uex_rural
+    ]
+    cores = ["#90CAF9", "#FFC107", "#FF0000"]
+
+    # Estilo visual
+    plt.style.use("dark_background")
+    fig, ax = plt.subplots(figsize=(9, 6))
+
+    barras = ax.bar(categorias, valores, color=cores)
+
+    # Rótulos nas barras
+    for bar, valor in zip(barras, valores):
+        ax.text(
+            bar.get_x() + bar.get_width() / 2,
+            valor + max(valores) * 0.02,
+            f"{valor:,}".replace(",", "."),
+            ha="center", va="bottom",
+            fontsize=13, color="white", fontweight="bold"
+        )
+
+    # Título e eixos
+    ax.set_title(
+        f"Unidades Executoras no Município de {municipio} — {ano_mais_recente}",
+        color="#FFA07A", fontsize=20
+    )
+    ax.set_xlabel("Fonte: PDDE Info", color="#FFA07A", fontsize=11)
+
+    ax.tick_params(axis='x', colors="#FFA07A", labelsize=13)
+    ax.tick_params(axis='y', colors="#FFA07A", labelsize=13)
+    for spine in ax.spines.values():
+        spine.set_color("#FFA07A")
+
+    ax.set_ylim(0, max(valores) * 1.25)
+    fig.tight_layout()
+    st.pyplot(fig)
+
+
 
 
     

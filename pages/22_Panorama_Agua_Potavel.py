@@ -39,7 +39,8 @@ from scripts.graficos import (grafico_agua_total_dados_brutos,
                               grafico_abastecimento_agua_por_fonte,
                               grafico_agua_total_fontes,
                               grafico_agua_total_fontes_municipios,
-                              grafico_escolas_uex_por_ano
+                              grafico_escolas_uex_por_ano,
+                              grafico_uex_por_municipio
 )
 
 # Configuração visual
@@ -259,6 +260,18 @@ with col1:
 
     grafico_escolas_uex_por_ano(df_panorama_agua, df_uex, ano=ano_uex)
 
+with col2:
+    # Selectbox do município
+    municipios_disponiveis = sorted(df_uex["Municipio"].unique())
+    
+    municipio = st.selectbox(
+        "Selecione o município:",
+        options=municipios_disponiveis,
+        key="uex_municipios"
+    )
+
+    grafico_uex_por_municipio(df_uex, municipio=municipio)
+                              
 st.write(texto_pan_agua_pdde_agua_requisitos_uex_analise())
 
 st.subheader("Escolas Anexas")
