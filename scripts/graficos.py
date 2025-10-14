@@ -2738,7 +2738,7 @@ def grafico_escolas_uex_por_ano(df_agua, df_uex, ano):
     # Dados do gráfico
     categorias = [
         "Escolas Ativas",
-        "Escolas vinculadas a UEx",
+        "Escolas com UEx",
         "UEx únicas",
         "Escolas Rurais",
         "UEx Escolas Rurais"
@@ -2769,7 +2769,7 @@ def grafico_escolas_uex_por_ano(df_agua, df_uex, ano):
         )
 
     # Título e eixos
-    ax.set_title(f"Escolas e Unidades Executoras - {ano}", color="#FFA07A", fontsize=24)
+    ax.set_title(f"Total de Escolas e Unidades Executoras - {ano}", color="#FFA07A", fontsize=24)
     ax.set_xlabel("Fonte: Censo Escolar e PDDE Info", color="#FFA07A", fontsize=10)
 
     ax.tick_params(axis='x', colors="#FFA07A", labelsize=13)
@@ -2781,69 +2781,80 @@ def grafico_escolas_uex_por_ano(df_agua, df_uex, ano):
     fig.tight_layout()
     st.pyplot(fig)
 
-# Este gráfico não foi incluído na página porque precisa fazer um ajuste pq o nome dos Muncípios não coincide entre os dois datasets.
-def grafico_uex_por_municipio(df_uex, municipio):
+def grafico_uex_por_municipio(df_agua, df_uex, municipio):
     """
     Gera gráfico de barras verticais com dados das Unidades Executoras (UEx)
-    para um município específico no ano mais recente disponível.
+    e do Censo Escolar para um município específico, no ano mais recente.
 
     Parâmetros:
     -----------
     df_uex : pd.DataFrame
-        DataFrame contendo informações das Unidades Executoras.
-        Espera-se que contenha as colunas: 'Ano', 'Município', 'Código Escola',
-        'CNPJ UEX', 'CNPJ EEX', 'Localização'.
+        DataFrame com dados das Unidades Executoras, contendo colunas:
+        'Ano', 'Município', 'Código Escola', 'CNPJ UEX', 'CNPJ EEX', 'Localização'.
+    
+    df_agua : pd.DataFrame
+        DataFrame do Censo Escolar (água potável), contendo colunas:
+        'NU_ANO_CENSO', 'NO_MUNICIPIO', 'TP_LOCALIZACAO', 'CO_ENTIDADE'.
+    
     municipio : str
-        Nome do município a ser filtrado.
+        Nome do município a ser filtrado (exato).
     """
     import matplotlib.pyplot as plt
     import streamlit as st
 
-    # Determinar o ano mais recente
-    ano_mais_recente = df_uex["Ano"].max()
+    # Ano mais recente disponível em df_uex
+    ano = df_uex["Ano"].max()
 
-    # Filtrar pelo ano e município
-    df_mun = df_uex[
-        (df_uex["Ano"] == ano_mais_recente) &
+    # === Filtragem dos DataFrames ===
+    df_uex_mun = df_uex[
+        (df_uex["Ano"] == ano) &
         (df_uex["Municipio"].str.upper() == municipio.upper())
     ]
+    df_agua_mun = df_agua[
+        (df_agua["NU_ANO_CENSO"] == ano) &
+        (df_agua["NO_MUNICIPIO"].str.upper() == municipio.upper())
+    ]
 
-    if df_mun.empty:
-        st.warning(f"Não há dados disponíveis para o município '{municipio}' no ano {ano_mais_recente}.")
+    if df_uex_mun.empty or df_agua_mun.empty:
+        st.warning(f"Não há dados disponíveis para o município '{municipio}' no ano {ano}.")
         return
 
-    # Total de escolas com UEx
-    total_escolas_com_uex = df_mun[df_mun["CNPJ UEX"].notna()]["Código Escola"].nunique()
+    # === Métricas ===
+    total_escolas = df_agua_mun["CO_ENTIDADE"].nunique()
+    total_escolas_rurais = df_agua_mun[df_agua_mun["TP_LOCALIZACAO"] == 2]["CO_ENTIDADE"].nunique()
 
-    # Total de UEx únicas
-    total_uex_unicas = df_mun[
-        (df_mun["CNPJ UEX"].notna()) &
-        (df_mun["CNPJ UEX"] != df_mun["CNPJ EEX"])
+    total_escolas_com_uex = df_uex_mun[df_uex_mun["CNPJ UEX"].notna()]["Código Escola"].nunique()
+
+    total_uex_unicas = df_uex_mun[
+        (df_uex_mun["CNPJ UEX"].notna()) &
+        (df_uex_mun["CNPJ UEX"] != df_uex_mun["CNPJ EEX"])
     ]["CNPJ UEX"].nunique()
 
-    # Total de escolas rurais com UEx
-    total_uex_rural = df_mun[
-        (df_mun["Localização"].str.lower() == "rural") &
-        (df_mun["CNPJ UEX"].notna()) &
-        (df_mun["CNPJ UEX"] != df_mun["CNPJ EEX"])
+    total_uex_rural = df_uex_mun[
+        (df_uex_mun["Localização"].str.lower() == "rural") &
+        (df_uex_mun["CNPJ UEX"].notna()) &
+        (df_uex_mun["CNPJ UEX"] != df_uex_mun["CNPJ EEX"])
     ]["CNPJ UEX"].nunique()
 
-    # Dados do gráfico
+    # === Gráfico ===
     categorias = [
+        "Escolas Ativas",
         "Escolas com UEx",
         "UEx únicas",
-        "UEx em Escolas Rurais"
+        "Escolas Rurais",
+        "UEx Escolas Rurais"
     ]
     valores = [
+        total_escolas,
         total_escolas_com_uex,
         total_uex_unicas,
+        total_escolas_rurais,
         total_uex_rural
     ]
-    cores = ["#90CAF9", "#FFC107", "#FF0000"]
+    cores = ["#B0E0E6", "#90CAF9", "#FFC107", "#006400", "#FF0000"]
 
-    # Estilo visual
     plt.style.use("dark_background")
-    fig, ax = plt.subplots(figsize=(9, 6))
+    fig, ax = plt.subplots(figsize=(11, 7))
 
     barras = ax.bar(categorias, valores, color=cores)
 
@@ -2857,21 +2868,19 @@ def grafico_uex_por_municipio(df_uex, municipio):
             fontsize=13, color="white", fontweight="bold"
         )
 
-    # Título e eixos
-    ax.set_title(
-        f"Unidades Executoras no Município de {municipio} — {ano_mais_recente}",
-        color="#FFA07A", fontsize=20
-    )
-    ax.set_xlabel("Fonte: PDDE Info", color="#FFA07A", fontsize=11)
-
+    # Estética
+    ax.set_title(f"Escolas e Unidades Executoras - {municipio} ({ano})", color="#FFA07A", fontsize=22)
+    ax.set_xlabel("Fonte: Censo Escolar e PDDE Info", color="#FFA07A", fontsize=11)
     ax.tick_params(axis='x', colors="#FFA07A", labelsize=13)
     ax.tick_params(axis='y', colors="#FFA07A", labelsize=13)
+
     for spine in ax.spines.values():
         spine.set_color("#FFA07A")
 
     ax.set_ylim(0, max(valores) * 1.25)
     fig.tight_layout()
     st.pyplot(fig)
+
 
 
 

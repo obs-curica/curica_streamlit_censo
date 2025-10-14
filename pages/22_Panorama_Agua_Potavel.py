@@ -265,12 +265,12 @@ with col2:
     municipios_disponiveis = sorted(df_uex["Municipio"].unique())
     
     municipio = st.selectbox(
-        "Selecione o município:",
+        "Selecione o Município:",
         options=municipios_disponiveis,
         key="uex_municipios"
     )
 
-    grafico_uex_por_municipio(df_uex, municipio=municipio)
+    grafico_uex_por_municipio(df_panorama_agua, df_uex, municipio=municipio)
                               
 st.write(texto_pan_agua_pdde_agua_requisitos_uex_analise())
 
