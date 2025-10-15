@@ -29,7 +29,8 @@ from scripts.textos import(texto_pan_agua_intro,
                            texto_pan_agua_pdde_agua_requisitos_uex,
                            texto_pan_agua_pdde_agua_requisitos_uex_analise,
                            texto_pan_agua_pdde_agua_requisitos_uex_anexos,
-                           texto_pan_agua_pdde_agua_requisitos_adesao
+                           texto_pan_agua_pdde_agua_requisitos_adesao,
+                           texto_pan_agua_pdde_agua_requisitos_adesao_analise
 )
 
 from scripts.graficos import (grafico_agua_total_dados_brutos,
@@ -54,6 +55,9 @@ df_panorama_agua = carregar_dados(url_df_panorama_agua)
 
 url_df_uex = 'https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/pdde_info/df_uex.csv'
 df_uex = carregar_dados(url_df_uex)
+
+url_df_pdde_equidade = 'https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/pdde_info/df_pdde_equidade.csv'
+df_pdde_equidade = carregar_dados(url_df_pdde_equidade)
 
 st.set_page_config(page_title="Panorama Água Potável", layout="wide", page_icon="🦜")
 
@@ -280,6 +284,11 @@ st.write(texto_pan_agua_pdde_agua_requisitos_uex_anexos())
 st.subheader("Efetiva adesão ao Programa")
 st.write(texto_pan_agua_pdde_agua_requisitos_adesao())
 
+col1, col2 = st.columns(2)
 
+with col1:
+   st.write("grafico") 
+
+st.write(texto_pan_agua_pdde_agua_requisitos_adesao_analise())
 
 # Relatorio das escolas com mais de 50 alunos que nao possuem UEx

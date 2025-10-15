@@ -1296,13 +1296,34 @@ def texto_pan_agua_pdde_agua_requisitos_uex_anexos():
 
 def texto_pan_agua_pdde_agua_requisitos_adesao():
     return """
-    Com a nova sistemática do PDDE Equidade, do qual o PDDE Água faz parte, a adesão ao Programa tem 3 fases. Na primeira, a Secretaria de 
-    Educação Continuada, Alfabetização de Jovens e Adultos, Diversidade e Inclusão do Ministério da Educação (Secadi) elabora e publica lista 
-    com as escolas elegíveis, segundo os critérios de prioridade do Programa. Ou seja, as escolas devem ter o Censo Escolar preenchido 
-    corretamente e possuir UEx própria para figurar na lista da Secadi. São priorizadas as escolas 
+    Com a nova sistemática do [PDDE Equidade](https://www.in.gov.br/en/web/dou/-/resolucao-n-17-de-15-de-agosto-de-2024-579018624), do qual 
+    o PDDE Água faz parte, a adesão ao Programa tem 2 etapas. Na primeira, a Secretaria de Educação Continuada, Alfabetização de Jovens e 
+    Adultos, Diversidade e Inclusão do Ministério da Educação (Secadi) elabora e publica lista com as escolas elegíveis para o ciclo, 
+    segundo os critérios de prioridade do Programa. Ou seja, as escolas devem ter o Censo Escolar preenchido corretamente e possuir UEx 
+    própria e adimplente para figurar na lista da Secadi. São priorizadas as escolas com menor número de matrículas e que não apresentem infraestrutura 
+    mínima, conforme indicador elaborado pela Secadi/MEC. Notem que o preenchimento correto do Censo Escolar é mais uma vez ressaltado como 
+    condição essencial para o acesso ao Programa. É por ele que a Secadi verifica os indicadores que elege como prioritários.
 
-    Se preenchidos os requisitos acima, as escolas devem, então, realizar sua efetiva adesão ao Programa nos sistemas do FNDE. 
+    Na segunda etapa, as escolas que figurarem na lista da Secadi devem fazer sua adesão ao Programa no Sistema do PDDE Equidade, **por meio 
+    de suas UEx**. Na sequência, as respectivas **Entidades Executoras** também devem fazer sua adesão ao Programa no Sistema do PDDE 
+    Equidade, comprometendo-se a apoiar todas as UEx indicadas pela Secadi/MEC. Aqui é apresentado o Plano de Atendimento, que deve conter a 
+    deliberação em Assembleia e respectiva copia da Ata da Reunião da UEx que aponte a forma de execução do recurso. As UEx também devem 
+    enviar fotos do local onde será realizada a obra ou aquisição do sistema de abastecimento de água.
+    
+    A adesão ao Programa é, portanto, uma etapa essencial para o acesso aos recursos. A não adesão por parte da UEx ou da EEx impede que a
+    escola receba o recurso, mesmo que ela atenda a todos os requisitos. Nesta fase, cabe atenção das Promotorias de Justiça do interior do 
+    Estado para acompanhar a efetiva adesão das escolas que figuram na [lista da Secadi](https://www.gov.br/mec/pt-br/pdde/pdde-equidade/documentos/), 
+    para garantir a efetiva captação dos recursos.
+    
+    E como anda então a adesão das escolas da rede pública de ensino do Acre ao PDDE Água, Esgotamento e Infraestrutura no Estado do Acre?
     """
+    
+def texto_pan_agua_pdde_agua_requisitos_adesao_analise():
+    return """
+    É isso mesmo. Nem a maioria das escolas que possuem UEx própria aderiram ao PDDE Água, Esgotamento e Infraestrutura. Ou seja, há uma 
+    grande falha de gestão por parte das Secretarias de Educação, que não estão prestado o apoio técnico necessário para que as escolas 
+    de sua rede adiram ao Programa.
+    """    
 
 def pan_agua_consideracoes_finais():
     return """
