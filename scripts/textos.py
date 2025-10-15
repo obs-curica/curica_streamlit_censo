@@ -1243,11 +1243,12 @@ def texto_pan_agua_pdde_agua_requisitos_uex():
     Esgotamento e Infraestrutura exige que a escola possua UEx própria**. Logo, escolas com até 50 alunos que optarem por serem 
     representadas por uma Entidade Executora ou Consórcio não poderão acessar os recursos do PDDE Água. 
     
-    Como anda, então, a constituição de UEx pelas escolas da rede pública de ensino do Acre? O gráfico abaixo utiliza os dados do Censo
-    Escolar e do PDDE Info para responder a essa pergunta. Os dados do Censo Escolar trazem o número total de escolas ativas. Os dados do
+    Como anda, então, a constituição de UEx pelas escolas da rede pública de ensino do Acre? Os gráficos abaixo utilizam os dados do Censo
+    Escolar e do PDDE Info para responder essa pergunta. Os dados do Censo Escolar trazem o número total de escolas ativas. Os dados do
     PDDE Info são trabalhados para contabilizar as escolas que possuem sua UEx própria ou estão vinculadas a uma Entidade Executora ou 
-    Consórcio. Então, o gráfico apresenta o número total de escolas que possuem UEX própria. Após, apresenta-se o total de escolas rurais e 
-    o número delas que possuem UEx própria.
+    Consórcio. Então, os gráficos apresentam o número total de escolas que possuem UEX própria. Após, apresentam o total de escolas rurais e 
+    o número delas que possuem UEx própria. O da esquerda traz o panorama geral do Estado do Acre, por ano, e o da direita permite a seleção 
+    por Município, somando os sistemas de ensino estadual e municipal respectivos.
     """
 
 def texto_pan_agua_pdde_agua_requisitos_uex_analise():
@@ -1278,17 +1279,19 @@ def texto_pan_agua_pdde_agua_requisitos_uex_anexos():
     contabilizados no Censo Escolar como se estivessem matriculados na escola polo. Não há menção ao prédio das escolas anexas, que existem 
     na prática, mas não são declarados no Censo Escolar. Para o FNDE, essas escolas simplesmente não existem. Essa "inexistência formal" 
     impede que as escolas constituam suas UEx. Somente a escola polo é contabilizada no Censo e pode acessar os repasses do FNDE. As demais 
-    escolas anexas ficam desatendidas não acessam o PDDE Água.
+    escolas anexas ficam desatendidas e não acessam o PDDE Água, Esgotamento e Infraestrutura.
 
-    A princípio, não é possível identificar esta situação por meio das bases de dados oficiais, de modo que esses dados não refletem a
-    realidade da rede de ensino. No entanto, é possível inferir a existência de casos extremos do emprego desta prática ao se comparar as 
-    redes de ensino de Municípios com número de alunos semelhantes, mas com disparidade no número de escolas. Essa questão foi antecipada no 
-    Panorama da Rede de Ensino, quando se fez um primeiro alerta para o problema. Lá fica evidente o caso do Município de Tarauacá, que 
-    possui um número de escolas muito inferior ao do Município de Feijó, o que indica um abuso dessa prática.
+    A princípio, não é possível identificar esta situação por meio das bases de dados oficiais, de modo que os dados apresentados até aqui
+    não refletem a integral realidade da rede de ensino. O déficit é ainda maior. No entanto, é possível inferir a existência de casos 
+    extremos do emprego desta prática ao se comparar redes de ensino de Municípios com número de alunos semelhantes, mas com disparidade 
+    aguda no número de escolas. Essa questão foi antecipada no Panorama da Rede de Ensino, quando se fez um primeiro alerta para o problema. 
+    Lá fica evidente o caso do Município de Tarauacá, que possui um número de escolas muito inferior ao do Município de Feijó, o que indica 
+    um abuso dessa prática.
     
-    Essa prática será abordada às minúcias no Panorama da Infraestrutura. Por hora, fica o alerta de que essa escolha administrativa de 
-    gestão se soma ao problema da falta de UEx própria, agravando a dificuldade de acesso das escolas rurais aos recursos do PDDE Água e 
-    acaba por violar o direito à educação de qualidade dos alunos dessas escolas.
+    A constituição de anexos pelos sistemas de ensino será abordada às minúcias no Panorama da Infraestrutura. Por hora, fica o alerta de 
+    que essa escolha administrativa de gestão **soma-se** ao problema da falta de UEx própria, agravando a dificuldade de acesso das escolas 
+    rurais aos recursos do PDDE Água e acaba por violar o direito à educação de qualidade dos alunos dessas escolas. Lembrando que a 
+    discricionariedade administrativa não pode violar direitos.
     """
 
 def texto_pan_agua_pdde_agua_requisitos_adesao():
