@@ -1296,7 +1296,12 @@ def texto_pan_agua_pdde_agua_requisitos_uex_anexos():
 
 def texto_pan_agua_pdde_agua_requisitos_adesao():
     return """
-    Falar do plano de atendimento aqui.
+    Com a nova sistemática do PDDE Equidade, do qual o PDDE Água faz parte, a adesão ao Programa tem 3 fases. Na primeira, a Secretaria de 
+    Educação Continuada, Alfabetização de Jovens e Adultos, Diversidade e Inclusão do Ministério da Educação (Secadi) elabora e publica lista 
+    com as escolas elegíveis, segundo os critérios de prioridade do Programa. Ou seja, as escolas devem ter o Censo Escolar preenchido 
+    corretamente e possuir UEx própria para figurar na lista da Secadi. São priorizadas as escolas 
+
+    Se preenchidos os requisitos acima, as escolas devem, então, realizar sua efetiva adesão ao Programa nos sistemas do FNDE. 
     """
 
 def pan_agua_consideracoes_finais():

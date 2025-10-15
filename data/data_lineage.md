@@ -177,6 +177,9 @@ https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pd
 
 https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/ApresentaoPDDE2024PDF.pdf
 
+Dissertação Sistema Monitoramento PDDE Água e Campo
+https://repositorio.enap.gov.br/jspui/bitstream/1/7600/1/Disserta%c3%a7%c3%a3o%20Rodrigo%20com%20ficha%20catalogr%c3%a1fica_compressed.pdf
+
 
 
 # Legislação
