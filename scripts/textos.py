@@ -1320,9 +1320,8 @@ def texto_pan_agua_pdde_agua_requisitos_adesao():
     
 def texto_pan_agua_pdde_agua_requisitos_adesao_analise():
     return """
-    É isso mesmo. Nem a maioria das escolas que possuem UEx própria aderiram ao PDDE Água, Esgotamento e Infraestrutura. Ou seja, há uma 
-    grande falha de gestão por parte das Secretarias de Educação, que não estão prestado o apoio técnico necessário para que as escolas 
-    de sua rede adiram ao Programa.
+    É isso mesmo. Nem a maioria das escolas que possuem UEx própria aderiram ao PDDE Água. Aqui fica evidente a grande falha de gestão por 
+    parte das Secretarias de Educação, que não prestam o apoio técnico necessário para que as escolas de sua rede adiram ao Programa.
     """    
 
 def pan_agua_consideracoes_finais():

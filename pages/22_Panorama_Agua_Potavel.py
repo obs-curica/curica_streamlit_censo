@@ -41,7 +41,9 @@ from scripts.graficos import (grafico_agua_total_dados_brutos,
                               grafico_agua_total_fontes,
                               grafico_agua_total_fontes_municipios,
                               grafico_escolas_uex_por_ano,
-                              grafico_uex_por_municipio
+                              grafico_uex_por_municipio,
+                              grafico_pdde_agua_por_ano,
+                              grafico_pdde_agua_por_municipio
 )
 
 # Configuração visual
@@ -267,7 +269,7 @@ with col1:
 with col2:
     # Selectbox do município
     municipios_disponiveis = sorted(df_uex["Municipio"].unique())
-    
+
     municipio = st.selectbox(
         "Selecione o Município:",
         options=municipios_disponiveis,
@@ -287,7 +289,22 @@ st.write(texto_pan_agua_pdde_agua_requisitos_adesao())
 col1, col2 = st.columns(2)
 
 with col1:
-   st.write("grafico") 
+   st.write("-------------") # gambiarra para alinhar os gráficos
+      
+   grafico_pdde_agua_por_ano(df_pdde_equidade)
+
+with col2:
+    anos_disponiveis = sorted(df_uex['Ano'].unique())
+    ano_mais_recente = max(anos_disponiveis)
+
+    ano_pdde = st.selectbox(
+        "Selecione o ano:",
+        options=anos_disponiveis,
+        index=anos_disponiveis.index(ano_mais_recente),
+        key="pdde_municipios_ano"
+    )
+
+    grafico_pdde_agua_por_municipio(df_pdde_equidade, ano=ano_pdde)
 
 st.write(texto_pan_agua_pdde_agua_requisitos_adesao_analise())
 
