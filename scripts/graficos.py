@@ -2715,7 +2715,11 @@ def grafico_escolas_uex_por_ano(df_agua, df_uex, ano):
     total_escolas_censo = df_agua_filtrado["CO_ENTIDADE"].nunique()
 
     # Total de escolas com CNPJ UEX informado (não nulo)
-    total_escolas_com_uex = df_uex_filtrado[df_uex_filtrado["CNPJ UEX"].notna()]["Código Escola"].nunique()
+    total_escolas_com_uex = df_uex_filtrado[
+        (df_uex_filtrado["CNPJ UEX"].notna()) &
+        (df_uex_filtrado["CNPJ UEX"] != df_uex_filtrado["CNPJ EEX"])
+        ]["Código Escola"].nunique()
+
 
     # Total de UEX únicas
     df_uex_unicas = df_uex_filtrado[
@@ -2726,22 +2730,22 @@ def grafico_escolas_uex_por_ano(df_agua, df_uex, ano):
     
     # Total escolas rurais
     total_escolas_rurais = df_agua_filtrado[df_agua_filtrado["TP_LOCALIZACAO"] == 2]["CO_ENTIDADE"].nunique()
-    
-    # Total de UEX únicas em escolas da zona rural
+
+    # Total de UEX próprias em escolas da zona rural
     df_rural = df_uex_filtrado[
         (df_uex_filtrado["Localização"].str.lower() == "rural") &
         (df_uex_filtrado["CNPJ UEX"].notna()) &
         (df_uex_filtrado["CNPJ UEX"] != df_uex_filtrado["CNPJ EEX"])
     ]
-    total_uex_rural = df_rural["CNPJ UEX"].nunique()
+    total_uex_rural = df_rural["CNPJ UEX"].shape[0]
 
     # Dados do gráfico
     categorias = [
         "Escolas Ativas",
-        "Escolas com UEx",
+        "UEx próprias",
         "UEx únicas",
         "Escolas Rurais",
-        "UEx Escolas Rurais"
+        "UEx Rurais próprias"
     ]
     valores = [
         total_escolas_censo,
@@ -2834,15 +2838,15 @@ def grafico_uex_por_municipio(df_agua, df_uex, municipio):
         (df_uex_mun["Localização"].str.lower() == "rural") &
         (df_uex_mun["CNPJ UEX"].notna()) &
         (df_uex_mun["CNPJ UEX"] != df_uex_mun["CNPJ EEX"])
-    ]["CNPJ UEX"].nunique()
+    ].shape[0]
 
     # === Gráfico ===
     categorias = [
         "Escolas Ativas",
-        "Escolas com UEx",
+        "UEx próprias",
         "UEx únicas",
         "Escolas Rurais",
-        "UEx Escolas Rurais"
+        "UEx Rurais próprias"
     ]
     valores = [
         total_escolas,

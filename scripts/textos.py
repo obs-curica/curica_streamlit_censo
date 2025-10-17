@@ -1224,10 +1224,10 @@ def texto_pan_agua_pdde_agua_requisitos_uex():
     compreender esse problema, é necessário definir o que é uma **Unidade Executora** e diferenciá-la da **Entidade Executora** (EEx). Esses
     conceitos estão definidos na [Resolução FNDE 15/2021](https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/funcionamento/copy_of_RESOLUOPDDEN15DE16DESETEMBRODE2021.pdf).
 
-    Entidade Executora (EEx) é a pessoa jurídica de **direito público**, Prefeituras ou Secretarias de Educação, que representam escolas 
-    públicas com **até 50 (cinquenta) alunos**. Além de efetivar o repasse dos recursos do PDDE às escolas representadas, as EEx são 
-    responsáveis por apoiar, técnica e financeiramente, as UEx representativas de suas escolas, bem como por acompanhar, fiscalizar e 
-    controlar a execução dos recursos repassados.
+    Entidade Executora (EEx) é a pessoa jurídica de **direito público**, Estado, Município ou as respectivas Secretarias de Educação. Elas 
+    podem representar escolas públicas com **até 50 (cinquenta) alunos**, para acesso ao PDDE Básico somente. Além de efetivar o repasse dos 
+    recursos do PDDE às escolas representadas, as EEx também são responsáveis por apoiar, técnica e financeiramente, as UEx representativas 
+    de suas escolas, bem como por acompanhar, fiscalizar e controlar a execução dos recursos repassados.
 
     A Unidade Executora (UEx) é uma "organização da sociedade civil com personalidade jurídica de **direito privado**, sem fins lucrativos, 
     constituída com a finalidade de representar uma unidade escolar pública ou um consórcio de unidades escolares públicas, integrada por 
@@ -1237,28 +1237,35 @@ def texto_pan_agua_pdde_agua_requisitos_uex():
     escolas com até 50 alunos podem optar por constituir sua própria UEx, vincular-se a uma UEx comum por meio de Consórcio (art. 8º) ou ser 
     representada por uma Entidade Executora. A formação de consórcio deve respeitar as disposições da [Lei 11.107/2005](https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2005/lei/l11107.htm).
     O MEC disponibiliza um [Manual de Orientação para a Constituição de UEx](https://www.gov.br/fnde/pt-br/acesso-a-informacao/acoes-e-programas/programas/pdde/media-pdde/manuais/ManualdeOrientaoparaConstituiodeUnidadeExecutoraPropriaUEx.pdf)
-    para auxiliar as escolas nesse processo.
+    para auxiliar as escolas nesse processo. **Considera-se que a escola possui UEx própria quando ela consitui sua própria UEx ou quando faz
+    parte de um Consórcio de no máximo cinco escolas com uma única UEx comum.**
 
-    A escola que integra um Consórcio ou é representada por uma EEx consegue acessar os recursos do PDDE Básico. **Entretanto, o PDDE Água, 
-    Esgotamento e Infraestrutura exige que a escola possua UEx própria**. Logo, escolas com até 50 alunos que optarem por serem 
-    representadas por uma Entidade Executora ou Consórcio não poderão acessar os recursos do PDDE Água. 
+    A escola que é representada por uma EEx consegue acessar os recursos do PDDE Básico. **Entretanto, para acesso ao PDDE Água, exige-se 
+    que a escola possua UEx própria**. Logo, escolas com até 50 alunos que optam por serem representadas por uma Entidade Executora não 
+    podem acessar os recursos do PDDE Água. 
     
     Como anda, então, a constituição de UEx pelas escolas da rede pública de ensino do Acre? Os gráficos abaixo utilizam os dados do Censo
     Escolar e do PDDE Info para responder essa pergunta. Os dados do Censo Escolar trazem o número total de escolas ativas. Os dados do
-    PDDE Info são trabalhados para contabilizar as escolas que possuem sua UEx própria ou estão vinculadas a uma Entidade Executora ou 
-    Consórcio. Então, os gráficos apresentam o número total de escolas que possuem UEX própria. Após, apresentam o total de escolas rurais e 
-    o número delas que possuem UEx própria. O da esquerda traz o panorama geral do Estado do Acre, por ano, e o da direita permite a seleção 
-    por Município, somando os sistemas de ensino estadual e municipal respectivos.
+    PDDE Info são trabalhados para contabilizar o total de escolas que possuem UEx própria. Então, os gráficos apresentam total de UEx 
+    únicas. Após, apresentam o número total de escolas rurais e aquelas que possuem UEx própria. O da esquerda traz o panorama geral do 
+    Estado do Acre, por ano. O da direita permite a seleção por Município, somando os sistemas de ensino estadual e municipal respectivos.
     """
 
 def texto_pan_agua_pdde_agua_requisitos_uex_analise():
     return """
-    Aqui se inicia a compreensão técnica do problema da falta de oferta de água potável nas escolas da rede pública de ensino do Acre. O 
-    gráfico acima mostra que a maioria das escolas rurais simplesmente não possui UEx própria. Logo, essas escolas ficam impedidas de 
-    acessar os recursos do PDDE Água e, por consequência, não conseguem oferecer água potável para seus alunos. Importante ressaltar que o 
-    número de UEx únicas foi obtido a partir da base de dados do PDDE Info, selecionando os CNPJs únicos das UEx do campo respectivo, 
-    excluídos aqueles que remetem ao CNPJ de suas respectivas Entidades Executoras, ou seja, ao CNPJ do Município ou da Secretaria de 
-    Educação, pois estes não constituem UEx própria. 
+    Aqui se inicia a compreensão técnica do problema da falta de oferta de água potável nas escolas da rede pública de ensino do Acre. 
+    Importante ressaltar que o número de UEx foi obtido a partir da base de dados do PDDE Info, contabilizando os CNPJs das UEx do 
+    campo respectivo, excluídos aqueles que remetem ao CNPJ de suas respectivas Entidades Executoras, ou seja, ao CNPJ do Município ou da 
+    Secretaria de Educação, pois estes não constituem UEx própria. Vamos à análise.
+
+    A primeira barra do gráfico traz o número total de escolas ativas. A segunda barra traz o número total de escolas vinculadas a uma UEx.
+    Logo, a diferença entre essas duas barras representa o número de escolas que não possuem UEx própria. De largada, já se percebe o
+    déficit de escolas que não possuem UEx própria. A terceira barra traz o número de UEx únicas que, comparada com a segunda barra, revela
+    o número de escolas que integram um Consórcio. A quarta e a quinta barra fornecem o panorama do ensino rural. A diferença entre elas
+    mostra o número de escolas rurais que não possuem UEx própria.
+     
+    A conclusão é de que existe um grande número de escolas públicas sem UEx própria e que a maioria delas são escolas rurais que, por esse
+    motivo, ficam impedidas de acessar os recursos do PDDE Água e, por consequência, não conseguem oferecer água potável para seus alunos. 
     
     Percebe-se, portanto, que existe grande montante de recursos financeiros disponíveis para o fornecimento de água potável nas escolas 
     rurais da rede pública de ensino do Acre, mas que não são acessados por elas devido a falha grave de gestão por parte das Secretarias de 
