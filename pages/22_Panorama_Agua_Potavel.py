@@ -43,7 +43,9 @@ from scripts.graficos import (grafico_agua_total_dados_brutos,
                               grafico_escolas_uex_por_ano,
                               grafico_uex_por_municipio,
                               grafico_pdde_agua_por_ano,
-                              grafico_pdde_agua_por_municipio
+                              grafico_pdde_agua_por_municipio,
+                              grafico_pdde_agua_escolas,
+                              grafico_pdde_agua_valores
 )
 
 # Configuração visual
@@ -290,7 +292,7 @@ col1, col2 = st.columns(2)
 
 with col1:
    st.write("-------------") # gambiarra para alinhar os gráficos
-      
+   
    grafico_pdde_agua_por_ano(df_pdde_equidade)
 
 with col2:
@@ -307,5 +309,14 @@ with col2:
     grafico_pdde_agua_por_municipio(df_pdde_equidade, ano=ano_pdde)
 
 st.write(texto_pan_agua_pdde_agua_requisitos_adesao_analise())
+
+st.header("Impacto Financeiro do PDDE Água")
+
+col1, col2 = st.columns(2)
+with col1:
+    grafico_pdde_agua_escolas(df_panorama_agua, df_uex, df_pdde_equidade)
+with col2:
+    grafico_pdde_agua_valores(df_panorama_agua, df_uex, df_pdde_equidade)    
+
 
 # Relatorio das escolas com mais de 50 alunos que nao possuem UEx

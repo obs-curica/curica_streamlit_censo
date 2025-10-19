@@ -2916,7 +2916,7 @@ def grafico_pdde_agua_por_ano(df):
 
     # Estilo visual
     plt.style.use("dark_background")
-    fig, ax = plt.subplots(figsize=(10, 8.3))
+    fig, ax = plt.subplots(figsize=(10, 8.9))
 
     cor_barras = "#B0E0E6"  # Azul do projeto
     barras = ax.bar(contagem_por_ano.index.astype(str), contagem_por_ano.values, color=cor_barras)
@@ -2932,7 +2932,7 @@ def grafico_pdde_agua_por_ano(df):
         )
 
     # Título e eixos
-    ax.set_title("Escolas que Acessaram o PDDE Água por Ano", color="#FFA07A", fontsize=24)
+    ax.set_title("Escolas que acessaram o PDDE Água por ano", color="#FFA07A", fontsize=24)
     ax.set_xlabel("Fonte: PDDE Info", color="#FFA07A", fontsize=11)
 
     ax.tick_params(axis='x', colors="#FFA07A", labelsize=17)
@@ -2949,6 +2949,8 @@ def grafico_pdde_agua_por_municipio(df, ano):
     Gera gráfico de barras horizontais com o total de escolas que acessaram o PDDE Água por município,
     para um determinado ano. Considera menções a 'água' na coluna 'Destinação'.
 
+    Se o município não aparecer no ano selecionado, seu valor será 0.
+
     Parâmetros:
     -----------
     df : pd.DataFrame
@@ -2958,6 +2960,7 @@ def grafico_pdde_agua_por_municipio(df, ano):
     """
     import matplotlib.pyplot as plt
     import streamlit as st
+    import pandas as pd
 
     # Verificações básicas
     colunas_necessarias = {"Ano", "Destinação", "Município"}
@@ -2965,25 +2968,31 @@ def grafico_pdde_agua_por_municipio(df, ano):
         st.error("O DataFrame deve conter as colunas: 'Ano', 'Destinação' e 'Município'.")
         return
 
-    # Filtrar pelo ano
+    # Lista de todos os municípios existentes no DataFrame (mesmo que não apareçam no ano)
+    todos_municipios = sorted(df["Município"].dropna().unique())
+
+    # Filtrar apenas o ano indicado
     df_ano = df[df["Ano"] == ano]
 
+    # Se não houver dados, cria DataFrame vazio com municípios zerados
     if df_ano.empty:
-        st.warning(f"Não há dados disponíveis para o ano {ano}.")
-        return
+        contagem = pd.Series(0, index=todos_municipios, dtype=int)
+    else:
+        # Coluna booleana para menções à "água"
+        df_ano["ACESSOU_PDDE_AGUA"] = df_ano["Destinação"].str.contains(
+            r"\b(água|agua)\b", case=False, na=False, regex=True
+        )
 
-    # Criar coluna indicadora se houve destinação para água
-    df_ano["ACESSOU_PDDE_AGUA"] = df_ano["Destinação"].str.contains(
-        r"\b(água|agua)\b", case=False, na=False, regex=True
-    )
+        # Contar quantas escolas acessaram PDDE Água por município
+        contagem = df_ano.groupby("Município")["ACESSOU_PDDE_AGUA"].sum().astype(int)
 
-    # Agrupar por município (garante que todos os municípios estejam presentes, até com 0)
-    contagem = df_ano.groupby("Município")["ACESSOU_PDDE_AGUA"].sum().astype(int)
+        # Garantir que todos os municípios existam no índice (preencher os ausentes com 0)
+        contagem = contagem.reindex(todos_municipios, fill_value=0)
 
-    # Ordenar
+    # Ordenar alfabeticamente ou por valor (opcional)
     contagem = contagem.sort_values(ascending=True)
 
-    # Estilo visual
+    # Estilo visual do projeto
     plt.style.use("dark_background")
     fig, ax = plt.subplots(figsize=(10, max(6, len(contagem) * 0.4)))
 
@@ -2992,19 +3001,21 @@ def grafico_pdde_agua_por_municipio(df, ano):
     # Rótulos ao final das barras (inclusive 0)
     for bar, valor in zip(barras, contagem.values):
         ax.text(
-            valor + contagem.max() * 0.01,
+            valor + (contagem.max() * 0.01 if contagem.max() > 0 else 0.1),
             bar.get_y() + bar.get_height() / 2,
-            f"{valor:,}".replace(",", "."),
+            f"{int(valor)}",
             va="center", ha="left",
             fontsize=12, color="white", fontweight="bold"
         )
 
     # Título e eixos
-    ax.set_title(f"Escolas que acessaram o PDDE Água por Município - {ano}", color="#FFA07A", fontsize=18)
+    ax.set_title(f"Escolas que acessaram o PDDE Água por Município — {ano}", color="#FFA07A", fontsize=20)
     ax.set_xlabel("Fonte: PDDE Info", color="#FFA07A", fontsize=12)
     
+
     ax.tick_params(axis='x', colors="#FFA07A", labelsize=12)
     ax.tick_params(axis='y', colors="#FFA07A", labelsize=11)
+
     for spine in ax.spines.values():
         spine.set_color("#FFA07A")
 
@@ -3013,8 +3024,230 @@ def grafico_pdde_agua_por_municipio(df, ano):
     st.pyplot(fig)
 
 
+def grafico_pdde_agua_escolas(df_censo, df_uex, df_equidade):
+    """
+    Gera gráfico de barras verticais para o último ano disponível,
+    representando:
+    1. Escolas que acessaram PDDE Água
+    2. Escolas elegíveis que não acessaram
+    3. Escolas potenciais com falhas de gestão
 
+    Parâmetros:
+    ------------
+    df_censo : pd.DataFrame
+    df_uex : pd.DataFrame
+    df_equidade : pd.DataFrame
+    """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+
+    # ============
+    # Selecionar último ano
+    # ============
+    ultimo_ano = df_censo["NU_ANO_CENSO"].max()
+
+    df_censo_ano = df_censo[df_censo["NU_ANO_CENSO"] == ultimo_ano].copy()
+    df_uex_ano = df_uex[df_uex["Ano"] == ultimo_ano].copy()
+    df_eq_ano = df_equidade[df_equidade["Ano"] == ultimo_ano].copy()
+
+    # ============
+    # Renomear colunas para merge
+    # ============
+    df_uex_ano = df_uex_ano.rename(columns={"Código Escola": "CO_ENTIDADE"})
+    df_eq_ano = df_eq_ano.rename(columns={"Código Escola": "CO_ENTIDADE"})
+
+    # ============
+    # Merge dos 3 dataframes
+    # ============
+    df_merged = df_censo_ano.merge(df_uex_ano, on="CO_ENTIDADE", how="left", suffixes=('', '_uex'))
+    df_merged = df_merged.merge(df_eq_ano, on="CO_ENTIDADE", how="left", suffixes=('', '_eq'))
+
+    # ============
+    # Coluna auxiliar: acessou PDDE com destinação para água
+    # ============
+    df_merged["acessou_pdde_agua"] = df_merged["Destinação"].fillna("").str.contains(r"\b(água|agua)\b", case=False)
+
+    # ============
+    # Coluna auxiliar: tem UEX própria
+    # ============
+    df_merged["tem_uex"] = df_merged["CNPJ UEX"].notna() & (df_merged["CNPJ UEX"] != df_merged["CNPJ EEX"])
+
+    # ============
+    # Escolas elegíveis
+    # ============
+    df_merged["elegivel"] = (
+        (df_merged["TP_LOCALIZACAO"] == 2) &
+        (df_merged["IN_AGUA_POTAVEL"] == 0) &
+        (df_merged["TP_OCUPACAO_PREDIO_ESCOLAR"] == 1) &
+        (df_merged["tem_uex"]) &
+        (~df_merged["acessou_pdde_agua"]) &
+        (
+            (
+                (df_merged["IN_AGUA_POCO_ARTESIANO"] != 1) &
+                (df_merged["IN_AGUA_REDE_PUBLICA"] != 1)
+            ) 
+        )
+    )
+
+    # ============
+    # Escolas potenciais
+    # ============
+    df_merged["potencial"] = (
+        (df_merged["TP_LOCALIZACAO"] == 2) &
+        (~df_merged["acessou_pdde_agua"]) &
+        (
+            (df_merged["IN_AGUA_POCO_ARTESIANO"] != 1) &
+            (df_merged["IN_AGUA_REDE_PUBLICA"] != 1) 
+        )
+    )
+
+    # ============
+    # Contagens
+    # ============
+    n_acessaram = df_merged["acessou_pdde_agua"].sum()
+    n_elegiveis = df_merged["elegivel"].sum()
+    n_potenciais = df_merged["potencial"].sum() - n_elegiveis
+
+    # ============
+    # Gráfico
+    # ============
+    categorias = [
+        "Acessaram\nPDDE Água",
+        "Escolas Elegíveis",
+        "Escolas Potenciais"
+    ]
+    valores = [n_acessaram, n_elegiveis, n_potenciais]
+    cores = ['#B0E0E6', '#FFC107', '#FFA07A']
+
+    fig, ax = plt.subplots(figsize=(10, 7))
+    bars = ax.bar(categorias, valores, color=cores, edgecolor='white')
+
+    ax.set_facecolor("black")
+    fig.patch.set_facecolor("black")
+    ax.set_title(f"Acesso ao PDDE Água por Escola - {ultimo_ano}", color="#FFA07A", fontsize=20)
+    ax.tick_params(axis='x', colors="#FFA07A", labelsize=15)
+    ax.tick_params(axis='y', colors="#FFA07A", labelsize=12)
+    ax.set_xlabel("Fonte: PDDE Info", color="#FFA07A", fontsize=12)
+    ax.spines['bottom'].set_color('#FFA07A')
+    ax.spines['left'].set_color('#FFA07A')
     
+    for bar in bars:
+        yval = bar.get_height()
+        ax.text(
+            bar.get_x() + bar.get_width()/2.0, 
+            yval + 1, f'{yval}', ha='center', va='bottom', 
+            fontsize=15, color='white', fontweight="bold")
+
+    st.pyplot(fig)
+    
+    
+def grafico_pdde_agua_valores(df_censo, df_uex, df_equidade):
+    """
+    Gera gráfico de barras verticais com valores financeiros estimados ou pagos
+    referentes ao PDDE Água, com base em dados de execução e matrículas.
+    """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    import numpy as np
+
+    # ============
+    # Selecionar último ano
+    # ============
+    ano = df_censo["NU_ANO_CENSO"].max()
+    df_censo = df_censo[df_censo["NU_ANO_CENSO"] == ano].copy()
+    df_uex = df_uex[df_uex["Ano"] == ano].copy().rename(columns={"Código Escola": "CO_ENTIDADE"})
+    df_equidade = df_equidade[df_equidade["Ano"] == ano].copy().rename(columns={"Código Escola": "CO_ENTIDADE"})
+
+    # ============
+    # Merge
+    # ============
+    df = df_censo.merge(df_uex, on="CO_ENTIDADE", how="left", suffixes=('', '_uex'))
+    df = df.merge(df_equidade, on="CO_ENTIDADE", how="left", suffixes=('', '_eq'))
+
+    # ============
+    # Marcadores auxiliares
+    # ============
+    df["acessou_pdde_agua"] = df["Destinação"].fillna("").str.contains(r"\b(água|agua)\b", case=False)
+    df["tem_uex"] = df["CNPJ UEX"].notna() & (df["CNPJ UEX"] != df["CNPJ EEX"])
+
+    df["elegivel"] = (
+        (df["TP_LOCALIZACAO"] == 2) &
+        (df["IN_AGUA_POTAVEL"] == 0) &
+        (df["TP_OCUPACAO_PREDIO_ESCOLAR"] == 1) &
+        df["tem_uex"] &
+        ~df["acessou_pdde_agua"] &
+        ((df["IN_AGUA_POCO_ARTESIANO"] != 1) & (df["IN_AGUA_REDE_PUBLICA"] != 1))
+    )
+
+    df["potencial"] = (
+        (df["TP_LOCALIZACAO"] == 2) &
+        ~df["acessou_pdde_agua"] &
+        ((df["IN_AGUA_POCO_ARTESIANO"] != 1) & (df["IN_AGUA_REDE_PUBLICA"] != 1))
+    )
+
+    # Evitar dupla contagem
+    df["potencial"] = df["potencial"] & (~df["elegivel"])
+
+    # ============
+    # Faixa de repasse estimado por escola
+    # ============
+    def calcular_faixa_recurso(matriculas):
+        if pd.isna(matriculas):
+            return 0
+        elif matriculas <= 50:
+            return 30000
+        elif matriculas <= 150:
+            return 35000
+        else:
+            return 45000
+
+    df["repasse_estimado"] = df["QT_MAT_BAS"].apply(calcular_faixa_recurso)
+
+    # ============
+    # Valores por grupo
+    # ============
+    # 1. Acessaram: soma real dos valores pagos
+    acessaram_valor = df[df["acessou_pdde_agua"]]["Valor Total"].fillna(0).sum()
+
+    # 2. Elegíveis: soma estimada
+    elegiveis_valor = df[df["elegivel"]]["repasse_estimado"].sum()
+
+    # 3. Potenciais: soma estimada
+    potenciais_valor = df[df["potencial"]]["repasse_estimado"].sum()
+
+    # ============
+    # Gráfico
+    # ============
+    categorias = [
+        "Acessaram\nPDDE Água",
+        "Escolas Elegíveis",
+        "Escolas Potenciais"
+    ]
+    valores = [acessaram_valor, elegiveis_valor, potenciais_valor]
+    cores = ['#B0E0E6', '#FFC107', '#FFA07A']
+
+    fig, ax = plt.subplots(figsize=(10, 7))
+    bars = ax.bar(categorias, valores, color=cores, edgecolor='white')
+
+    ax.set_facecolor("black")
+    fig.patch.set_facecolor("black")
+    ax.set_title(f"Impacto Financeiro do PDDE Água - {ano}", color="#FFA07A", fontsize=21)
+    ax.tick_params(axis='x', colors="#FFA07A", labelsize=15)
+    ax.tick_params(axis='y', colors="#FFA07A", labelsize=12)
+    ax.set_xlabel("Fonte: PDDE Info e Censo Escolar", color="#FFA07A", fontsize=13)
+    ax.spines['bottom'].set_color('#FFA07A')
+    ax.spines['left'].set_color('#FFA07A')
+
+    for bar in bars:
+        yval = bar.get_height()
+        label = f'R$ {yval:,.0f}'.replace(',', '.')
+        ax.text(bar.get_x() + bar.get_width()/2.0, yval + (yval * 0.01),
+                label, ha='center', va='bottom',
+                fontsize=13, color='white', fontweight="bold")
+
+    st.pyplot(fig)
+
+
 
 #===========================
 # PAGINA POVOS TRADICIONAIS
