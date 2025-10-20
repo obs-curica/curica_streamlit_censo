@@ -3141,7 +3141,7 @@ def grafico_pdde_agua_escolas(df_censo, df_uex, df_equidade):
     st.pyplot(fig)
     
     
-def grafico_pdde_agua_valores(df_censo, df_uex, df_equidade):
+def grafico_pdde_agua_financeiro(df_censo, df_uex, df_equidade):
     """
     Gera gráfico de barras verticais com valores financeiros estimados ou pagos
     referentes ao PDDE Água, com base em dados de execução e matrículas.
@@ -3243,7 +3243,7 @@ def grafico_pdde_agua_valores(df_censo, df_uex, df_equidade):
         label = f'R$ {yval:,.0f}'.replace(',', '.')
         ax.text(bar.get_x() + bar.get_width()/2.0, yval + (yval * 0.01),
                 label, ha='center', va='bottom',
-                fontsize=13, color='white', fontweight="bold")
+                fontsize=14, color='white', fontweight="bold")
 
     st.pyplot(fig)
 

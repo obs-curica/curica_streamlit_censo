@@ -1332,19 +1332,51 @@ def texto_pan_agua_pdde_agua_requisitos_adesao_analise():
     parte das Secretarias de Educação, que não prestam o apoio técnico necessário para que as escolas de sua rede adiram ao Programa. Embora
     o quadro da falta de UEx própria seja grave, a falta de adesão ao Programa por parte das escolas que possuem UEx própria é ainda mais
     preocupante. Isso porque, se a escola possui UEx própria, ela não adere ao Programa ou por negligência da gestão, ou por erro no 
-    preenchimento do Censo Escolar. Isso porque, mesmo se a escola possuir UEx própria, se ela declara no Censo Escolar que fornece água 
+    preenchimento do Censo Escolar. Isso porque, mesmo que a escola possua UEx própria, se ela declara no Censo Escolar que fornece água 
     potável, ela não será caracterizada como elegível ao Programa. 
     
-    E quanto custa essa falha de gestão? 
-    
+    E essa falha de gestão pode ser traduzida para valores financeiros. Vamos a eles.      
     """    
 def texto_pan_agua_pdde_financeiro_intro():
     return """
+    Esta seção traz um estudo sobre o panorama da adesão ao PDDE Água no Estado do Acre, bem como realiza dois levantamentos que contemplam 
+    as premissas levantadas nas seções anteriores. Esses dados dizem respeito ao ano do último Censo Escolar disponível, foram extraídos da 
+    plataforma PDDE Info e cruzados com os do Censo Escolar, de modo a coincidir com o mais atual disponível. 
     
+    A primeira coluna traz o número de escolas e os valores efetivamente recebidos por elas pela adesão ao Programa. Os dados foram extraídos 
+    da plataforma PDDE Info, com filtro para o ano do último Censo Escolar disponível. 
+    
+    A segunda coluna traz o número de escolas elegíveis, ou seja, aquelas que preenchem os requisitos para acessar o Programa **imediatamente**. 
+    São as escolas que declararam corretamente sua localização na zona rural, possuir prédio próprio, não oferecer água potável e, de acordo 
+    com as premissas estabelecidas neste estudo, possuem fontes de abastecimento impróprias para consumo humano. Elas também possuem UEx própria, 
+    apta a receber os recursos, e não foram contempladas no ano anterior. Lhes faltam, apenas, aderir ao Programa. O gráfico da direita traz o
+    valor que poderia ser acessado imediatamente para a construção de sistemas de abastecimento nessas escolas, caso houvesse a adesão. O valor
+    é obtido contabilizando-se o número de matrículas declaradas ao Censo Escolar e obedecendo os parâmetros da [Resolução FNDE 17/2024](https://www.in.gov.br/en/web/dou/-/resolucao-n-17-de-15-de-agosto-de-2024-579018624).
+
+    A terceira coluna traz o número de escolas que poderiam acessar o PDDE Água e estão momentaneamente impedidas de fazê-lo por erro no 
+    preenchimento do Censo Escolar ou por falta de constituição de UEx própria. Esse filtro leva em consideração a localização das escolas e 
+    as fontes de abastecimento declaradas por elas ao Censo Escolar. Para encontrar a potencialidade, desconsideram-se as marcações a respeito 
+    da existência de prédio próprio e se fornece ou não água potável. São excluídas as escolas que receberam o recurso no ano anterior e aquelas 
+    elegíveis. O valor é obtido contabilizando-se o número de matrículas por escola declaradas ao Censo Escolar e obedecendo os parâmetros da 
+    [Resolução FNDE 17/2024](https://www.in.gov.br/en/web/dou/-/resolucao-n-17-de-15-de-agosto-de-2024-579018624).
+    """
+
+def texto_pan_agua_pdde_financeiro_analise():
+    return """
+    A singela comparação entre o número de escolas que acessaram o programa e aquelas que poderiam acessa-lo imediatamente já é bastante para 
+    identificar grave falha de gestão dos respectivos sistemas de ensino. Pois, se a escola está apta para participar do programa, não há 
+    justificativa que não a negligência para esta inércia. Entretanto, o quadro é muito mais grave quando se contabilizam as escolas que 
+    ficam impedidas de acessar os recursos em razão da não constituição de UEx ou de simples erro de marcação no Censo Escolar. Vê-se que há
+    um grande potencial de captação de recursos por parte das gestões escolares e que é deixado na mesa por simples falha burocrática.
+
+    E o resultado prático dessa falha é mensurado no gráfico à direita. Ele traz os valores respectivos que deixaram de ser acessados pelas
+    redes de ensino
     """
 
 def texto_pan_agua_consideracoes_finais():
     return """
+    Os dados acima respondem a pergunta que guia o estudo: reserva do possível ou mínimo existencial?
+    
     Considerações finais.
     
     UEx e EEX "garantir livre acesso às suas dependências a representantes do FNDE, do Tribunal de
