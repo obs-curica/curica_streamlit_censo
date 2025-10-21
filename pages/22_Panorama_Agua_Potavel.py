@@ -251,10 +251,10 @@ st.write(texto_pan_agua_pdde_intro())
 st.header('PDDE Água, Esgotamento Sanitário e Infraestrutura')
 st.write(texto_pan_agua_pdde_agua_intro())
 
-st.subheader("Preenchimento correto do Censo Escolar")
+st.subheader("1. Preenchimento correto do Censo Escolar")
 st.write(texto_pan_agua_pdde_agua_requisitos_censo())
 
-st.subheader("Unidade Executora própria vs. Entidades Executoras")
+st.subheader("2. Unidade Executora própria vs. Entidades Executoras")
 st.write(texto_pan_agua_pdde_agua_requisitos_uex())
 
 col1, col2 = st.columns(2)
@@ -289,7 +289,7 @@ st.write(texto_pan_agua_pdde_agua_requisitos_uex_analise())
 st.subheader("Escolas Anexas")
 st.write(texto_pan_agua_pdde_agua_requisitos_uex_anexos())
 
-st.subheader("Efetiva adesão ao Programa")
+st.subheader("3. Efetiva adesão ao Programa")
 st.write(texto_pan_agua_pdde_agua_requisitos_adesao())
 
 col1, col2 = st.columns(2)

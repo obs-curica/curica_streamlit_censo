@@ -913,6 +913,9 @@ def texto_pan_agua_metodologia():
     do FNDE como proposta de solução do problema. Este programa disponibiliza recursos financeiros para a construção de sistemas de 
     abastecimento de água potável e saneamento básico nas escolas públicas. Aqui, os dados do Censo Escolar serão cruzados com os dados do 
     PDDE - Água, para identificar possíveis falhas de gestão que impeçam o acesso a esses recursos, bem como apontar soluções para o problema.
+
+    A análise dos dados faz uso da linguagem de programação Python e das bibliotecas Pandas, para tratamento e análise dos dados, Matplotlib,
+    para a visualização dos dados e Streamlit, para distribuição.
     """
 
 def texto_pan_agua_dados_brutos_intro():
@@ -1003,13 +1006,13 @@ def texto_pan_agua_dados_brutos_problematizacao_intro():
     dados a partir de conhecimentos técnicos prévios e da experiência prática de campo. A adoção dessas premissas busca oferecer um panorama 
     mais realista do problema e também fornecer subsídios práticos para a atuação eficiente das Promotorias de Justiça do interior do Estado. 
     A partir da definição dessas premissas, a resposta sobre a oferta de água potável será confrontada com as fontes de abastecimento 
-    declaradas, para verificar a coerência das respostas declaradas ao Censo Escolar.
+    declaradas, para verificar a coerência das respostas declaradas ao Censo Escolar e a realidade constatada em campo.
     """
     
 def texto_pan_agua_dados_brutos_problematizacao_premissas():
     return """
     As premissas adotadas na análise dos dados sobre a oferta de água potável nas escolas levam em conta a coerência semântica entre a 
-    resposta sobre a oferta de água potável e se a fonte de abastecimento é potencialmente potável. Logo, as premissas são as seguintes:
+    resposta sobre a oferta de água potável e sua respectiva fonte de abastecimento. Logo, as premissas são as seguintes:
 
     1. A água proveniente da :orange-background[rede pública] de abastecimento é considerada potável.
     2. A água de :orange-background[poços artesianos] é considerada potável.
@@ -1029,7 +1032,7 @@ def texto_pan_agua_dados_brutos_problematizacao_premissas():
     por bombas movidas a combustão ou por energia solar. Entretanto, é importante lembrar que nem todo o subsolo do Acre fornece água de 
     boa qualidade.
     
-    Por sua vez, a cacimba ou o poço amazônico,'falado', é um poço raso, de pequeno volume, escavado manualmente, que capta a água de 
+    Por sua vez, a cacimba ou o poço amazônico, 'falado', é um poço raso, de pequeno volume, escavado manualmente, que capta a água de 
     aquíferos rasos ou da superfície. De regra, as cacimbas são cavadas em locais mais baixos no relevo, não são cercadas, são facilmente 
     acessadas por animais e recebem a água e todo tipo de partículas carreadas pelas chuvas. Essa água não recebe tratamento adequado e, 
     mesmo parecendo límpida, é imprópria para o consumo humano. Sem mencionar a necessidade de transporte manual dessa água até o local onde 
@@ -1077,7 +1080,7 @@ def texto_pan_agua_fontes_intro_02():
     impróprias para o consumo humano. Agora faça o mesmo com o segundo número apresentado acima. Subtraia este número do
     total de escolas que declaram não fornecer água potável. Mudou o panorama? Certamente está mais próximo da realidade de campo.
     
-    Agora que a metodologia adotada está clara, é possível avançar na análise para lançar mão das premissas estabelecidas acima para traçar
+    Agora que a metodologia adotada está clara, é possível avançar na análise para lançar mão das premissas estabelecidas acima e traçar
     um quadro mais realista do fornecimento de água potável nas escolas da rede pública de ensino do Acre. 
 
     Conforme as premissas, todas as escolas localizadas em zonas urbanas e as rurais que declaram fornecer água proveniente de fonte de
@@ -1100,7 +1103,7 @@ def texto_pan_agua_fontes_analise():
     ataca situações críticas de violação de direitos, apontando as escolas que necessitam de **intervenção urgente**.
 
     As informações colhidas também estão maduras para a reflexão sobre o preenchimento correto do :orange-background[Censo Escolar]. 
-    Conforme introduzido no Panorama da Rede de Ensino e no do Financiamento, as respostas ao questionário do Censo Escolar são essenciais 
+    Conforme introduzido nos Panoramas da Rede de Ensino e do Financiamento, as respostas ao questionário do Censo Escolar são essenciais 
     para a definição de políticas públicas e posterior captação de recursos junto ao FNDE, conforme se verá a seguir.
     
     O estudo evidencia a incoerência entre a resposta a respeito do fornecimento de água potável pela escola e a sua respectiva fonte de
@@ -1315,7 +1318,7 @@ def texto_pan_agua_pdde_agua_requisitos_adesao():
     Na segunda etapa, as escolas que figurarem na lista da Secadi devem fazer sua adesão ao Programa no Sistema do PDDE Equidade, **por meio 
     de suas UEx**. Na sequência, as respectivas **Entidades Executoras** também devem fazer sua adesão ao Programa no Sistema do PDDE 
     Equidade, comprometendo-se a apoiar todas as UEx indicadas pela Secadi/MEC. Aqui é apresentado o Plano de Atendimento, que deve conter a 
-    deliberação em Assembleia e respectiva copia da Ata da Reunião da UEx que aponte a forma de execução do recurso. As UEx também devem 
+    deliberação em Assembleia e respectiva cópia da Ata da Reunião da UEx que aponte a forma de execução do recurso. As UEx também devem 
     enviar fotos do local onde será realizada a obra ou aquisição do sistema de abastecimento de água.
     
     A adesão ao Programa é, portanto, uma etapa essencial para o acesso aos recursos. A não adesão por parte da UEx ou da EEx impede que a
@@ -1336,7 +1339,8 @@ def texto_pan_agua_pdde_agua_requisitos_adesao_analise():
     potável, ela não será caracterizada como elegível ao Programa. 
     
     E essa falha de gestão pode ser traduzida para valores financeiros. Vamos a eles.      
-    """    
+    """
+
 def texto_pan_agua_pdde_financeiro_intro():
     return """
     Esta seção traz um estudo sobre o panorama da adesão ao PDDE Água no Estado do Acre, bem como realiza dois levantamentos que contemplam 

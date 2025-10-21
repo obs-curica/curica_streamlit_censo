@@ -3128,9 +3128,10 @@ def grafico_pdde_agua_escolas(df_censo, df_uex, df_equidade):
     ax.tick_params(axis='x', colors="#FFA07A", labelsize=15)
     ax.tick_params(axis='y', colors="#FFA07A", labelsize=12)
     ax.set_xlabel("Fonte: PDDE Info", color="#FFA07A", fontsize=12)
-    ax.spines['bottom'].set_color('#FFA07A')
-    ax.spines['left'].set_color('#FFA07A')
     
+    for spine in ax.spines.values():
+        spine.set_color("#FFA07A")
+
     for bar in bars:
         yval = bar.get_height()
         ax.text(
@@ -3235,8 +3236,8 @@ def grafico_pdde_agua_financeiro(df_censo, df_uex, df_equidade):
     ax.tick_params(axis='x', colors="#FFA07A", labelsize=15)
     ax.tick_params(axis='y', colors="#FFA07A", labelsize=12)
     ax.set_xlabel("Fonte: PDDE Info e Censo Escolar", color="#FFA07A", fontsize=13)
-    ax.spines['bottom'].set_color('#FFA07A')
-    ax.spines['left'].set_color('#FFA07A')
+    for spine in ax.spines.values():
+        spine.set_color("#FFA07A")
 
     for bar in bars:
         yval = bar.get_height()
