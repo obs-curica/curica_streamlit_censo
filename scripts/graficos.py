@@ -817,36 +817,36 @@ def grafico_fnde_receita_total(df):
     df : pd.DataFrame
         DataFrame contendo as colunas 'Ano' e 'Pago'.
     """
-    # Ordenar por ano
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    
     df_filtrado = df.sort_values(by='Ano').copy()
 
-    # Converter valores para bilhões
+    # Converte valores para bilhões
     df_filtrado['Pago_bi'] = df_filtrado['Pago'] / 1_000_000_000
 
-    # Estilo escuro
-    plt.style.use('dark_background')
+    
 
     # Cor padrão (verde escuro para manter padrão visual financeiro)
     cor_barras = '#006400'
 
-    # Criar gráfico
+    # Plotagem do gráfico
+    plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(9, 6))
     ax.bar(df_filtrado['Ano'].astype(str), df_filtrado['Pago_bi'], color=cor_barras)
 
-    # Título e rótulos
+    
     ax.set_title('Evolução da Receita do FNDE', color='#FFA07A', fontsize=16)
     ax.set_ylabel('Valor em bilhões de R$ (bi)', color='#FFA07A', fontsize=10)
     ax.set_xlabel('Fonte: Painel do Orçamento Federal', color='#FFA07A', fontsize=10)
 
-    # Estilo dos spines
     for spine in ax.spines.values():
         spine.set_color('#FFA07A')
 
-    # Ticks
     ax.tick_params(axis='x', colors='#FFA07A', labelsize=12)
     ax.tick_params(axis='y', colors='#FFA07A', labelsize=12)
 
-    # Inserir valores no topo das barras
+    # Valores no topo das barras
     max_valor = df_filtrado['Pago_bi'].max()
     for i, valor in enumerate(df_filtrado['Pago_bi']):
         ax.text(
@@ -873,17 +873,18 @@ def grafico_fnde_acoes(df, ano):
     ano : int
         Ano para o qual o gráfico será filtrado
     """
-
-    # Filtrar o DataFrame pelo ano selecionado
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    import matplotlib.colors as mcolors
+        
     df_filtrado = df[df["Ano"] == ano].copy()
 
-    # Remover valores nulos ou negativos
+    # Remove valores nulos ou negativos
     df_filtrado = df_filtrado[df_filtrado["Dotação Atual (R$)"] > 0]
 
-    # Ordenar pelo valor
     df_filtrado = df_filtrado.sort_values(by="Dotação Atual (R$)", ascending=True)
 
-    # Converter para bilhões
+    # Converte para bilhões
     df_filtrado["Dotação (bi)"] = df_filtrado["Dotação Atual (R$)"] / 1_000_000_000
 
     # Gradiente da cor verde para branco
@@ -893,18 +894,16 @@ def grafico_fnde_acoes(df, ano):
     norm = mcolors.Normalize(vmin=df_filtrado["Dotação (bi)"].min(), vmax=df_filtrado["Dotação (bi)"].max())
     cores = [cmap(norm(v)) for v in df_filtrado["Dotação (bi)"]]
 
-    # Plot
+    # Plotagem do Gráfico
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(10, 5.65))
 
     ax.barh(df_filtrado["Ação"], df_filtrado["Dotação (bi)"], color=cores)
 
-    # Título e rótulos
     ax.set_title(f"Detalhamento por Ação - FNDE {ano}", color="#FFA07A", fontsize=18)
     ax.set_xlabel("Fonte: Relatório de Gestão do FNDE", color="#FFA07A", fontsize=11)
     ax.set_ylabel("Valor em bilhões de R$ (bi)", color="#FFA07A", fontsize=10)
 
-    # Estilo dos eixos
     ax.tick_params(colors='#FFA07A', labelsize=12)
     for spine in ax.spines.values():
         spine.set_color('#FFA07A')
@@ -913,7 +912,7 @@ def grafico_fnde_acoes(df, ano):
     max_valor = df_filtrado["Dotação (bi)"].max()
     ax.set_xlim(0, max_valor * 1.15)
 
-    # Inserir valores nas barras
+    # Valores nas barras
     for i, valor in enumerate(df_filtrado["Dotação (bi)"]):
         ax.text(
             valor + max_valor * 0.01,
@@ -939,7 +938,10 @@ def grafico_fundeb_total_ano(df, ano):
     ano : int
         Ano selecionado pelo usuário na interface Streamlit.
     """
-    # Filtra e ordena os dados
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    import matplotlib.colors as mcolors
+    
     df_filtrado = df[df['ano'] == ano].copy()
     df_filtrado.sort_values(by='valor_receita_total_fundeb', ascending=True, inplace=True)
 
@@ -952,20 +954,19 @@ def grafico_fundeb_total_ano(df, ano):
                          vmax=df_filtrado['valor_milhoes'].max())
     cores = [cmap(norm(v)) for v in df_filtrado['valor_milhoes']]
 
-    # Estilo escuro
+    # Ploatagem do gráfico
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(12, max(6, 0.48 * len(df_filtrado))))
 
-    # Gráfico
     ax.barh(df_filtrado['nome'], df_filtrado['valor_milhoes'], color=cores)
 
-    # Título e eixos
     ax.set_title(f'Total da Receita do Fundeb - {ano}', color='#FFA07A', fontsize=25)
     ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=16)
     ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=16)
     
-    # Estilo dos ticks e spines
+    
     ax.tick_params(colors='#FFA07A', labelsize=17)
+    
     # Define o número máximo de spines
     ax.xaxis.set_major_locator(plt.MaxNLocator(5))
     for spine in ax.spines.values():
@@ -980,11 +981,10 @@ def grafico_fundeb_total_ano(df, ano):
     n_barras = len(df_filtrado)
     ax.set_ylim(-0.7, n_barras - 0.3)
 
-
     # Alinha o spine direito com o limite superior dinâmico
-    ax.spines['right'].set_position(('data', limite_superior * 1))  # ajusta a posição do spine direito para o limite superior + 2%
-    
-    # Inserir rótulos nas barras (em milhões com uma casa decimal)
+    ax.spines['right'].set_position(('data', limite_superior * 1))
+
+    # Valores nas barras (em milhões com uma casa decimal)
     for i, valor in enumerate(df_filtrado['valor_milhoes']):
         deslocamento = limite_superior * 0.01
         ax.text(valor + deslocamento, i, f"R$ {valor:,.1f}",
@@ -1005,34 +1005,30 @@ def grafico_fundeb_total_ente(df, ente):
     ente : str
         Nome do Município ou Estado selecionado pelo usuário.
     """
-    # Filtra os dados para o ente selecionado
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    
     df_filtrado = df[df['nome'] == ente].sort_values(by='ano').copy()
 
     # Conversão para milhões
     df_filtrado['valor_milhoes'] = df_filtrado['valor_receita_total_fundeb'] / 1_000_000
 
-    # Estilo escuro
-    plt.style.use('dark_background')
-
-    # Cores: Verde escuro fixo
     cor_barras = '#006400'
 
-    # Plot
+    # Plotagem do gráfico
+    plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(9, 8.3))
     ax.bar(df_filtrado['ano'].astype(str), df_filtrado['valor_milhoes'], color=cor_barras)
 
-    # Título e eixos
     ax.set_title(f'Fundeb Total por Ente - {ente}', color='#FFA07A', fontsize=19)
     ax.set_ylabel('Valor em milhões de reais (R$ mi)', color='#FFA07A', fontsize=12)
     ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=12)
     
-    
-    # Estilo dos spines e ticks
     ax.tick_params(colors='#FFA07A', labelsize=13)
     for spine in ax.spines.values():
         spine.set_color('#FFA07A')
 
-    # Rótulos nas barras
+    # Valores nas barras
     for i, valor in enumerate(df_filtrado['valor_milhoes']):
         deslocamento = df_filtrado['valor_milhoes'].max() * 0.01
         ax.text(i, valor + deslocamento,
@@ -1047,26 +1043,26 @@ def grafico_indicador_despesa_profissionais(df, ente):
     a remuneração dos profissionais da educação, ao longo dos anos, para o ente selecionado.
     """
 
-
-    # Filtrar dados do ente
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    import pandas as pd
+    
     df_filtrado = df[df['nome'] == ente].sort_values(by='ano').copy()
 
-    # Conversão segura para float
+    # Conversão para float
     df_filtrado['indicador_despesa_fundeb_profissionais'] = pd.to_numeric(
         df_filtrado['indicador_despesa_fundeb_profissionais'].astype(str).str.replace(',', '.'),
         errors='coerce'
     )
 
-    # Estilo do gráfico
-    plt.style.use('dark_background')
-
-    # Definir cores condicionais por linha
+    # Define cores condicionais por linha
     cores = [
         '#8B0000' if valor < 70 else '#006400'
         for valor in df_filtrado['indicador_despesa_fundeb_profissionais']
     ]
 
-    # Plot
+    # Plotagem do gráfico
+    plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(8, 6))
     bars = ax.bar(
         df_filtrado['ano'].astype(str),
@@ -1074,24 +1070,21 @@ def grafico_indicador_despesa_profissionais(df, ente):
         color=cores
     )
 
-    # Título e eixos
     ax.set_title(f'Despesa com Profissionais da Educação Fundeb - {ente}',
                  color='#FFA07A', fontsize=15)
     ax.set_ylabel('Indicador (%)', color='#FFA07A', fontsize=12)
     ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=10)
 
-    # Estilo dos spines
     for spine in ax.spines.values():
         spine.set_color('#FFA07A')
 
-    # Estilo dos ticks
     ax.tick_params(axis='x', colors='#FFA07A', labelsize=12)
     ax.tick_params(axis='y', colors='#FFA07A', labelsize=12)
 
     # Limite do eixo Y
     ax.set_ylim(0, 110)
 
-    # Rótulos de valor nas barras
+    # Valor nas barras
     for i, valor in enumerate(df_filtrado['indicador_despesa_fundeb_profissionais']):
         if pd.notnull(valor):
             ax.text(
@@ -1117,29 +1110,26 @@ def grafico_percentual_recursos_nao_utilizados(df, ente):
     import streamlit as st
     import pandas as pd
 
-    # Filtrar dados
     df_filtrado = df[df['nome'] == ente].sort_values(by='ano').copy()
 
-    # Conversão robusta
     df_filtrado['indicador_receita_nao_aplicada'] = pd.to_numeric(
         df_filtrado['indicador_receita_nao_aplicada'].astype(str).str.replace(',', '.'),
         errors='coerce'
     )
 
-    # Verificação de dados
     if df_filtrado['indicador_receita_nao_aplicada'].isnull().all():
         st.warning("Não foi possível carregar os percentuais de recursos não utilizados.")
         return
-
-    # Estilo
-    plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(8, 6))
 
     # Cores condicionais
     cores = [
         '#8B0000' if valor > 10 else '#FFD700'
         for valor in df_filtrado['indicador_receita_nao_aplicada'].fillna(0)
     ]
+    
+    # Plotagem do gráfico
+    plt.style.use('dark_background')
+    fig, ax = plt.subplots(figsize=(8, 6))
 
     bars = ax.bar(
         df_filtrado['ano'].astype(str),
@@ -1147,7 +1137,6 @@ def grafico_percentual_recursos_nao_utilizados(df, ente):
         color=cores
     )
 
-    # Título e eixos
     ax.set_title(f'Recursos Não Utilizados Fundeb - {ente}',
                  color='#FFA07A', fontsize=15)
     ax.set_ylabel('Percentual (%)', color='#FFA07A', fontsize=10)
@@ -1155,6 +1144,7 @@ def grafico_percentual_recursos_nao_utilizados(df, ente):
 
     ax.tick_params(axis='x', colors='#FFA07A', labelsize=12)
     ax.tick_params(axis='y', colors='#FFA07A', labelsize=12)
+    
     for spine in ax.spines.values():
         spine.set_color('#FFA07A')
 
@@ -1162,7 +1152,7 @@ def grafico_percentual_recursos_nao_utilizados(df, ente):
     limite_y = max(105, df_filtrado['indicador_receita_nao_aplicada'].max() * 1.2)
     ax.set_ylim(0, limite_y)
 
-    # Rótulos
+    # Valor nas barras
     for i, valor in enumerate(df_filtrado['indicador_receita_nao_aplicada']):
         if pd.notnull(valor):
             ax.text(
@@ -1190,41 +1180,40 @@ def grafico_valor_repasse_fundeb(df, ente):
     ente : str
         Nome do Município ou Estado selecionado pelo usuário.
     """
-   
-    # Filtrar dados do ente
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    import pandas as pd
+    
     df_filtrado = df[df['nome'] == ente].sort_values(by='ano').copy()
 
-    # Conversão segura para float
+    # Conversão para float
     df_filtrado['valor_repasse_fundeb'] = pd.to_numeric(
         df_filtrado['valor_repasse_fundeb'].astype(str).str.replace(',', '.'),
         errors='coerce'
     )
 
-    # Converter para milhões
+    # Converte para milhões
     df_filtrado['valor_milhoes'] = df_filtrado['valor_repasse_fundeb'] / 1_000_000
-
-    # Estilo do gráfico
-    plt.style.use('dark_background')
 
     # Cor das barras
     cor_barras = '#006400'
 
-    # Criar gráfico
+    # Plotagem do gráfico
+    plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(8, 6))
     ax.bar(df_filtrado['ano'].astype(str), df_filtrado['valor_milhoes'], color=cor_barras)
 
-    # Título e eixos
     ax.set_title(f'Evolução do Repasse do Fundeb - {ente}', color='#FFA07A', fontsize=16)
     ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=10)
     ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=10)
 
-    # Estilo dos eixos
     ax.tick_params(axis='x', colors='#FFA07A', labelsize=12)
     ax.tick_params(axis='y', colors='#FFA07A', labelsize=12)
+    
     for spine in ax.spines.values():
         spine.set_color('#FFA07A')
 
-    # Inserção dos valores no topo das barras
+    # Valores nas barras
     for i, valor in enumerate(df_filtrado['valor_milhoes']):
         if pd.notnull(valor):
             ax.text(
@@ -1252,18 +1241,21 @@ def grafico_complementacoes_fundeb(df, ente):
     ente : str
         Nome do Município ou Estado selecionado pelo usuário.
     """
-
-    # Filtrar e ordenar os dados
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    import pandas as pd
+    import numpy as np
+    
     df_filtrado = df[df['nome'] == ente].sort_values(by='ano').copy()
 
-    # Conversão segura para float
+    # Conversão para float
     for col in ['valor_receita_vaaf', 'valor_receita_vaat', 'valor_receita_vaar']:
         df_filtrado[col] = pd.to_numeric(
             df_filtrado[col].astype(str).str.replace(',', '.'),
             errors='coerce'
-        ) / 1_000_000  # Converter para milhões
+        ) / 1_000_000  # Converte para milhões
 
-    # Estilo do gráfico
+    # Plotagem do gráfico
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(8, 6))
 
@@ -1272,25 +1264,25 @@ def grafico_complementacoes_fundeb(df, ente):
     x = np.arange(len(anos))
     largura = 0.25
 
-    # Cores conforme padrão visual
-    cor_vaaf = '#006400'   # Verde escuro
-    cor_vaat = '#FFA500'   # Laranja
-    cor_vaar = '#00BFFF'   # Azul claro
+    # Cores das barras
+    cor_vaaf = '#006400'   
+    cor_vaat = '#FFA500'   
+    cor_vaar = '#00BFFF'   
 
-    # Plotagem
+    # Plotagem das três barras agrupadas
     ax.bar(x - largura, df_filtrado['valor_receita_vaaf'], width=largura, label='VAAF', color=cor_vaaf)
     ax.bar(x,            df_filtrado['valor_receita_vaat'], width=largura, label='VAAT', color=cor_vaat)
     ax.bar(x + largura, df_filtrado['valor_receita_vaar'], width=largura, label='VAAR', color=cor_vaar)
 
-    # Título e rótulos
     ax.set_title(f'Complementações do Fundeb por Ano - {ente}', color='#FFA07A', fontsize=16)
     ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=10)
     ax.set_xlabel('Fonte: Siope', color='#FFA07A', fontsize=10)
+    
     ax.set_xticks(x)
     ax.set_xticklabels(anos)
 
-    # Estilo dos eixos
     ax.tick_params(colors='#FFA07A', labelsize=12)
+    
     for spine in ax.spines.values():
         spine.set_color('#FFA07A')
 
@@ -1312,41 +1304,41 @@ def grafico_valor_receita_impostos(df, ente):
     ente : str
         Nome do Município ou Estado selecionado pelo usuário.
     """
-
-    # Filtrar e ordenar os dados
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    import pandas as pd
+    
     df_filtrado = df[df['nome'] == ente].sort_values(by='ano').copy()
 
-    # Conversão segura para float
+    # Conversão para float
     df_filtrado['valor_receita_impostos'] = pd.to_numeric(
         df_filtrado['valor_receita_impostos'].astype(str).str.replace(',', '.'),
         errors='coerce'
     )
 
-    # Converter para milhões
+    # Conversão para milhões
     df_filtrado['valor_milhoes'] = df_filtrado['valor_receita_impostos'] / 1_000_000
 
-    # Estilo
+    # Plotagem do gráfico
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(8, 6))
 
     # Cor da barra
     cor_barras = '#006400'
 
-    # Plot
     ax.bar(df_filtrado['ano'].astype(str), df_filtrado['valor_milhoes'], color=cor_barras)
 
-    # Eixos e título
     ax.set_title(f'Total da Receita de Impostos - {ente}', color='#FFA07A', fontsize=16)
     ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=10)
     ax.set_xlabel('Fonte: Siope', color='#FFA07A', fontsize=10)
 
-    # Estilo dos ticks e spines
     ax.tick_params(axis='x', colors='#FFA07A', labelsize=12)
     ax.tick_params(axis='y', colors='#FFA07A', labelsize=12)
+    
     for spine in ax.spines.values():
         spine.set_color('#FFA07A')
 
-    # Rótulos no topo das barras
+    # Valor nas barras
     for i, valor in enumerate(df_filtrado['valor_milhoes']):
         if pd.notnull(valor):
             ax.text(
@@ -1368,11 +1360,14 @@ def grafico_valores_despesa_minima_impostos(df, ente):
     e a despesa total liquidada com impostos para o ente selecionado.
     Caso a despesa não atinja o mínimo, a barra de despesa será colorida em vermelho.
     """
-
-    # Filtrar dados do ente
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    import pandas as pd
+    import numpy as np
+    
     df_filtrado = df[df['nome'] == ente].sort_values(by='ano').copy()
 
-    # Conversão segura para float e milhões
+    # Conversão para float e milhões
     for col in ['valor_minimo_mde', 'valor_total_despesa_impostos']:
         df_filtrado[col] = pd.to_numeric(
             df_filtrado[col].astype(str).str.replace(',', '.'),
@@ -1384,38 +1379,38 @@ def grafico_valores_despesa_minima_impostos(df, ente):
     x = np.arange(len(anos))
     largura = 0.35
 
-    # Estilo visual
-    plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(8, 6))
-
     # Cores
-    cor_exigido = '#00BFFF'            # Azul claro
-    cor_despesa_ok = '#FFA500'     # Laranja
-    cor_despesa_ruim = '#FF0000'   # Vermelho
+    cor_exigido = '#00BFFF'
+    cor_despesa_ok = '#FFA500'
+    cor_despesa_menor = '#FF0000'
 
-    # Determinar cores das barras de despesa com base na comparação
+    # Cores condicionais
     cores_despesa = [
-        cor_despesa_ruim if mde > despesa else cor_despesa_ok
+        cor_despesa_menor if mde > despesa else cor_despesa_ok
         for mde, despesa in zip(df_filtrado['valor_minimo_mde'], df_filtrado['valor_total_despesa_impostos'])
     ]
 
-    # Plotar barras
+    # Plotagem do gráfico
+    plt.style.use('dark_background')
+    fig, ax = plt.subplots(figsize=(8, 6))
+    
+    # Barras duplas
     ax.bar(x - largura/2, df_filtrado['valor_minimo_mde'], width=largura, label='Mínimo MDE', color=cor_exigido)
     ax.bar(x + largura/2, df_filtrado['valor_total_despesa_impostos'], width=largura, label='Despesa MDE Impostos', color=cores_despesa)
 
-    # Título e eixos
     ax.set_title(f'Mínimo MDE x Despesa MDE Impostos - {ente}', color='#FFA07A', fontsize=16)
     ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=10)
     ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=10)
+    
     ax.set_xticks(x)
     ax.set_xticklabels(anos)
 
-    # Eixos e bordas
     ax.tick_params(colors='#FFA07A', labelsize=12)
+    
     for spine in ax.spines.values():
         spine.set_color('#FFA07A')
 
-    # Cálculo do limite do eixo Y
+    # Limite do eixo Y
     valor_maximo = max(df_filtrado[['valor_minimo_mde', 'valor_total_despesa_impostos']].max())
     ax.set_ylim(top=valor_maximo * 1.15)
 
@@ -1440,11 +1435,14 @@ def grafico_valores_limite_constitucional(df, ente):
     e a despesa total liquidada com impostos para o ente selecionado.
     Caso a despesa não atinja o mínimo, a barra de despesa será colorida em vermelho.
     """
-
-    # Filtrar dados do ente
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    import pandas as pd
+    import numpy as np
+    
     df_filtrado = df[df['nome'] == ente].sort_values(by='ano').copy()
 
-    # Conversão segura para float e milhões
+    # Conversão para float e milhões
     for col in ['valor_limite_const_exigido', 'valor_limite_const_aplicado']:
         df_filtrado[col] = pd.to_numeric(
             df_filtrado[col].astype(str).str.replace(',', '.'),
@@ -1456,38 +1454,37 @@ def grafico_valores_limite_constitucional(df, ente):
     x = np.arange(len(anos))
     largura = 0.35
 
-    # Estilo visual
-    plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(8, 6))
+    cor_exigido = '#00BFFF'
+    cor_despesa_ok = '#FFA500'
+    cor_despesa_menor = '#FF0000'
 
-    # Cores
-    cor_exigido = '#00BFFF'            # Azul claro
-    cor_despesa_ok = '#FFA500'     # Laranja
-    cor_despesa_ruim = '#FF0000'   # Vermelho
-
-    # Determinar cores das barras de despesa com base na comparação
+    # cores condicionais
     cores_despesa = [
-        cor_despesa_ruim if mde > despesa else cor_despesa_ok
+        cor_despesa_menor if mde > despesa else cor_despesa_ok
         for mde, despesa in zip(df_filtrado['valor_limite_const_exigido'], df_filtrado['valor_limite_const_aplicado'])
     ]
 
-    # Plotar barras
+    # Plotagem do gráfico
+    plt.style.use('dark_background')
+    fig, ax = plt.subplots(figsize=(8, 6))
+    
+    # Barras duplas
     ax.bar(x - largura/2, df_filtrado['valor_limite_const_exigido'], width=largura, label='Mínimo Constitucional exigido', color=cor_exigido)
     ax.bar(x + largura/2, df_filtrado['valor_limite_const_aplicado'], width=largura, label='Investimento total em MDE', color=cores_despesa)
 
-    # Título e eixos
     ax.set_title(f'Investimento Mínimo Constitucional - {ente}', color='#FFA07A', fontsize=16)
     ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=10)
     ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=10)
+    
     ax.set_xticks(x)
     ax.set_xticklabels(anos)
 
-    # Eixos e bordas
     ax.tick_params(colors='#FFA07A', labelsize=12)
+    
     for spine in ax.spines.values():
         spine.set_color('#FFA07A')
 
-    # Cálculo do limite do eixo Y
+    # Limite do eixo Y
     valor_maximo = max(df_filtrado[['valor_limite_const_exigido', 'valor_limite_const_aplicado']].max())
     ax.set_ylim(top=valor_maximo * 1.15)
 
@@ -1511,27 +1508,26 @@ def grafico_indicador_limite_constitucional(df, ente):
     Gera um gráfico de barras verticais mostrando a evolução do indicador de gastos com 
     a remuneração dos profissionais da educação, ao longo dos anos, para o ente selecionado.
     """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    import pandas as pd
 
-
-    # Filtrar dados do ente
     df_filtrado = df[df['nome'] == ente].sort_values(by='ano').copy()
 
-    # Conversão segura para float
+    # Conversão para float
     df_filtrado['indicador_limite_constitucional'] = pd.to_numeric(
         df_filtrado['indicador_limite_constitucional'].astype(str).str.replace(',', '.'),
         errors='coerce'
     )
 
-    # Estilo do gráfico
-    plt.style.use('dark_background')
-
-    # Definir cores condicionais por linha
+    # cores condicionais
     cores = [
         '#8B0000' if valor < 25 else '#006400'
         for valor in df_filtrado['indicador_limite_constitucional']
     ]
 
-    # Plot
+    # Plotagem do gráfico
+    plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(8, 6))
     bars = ax.bar(
         df_filtrado['ano'].astype(str),
@@ -1539,24 +1535,21 @@ def grafico_indicador_limite_constitucional(df, ente):
         color=cores
     )
 
-    # Título e eixos
     ax.set_title(f'Indicador do Mínimo Constitucional - {ente}',
                  color='#FFA07A', fontsize=15)
     ax.set_ylabel('Indicador (%)', color='#FFA07A', fontsize=12)
     ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=10)
 
-    # Estilo dos spines
     for spine in ax.spines.values():
         spine.set_color('#FFA07A')
 
-    # Estilo dos ticks
     ax.tick_params(axis='x', colors='#FFA07A', labelsize=12)
     ax.tick_params(axis='y', colors='#FFA07A', labelsize=12)
 
     # Limite do eixo Y
     ax.set_ylim(0, 110)
 
-    # Rótulos de valor nas barras
+    # Valor nas barras
     for i, valor in enumerate(df_filtrado['indicador_limite_constitucional']):
         if pd.notnull(valor):
             ax.text(
@@ -1584,32 +1577,34 @@ def grafico_receita_salario_educacao_ano(df, ano):
     ano : int
         Ano selecionado pelo usuário na interface Streamlit.
     """
-    # Filtra e ordena os dados
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    import matplotlib.colors as mcolors
+    
     df_filtrado = df[df['ano'] == ano].copy()
     df_filtrado.sort_values(by='valor_receita_salario_educacao', ascending=True, inplace=True)
 
     # Conversão para milhões
     df_filtrado['valor_milhoes'] = df_filtrado['valor_receita_salario_educacao'] / 1_000_000
 
-    # Gradiente de verde (verde claro -> verde escuro)
+    # Gradiente de cores
     cmap = mcolors.LinearSegmentedColormap.from_list('verde_gradiente', ['#90ee90', '#006400'])
     norm = plt.Normalize(vmin=df_filtrado['valor_milhoes'].min(),
                          vmax=df_filtrado['valor_milhoes'].max())
     cores = [cmap(norm(v)) for v in df_filtrado['valor_milhoes']]
 
-    # Estilo escuro
+    # Plotagem do gráfico
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(12, max(6, 0.48 * len(df_filtrado))))
 
-    # Gráfico
     ax.barh(df_filtrado['nome'], df_filtrado['valor_milhoes'], color=cores)
 
-    # Título e eixos
     ax.set_title('Total da Receita do Salário-Educação (R$ milhões)', color='#FFA07A', fontsize=23)
     ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=15)
     ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=15)
-    # Estilo dos ticks e spines
+    
     ax.tick_params(colors='#FFA07A', labelsize=20)
+    
     for spine in ax.spines.values():
         spine.set_color('#FFA07A')
 
@@ -1622,11 +1617,10 @@ def grafico_receita_salario_educacao_ano(df, ano):
     n_barras = len(df_filtrado)
     ax.set_ylim(-0.7, n_barras - 0.3)
 
-
     # Alinha o spine direito com o limite superior dinâmico
-    ax.spines['right'].set_position(('data', limite_superior * 1))  # ajusta a posição do spine direito para o limite superior + 2%
+    ax.spines['right'].set_position(('data', limite_superior * 1))
     
-    # Inserir rótulos nas barras (em milhões com uma casa decimal)
+    # Valores nas barras
     for i, valor in enumerate(df_filtrado['valor_milhoes']):
         deslocamento = limite_superior * 0.01
         ax.text(valor + deslocamento, i, f"R$ {valor:,.1f} mi",
@@ -1647,11 +1641,14 @@ def grafico_receita_salario_educacao_ente(df, ente):
     ente : str
         Nome do Município ou Estado selecionado.
     """
-
-    # Filtrar dados do ente
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    import pandas as pd
+    import numpy as np
+    
     df_filtrado = df[df['nome'] == ente].sort_values(by='ano').copy()
 
-    # Conversão segura para float (milhões)
+    # Conversão para float e milhões
     df_filtrado['valor_receita_salario_educacao'] = pd.to_numeric(
         df_filtrado['valor_receita_salario_educacao'].astype(str).str.replace(',', '.'),
         errors='coerce'
@@ -1662,23 +1659,20 @@ def grafico_receita_salario_educacao_ente(df, ente):
     valores = df_filtrado['valor_receita_salario_educacao']
     x = np.arange(len(anos))
 
-    # Estilo
-    plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(7, 6.45))
-
-    # Cor padrão do projeto
     cor_verde = '#006400'
 
-    # Plotar barras
+    # Plotagem do gráfico
+    plt.style.use('dark_background')
+    fig, ax = plt.subplots(figsize=(7, 6.45))
+    
     ax.bar(anos, valores, color=cor_verde)
 
-    # Título e eixos
     ax.set_title(f'Receita do Salário-Educação - {ente}', color='#FFA07A', fontsize=14)
     ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=9)
     ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=9)
 
-    # Estilo dos eixos
     ax.tick_params(colors='#FFA07A', labelsize=11)
+    
     for spine in ax.spines.values():
         spine.set_color('#FFA07A')
 
@@ -1686,7 +1680,7 @@ def grafico_receita_salario_educacao_ente(df, ente):
     valor_maximo = valores.max()
     ax.set_ylim(top=valor_maximo * 1.15)
 
-    # Rótulos no topo das barras com deslocamento proporcional
+    # Valores no topo das barras com deslocamento proporcional
     for i, valor in enumerate(valores):
         if pd.notnull(valor):
             ax.text(
@@ -1716,8 +1710,11 @@ def grafico_receitas_adicionais_por_ente_ano(df, ente, ano):
     ano : int
         Ano de referência dos dados.
     """
-
-    # Lista de colunas que serão exibidas no gráfico
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    import matplotlib.colors as mcolors
+    from scripts.utils import COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO
+    
     colunas_receitas = [
         "valor_receita_pdde",
         "valor_receita_pnae",
@@ -1729,48 +1726,43 @@ def grafico_receitas_adicionais_por_ente_ano(df, ente, ano):
         "valor_receita_outras_outras"
     ]
 
-    # Filtrar o DataFrame
     df_filtrado = df[(df["nome"] == ente) & (df["ano"] == ano)]
 
     if df_filtrado.empty:
         st.warning(f"Não há dados disponíveis para o ente '{ente}' no ano {ano}.")
         return
 
-    # Selecionar apenas as colunas de interesse
     df_valores = df_filtrado[colunas_receitas].T.copy()
     df_valores.columns = ["valor"]
     df_valores["valor_mi"] = df_valores["valor"] / 1_000_000
 
-    # Renomear para nomes amigáveis
     df_valores["fonte"] = df_valores.index.map(lambda col: COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO.get(col, col))
 
-    # Ordenar valores crescentes
     df_valores = df_valores.sort_values(by="valor_mi", ascending=True)
 
-    # Gradiente verde → branco
+    # Gradiente
     cor_inicio = "#FFFFFF"
     cor_fim = "#006400"
     cmap = mcolors.LinearSegmentedColormap.from_list("verde_para_branco", [cor_inicio, cor_fim])
     norm = mcolors.Normalize(vmin=df_valores["valor_mi"].min(), vmax=df_valores["valor_mi"].max())
     cores = [cmap(norm(v)) for v in df_valores["valor_mi"]]
 
-    # Estilo escuro
+    # Plotagem do gráfico
     plt.style.use("dark_background")
     fig, ax = plt.subplots(figsize=(10, 7))
 
     ax.barh(df_valores["fonte"], df_valores["valor_mi"], color=cores)
 
-    # Estilo do gráfico
     ax.set_title(f"Receitas Adicionais da Educação - {ente} ({ano})", color="#FFA07A", fontsize=18)
     ax.set_xlabel("Fonte: SIOPE", color="#FFA07A", fontsize=11)
     ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=11)
 
-    # Ticks e spines
     ax.tick_params(colors='#FFA07A', labelsize=14)
+    
     for spine in ax.spines.values():
         spine.set_color('#FFA07A')
 
-    # Espaço para rótulos
+    # Espaço para os valores nas barras
     max_valor = df_valores["valor_mi"].max()
     ax.set_xlim(0, max_valor * 1.15)
 
@@ -1793,7 +1785,10 @@ def grafico_receitas_adicionais_evolucao(df, ente, categoria):
     categoria : str
         Nome da coluna da categoria de receita adicional (ex: 'valor_receita_pdde').
     """
-    # Lista de categorias válidas
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    from scripts.utils import COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO
+    
     colunas_receitas = [
         "valor_receita_pdde",
         "valor_receita_pnae",
@@ -1809,7 +1804,6 @@ def grafico_receitas_adicionais_evolucao(df, ente, categoria):
         st.error(f"A categoria '{categoria}' não é reconhecida como uma receita adicional válida.")
         return
 
-    # Filtrar o DataFrame
     df_filtrado = df[df["nome"] == ente][["ano", categoria]].copy()
 
     if df_filtrado.empty:
@@ -1818,20 +1812,27 @@ def grafico_receitas_adicionais_evolucao(df, ente, categoria):
 
     # Conversão para milhões
     df_filtrado["valor_mi"] = df_filtrado[categoria] / 1_000_000
+    
     df_filtrado["ano_str"] = df_filtrado["ano"].astype(str)
     df_filtrado = df_filtrado.sort_values(by="ano")
 
-    # Nome legível da categoria
     nome_legivel = COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO.get(categoria, categoria)
 
-    # Estilo e figura
+    # Plotagem do gráfico
     plt.style.use("dark_background")
     fig, ax = plt.subplots(figsize=(10, 7))
 
-    # Plot
     bars = ax.bar(df_filtrado["ano_str"], df_filtrado["valor_mi"], color="#006400")
 
-    # Rótulos no topo
+    ax.set_title(f"Evolução da Receita de {nome_legivel} - {ente}", color="#FFA07A", fontsize=18)
+    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=11)
+    ax.set_xlabel("Fonte: SIOPE", color="#FFA07A", fontsize=11)
+
+    ax.tick_params(colors='#FFA07A', labelsize=14)
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    # Rótulos no topo das barras
     for bar in bars:
         altura = bar.get_height()
         ax.text(
@@ -1845,17 +1846,7 @@ def grafico_receitas_adicionais_evolucao(df, ente, categoria):
             fontsize=13
         )
 
-    # Título e eixos
-    ax.set_title(f"Evolução da Receita de {nome_legivel} - {ente}", color="#FFA07A", fontsize=18)
-    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=11)
-    ax.set_xlabel("Fonte: SIOPE", color="#FFA07A", fontsize=11)
-
-    # Estilo dos eixos
-    ax.tick_params(colors='#FFA07A', labelsize=14)
-    for spine in ax.spines.values():
-        spine.set_color('#FFA07A')
-
-    # Ajustar eixo y com epsilon e mínimo de 1.0
+    # Ajuste dinâmico do eixo y
     y_max = max(df_filtrado["valor_mi"].max(), 1.0)
     ax.set_ylim(0.001, y_max * 1.15)
 
@@ -1879,8 +1870,7 @@ def grafico_execucao_pdde_valores(df, ano, ente):
     """
     import matplotlib.pyplot as plt
     import streamlit as st
-
-    # Filtrar o DataFrame
+    
     df_filtrado = df[(df["ano"] == ano) & (df["nome"] == ente)]
 
     if df_filtrado.empty:
@@ -1893,22 +1883,28 @@ def grafico_execucao_pdde_valores(df, ano, ente):
         df_filtrado["saldo_executado"].values[0] / 1_000_000,
         df_filtrado["saldo_nao_utilizado"].values[0] / 1_000_000
     ]
+    
     categorias = ["Disponibilizado", "Executado", "Não utilizado"]
-    cores = ["#4682B4", "#006400", "#FFA500"]  # azul, verde, laranja
+    
+    cores = ["#4682B4", "#006400", "#FFA500"]
 
-    # Estilo
+    # Plotagem do gráfico
     plt.style.use("dark_background")
     fig, ax = plt.subplots(figsize=(8, 5.5))
 
-    # Plot
     bars = ax.bar(categorias, valores_mi, color=cores)
+
+    ax.set_title(f"Execução dos Recursos do PDDE - {ente} ({ano})", color="#FFA07A", fontsize=14)
+    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=10)
+    ax.set_xlabel("Fonte: Painel de Monitoramento do PDDE - FNDE", color="#FFA07A", fontsize=10)
+
+    ax.tick_params(axis="x", colors="#FFA07A", labelsize=12)
+    ax.tick_params(axis="y", colors="#FFA07A")
     
-    # Ajuste de altura do eixo Y
-    y_max = max(valores_mi)
-    ax.set_ylim(0, y_max * 1.2)
+    for spine in ax.spines.values():
+        spine.set_color("#FFA07A")
 
-
-    # Rótulos
+    # Valores no topo das barras
     for bar, valor in zip(bars, valores_mi):
         ax.text(
             bar.get_x() + bar.get_width() / 2,
@@ -1921,17 +1917,10 @@ def grafico_execucao_pdde_valores(df, ano, ente):
             fontsize=11
         )
 
-    # Título e eixos
-    ax.set_title(f"Execução dos Recursos do PDDE - {ente} ({ano})", color="#FFA07A", fontsize=14)
-    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=10)
-    ax.set_xlabel("Fonte: Painel de Monitoramento do PDDE - FNDE", color="#FFA07A", fontsize=10)
-
-    # Estilo dos eixos
-    ax.tick_params(axis="x", colors="#FFA07A", labelsize=12)
-    ax.tick_params(axis="y", colors="#FFA07A")
-    for spine in ax.spines.values():
-        spine.set_color("#FFA07A")
-
+    # Ajuste de altura do eixo Y
+    y_max = max(valores_mi)
+    ax.set_ylim(0, y_max * 1.2)
+    
     # Legenda
     ax.legend(bars, categorias, loc="upper right", frameon=False, labelcolor="white")
 
@@ -1950,39 +1939,28 @@ def grafico_execucao_pdde_porcentagem(df, ano):
     ano : int
         Ano de referência
     """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    import matplotlib.colors as mcolors
     
-    # Filtrar por ano
     df_filtrado = df[df["ano"] == ano][["nome", "porcentagem_execucao"]].dropna()
 
     if df_filtrado.empty:
         st.warning(f"Não há dados disponíveis para o ano de {ano}.")
         return
 
-    # Ordenar por porcentagem crescente
     df_filtrado = df_filtrado.sort_values(by="porcentagem_execucao", ascending=True)
 
-    # Gradiente verde → vermelho
+    # Gradiente
     cmap = mcolors.LinearSegmentedColormap.from_list("verde_vermelho", ["#8B0000", "#006400",])
     norm = mcolors.Normalize(vmin=0, vmax=1)
     cores = [cmap(norm(v)) for v in df_filtrado["porcentagem_execucao"]]
 
-    # Estilo e plot
+    # Plotagem do gráfico
     plt.style.use("dark_background")
     fig, ax = plt.subplots(figsize=(10, 8))
 
     ax.barh(df_filtrado["nome"], df_filtrado["porcentagem_execucao"] * 100, color=cores)
-
-    # Rótulos nas barras
-    for i, valor in enumerate(df_filtrado["porcentagem_execucao"]):
-        ax.text(
-            valor * 100 + 1,
-            i,
-            f"{valor * 100:.1f}%",
-            va="center",
-            color="white",
-            fontweight='bold',
-            fontsize=10
-        )
 
     # Estilo dos eixos
     ax.set_title(f"Execução Percentual dos Recursos do PDDE - {ano}", color="#FFA07A", fontsize=18)
@@ -1994,7 +1972,20 @@ def grafico_execucao_pdde_porcentagem(df, ano):
     for spine in ax.spines.values():
         spine.set_color("#FFA07A")
 
-    ax.set_xlim(0, 100)  # de 0% a 100%
+    ax.set_xlim(0, 100)
+    
+    # Valores nas barras
+    for i, valor in enumerate(df_filtrado["porcentagem_execucao"]):
+        ax.text(
+            valor * 100 + 1,
+            i,
+            f"{valor * 100:.1f}%",
+            va="center",
+            color="white",
+            fontweight='bold',
+            fontsize=10
+        )
+
     fig.tight_layout()
     st.pyplot(fig)
 
@@ -2014,7 +2005,6 @@ def grafico_receita_total_educacao(df, ente):
     import streamlit as st
     import pandas as pd
 
-    # Filtrar dados
     df_filtrado = df[df["nome"] == ente].copy()
     df_filtrado = df_filtrado.sort_values(by="ano")
 
@@ -2022,23 +2012,32 @@ def grafico_receita_total_educacao(df, ente):
         st.warning(f"Não há dados disponíveis para o ente '{ente}'.")
         return
 
-    # Conversão segura dos valores
     df_filtrado["valor_total_receita_educacao"] = pd.to_numeric(
         df_filtrado["valor_total_receita_educacao"].astype(str).str.replace(",", "."),
         errors="coerce"
     )
 
-    # Em milhões
     df_filtrado["valor_mi"] = df_filtrado["valor_total_receita_educacao"] / 1_000_000
 
-    # Estilo
+    cor_verde = "#006400"
+    
+    # Plotagem do gráfico
     plt.style.use("dark_background")
     fig, ax = plt.subplots(figsize=(10, 7))
 
-    cor_verde = "#006400"
     bars = ax.bar(df_filtrado["ano"].astype(str), df_filtrado["valor_mi"], color=cor_verde)
 
-    # Rótulos nas barras
+    ax.set_title(f"Receita Total para Educação - {ente}", color="#FFA07A", fontsize=18)
+    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=11)
+    ax.set_xlabel("Fonte: SIOPE", color="#FFA07A", fontsize=11)
+
+    ax.tick_params(colors='#FFA07A', labelsize=13)    
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    ax.set_ylim(0, df_filtrado["valor_mi"].max() * 1.25)
+    
+    # Valores nas barras
     for bar, valor in zip(bars, df_filtrado["valor_mi"]):
         ax.text(
             bar.get_x() + bar.get_width() / 2,
@@ -2049,17 +2048,6 @@ def grafico_receita_total_educacao(df, ente):
             fontweight="bold",
             fontsize=13
         )
-
-    # Título e eixos
-    ax.set_title(f"Receita Total para Educação - {ente}", color="#FFA07A", fontsize=18)
-    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=11)
-    ax.set_xlabel("Fonte: SIOPE", color="#FFA07A", fontsize=11)
-
-    ax.tick_params(colors='#FFA07A', labelsize=13)    
-    for spine in ax.spines.values():
-        spine.set_color('#FFA07A')
-
-    ax.set_ylim(0, df_filtrado["valor_mi"].max() * 1.25)
 
     fig.tight_layout()
     st.pyplot(fig)
@@ -2083,27 +2071,35 @@ def grafico_agua_total_dados_brutos(df, ano_censo):
     """
     import matplotlib.pyplot as plt
     import streamlit as st
-
-    # Filtrar DataFrame pelo ano
+    
     df_filtrado = df[df["NU_ANO_CENSO"] == ano_censo]
 
     if df_filtrado.empty:
         st.warning(f"Não há dados disponíveis para o ano {ano_censo}.")
         return
 
-    # Contagem das respostas
     contagem = df_filtrado["IN_AGUA_POTAVEL"].value_counts().sort_index(ascending=False)
     contagem.index = contagem.index.map({1: "Fornece", 0: "Não Fornece"})
 
-    # Cores fixas conforme solicitado
     cores = ["#B0E0E6" if idx == "Fornece" else "#FFC107" for idx in contagem.index]
 
-    # Estilo escuro
+    # Plotagem do gráfico
     plt.style.use("dark_background")
     fig, ax = plt.subplots(figsize=(8, 7.5))
 
-    # Barras
-    bars = ax.bar(contagem.index, contagem.values, color=cores)
+    ax.bar(contagem.index, contagem.values, color=cores)
+
+    ax.set_title(f"Fornecimento de Água Potável - {ano_censo}", color="#FFA07A", fontsize=20)
+    ax.set_ylabel("Número de Escolas", color="#FFA07A", fontsize=12)
+    ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=12)
+
+    for spine in ax.spines.values():
+        spine.set_color("#FFA07A")
+
+    ax.tick_params(axis="x", colors="#FFA07A", labelsize=16)
+    ax.tick_params(axis="y", colors="#FFA07A", labelsize=14)
+
+    ax.set_ylim(0, contagem.max() * 1.2)
 
     # Inserir valores nas barras
     for i, valor in enumerate(contagem.values):
@@ -2116,22 +2112,7 @@ def grafico_agua_total_dados_brutos(df, ano_censo):
             fontweight="bold",
             fontsize=14
         )
-
-    # Título e eixos
-    ax.set_title(f"Fornecimento de Água Potável - {ano_censo}", color="#FFA07A", fontsize=20)
-    ax.set_ylabel("Número de Escolas", color="#FFA07A", fontsize=12)
-    ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=12)
-
-    # Estilo dos spines
-    for spine in ax.spines.values():
-        spine.set_color("#FFA07A")
-
-    # Estilo dos ticks
-    ax.tick_params(axis="x", colors="#FFA07A", labelsize=16)
-    ax.tick_params(axis="y", colors="#FFA07A", labelsize=14)
-
-    ax.set_ylim(0, contagem.max() * 1.2)
-
+    
     fig.tight_layout()
     st.pyplot(fig)
 
@@ -2162,24 +2143,30 @@ def grafico_escolas_sem_agua_por_municipio(df, ano_censo):
         st.warning(f"Não há registros de escolas sem água potável em {ano_censo}.")
         return
 
-    # Agrupar por município
     contagem = df_filtrado["NO_MUNICIPIO"].value_counts().sort_values(ascending=True)
 
-    # Criar gradiente entre azul e amarelo (crescente)
+    # gradiente de cores
     cor_inicio = "#B0E0E6"
     cor_fim = "#FFC107"
     cmap = mcolors.LinearSegmentedColormap.from_list("gradiente_agua", [cor_inicio, cor_fim])
     norm = mcolors.Normalize(vmin=0, vmax=len(contagem) - 1)
     cores = [cmap(norm(i)) for i in range(len(contagem))]
 
-    # Estilo
+    # Plotagem do gráfico
     plt.style.use("dark_background")
     fig, ax = plt.subplots(figsize=(10, max(5, len(contagem) * 0.45)))
 
-    # Plotar barras horizontais
     barras = ax.barh(contagem.index, contagem.values, color=cores)
 
-    # Rótulos ao final de cada barra
+    ax.set_title(f"Escolas sem Água Potável por Município - {ano_censo}", color="#FFA07A", fontsize=22, pad=10)
+    ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=15)
+
+    ax.tick_params(colors="#FFA07A", labelsize=15)
+    
+    for spine in ax.spines.values():
+        spine.set_color("#FFA07A")
+
+    # Valores nas barras
     for barra, valor in zip(barras, contagem.values):
         ax.text(
             valor + max(contagem.values) * 0.01,
@@ -2191,15 +2178,6 @@ def grafico_escolas_sem_agua_por_municipio(df, ano_censo):
             fontweight="bold",
             fontsize=12
         )
-
-    # Título e eixos
-    ax.set_title(f"Escolas sem Água Potável por Município - {ano_censo}", color="#FFA07A", fontsize=22, pad=10)
-    ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=15)
-
-    # Estilo visual do projeto
-    ax.tick_params(colors="#FFA07A", labelsize=15)
-    for spine in ax.spines.values():
-        spine.set_color("#FFA07A")
 
     fig.tight_layout()
     st.pyplot(fig)
