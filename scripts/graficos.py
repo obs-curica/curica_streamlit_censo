@@ -3123,6 +3123,245 @@ def grafico_pdde_agua_financeiro(df_censo, df_uex, df_equidade):
     st.pyplot(fig)
 
 
+def grafico_pdde_agua_escolas_municipios(df_censo, df_uex, df_equidade, nome_municipio):
+    """
+    Gera gráfico de barras verticais para o último ano disponível,
+    representando:
+    1. Escolas que acessaram PDDE Água
+    2. Escolas elegíveis que não acessaram
+    3. Escolas potenciais com falhas de gestão
+
+    Parâmetros:
+    ------------
+    df_censo : pd.DataFrame
+    df_uex : pd.DataFrame
+    df_equidade : pd.DataFrame
+    nome_municipio : str
+        Nome do município conforme consta na coluna 'NO_MUNICIPIO' do df_censo
+    """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+
+    # ============
+    # Selecionar último ano
+    # ============
+    ultimo_ano = df_censo["NU_ANO_CENSO"].max()
+
+    # ============
+    # Filtrar dados por município
+    # ============
+    df_censo_ano = df_censo[
+        (df_censo["NU_ANO_CENSO"] == ultimo_ano) &
+        (df_censo["NO_MUNICIPIO"] == nome_municipio)
+    ].copy()
+
+    df_uex_ano = df_uex[
+        (df_uex["Ano"] == ultimo_ano)
+    ].copy()
+
+    df_eq_ano = df_equidade[
+        (df_equidade["Ano"] == ultimo_ano)
+    ].copy()
+
+    # ============
+    # Renomear colunas para merge
+    # ============
+    df_uex_ano = df_uex_ano.rename(columns={"Código Escola": "CO_ENTIDADE"})
+    df_eq_ano = df_eq_ano.rename(columns={"Código Escola": "CO_ENTIDADE"})
+
+    # ============
+    # Merge dos 3 dataframes
+    # ============
+    df_merged = df_censo_ano.merge(df_uex_ano, on="CO_ENTIDADE", how="left", suffixes=('', '_uex'))
+    df_merged = df_merged.merge(df_eq_ano, on="CO_ENTIDADE", how="left", suffixes=('', '_eq'))
+
+    # ============
+    # Colunas auxiliares
+    # ============
+    df_merged["acessou_pdde_agua"] = df_merged["Destinação"].fillna("").str.contains(r"\b(água|agua)\b", case=False)
+    df_merged["tem_uex"] = df_merged["CNPJ UEX"].notna() & (df_merged["CNPJ UEX"] != df_merged["CNPJ EEX"])
+
+    # ============
+    # Escolas elegíveis
+    # ============
+    df_merged["elegivel"] = (
+        (df_merged["TP_LOCALIZACAO"] == 2) &
+        (df_merged["IN_AGUA_POTAVEL"] == 0) &
+        (df_merged["TP_OCUPACAO_PREDIO_ESCOLAR"] == 1) &
+        (df_merged["tem_uex"]) &
+        (~df_merged["acessou_pdde_agua"]) &
+        (
+            (df_merged["IN_AGUA_POCO_ARTESIANO"] != 1) &
+            (df_merged["IN_AGUA_REDE_PUBLICA"] != 1)
+        )
+    )
+
+    # ============
+    # Escolas potenciais
+    # ============
+    df_merged["potencial"] = (
+        (df_merged["TP_LOCALIZACAO"] == 2) &
+        (~df_merged["acessou_pdde_agua"]) &
+        (
+            (df_merged["IN_AGUA_POCO_ARTESIANO"] != 1) &
+            (df_merged["IN_AGUA_REDE_PUBLICA"] != 1)
+        )
+    )
+
+    # ============
+    # Contagens
+    # ============
+    n_acessaram = df_merged["acessou_pdde_agua"].sum()
+    n_elegiveis = df_merged["elegivel"].sum()
+    n_potenciais = df_merged["potencial"].sum() - n_elegiveis
+
+    # ============
+    # Gráfico
+    # ============
+    categorias = [
+        "Acessaram\nPDDE Água",
+        "Escolas Elegíveis",
+        "Escolas Potenciais"
+    ]
+    valores = [n_acessaram, n_elegiveis, n_potenciais]
+    cores = ['#B0E0E6', '#FFC107', '#FFA07A']
+
+    fig, ax = plt.subplots(figsize=(10, 7))
+    bars = ax.bar(categorias, valores, color=cores, edgecolor='white')
+
+    ax.set_facecolor("black")
+    fig.patch.set_facecolor("black")
+    ax.set_title(f"{nome_municipio.upper()} – Acesso ao PDDE Água ({ultimo_ano})", color="#FFA07A", fontsize=20)
+    ax.tick_params(axis='x', colors="#FFA07A", labelsize=15)
+    ax.tick_params(axis='y', colors="#FFA07A", labelsize=12)
+    ax.set_xlabel("Fonte: PDDE Info", color="#FFA07A", fontsize=12)
+
+    for spine in ax.spines.values():
+        spine.set_color("#FFA07A")
+        
+    max_val = max(valores)
+    ax.set_ylim(0, max_val + max_val * 0.2)
+
+    for bar in bars:
+        yval = bar.get_height()
+        ax.text(
+            bar.get_x() + bar.get_width()/2.0,
+            yval + (max_val * 0.02),
+            f'{int(yval)}', ha='center', va='bottom',
+            fontsize=15, color='white', fontweight="bold"
+        )
+
+
+    st.pyplot(fig)
+
+
+def grafico_pdde_agua_financeiro_municipios(df_censo, df_uex, df_equidade, municipio):
+    """
+    Gera gráfico de barras verticais com valores financeiros estimados ou pagos
+    referentes ao PDDE Água, com base em dados de execução e matrículas.
+    """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    
+    # ============
+    # Selecionar último ano
+    # ============
+    ano = df_censo["NU_ANO_CENSO"].max()
+    df_censo = df_censo[
+        (df_censo["NU_ANO_CENSO"] == ano) &
+        (df_censo['NO_MUNICIPIO'] == municipio)   
+    ].copy()
+    df_uex = df_uex[df_uex["Ano"] == ano].copy().rename(columns={"Código Escola": "CO_ENTIDADE"})
+    df_equidade = df_equidade[df_equidade["Ano"] == ano].copy().rename(columns={"Código Escola": "CO_ENTIDADE"})
+
+    # ============
+    # Merge
+    # ============
+    df = df_censo.merge(df_uex, on="CO_ENTIDADE", how="left", suffixes=('', '_uex'))
+    df = df.merge(df_equidade, on="CO_ENTIDADE", how="left", suffixes=('', '_eq'))
+
+    # ============
+    # Marcadores auxiliares
+    # ============
+    df["acessou_pdde_agua"] = df["Destinação"].fillna("").str.contains(r"\b(água|agua)\b", case=False)
+    df["tem_uex"] = df["CNPJ UEX"].notna() & (df["CNPJ UEX"] != df["CNPJ EEX"])
+
+    df["elegivel"] = (
+        (df["TP_LOCALIZACAO"] == 2) &
+        (df["IN_AGUA_POTAVEL"] == 0) &
+        (df["TP_OCUPACAO_PREDIO_ESCOLAR"] == 1) &
+        df["tem_uex"] &
+        ~df["acessou_pdde_agua"] &
+        ((df["IN_AGUA_POCO_ARTESIANO"] != 1) & (df["IN_AGUA_REDE_PUBLICA"] != 1))
+    )
+
+    df["potencial"] = (
+        (df["TP_LOCALIZACAO"] == 2) &
+        ~df["acessou_pdde_agua"] &
+        ((df["IN_AGUA_POCO_ARTESIANO"] != 1) & (df["IN_AGUA_REDE_PUBLICA"] != 1))
+    )
+
+    # Evitar dupla contagem
+    df["potencial"] = df["potencial"] & (~df["elegivel"])
+
+    # ============
+    # Faixa de repasse estimado por escola
+    # ============
+    def calcular_faixa_recurso(matriculas):
+        if pd.isna(matriculas):
+            return 0
+        elif matriculas <= 50:
+            return 30000
+        elif matriculas <= 150:
+            return 35000
+        else:
+            return 45000
+
+    df["repasse_estimado"] = df["QT_MAT_BAS"].apply(calcular_faixa_recurso)
+
+    # ============
+    # Valores por grupo
+    # ============
+    # 1. Acessaram: soma real dos valores pagos
+    acessaram_valor = df[df["acessou_pdde_agua"]]["Valor Total"].fillna(0).sum()
+
+    # 2. Elegíveis: soma estimada
+    elegiveis_valor = df[df["elegivel"]]["repasse_estimado"].sum()
+
+    # 3. Potenciais: soma estimada
+    potenciais_valor = df[df["potencial"]]["repasse_estimado"].sum()
+
+    # ============
+    # Gráfico
+    # ============
+    categorias = [
+        "Acessaram\nPDDE Água",
+        "Escolas Elegíveis",
+        "Escolas Potenciais"
+    ]
+    valores = [acessaram_valor, elegiveis_valor, potenciais_valor]
+    cores = ['#B0E0E6', '#FFC107', '#FFA07A']
+
+    fig, ax = plt.subplots(figsize=(10, 7))
+    bars = ax.bar(categorias, valores, color=cores, edgecolor='white')
+
+    ax.set_facecolor("black")
+    fig.patch.set_facecolor("black")
+    ax.set_title(f"Impacto Financeiro PDDE Água - {municipio} ({ano})", color="#FFA07A", fontsize=17)
+    ax.tick_params(axis='x', colors="#FFA07A", labelsize=15)
+    ax.tick_params(axis='y', colors="#FFA07A", labelsize=10)
+    ax.set_xlabel("Fonte: PDDE Info e Censo Escolar", color="#FFA07A", fontsize=13)
+    for spine in ax.spines.values():
+        spine.set_color("#FFA07A")
+
+    for bar in bars:
+        yval = bar.get_height()
+        label = f'R$ {yval:,.0f}'.replace(',', '.')
+        ax.text(bar.get_x() + bar.get_width()/2.0, yval + (yval * 0.01),
+                label, ha='center', va='bottom',
+                fontsize=14, color='white', fontweight="bold")
+
+    st.pyplot(fig)
 
 #===========================
 # PAGINA POVOS TRADICIONAIS

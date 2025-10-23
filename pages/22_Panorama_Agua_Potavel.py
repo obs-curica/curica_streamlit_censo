@@ -49,7 +49,9 @@ from scripts.graficos import (grafico_agua_total_dados_brutos,
                               grafico_pdde_agua_por_ano,
                               grafico_pdde_agua_por_municipio,
                               grafico_pdde_agua_escolas,
-                              grafico_pdde_agua_financeiro                              
+                              grafico_pdde_agua_financeiro,
+                              grafico_pdde_agua_escolas_municipios,
+                              grafico_pdde_agua_financeiro_municipios
 )
 
 # Configuração visual
@@ -325,6 +327,21 @@ with col2:
     grafico_pdde_agua_financeiro(df_panorama_agua, df_uex, df_pdde_equidade)    
 
 st.write(texto_pan_agua_pdde_financeiro_analise())
+
+# Selectbox do município
+municipios_disponiveis = sorted(df_panorama_agua['NO_MUNICIPIO'].unique())
+    
+municipio = st.selectbox(
+    "Selecione o Município:",
+    options=municipios_disponiveis,
+    key="pdde_agua_escola_municipios"
+)
+
+col1, col2 = st.columns(2)
+with col1:
+    grafico_pdde_agua_escolas_municipios(df_panorama_agua, df_uex, df_pdde_equidade, municipio)
+with col2:
+    grafico_pdde_agua_financeiro_municipios(df_panorama_agua, df_uex, df_pdde_equidade, municipio)
 
 st.header("Considerações Finais")
 st.write(texto_pan_agua_consideracoes_finais())
