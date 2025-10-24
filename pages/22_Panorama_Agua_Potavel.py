@@ -31,9 +31,11 @@ from scripts.textos import(texto_pan_agua_intro,
                            texto_pan_agua_pdde_agua_requisitos_uex_anexos,
                            texto_pan_agua_pdde_agua_requisitos_adesao,
                            texto_pan_agua_pdde_agua_requisitos_adesao_analise,
-                           texto_pan_agua_pdde_financeiro_intro,
+                           texto_pan_agua_pdde_financeiro_intro_01,
+                           texto_pan_agua_pdde_financeiro_intro_02,
                            texto_pan_agua_pdde_financeiro_analise,
-                           texto_pan_agua_consideracoes_finais
+                           texto_pan_agua_consideracoes_finais,
+                           texto_pan_agua_relatorios_intro
 
 )
 
@@ -53,6 +55,8 @@ from scripts.graficos import (grafico_agua_total_dados_brutos,
                               grafico_pdde_agua_escolas_municipios,
                               grafico_pdde_agua_financeiro_municipios
 )
+
+from scripts.relatorios import (pan_agua_relatorio_potavel_censo)
 
 # Configuração visual
 plt.style.use('dark_background')
@@ -318,7 +322,7 @@ st.write(texto_pan_agua_pdde_agua_requisitos_adesao_analise())
 
 st.header("Impacto Financeiro do PDDE Água")
 
-st.write(texto_pan_agua_pdde_financeiro_intro())
+st.write(texto_pan_agua_pdde_financeiro_intro_01())
 
 col1, col2 = st.columns(2)
 with col1:
@@ -326,7 +330,7 @@ with col1:
 with col2:
     grafico_pdde_agua_financeiro(df_panorama_agua, df_uex, df_pdde_equidade)    
 
-st.write(texto_pan_agua_pdde_financeiro_analise())
+st.write(texto_pan_agua_pdde_financeiro_intro_02())
 
 # Selectbox do município
 municipios_disponiveis = sorted(df_panorama_agua['NO_MUNICIPIO'].unique())
@@ -343,8 +347,14 @@ with col1:
 with col2:
     grafico_pdde_agua_financeiro_municipios(df_panorama_agua, df_uex, df_pdde_equidade, municipio)
 
+st.write(texto_pan_agua_pdde_financeiro_analise())
+
 st.header("Considerações Finais")
 st.write(texto_pan_agua_consideracoes_finais())
 
+st.header("Geração de relatórios")
+st.write(texto_pan_agua_relatorios_intro())
+
+pan_agua_relatorio_potavel_censo(df_panorama_agua, municipio=)
 
 # Relatorio das escolas com mais de 50 alunos que nao possuem UEx
