@@ -13,7 +13,6 @@ def carregar_dados(url):
     
     return df
 
-# Dicionário de renomeação de colunas para exibição amigável ao usuário
 # Dicionário de renomeação de colunas do Censo Escolar
 COLUNAS_RENOMEADAS_CENSO = {
     "NU_ANO_CENSO": "Ano do Censo",
@@ -92,19 +91,45 @@ COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO = {
     "tipo_ente": "Tipo de Ente"
 }
 
-def renomear_colunas_financiamento(df):
-    """
-    Renomeia as colunas do DataFrame para nomes mais legíveis,
-    conforme o dicionário COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO.
+# Dicionário para mapping dos valores das colunas do Censo Escolar
+DICIONARIOS_DE_MAPPING_CENSO = {
+    "TP_DEPENDENCIA": {
+        1: "Federal",
+        2: "Estadual",
+        3: "Municipal"
+    },
+    "TP_LOCALIZACAO": {
+        1: "Urbana",
+        2: "Rural"
+    },
+    "TP_LOCALIZACAO_DIFERENCIADA": {
+        0: "Não",
+        1: "Assentamento",
+        2: "Terra Indígena",
+        3: "Quilombola",
+        8: "Comunidade Tradicional"
+    },
+    "IN_LOCAL_FUNC_PREDIO_ESCOLAR": {
+        0: "Não",
+        1: "Sim"
+    },
+    "TP_OCUPACAO_PREDIO_ESCOLAR": {
+        1: "Próprio",
+        2: "Alugado",
+        3: "Cedido"
+    },
+    "IN_AGUA_POTAVEL": {
+        0: "Não",
+        1: "Sim"
+    }
+}
 
-    Parâmetros:
-    -----------
-    df : pd.DataFrame
-        DataFrame original com nomes técnicos das colunas.
-
-    Retorno:
-    --------
-    pd.DataFrame
-        DataFrame com colunas renomeadas para exibição amigável.
+# Função para aplicação do dicionário de mapping do Censo
+def aplicar_mapeamentos_censo(df):
     """
-    return df.rename(columns=COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO)
+    Aplica os dicionários de mapping às colunas do DataFrame que tiverem correspondência.
+    """
+    for coluna, dicionario in DICIONARIOS_DE_MAPPING_CENSO.items():
+        if coluna in df.columns:
+            df[coluna] = df[coluna].map(dicionario)
+    return df

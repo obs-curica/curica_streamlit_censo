@@ -5,10 +5,10 @@ import matplotlib.colors as mcolors
 import os
 import re
 
-
-
 from scripts.utils import(carregar_dados,
-                          COLUNAS_RENOMEADAS_CENSO
+                          COLUNAS_RENOMEADAS_CENSO,
+                          DICIONARIOS_DE_MAPPING_CENSO,
+                          aplicar_mapeamentos_censo
 )
 
 from scripts.textos import(texto_pan_agua_intro,
@@ -56,7 +56,7 @@ from scripts.graficos import (grafico_agua_total_dados_brutos,
                               grafico_pdde_agua_financeiro_municipios
 )
 
-from scripts.relatorios import (pan_agua_relatorio_potavel_censo)
+
 
 # Configuração visual
 plt.style.use('dark_background')
@@ -355,6 +355,53 @@ st.write(texto_pan_agua_consideracoes_finais())
 st.header("Geração de relatórios")
 st.write(texto_pan_agua_relatorios_intro())
 
-pan_agua_relatorio_potavel_censo(df_panorama_agua, municipio=)
+map_dependencia = {1: 'Federal', 2: 'Estadual', 3: 'Municipal'}
+map_localizacao = {1: 'Urbana', 2: 'Rural'}
+map_localizacao_diferenciada = {0: 'Não', 1: 'Assentamento', 2: 'Terra Indígena', 3: 'Quilombola', 8: 'Comunidade Tradicional'}
+predio_escolar = {0: 'Não', 1: 'Sim'}
+ocupacao_predio_escolar = {1: 'Próprio', 2: 'Alugado', 3: 'Cedido'}
+
+with st.form("form_pan_agua_escolas_agua_censo"):
+
+    
+    
+    # Selectbox do Município
+    municipios_disponiveis = sorted(df_panorama_agua['NO_MUNICIPIO'].unique())
+
+    municipio = st.selectbox(
+        "Selecione o Município:",
+        options=municipios_disponiveis,
+        key="relatorio_escolas_agua_censo"
+    )
+    
+    # Selectbox do ano
+    anos_disponiveis = sorted(df_panorama_agua['NU_ANO_CENSO'].unique())
+    ano_mais_recente = max(anos_disponiveis)
+    
+    ano_censo = st.selectbox(
+    "Selecione o ano do Censo Escolar:",
+    options=anos_disponiveis,
+    index=anos_disponiveis.index(ano_mais_recente),
+    key="ano_censo_pan_rede_relatorio"
+    )
+    
+    colunas_relatorio = [
+        'NU_ANO_CENSO', 'NO_MUNICIPIO', 'NO_ENTIDADE', 'CO_ENTIDADE',
+        'TP_DEPENDENCIA', 'TP_LOCALIZACAO', 'TP_LOCALIZACAO_DIFERENCIADA',
+        'DS_ENDERECO', 'IN_LOCAL_FUNC_PREDIO_ESCOLAR', 'TP_OCUPACAO_PREDIO_ESCOLAR',
+        'IN_AGUA_POTAVEL'
+    ]
+    
+    # Botão
+    submitted = st.form_submit_button("Gerar Relatório ")
+    
+    if submitted:
+        df_filtrado = df_panorama_agua[
+            (df_panorama_agua["NO_MUNICIPIO"] == municipio) &
+            (df_panorama_agua["NU_ANO_CENSO"] == ano_censo)
+        ]
+        aplicar_mapeamentos_censo(df_filtrado)
+        df_filtrado = df_filtrado[colunas_relatorio].rename(columns=COLUNAS_RENOMEADAS_CENSO)
+        st.write(df_filtrado)
 
 # Relatorio das escolas com mais de 50 alunos que nao possuem UEx
