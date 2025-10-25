@@ -355,15 +355,11 @@ st.write(texto_pan_agua_consideracoes_finais())
 st.header("Geração de relatórios")
 st.write(texto_pan_agua_relatorios_intro())
 
-map_dependencia = {1: 'Federal', 2: 'Estadual', 3: 'Municipal'}
-map_localizacao = {1: 'Urbana', 2: 'Rural'}
-map_localizacao_diferenciada = {0: 'Não', 1: 'Assentamento', 2: 'Terra Indígena', 3: 'Quilombola', 8: 'Comunidade Tradicional'}
-predio_escolar = {0: 'Não', 1: 'Sim'}
-ocupacao_predio_escolar = {1: 'Próprio', 2: 'Alugado', 3: 'Cedido'}
-
-with st.form("form_pan_agua_escolas_agua_censo"):
-
+# Relatório água potável dados brutos
+with st.form("form_pan_agua_escolas_censo"):
     
+    st.subheader("Escolas que declaram não fornecer Água Potável, segundo os dados brutos do Censo Escolar")
+    st.write("Este relatório leva em conta apenas a coluna 'IN_AGUA_POTAVEL' do Censo Escolar, que contém a declaração sobre o fornecimento ou não de água potável, sem considerar as fontes de abastecimento.")
     
     # Selectbox do Município
     municipios_disponiveis = sorted(df_panorama_agua['NO_MUNICIPIO'].unique())
@@ -371,7 +367,7 @@ with st.form("form_pan_agua_escolas_agua_censo"):
     municipio = st.selectbox(
         "Selecione o Município:",
         options=municipios_disponiveis,
-        key="relatorio_escolas_agua_censo"
+        key="relatorio_escolas_agua_censo_municipio"
     )
     
     # Selectbox do ano
@@ -382,7 +378,7 @@ with st.form("form_pan_agua_escolas_agua_censo"):
     "Selecione o ano do Censo Escolar:",
     options=anos_disponiveis,
     index=anos_disponiveis.index(ano_mais_recente),
-    key="ano_censo_pan_rede_relatorio"
+    key="relatorio_escolas_agua_censo_ano"
     )
     
     colunas_relatorio = [
@@ -398,10 +394,163 @@ with st.form("form_pan_agua_escolas_agua_censo"):
     if submitted:
         df_filtrado = df_panorama_agua[
             (df_panorama_agua["NO_MUNICIPIO"] == municipio) &
-            (df_panorama_agua["NU_ANO_CENSO"] == ano_censo)
-        ]
+            (df_panorama_agua["NU_ANO_CENSO"] == ano_censo) &
+            (df_panorama_agua["IN_AGUA_POTAVEL"] == 0)
+        ].copy()
+        
         aplicar_mapeamentos_censo(df_filtrado)
         df_filtrado = df_filtrado[colunas_relatorio].rename(columns=COLUNAS_RENOMEADAS_CENSO)
-        st.write(df_filtrado)
+        st.write(df_filtrado.reset_index(drop=True))
+
+# Relatório água potável segundo as fontes de abastecimento
+with st.form("form_pan_agua_escolas_fontes"):
+    
+    st.subheader("Escolas que declaram fontes de abastecimento impróprias para o consumo")
+    st.write("Este relatório leva em conta as fontes de abastecimento declaradas pelas escolas ao Censo Escolar. São mostradas as fontes consideradas impróprias para o consumo humano.")
+    
+    # Selectbox do Município
+    municipios_disponiveis = sorted(df_panorama_agua['NO_MUNICIPIO'].unique())
+
+    municipio = st.selectbox(
+        "Selecione o Município:",
+        options=municipios_disponiveis,
+        key="relatorio_escolas_agua_fontes_municipio"
+    )
+    
+    # Selectbox do ano
+    anos_disponiveis = sorted(df_panorama_agua['NU_ANO_CENSO'].unique())
+    ano_mais_recente = max(anos_disponiveis)
+    
+    ano_censo = st.selectbox(
+    "Selecione o ano do Censo Escolar:",
+    options=anos_disponiveis,
+    index=anos_disponiveis.index(ano_mais_recente),
+    key="relatorio_escolas_agua_fontes_ano"
+    )
+    
+    colunas_relatorio = [
+        'NU_ANO_CENSO', 'NO_MUNICIPIO', 'NO_ENTIDADE', 'CO_ENTIDADE',
+        'TP_DEPENDENCIA', 'TP_LOCALIZACAO', 'TP_LOCALIZACAO_DIFERENCIADA',
+        'DS_ENDERECO', 'IN_LOCAL_FUNC_PREDIO_ESCOLAR', 'TP_OCUPACAO_PREDIO_ESCOLAR',
+        'IN_AGUA_POTAVEL', 'IN_AGUA_REDE_PUBLICA', 'IN_AGUA_POCO_ARTESIANO',
+        'IN_AGUA_CACIMBA', 'IN_AGUA_FONTE_RIO', 'IN_AGUA_INEXISTENTE',
+        'IN_AGUA_CARRO_PIPA'
+    ]
+    
+    # Botão
+    submitted = st.form_submit_button("Gerar Relatório ")
+    
+    if submitted:
+        df_filtrado = df_panorama_agua[
+            (df_panorama_agua["NO_MUNICIPIO"] == municipio) &
+            (df_panorama_agua["NU_ANO_CENSO"] == ano_censo) &
+            (df_panorama_agua["IN_AGUA_REDE_PUBLICA"] != 1) &
+            (df_panorama_agua["IN_AGUA_POCO_ARTESIANO"] != 1)
+        ].copy()
+        
+        aplicar_mapeamentos_censo(df_filtrado)
+        df_filtrado = df_filtrado[colunas_relatorio].rename(columns=COLUNAS_RENOMEADAS_CENSO)
+        st.write(df_filtrado.reset_index(drop=True))
+
+# Relatório água potável segundo as fontes de abastecimento
+with st.form("form_pan_agua_pdde_agua_escolas_contempladas"):
+    
+    st.subheader("Escolas que receberam recursos do PDDE Água")
+    st.write("Este relatório enumera as escolas que receberam os recursos do PDDE Água, por Município.")
+    
+    # Selectbox do Município
+    municipios_disponiveis = sorted(df_panorama_agua['NO_MUNICIPIO'].unique())
+
+    municipio = st.selectbox(
+        "Selecione o Município:",
+        options=municipios_disponiveis,
+        key="relatorio_escolas_pdde_agua_contempladas_municipio"
+    )
+    
+    # Selectbox do ano
+    anos_disponiveis = sorted(df_panorama_agua['NU_ANO_CENSO'].unique())
+    ano_mais_recente = max(anos_disponiveis)
+    
+    ano = st.selectbox(
+    "Selecione o ano do Censo Escolar:",
+    options=anos_disponiveis,
+    index=anos_disponiveis.index(ano_mais_recente),
+    key="relatorio_escolas_pdde_agua_contempladas_ano"
+    )
+    
+    colunas_relatorio = ["Ano", "Município", "Código Escola", "Nome Escola",
+                         "Quantidade Alunos", "Rede Atendimento", "CNPJ Executora",
+                         "Nome Executora", "Destinação", "Valor Total", 
+                         "Data da Ord. de Pagamento"        
+    ]
+    
+    filtro_agua = df_pdde_equidade["Destinação"].str.contains(r"\b(água|agua)\b", case=False, na=False, regex=True).copy()
+    
+    # Botão
+    submitted = st.form_submit_button("Gerar Relatório ")
+    
+    if submitted:
+        df_pdde_agua = df_pdde_equidade[filtro_agua]
+        df_filtrado = df_pdde_agua[
+            (df_pdde_agua["Município"] == municipio) &
+            (df_pdde_agua["Ano"] == ano)
+        ].copy()
+        
+        if df_filtrado.empty:
+            st.warning(f"O Município de {municipio} não recebeu recursos do PDDE Água no ano de {ano}.")
+        
+        else:
+            st.write(df_filtrado[colunas_relatorio].reset_index(drop=True))
+        
+# Relatório das escolas elegíveis ao PDDE Água
+with st.form("form_pan_agua_escolas_elegiveis"):
+    
+    st.subheader("Escolas elegíveis ao PDDE Água")
+    st.write("Este relatório detalha as escolas que poderiam acessar o PDDE Água imediatamente e não o fazem por falta de adesão.")
+    
+    # Selectbox do Município
+    municipios_disponiveis = sorted(df_panorama_agua['NO_MUNICIPIO'].unique())
+
+    municipio = st.selectbox(
+        "Selecione o Município:",
+        options=municipios_disponiveis,
+        key="relatorio_escolas_elegiveis_municipio"
+    )
+    
+    # Selectbox do ano
+    anos_disponiveis = sorted(df_panorama_agua['NU_ANO_CENSO'].unique())
+    ano_mais_recente = max(anos_disponiveis)
+    
+    ano_censo = st.selectbox(
+    "Selecione o ano do Censo Escolar:",
+    options=anos_disponiveis,
+    index=anos_disponiveis.index(ano_mais_recente),
+    key="relatorio_escolas_elegiveis_ano"
+    )
+    
+    colunas_relatorio = [
+        'NU_ANO_CENSO', 'NO_MUNICIPIO', 'NO_ENTIDADE', 'CO_ENTIDADE',
+        'TP_DEPENDENCIA', 'TP_LOCALIZACAO', 'TP_LOCALIZACAO_DIFERENCIADA',
+        'DS_ENDERECO', 'IN_LOCAL_FUNC_PREDIO_ESCOLAR', 'TP_OCUPACAO_PREDIO_ESCOLAR',
+        'IN_AGUA_POTAVEL', 'IN_AGUA_REDE_PUBLICA', 'IN_AGUA_POCO_ARTESIANO',
+        'IN_AGUA_CACIMBA', 'IN_AGUA_FONTE_RIO', 'IN_AGUA_INEXISTENTE',
+        'IN_AGUA_CARRO_PIPA'
+    ]
+    
+    # Botão
+    submitted = st.form_submit_button("Gerar Relatório ")
+    
+    if submitted:
+        df_filtrado = df_panorama_agua[
+            (df_panorama_agua["NO_MUNICIPIO"] == municipio) &
+            (df_panorama_agua["NU_ANO_CENSO"] == ano_censo) &
+            (df_panorama_agua["IN_AGUA_REDE_PUBLICA"] != 1) &
+            (df_panorama_agua["IN_AGUA_POCO_ARTESIANO"] != 1)
+        ].copy()
+        
+        aplicar_mapeamentos_censo(df_filtrado)
+        df_filtrado = df_filtrado[colunas_relatorio].rename(columns=COLUNAS_RENOMEADAS_CENSO)
+        st.write(df_filtrado.reset_index(drop=True))
+
 
 # Relatorio das escolas com mais de 50 alunos que nao possuem UEx

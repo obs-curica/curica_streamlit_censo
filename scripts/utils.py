@@ -121,6 +121,30 @@ DICIONARIOS_DE_MAPPING_CENSO = {
     "IN_AGUA_POTAVEL": {
         0: "Não",
         1: "Sim"
+    },
+    "IN_AGUA_REDE_PUBLICA": {
+        0: "Não",
+        1: "Sim"
+    },
+    "IN_AGUA_POCO_ARTESIANO": {
+        0: "Não",
+        1: "Sim"
+    },
+    "IN_AGUA_CACIMBA": {
+        0: "Não",
+        1: "Sim"
+    },
+    "IN_AGUA_FONTE_RIO": {
+        0: "Não",
+        1: "Sim"
+    },
+    "IN_AGUA_INEXISTENTE": {
+        0: "Não",
+        1: "Sim"
+    },
+    "IN_AGUA_CARRO_PIPA": {
+        0: "Não",
+        1: "Sim"
     }
 }
 
