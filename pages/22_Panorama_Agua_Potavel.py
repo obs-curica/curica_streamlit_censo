@@ -56,6 +56,7 @@ from scripts.graficos import (grafico_agua_total_dados_brutos,
                               grafico_pdde_agua_financeiro_municipios
 )
 
+from scripts.relatorios import teste
 
 
 # Configuração visual
@@ -554,3 +555,7 @@ with st.form("form_pan_agua_escolas_elegiveis"):
 
 
 # Relatorio das escolas com mais de 50 alunos que nao possuem UEx
+
+st.header("Teste")
+
+teste(df_panorama_agua)

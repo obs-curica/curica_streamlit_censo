@@ -1,44 +1,57 @@
 # Panorama Água
 
-def pan_agua_relatorio_potavel_censo(df_censo, municipio, ano_censo):
-    """
-    Gera um relatório das escolas que marcaram fornecer água potável no Censo Escolar, por Município.
-    
-    Parâmetros:
-    -----------
-    df_censo : pd.DataFrame
-        DataFrame df_panorama_agua.
-    municipio : 
-    ano_censo : int
-        Ano do censo escolar selecionado pelo usuário na interface.
-    """
+def teste(df):
+    # Relatório das escolas elegíveis ao PDDE Água
     import streamlit as st
     import pandas as pd
+    from scripts.utils import aplicar_mapeamentos_censo
+    from scripts.utils import COLUNAS_RENOMEADAS_CENSO
     
-    with st.form("pan_agua_relatorio_potavel_censo"):
+    with st.form("form_pan_agua_teste"):
 
-    st.subheader("Escolas que declaram ofertar água potável no Censo Escolar")
-    st.write("Dados disponíveis a partir do ano de 2019.")
+        st.subheader("Escolas elegíveis ao PDDE Água")
+        st.write("Este relatório detalha as escolas que poderiam acessar o PDDE Água imediatamente e não o fazem por falta de adesão.")
 
-    submitted = st.form_submit_button("Gerar Dados")
+        # Selectbox do Município
+        municipios_disponiveis = sorted(df['NO_MUNICIPIO'].unique())
 
-    if submitted:
-        # Garantir que a coluna esteja numérica
-        df = df_panorama_financiamento.copy()
-        df["indicador_despesa_fundeb_profissionais"] = pd.to_numeric(
-            df["indicador_despesa_fundeb_profissionais"].astype(str).str.replace(",", "."),
-            errors="coerce"
+        municipio = st.selectbox(
+            "Selecione o Município:",
+            options=municipios_disponiveis,
+            key="relatorio_teste_mun"
         )
 
-        # Filtrar por descumprimento (< 70%) a partir de 2021
-        df_filtrado = df[
-            (df["ano"] >= 2021) &
-            (df["indicador_despesa_fundeb_profissionais"] < 70)
-        ][["nome", "cod_ibge", "ano", "indicador_despesa_fundeb_profissionais"]].copy()
+        # Selectbox do ano
+        anos_disponiveis = sorted(df['NU_ANO_CENSO'].unique())
+        ano_mais_recente = max(anos_disponiveis)
 
-        if df_filtrado.empty:
-            st.warning("Não houve descumprimento para os anos disponíveis.")
-        else:
-            # Renomear colunas com base no dicionário do projeto
-            df_renomeado = df_filtrado.rename(columns=COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO)
-            st.dataframe(df_renomeado)
+        ano_censo = st.selectbox(
+        "Selecione o ano do Censo Escolar:",
+        options=anos_disponiveis,
+        index=anos_disponiveis.index(ano_mais_recente),
+        key="relatorio_teste_ano"
+        )
+
+        colunas_relatorio = [
+            'NU_ANO_CENSO', 'NO_MUNICIPIO', 'NO_ENTIDADE', 'CO_ENTIDADE',
+            'TP_DEPENDENCIA', 'TP_LOCALIZACAO', 'TP_LOCALIZACAO_DIFERENCIADA',
+            'DS_ENDERECO', 'IN_LOCAL_FUNC_PREDIO_ESCOLAR', 'TP_OCUPACAO_PREDIO_ESCOLAR',
+            'IN_AGUA_POTAVEL', 'IN_AGUA_REDE_PUBLICA', 'IN_AGUA_POCO_ARTESIANO',
+            'IN_AGUA_CACIMBA', 'IN_AGUA_FONTE_RIO', 'IN_AGUA_INEXISTENTE',
+            'IN_AGUA_CARRO_PIPA'
+        ]
+
+        # Botão
+        submitted = st.form_submit_button("Gerar Relatório ")
+
+        if submitted:
+            df_filtrado = df[
+                (df["NO_MUNICIPIO"] == municipio) &
+                (df["NU_ANO_CENSO"] == ano_censo) &
+                (df["IN_AGUA_REDE_PUBLICA"] != 1) &
+                (df["IN_AGUA_POCO_ARTESIANO"] != 1)
+            ].copy()
+
+            aplicar_mapeamentos_censo(df_filtrado)
+            df_filtrado = df_filtrado[colunas_relatorio].rename(columns=COLUNAS_RENOMEADAS_CENSO)
+            st.write(df_filtrado.reset_index(drop=True))
