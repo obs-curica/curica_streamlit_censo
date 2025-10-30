@@ -3122,7 +3122,6 @@ def grafico_pdde_agua_financeiro(df_censo, df_uex, df_equidade):
 
     st.pyplot(fig)
 
-
 def grafico_pdde_agua_escolas_municipios(df_censo, df_uex, df_equidade, nome_municipio):
     """
     Gera gráfico de barras verticais para o último ano disponível,
@@ -3253,7 +3252,6 @@ def grafico_pdde_agua_escolas_municipios(df_censo, df_uex, df_equidade, nome_mun
 
 
     st.pyplot(fig)
-
 
 def grafico_pdde_agua_financeiro_municipios(df_censo, df_uex, df_equidade, municipio):
     """
