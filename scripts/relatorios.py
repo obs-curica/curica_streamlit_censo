@@ -376,6 +376,158 @@ def relatorio_pdde_agua_escolas_potenciais(df_agua, df_uex, df_equidade):
                 aplicar_mapeamentos_censo(df_potencial)
                 df_potencial = df_potencial[colunas_relatorio].rename(columns=COLUNAS_RENOMEADAS_CENSO)
                 st.write(df_potencial.reset_index(drop=True))
+
+def relatorio_pdde_escolas_sem_uex(df_agua, df_uex):
+    """
+    Relatório das escolas sem Unidade Executora, por Município e ano.
+
+    Parâmetros:
+    -----------
+        df_agua : pd.DataFrame
+        df_uex : pd.DataFrame
+    """
+    import streamlit as st
+    from scripts.utils import COLUNAS_RENOMEADAS_CENSO
+    from scripts.utils import aplicar_mapeamentos_censo
+    
+    with st.form("form_pan_agua_escolas_sem_uex"):
+        
+        st.subheader("Escolas sem Unidade Executora")
+        st.write("Este relatório detalha as escolas que não possuem Unidade Executora.")
+
+        # Selectbox do Município
+        municipios_disponiveis = sorted(df_agua['NO_MUNICIPIO'].unique())
+
+        municipio = st.selectbox(
+            "Selecione o Município:",
+            options=municipios_disponiveis,
+            key="relatorio_escolas_sem_uex_municipio"
+        )
+
+        # Selectbox do ano
+        anos_disponiveis = sorted(df_agua['NU_ANO_CENSO'].unique())
+        ano_mais_recente = max(anos_disponiveis)
+
+        ano_censo = st.selectbox(
+        "Selecione o ano do Censo Escolar:",
+        options=anos_disponiveis,
+        index=anos_disponiveis.index(ano_mais_recente),
+        key="relatorio_escolas_sem_uex_ano"
+        )
+
+        colunas_relatorio = [
+            'NU_ANO_CENSO', 'NO_MUNICIPIO', 'NO_ENTIDADE', 'CO_ENTIDADE',
+            'TP_DEPENDENCIA', 'TP_LOCALIZACAO', 'TP_LOCALIZACAO_DIFERENCIADA',
+            'DS_ENDERECO', 'QT_MAT_BAS'
+        ]
+        
+        # Botão
+        submitted = st.form_submit_button("Gerar Relatório")
+
+        if submitted:
+            df_agua_ano = df_agua[df_agua["NU_ANO_CENSO"] == ano_censo].copy()
+            df_uex_ano = df_uex[df_uex["Ano"] == ano_censo].copy()
+            
+            # Renomear colunas para merge
+            df_uex_ano = df_uex_ano.rename(columns={"Código Escola": "CO_ENTIDADE"})
+            
+            # Merge dos 3 dataframes
+            df_merged = df_agua_ano.merge(df_uex_ano, on="CO_ENTIDADE", how="left", suffixes=('', '_uex'))
+            
+            # Coluna auxiliar: tem UEX própria
+            df_merged["tem_uex"] = df_merged["CNPJ UEX"].notna() & (df_merged["CNPJ UEX"] != df_merged["CNPJ EEX"])
+
+            df_filtrado = df_merged[(
+                (df_merged["NO_MUNICIPIO"] == municipio) &
+                (df_merged["NU_ANO_CENSO"] == ano_censo) &
+                (df_merged["tem_uex"] == False) 
+            )
+            ].copy()
+            
+            if df_filtrado.empty:
+                st.warning(f"Todas as escolas do Município de {municipio} estão vinculadas a alguma UEx no ano de {ano_censo}.")
+            else: 
+                aplicar_mapeamentos_censo(df_filtrado)
+                df_filtrado = df_filtrado[colunas_relatorio].rename(columns=COLUNAS_RENOMEADAS_CENSO)
+                st.write(df_filtrado.reset_index(drop=True))
+
+def relatorio_pdde_escolas_sem_uex_proprias(df_agua, df_uex):
+    """
+    Relatório das escolas com mais de 50 alunos sem Unidade Executora própria, por Município e ano.
+
+    Parâmetros:
+    -----------
+        df_agua : pd.DataFrame
+        df_uex : pd.DataFrame
+    """
+    import streamlit as st
+    from scripts.utils import COLUNAS_RENOMEADAS_CENSO
+    from scripts.utils import aplicar_mapeamentos_censo
+    
+    with st.form("form_pan_agua_escolas_sem_uex_proprias"):
+        
+        st.subheader("Escolas com mais de 50 alunos sem Unidade Executora própria")
+        st.write("Este relatório detalha as escolas que possuem mais de cinquenta alunos matriculados e que não possui Unidade Executora própria.")
+
+        # Selectbox do Município
+        municipios_disponiveis = sorted(df_agua['NO_MUNICIPIO'].unique())
+
+        municipio = st.selectbox(
+            "Selecione o Município:",
+            options=municipios_disponiveis,
+            key="relatorio_escolas_sem_uex_propria_municipio"
+        )
+
+        # Selectbox do ano
+        anos_disponiveis = sorted(df_agua['NU_ANO_CENSO'].unique())
+        ano_mais_recente = max(anos_disponiveis)
+
+        ano_censo = st.selectbox(
+        "Selecione o ano do Censo Escolar:",
+        options=anos_disponiveis,
+        index=anos_disponiveis.index(ano_mais_recente),
+        key="relatorio_escolas_sem_uex_propria_ano"
+        )
+
+        colunas_relatorio = [
+            'NU_ANO_CENSO', 'NO_MUNICIPIO', 'NO_ENTIDADE', 'CO_ENTIDADE',
+            'TP_DEPENDENCIA', 'QT_MAT_BAS', 'TP_LOCALIZACAO', 'TP_LOCALIZACAO_DIFERENCIADA',
+            'DS_ENDERECO'
+        ]
+        
+        # Botão
+        submitted = st.form_submit_button("Gerar Relatório")
+
+        if submitted:
+            df_agua_ano = df_agua[df_agua["NU_ANO_CENSO"] == ano_censo].copy()
+            df_uex_ano = df_uex[df_uex["Ano"] == ano_censo].copy()
+            
+            # Renomear colunas para merge
+            df_uex_ano = df_uex_ano.rename(columns={"Código Escola": "CO_ENTIDADE"})
+            
+            # Merge dos 3 dataframes
+            df_merged = df_agua_ano.merge(df_uex_ano, on="CO_ENTIDADE", how="left", suffixes=('', '_uex'))
+            
+            # Coluna auxiliar: tem UEX própria
+            df_merged["tem_uex"] = df_merged["CNPJ UEX"].notna() & (df_merged["CNPJ UEX"] != df_merged["CNPJ EEX"])
+
+            df_filtrado = df_merged[(
+                (df_merged["NO_MUNICIPIO"] == municipio) &
+                (df_merged["NU_ANO_CENSO"] == ano_censo) &
+                (df_merged["QT_MAT_BAS"] >= 50) &
+                (df_merged["tem_uex"] == False) #continuar logica aqui
+                
+
+            )
+            ].copy()
+            
+            if df_filtrado.empty:
+                st.warning(f"O Município de {municipio} não  possui escolas com mais de cinquenta alunos sem Unidade Executora própria no ano de {ano_censo}.")
+            else: 
+                aplicar_mapeamentos_censo(df_filtrado)
+                df_filtrado = df_filtrado[colunas_relatorio].rename(columns=COLUNAS_RENOMEADAS_CENSO)
+                st.write(df_filtrado.reset_index(drop=True))
+
                 
 def relatorio_pdde_agua_escolas_contempladas_irregulares(df_agua, df_equidade):
     """
@@ -449,7 +601,7 @@ def relatorio_pdde_agua_escolas_contempladas_irregulares(df_agua, df_equidade):
             ].copy()
 
             if df_filtrado.empty:
-                st.warning(f"Nenhuma escola do Município de {municipio} que recebeu recursos do PDDE Água no ano de {ano} informa não oferecer água potável ou declara fontes impróprias para o consumo.")
+                st.warning(f"Nenhuma escola do Município de {municipio} recebeu recursos do PDDE Água no ano de {ano}.")
 
             else:
                 st.write(df_filtrado[colunas_relatorio].reset_index(drop=True))
