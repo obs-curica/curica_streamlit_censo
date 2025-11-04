@@ -1,5 +1,198 @@
-# Panorama Água
+#=========================
+# Panorama Financiamento
+#=========
 
+def relatorio_fin_despesas_profissionais(df_fin):
+    """
+    Relatório que apresenta os Entes Federados que descumpriram a despesa 
+    mínima de 70% com remuneração dos profissionais da educação. 
+    Dados disponíveis a partir do ano de 2021.
+    
+    Parâmetros:
+    -----------
+    df_fin : pd.DataFrame
+        DataFrame do Panorama do Financiamento.
+    """
+    import streamlit as st
+    import pandas as pd
+    from scripts.utils import COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO
+    
+    with st.form("pan_fin_form_remuneracao_profissionais_teste"):
+
+        st.subheader("Descumprimento da despesa mínima com profissionais da educação")
+        st.write("Entes que descumpriram a despesa mínima de 70% com remuneração dos profissionais da educação. Dados disponíveis a partir do ano de 2021.")
+
+        submitted = st.form_submit_button("Gerar Relatório")
+
+        if submitted:
+            # Garantir que a coluna esteja numérica
+            df = df_fin.copy()
+            df["indicador_despesa_fundeb_profissionais"] = pd.to_numeric(
+                df["indicador_despesa_fundeb_profissionais"].astype(str).str.replace(",", "."),
+                errors="coerce"
+            )
+
+            # Filtrar por descumprimento (< 70%) a partir de 2021
+            df_filtrado = df[
+                (df["ano"] >= 2021) &
+                (df["indicador_despesa_fundeb_profissionais"] < 70)
+            ][["nome", "cod_ibge", "ano", "indicador_despesa_fundeb_profissionais"]].copy()
+
+            if df_filtrado.empty:
+                st.warning("Não houve descumprimento para os anos disponíveis.")
+            else:
+                df_filtrado = df_filtrado.rename(columns=COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO)
+                st.write(df_filtrado.reset_index(drop=True))
+
+def relatorio_fin_superavit(df_fin):
+    """
+    Relatório que apresenta os Entes Federados que descumpriram 
+    o valor máximo de superávit permitido. Dados disponíveis a 
+    partir do ano de 2021.
+    
+    Parâmetros:
+    -----------
+    df_fin : pd.DataFrame
+        DataFrame do Panorama do Financiamento.
+    """
+    import streamlit as st
+    import pandas as pd
+    from scripts.utils import COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO
+
+    with st.form("pan_fin_form_superavit"):
+
+        st.subheader("Descumprimento do máximo de 10% de superávit no exercício")
+        st.write("Entes que descumpriram o valor máximo de superávit permitido. Dados disponíveis a partir do ano de 2021.")
+
+        submitted = st.form_submit_button("Gerar Relatório")
+
+        if submitted:
+            # Copiar o DataFrame
+            df = df_fin.copy()
+
+            # Garantir que as colunas estejam numéricas
+            colunas_max_superavit = ["valor_receita_total_fundeb", "valor_receita_nao_aplicada", "indicador_receita_nao_aplicada"]
+            for col in colunas_max_superavit:
+                df[col] = pd.to_numeric(
+                    df[col].astype(str).str.replace(",", "."),
+                    errors="coerce"
+                )
+
+            # Filtrar entes que não atingiram o mínimo
+            df_filtrado = df[
+                (df["ano"] >= 2021) &
+                (df["indicador_receita_nao_aplicada"] > 10)
+            ][["nome", "cod_ibge", "ano", "valor_receita_total_fundeb", "valor_receita_nao_aplicada", "indicador_receita_nao_aplicada"]].copy()
+
+            if df_filtrado.empty:
+                st.warning("Não houve descumprimento para os anos disponíveis.")
+            else:
+                df_renomeado = df_filtrado.rename(columns=COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO)
+                st.write(df_renomeado.reset_index(drop=True))
+
+def relatorio_fin_minimo_constitucional(df_fin):
+    """
+    Relatório que apresenta os Entes Federados que descumpriram 
+    o valor mínimo de 25% de investimento em educação. 
+    Dados disponíveis a partir do ano de 2021.
+    
+    Parâmetros:
+    -----------
+    df_fin : pd.DataFrame
+        DataFrame do Panorama do Financiamento.
+    """
+    import streamlit as st
+    import pandas as pd
+    from scripts.utils import COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO
+    
+    with st.form("pan_fin_form_minimo_constitucionas"):
+
+        st.subheader("Descumprimento do Mínimo Constitucional (25%)")
+        st.write("Entes que descumpriram a aplicação mínima de 25% exigida. Dados disponíveis a partir do ano de 2021.")
+
+        submitted = st.form_submit_button("Gerar Relatório")
+
+        if submitted:
+            # Copiar o DataFrame
+            df = df_fin.copy()
+
+            # Garantir que as colunas estejam numéricas
+            colunas_min_const = ["valor_limite_const_exigido", "valor_limite_const_aplicado"]
+            for col in colunas_min_const:
+                df[col] = pd.to_numeric(
+                    df[col].astype(str).str.replace(",", "."),
+                    errors="coerce"
+                )
+
+            # Filtrar entes que não atingiram o mínimo
+            df_filtrado = df[
+                (df["ano"] >= 2021) &
+                (df["indicador_limite_constitucional"] < 25)
+            ][["nome", "cod_ibge", "ano", "valor_limite_const_exigido", "valor_limite_const_aplicado", "indicador_limite_constitucional"]].copy()
+
+            if df_filtrado.empty:
+                st.warning("Não houve descumprimento para os anos disponíveis.")
+            else:
+                # Renomear colunas com base no dicionário do projeto
+                df_renomeado = df_filtrado.rename(columns=COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO)
+                st.write(df_renomeado.reset_index(drop=True))
+
+def relatorio_fin_dados_financeiros(df_fin):
+    """
+    Relatório que apresenta todos os dados financeiros utilizados neste Panorama. 
+    Dados disponíveis a partir do ano de 2021.
+    
+    Parâmetros:
+    -----------
+    df_fin : pd.DataFrame
+        DataFrame do Panorama do Financiamento.
+    """
+    import streamlit as st
+    from scripts.utils import COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO
+    
+    with st.form("pan_fin_form_dados_financeiros"):
+
+        st.subheader("Dados Financeiros")
+        st.write("Aqui você gera uma tabela com todos os dados financeiros utilizados neste Panorama. Estão disponíveis os dados a partir do ano de 2021.")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            entes_disponiveis = sorted(df_fin["nome"].unique())
+            ente_selecionado = st.multiselect(
+                "Selecione o(s) ente(s):",
+                options=entes_disponiveis,
+                key="relatorio_financiamento_ente"
+            )
+
+        with col2:
+            anos_disponiveis = sorted(df_fin["ano"].unique())
+            anos_selecionados = st.multiselect(
+                "Selecione o(s) ano(s):",
+                options=anos_disponiveis,
+                default=[max(anos_disponiveis)],
+                key="relatorio_financiamento_anos"
+            )
+
+        # Botão de submissão
+        submitted = st.form_submit_button("Gerar Relatório")
+
+        if submitted:
+            # Filtrar o DataFrame corretamente
+            df_filtrado = df_fin[
+                (df_fin["nome"].isin(ente_selecionado)) &
+                (df_fin["ano"].isin(anos_selecionados))
+            ].copy()
+
+            if df_filtrado.empty:
+                st.warning("Não há dados disponíveis para o ente e ano selecionados.")
+            else:
+                df_renomeado = df_filtrado.rename(columns=COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO)
+                st.write(df_renomeado.reset_index(drop=True))
+
+#==============
+# Panorama Água
+#==============
 def relatorio_agua_dados_brutos(df_agua):
     """
     Relatório que leva em conta apenas a coluna 'IN_AGUA_POTAVEL' do Censo 
@@ -77,7 +270,7 @@ def relatorio_agua_fontes(df_agua):
     with st.form("form_pan_agua_escolas_fontes"):
 
         st.subheader("Escolas que declaram fontes de abastecimento impróprias para o consumo")
-        st.write("Este relatório leva em conta as fontes de abastecimento declaradas pelas escolas ao Censo Escolar. São mostradas as fontes consideradas impróprias para o consumo humano.")
+        st.write("Este relatório lista as escolas que declaram fontes de abastecimento consideradas impróprias para o consumo humano.")
 
         # Selectbox do Município
         municipios_disponiveis = sorted(df_agua['NO_MUNICIPIO'].unique())
@@ -615,6 +808,3 @@ def relatorio_pdde_agua_escolas_contempladas_irregulares(df_agua, df_equidade):
             else:
                 st.write(df_filtrado[colunas_relatorio].reset_index(drop=True))
                 
-# escolas que não possuem nenhuma UEx
-
-# escolas com mais de 50 alunos que não possuem UEx própria (integram consorcios)

@@ -157,3 +157,12 @@ def aplicar_mapeamentos_censo(df):
         if coluna in df.columns:
             df[coluna] = df[coluna].map(dicionario)
     return df
+
+def aplicar_mapeamentos_df_financiamento(df):
+    """
+    Aplica os dicionários de mapping às colunas do DataFrame que tiverem correspondência.
+    """
+    for coluna, dicionario in COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO.items():
+        if coluna in df.columns:
+            df[coluna] = df[coluna].map(dicionario)
+    return df
