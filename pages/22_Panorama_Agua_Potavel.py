@@ -61,8 +61,9 @@ from scripts.relatorios import (relatorio_agua_dados_brutos,
                                 relatorio_pdde_agua_escolas_contempladas,
                                 relatorio_pdde_agua_escolas_elegiveis,
                                 relatorio_pdde_agua_escolas_potenciais,
-                                relatorio_pdde_agua_escolas_contempladas_irregulares,
-                                relatorio_pdde_escolas_sem_uex
+                                relatorio_pdde_escolas_sem_uex,
+                                relatorio_pdde_escolas_sem_uex_proprias,
+                                relatorio_pdde_agua_escolas_contempladas_irregulares
 )
 
 # Configuração visual
@@ -377,6 +378,6 @@ relatorio_pdde_agua_escolas_potenciais(df_panorama_agua, df_uex, df_pdde_equidad
 
 relatorio_pdde_escolas_sem_uex(df_panorama_agua, df_uex)
 
-# Relatorio das escolas com mais de 50 alunos que nao possuem UEx
+relatorio_pdde_escolas_sem_uex_proprias(df_panorama_agua, df_uex)
 
 relatorio_pdde_agua_escolas_contempladas_irregulares(df_panorama_agua, df_pdde_equidade)

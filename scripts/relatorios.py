@@ -418,7 +418,7 @@ def relatorio_pdde_escolas_sem_uex(df_agua, df_uex):
         colunas_relatorio = [
             'NU_ANO_CENSO', 'NO_MUNICIPIO', 'NO_ENTIDADE', 'CO_ENTIDADE',
             'TP_DEPENDENCIA', 'TP_LOCALIZACAO', 'TP_LOCALIZACAO_DIFERENCIADA',
-            'DS_ENDERECO', 'QT_MAT_BAS'
+            'DS_ENDERECO', 'QT_MAT_BAS', 'CNPJ UEX', 'Razão Social'
         ]
         
         # Botão
@@ -491,43 +491,52 @@ def relatorio_pdde_escolas_sem_uex_proprias(df_agua, df_uex):
 
         colunas_relatorio = [
             'NU_ANO_CENSO', 'NO_MUNICIPIO', 'NO_ENTIDADE', 'CO_ENTIDADE',
-            'TP_DEPENDENCIA', 'QT_MAT_BAS', 'TP_LOCALIZACAO', 'TP_LOCALIZACAO_DIFERENCIADA',
-            'DS_ENDERECO'
+            'TP_DEPENDENCIA', 'QT_MAT_BAS', 'CNPJ UEX', 'Razão Social', 
+            'TP_LOCALIZACAO', 'TP_LOCALIZACAO_DIFERENCIADA', 'DS_ENDERECO'
         ]
         
         # Botão
         submitted = st.form_submit_button("Gerar Relatório")
 
         if submitted:
+            # Filtra os DataFrames pelo ano selecionado
             df_agua_ano = df_agua[df_agua["NU_ANO_CENSO"] == ano_censo].copy()
             df_uex_ano = df_uex[df_uex["Ano"] == ano_censo].copy()
-            
+
             # Renomear colunas para merge
             df_uex_ano = df_uex_ano.rename(columns={"Código Escola": "CO_ENTIDADE"})
-            
-            # Merge dos 3 dataframes
+
+            # Merge dos dataframes
             df_merged = df_agua_ano.merge(df_uex_ano, on="CO_ENTIDADE", how="left", suffixes=('', '_uex'))
-            
-            # Coluna auxiliar: tem UEX própria
-            df_merged["tem_uex"] = df_merged["CNPJ UEX"].notna() & (df_merged["CNPJ UEX"] != df_merged["CNPJ EEX"])
 
-            df_filtrado = df_merged[(
-                (df_merged["NO_MUNICIPIO"] == municipio) &
-                (df_merged["NU_ANO_CENSO"] == ano_censo) &
-                (df_merged["QT_MAT_BAS"] >= 50) &
-                (df_merged["tem_uex"] == False) #continuar logica aqui
-                
+            # 🔹 Filtrar somente o município selecionado (para limitar a contagem de CNPJs)
+            df_mun = df_merged[df_merged["NO_MUNICIPIO"] == municipio].copy()
 
+            # 🔹 Contar quantas vezes cada CNPJ UEX aparece dentro do município e ano
+            cnpjs_repetidos = (
+                df_mun["CNPJ UEX"]
+                .value_counts()
+                .loc[lambda x: x > 1]  # consórcios (repetidos)
+                .index
             )
+
+            # 🔹 Filtrar escolas que atendem às condições:
+            df_filtrado = df_mun[
+                (df_mun["QT_MAT_BAS"] > 50) &
+                (
+                    (df_mun["CNPJ UEX"].isin(cnpjs_repetidos)) |       # CNPJ aparece mais de uma vez
+                    (df_mun["CNPJ UEX"].isna()) |                      # CNPJ válido
+                    (df_mun["CNPJ UEX"] == df_mun["CNPJ EEX"])
+                )
             ].copy()
-            
+
+            # 🔹 Exibir resultado
             if df_filtrado.empty:
-                st.warning(f"O Município de {municipio} não  possui escolas com mais de cinquenta alunos sem Unidade Executora própria no ano de {ano_censo}.")
-            else: 
+                st.warning(f"O Município de {municipio} não possui escolas com mais de 50 alunos que compartilham a mesma Unidade Executora (UEX) no ano de {ano_censo}.")
+            else:
                 aplicar_mapeamentos_censo(df_filtrado)
                 df_filtrado = df_filtrado[colunas_relatorio].rename(columns=COLUNAS_RENOMEADAS_CENSO)
                 st.write(df_filtrado.reset_index(drop=True))
-
                 
 def relatorio_pdde_agua_escolas_contempladas_irregulares(df_agua, df_equidade):
     """
