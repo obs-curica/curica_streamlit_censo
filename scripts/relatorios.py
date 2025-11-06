@@ -1,4 +1,104 @@
 #=========================
+# Panorama Rede
+#=========================
+
+def relatorio_rede_dados_escolas(df_rede):
+    """
+    Relatório que apresenta os dados das escolas da 
+    rede de ensino selecionada.
+    
+    Parâmetros:
+    -----------
+    df_rede : pd.DataFrame
+        DataFrame do censo escolar.
+    """
+    import streamlit as st
+    from scripts.utils import COLUNAS_RENOMEADAS_CENSO
+    from scripts.utils import aplicar_mapeamentos_censo
+
+    with st.form("form_pan_rede_relatorio_teste"):
+        
+        anos_disponiveis = sorted(df_rede['NU_ANO_CENSO'].unique())
+        ano_mais_recente = max(anos_disponiveis)
+        
+        col1, col2 = st.columns(2)
+    
+        with col1:
+
+            # Selectbox do ano
+            ano_censo = st.selectbox(
+                "Selecione o ano do Censo Escolar:",
+                options=anos_disponiveis,
+                index=anos_disponiveis.index(ano_mais_recente),
+                key="ano_censo_pan_rede_relatorio"
+            )
+
+            # Selectbox do Município
+            municipio = st.selectbox(
+                "Selecione o Município:",
+                sorted(df_rede['NO_MUNICIPIO'].unique()),
+                key="municipio_pan_rede_relatorio"
+            )
+
+        with col2:
+            # Cartão de filtros de dependência
+            with st.container(border=True):
+                st.markdown("##### Filtrar por Dependência Administrativa")
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    federal = st.checkbox("Federal", value=True, key="dep_federal")
+                with col2:
+                    estadual = st.checkbox("Estadual", value=True, key="dep_estadual")
+                with col3:
+                    municipal = st.checkbox("Municipal", value=True, key="dep_municipal")
+
+            dependencia_selecionada = []
+            if federal: dependencia_selecionada.append(1)
+            if estadual: dependencia_selecionada.append(2)
+            if municipal: dependencia_selecionada.append(3)
+
+            # Cartão de filtros de localização
+            with st.container(border=True):
+                st.markdown("##### Filtrar por Localização")
+                col4, col5 = st.columns(2)
+                with col4:
+                    urbana = st.checkbox("Urbana", value=True, key="loc_urbana")
+                with col5:
+                    rural = st.checkbox("Rural", value=True, key="loc_rural")
+
+            localizacao_selecionada = []
+            if urbana: localizacao_selecionada.append(1)
+            if rural: localizacao_selecionada.append(2)
+
+        # Botão
+        submitted = st.form_submit_button("Gerar Relatório")
+
+        if submitted:
+            
+            colunas_interesse = [ 
+                'NU_ANO_CENSO', 'NO_MUNICIPIO', 'NO_ENTIDADE', 'CO_ENTIDADE',
+                'TP_DEPENDENCIA', 'TP_LOCALIZACAO', 'TP_LOCALIZACAO_DIFERENCIADA',
+                'DS_ENDERECO', 'DS_COMPLEMENTO', 'QT_MAT_BAS'
+            ]
+
+            df_rede = df_rede[colunas_interesse].copy()
+
+            df_filtrado = df_rede[
+                (df_rede['NU_ANO_CENSO'] == ano_censo) &
+                (df_rede['NO_MUNICIPIO'] == municipio) &
+                (df_rede['TP_DEPENDENCIA'].isin(dependencia_selecionada)) &
+                (df_rede['TP_LOCALIZACAO'].isin(localizacao_selecionada))
+            ]
+            
+            if df_filtrado.empty:
+                st.warning("Não há dados para os filtros selecionados.")
+            else:
+                aplicar_mapeamentos_censo(df_filtrado)
+                df_filtrado = df_filtrado.rename(columns=COLUNAS_RENOMEADAS_CENSO)
+                st.write(df_filtrado.reset_index(drop=True))
+
+            
+#=========================
 # Panorama Financiamento
 #=========
 
