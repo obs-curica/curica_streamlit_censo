@@ -370,7 +370,7 @@ with col1:
 st.write(texto_pan_fin_consideracoes_finais_analise())
 
 
-st.header("Geração de relatórios")
+st.header("Relatórios")
 
 st.write(texto_pan_fin_relatorio_intro())
 

@@ -213,7 +213,8 @@ with st.form("form_dependencia_localizacao_municipio"):
 st.write(text_pan_rede_dependencia_rural_conclusao())
 
 
-st.header("Geração de relatórios")
+st.header("Relatórios")
+
 st.write(texto_pan_rede_relatorio_intro())
 
 relatorio_rede_dados_escolas(df_panorama_geral)

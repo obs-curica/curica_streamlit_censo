@@ -1,11 +1,4 @@
 
-import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
-import pandas as pd
-import streamlit as st
-import numpy as np
-from utils import COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO
-
 #============================
 # PAGINA PANORAMA GERAL
 #=============================
@@ -40,6 +33,11 @@ def grafico_matriculas_por_municipio(df, ano_censo):
     fig, ax = plt.subplots(figsize=(15, max(8, 0.5 * len(resultado_matriculas))))
     bars = ax.barh(resultado_matriculas.index, resultado_matriculas.values, color=cores)
 
+    # Valores nas barras com base mil
+    for i, valor in enumerate(resultado_matriculas):
+        ax.text(valor + (resultado_matriculas.max() * 0.01), i, f'{int(valor/1000)}', va='center',
+                color='white', fontweight='bold', fontsize=22)
+    
     # Ajusta dinamicamente o limite superior do eixo X com uma folga de 10%
     limite_superior = resultado_matriculas.max() * 1.1
     ax.set_xlim(right=limite_superior)
@@ -54,11 +52,6 @@ def grafico_matriculas_por_municipio(df, ano_censo):
     ax.tick_params(axis='y', colors='#FFA07A', labelsize=25)
     ax.xaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f'{int(x/1000)}mil'))
     ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=17)
-
-    # Valores nas barras com base mil
-    for i, valor in enumerate(resultado_matriculas):
-        ax.text(valor + (resultado_matriculas.max() * 0.01), i, f'{int(valor/1000)}', va='center',
-                color='white', fontweight='bold', fontsize=22)
 
     fig.tight_layout()
     st.pyplot(fig)
@@ -85,18 +78,20 @@ def grafico_escolas_por_municipio(df, ano_censo):
     norm = plt.Normalize(vmin=resultado_escolas.min(), vmax=resultado_escolas.max())
     cores = [cmap(norm(valor)) for valor in resultado_escolas]
 
-    # Gráfico total de escolas por Município
+    # Plotagem do gráfico
     plt.style.use('dark_background')
     
     fig, ax = plt.subplots(figsize=(15, max(8, 0.5 * len(resultado_escolas))))
     bars = ax.barh(resultado_escolas.index, resultado_escolas.values, color=cores)
     
+    for i, valor in enumerate(resultado_escolas):
+        plt.text(valor + (resultado_escolas.max() * 0.01), i, str(valor), va='center',
+                 color='white', fontweight='bold', fontsize=22)
+    
     # Ajusta dinamicamente o limite superior do eixo X com uma folga de 10%
     limite_superior = resultado_escolas.max() * 1.1
     ax.set_xlim(right=limite_superior)
 
-    
-    # Título e rótulos
     ax.set_title('Total de Escolas por Município', color='#FFA07A', fontsize=40)
     ax = plt.gca()
     
@@ -107,11 +102,6 @@ def grafico_escolas_por_municipio(df, ano_censo):
     plt.xticks(color='#FFA07A', fontsize=25)
     plt.yticks(color='#FFA07A', fontsize=25)
     ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=17)
-    
-    # Valores nas barras
-    for i, valor in enumerate(resultado_escolas):
-        plt.text(valor + (resultado_escolas.max() * 0.01), i, str(valor), va='center',
-                 color='white', fontweight='bold', fontsize=22)
     
     plt.tight_layout()
     st.pyplot(plt)
@@ -315,7 +305,12 @@ def grafico_escolas_por_dependencia_municipio(df, ano_censo, municipio):
     # Plotagem do gráfico
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(10, 7))
+    
     bars = ax.bar(dependencia_counts.index, dependencia_counts.values, color=cores)
+    
+    for i, valor in enumerate(dependencia_counts):
+        ax.text(i, valor + max(dependencia_counts) * 0.02, str(valor), ha='center',
+                color='white', fontweight='bold', fontsize=17)
     
     ax.set_title(f'Total de Escolas por Dep. Administrativa - {municipio} ({ano_censo})', color='#FFA07A', fontsize=19)
     ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=13)
@@ -328,12 +323,6 @@ def grafico_escolas_por_dependencia_municipio(df, ano_censo, municipio):
     ax.tick_params(axis='x', colors='#FFA07A', labelsize=17)
     ax.tick_params(axis='y', colors='#FFA07A', labelsize=15)
     
-
-    # Valores nas barras
-    for i, valor in enumerate(dependencia_counts):
-        ax.text(i, valor + max(dependencia_counts) * 0.02, str(valor), ha='center',
-                color='white', fontweight='bold', fontsize=17)
-        
     fig.tight_layout()
     st.pyplot(fig)
 
@@ -364,32 +353,28 @@ def grafico_matriculas_por_localizacao(df, ano_censo):
   
     cores = [cores_localizacao[r] for r in localizacao_counts.index]
 
-
-
     # Plotagem do gráfico
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(10, 6))
+    
     bars = ax.bar(localizacao_counts.index, localizacao_counts.values, color=cores)
 
-    # Título e rótulos
+    for i, valor in enumerate(localizacao_counts):
+        ax.text(i, valor + max(localizacao_counts) * 0.02, str(valor), ha='center',
+                color='white', fontweight='bold', fontsize=16)
+    
     ax.set_title('Total de matrículas por Localização', color='#FFA07A', fontsize=25)
     ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=13)
     
-    # Estilo dos spines
     for spine in ax.spines.values():
         spine.set_color('#FFA07A')
         spine.set_linewidth(1)
     
-    # Ticks
     ax.set_ylim(0, localizacao_counts.max() * 1.1)
     ax.tick_params(axis='x', colors='#FFA07A', labelsize=17)
     ax.tick_params(axis='y', colors='#FFA07A', labelsize=15)
     ax.yaxis.set_major_locator(MaxNLocator(nbins=6))
     
-    # Inserir valores nas barras
-    for i, valor in enumerate(localizacao_counts):
-        ax.text(i, valor + max(localizacao_counts) * 0.02, str(valor), ha='center',
-                color='white', fontweight='bold', fontsize=16)
     fig.tight_layout()
     st.pyplot(fig)
 
@@ -422,9 +407,13 @@ def grafico_escolas_por_localizacao(df, ano_censo):
     # Plotagem do gráfico
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(10, 6))
+    
     bars = ax.bar(localizacao_counts.index, localizacao_counts.values, color=cores)
 
-    # Título e rótulos
+    for i, valor in enumerate(localizacao_counts):
+        ax.text(i, valor + max(localizacao_counts) * 0.02, str(valor), ha='center',
+                color='white', fontweight='bold', fontsize=16)
+        
     ax.set_title('Total de Escolas por Localização', color='#FFA07A', fontsize=25)
     ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=13)
 
@@ -435,11 +424,6 @@ def grafico_escolas_por_localizacao(df, ano_censo):
     ax.set_ylim(0, localizacao_counts.max() * 1.1)
     ax.tick_params(axis='x', colors='#FFA07A', labelsize=17)
     ax.tick_params(axis='y', colors='#FFA07A', labelsize=15)
-    
-    # Valores nas barras
-    for i, valor in enumerate(localizacao_counts):
-        ax.text(i, valor + max(localizacao_counts) * 0.02, str(valor), ha='center',
-                color='white', fontweight='bold', fontsize=16)
     
     fig.tight_layout()
     st.pyplot(fig)
@@ -476,13 +460,16 @@ def grafico_matriculas_por_localizacao_municipio(df, ano_censo, municipio):
 
     cores = [cores_localizacao[r] for r in localizacao_counts.index]
 
-
-
     # Plotagem do gráfico
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(10, 6))
+    
     bars = ax.bar(localizacao_counts.index, localizacao_counts.values, color=cores)
 
+    for i, valor in enumerate(localizacao_counts):
+        ax.text(i, valor + max(localizacao_counts) * 0.02, str(valor), ha='center',
+                color='white', fontweight='bold', fontsize=16)
+    
     ax.set_title(f'Total de matrículas por Localização - {municipio} ({ano_censo})', color='#FFA07A', fontsize=19)
     ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=13)
 
@@ -490,17 +477,13 @@ def grafico_matriculas_por_localizacao_municipio(df, ano_censo, municipio):
         spine.set_color('#FFA07A')
         spine.set_linewidth(1)
 
-    
     ax.set_ylim(0, localizacao_counts.max() * 1.1)
     ax.tick_params(axis='x', colors='#FFA07A', labelsize=17)
     ax.tick_params(axis='y', colors='#FFA07A', labelsize=15)
     
-    # Definindo o número de ticks no eixo y
+    # Define o número de ticks no eixo y
     ax.yaxis.set_major_locator(MaxNLocator(nbins=6))
-    # Inserir valores nas barras
-    for i, valor in enumerate(localizacao_counts):
-        ax.text(i, valor + max(localizacao_counts) * 0.02, str(valor), ha='center',
-                color='white', fontweight='bold', fontsize=16)
+    
     fig.tight_layout()
     st.pyplot(fig)
 
@@ -536,7 +519,12 @@ def grafico_escolas_por_localizacao_municipio(df, ano_censo, municipio):
     # Plotagem do gráfico
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(10, 6))
+
     bars = ax.bar(localizacao_counts.index, localizacao_counts.values, color=cores)
+
+    for i, valor in enumerate(localizacao_counts):
+        ax.text(i, valor + max(localizacao_counts) * 0.02, str(valor), ha='center',
+                color='white', fontweight='bold', fontsize=16)
 
     ax.set_title(f'Total de Escolas por Localização - {municipio} ({ano_censo})', color='#FFA07A', fontsize=19)
     ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=13)
@@ -548,11 +536,6 @@ def grafico_escolas_por_localizacao_municipio(df, ano_censo, municipio):
     ax.set_ylim(0, localizacao_counts.max() * 1.1)
     ax.tick_params(axis='x', colors='#FFA07A', labelsize=17)
     ax.tick_params(axis='y', colors='#FFA07A', labelsize=15)
-
-    # Valores nas barras
-    for i, valor in enumerate(localizacao_counts):
-        ax.text(i, valor + max(localizacao_counts) * 0.02, str(valor), ha='center',
-                color='white', fontweight='bold', fontsize=16)
 
     fig.tight_layout()
     st.pyplot(fig)
@@ -650,7 +633,6 @@ def grafico_escolas_por_dependencia_localizacao(df, ano_censo):
     ax.bar(x - largura/2, urbana, width=largura, label='Urbana', color='#C0C0C0')
     ax.bar(x + largura/2, rural, width=largura, label='Rural', color='#1FB029')
 
-    # Eixos e rótulos
     ax.set_title(f'Total de Escolas por Dependência e Localização - ({ano_censo})', color='#FFA07A', fontsize=20)
     ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=13)
     
@@ -2101,7 +2083,7 @@ def grafico_agua_total_dados_brutos(df, ano_censo):
 
     ax.set_ylim(0, contagem.max() * 1.2)
 
-    # Inserir valores nas barras
+    # Valores nas barras
     for i, valor in enumerate(contagem.values):
         ax.text(
             i,
@@ -2133,7 +2115,7 @@ def grafico_escolas_sem_agua_por_municipio(df, ano_censo):
     import matplotlib.cm as cm
     import streamlit as st
 
-    # Filtrar dados do ano e escolas sem água potável
+    
     df_filtrado = df[
         (df["NU_ANO_CENSO"] == ano_censo) & 
         (df["IN_AGUA_POTAVEL"] == 0)
@@ -2198,31 +2180,39 @@ def grafico_alunos_por_disponibilidade_agua(df, ano_censo):
     import streamlit as st
     import pandas as pd
 
-    # Filtrar dados do ano
+    
     df_filtrado = df[df["NU_ANO_CENSO"] == ano_censo]
 
     if df_filtrado.empty:
         st.warning(f"Não há dados disponíveis para o ano {ano_censo}.")
         return
 
-    # Garantir que QT_MAT_BAS seja numérico
+    # Checagem para que QT_MAT_BAS seja numérico
     df_filtrado["QT_MAT_BAS"] = pd.to_numeric(df_filtrado["QT_MAT_BAS"], errors="coerce").fillna(0)
 
-    # Agrupar soma de alunos por fornecimento de água potável
+    # Agrupa soma de alunos por fornecimento de água potável
     soma_alunos = df_filtrado.groupby("IN_AGUA_POTAVEL")["QT_MAT_BAS"].sum().sort_index(ascending=False)
     soma_alunos.index = soma_alunos.index.map({1: "Fornece", 0: "Não Fornece"})
 
-    # Cores fixas
     cores = ["#B0E0E6" if idx == "Fornece" else "#FFC107" for idx in soma_alunos.index]
 
-    # Estilo do projeto
+    # Plotagem do gráfico
     plt.style.use("dark_background")
     fig, ax = plt.subplots(figsize=(8, 6))
 
-    # Plotagem vertical
     barras = ax.bar(soma_alunos.index, soma_alunos.values, color=cores)
 
-    # Rótulos nas barras
+    ax.set_title(f"Alunos por Disponibilidade de Água Potável — {ano_censo}", color="#FFA07A", fontsize=18)
+    ax.set_ylabel("Número total de alunos", color="#FFA07A", fontsize=12)
+    ax.set_xlabel("Disponibilidade de Água", color="#FFA07A", fontsize=12)
+
+    ax.tick_params(colors="#FFA07A", labelsize=12)
+    for spine in ax.spines.values():
+        spine.set_color("#FFA07A")
+
+    ax.set_ylim(0, soma_alunos.max() * 1.25)
+
+    # Valores nas barras
     for bar, valor in zip(barras, soma_alunos.values):
         ax.text(
             bar.get_x() + bar.get_width() / 2,
@@ -2231,19 +2221,7 @@ def grafico_alunos_por_disponibilidade_agua(df, ano_censo):
             ha="center", va="bottom",
             color="white", fontweight="bold", fontsize=13
         )
-
-    # Título e eixos
-    ax.set_title(f"Alunos por Disponibilidade de Água Potável — {ano_censo}", color="#FFA07A", fontsize=18)
-    ax.set_ylabel("Número total de alunos", color="#FFA07A", fontsize=12)
-    ax.set_xlabel("Disponibilidade de Água", color="#FFA07A", fontsize=12)
-
-    # Estilo dos eixos e spines
-    ax.tick_params(colors="#FFA07A", labelsize=12)
-    for spine in ax.spines.values():
-        spine.set_color("#FFA07A")
-
-    ax.set_ylim(0, soma_alunos.max() * 1.25)
-
+    
     fig.tight_layout()
     st.pyplot(fig)
 
@@ -2262,7 +2240,6 @@ def grafico_localizacao_escolas_sem_agua(df, ano_censo):
     import matplotlib.pyplot as plt
     import streamlit as st
 
-    # Filtra escolas sem água potável no ano especificado
     df_filtrado = df[
         (df["NU_ANO_CENSO"] == ano_censo) &
         (df["IN_AGUA_POTAVEL"] == 0)
@@ -2277,13 +2254,23 @@ def grafico_localizacao_escolas_sem_agua(df, ano_censo):
     contagem.index = contagem.index.map({1: "Urbana", 2: "Rural"})
     cores = ["#B0E0E6", "#FFC107"]
 
-    # Estilo visual do projeto
+    # Plotagem do gráfico
     plt.style.use("dark_background")
     fig, ax = plt.subplots(figsize=(7, 5))
 
     barras = ax.bar(contagem.index, contagem.values, color=cores)
 
-    # Rótulos nas barras
+    ax.set_title(f"Escolas Sem Água Potável por Localização — {ano_censo}", color="#FFA07A", fontsize=16)
+    ax.set_ylabel("Número de Escolas", color="#FFA07A", fontsize=11)
+    ax.set_xlabel("Localização", color="#FFA07A", fontsize=11)
+
+    ax.tick_params(colors="#FFA07A", labelsize=12)
+    for spine in ax.spines.values():
+        spine.set_color("#FFA07A")
+
+    ax.set_ylim(0, contagem.max() * 1.25)
+    
+    # Valores nas barras
     for bar, valor in zip(barras, contagem.values):
         ax.text(
             bar.get_x() + bar.get_width() / 2,
@@ -2295,18 +2282,7 @@ def grafico_localizacao_escolas_sem_agua(df, ano_censo):
             fontsize=13,
             fontweight="bold"
         )
-
-    # Título e eixos
-    ax.set_title(f"Escolas Sem Água Potável por Localização — {ano_censo}", color="#FFA07A", fontsize=16)
-    ax.set_ylabel("Número de Escolas", color="#FFA07A", fontsize=11)
-    ax.set_xlabel("Localização", color="#FFA07A", fontsize=11)
-
-    # Estilo dos eixos
-    ax.tick_params(colors="#FFA07A", labelsize=12)
-    for spine in ax.spines.values():
-        spine.set_color("#FFA07A")
-
-    ax.set_ylim(0, contagem.max() * 1.25)
+    
     fig.tight_layout()
     st.pyplot(fig)
 
@@ -2407,7 +2383,6 @@ def grafico_agua_total_fontes(df, ano_censo):
     import matplotlib.pyplot as plt
     import streamlit as st
 
-    # Filtrar ano do Censo
     df_filtrado = df[df["NU_ANO_CENSO"] == ano_censo]
 
     if df_filtrado.empty:
@@ -2442,13 +2417,12 @@ def grafico_agua_total_fontes(df, ano_censo):
     valores = [total_fornece, total_nao_fornece]
     cores = ["#B0E0E6", "#FFC107"]
 
-    # Estilo do gráfico
+    # Plotagem do gráfico
     plt.style.use("dark_background")
     fig, ax = plt.subplots(figsize=(8, 6))
 
     barras = ax.bar(categorias, valores, color=cores)
-
-    # Rótulos nas barras
+    
     for bar, valor in zip(barras, valores):
         ax.text(
             bar.get_x() + bar.get_width() / 2,
@@ -2458,7 +2432,6 @@ def grafico_agua_total_fontes(df, ano_censo):
             fontsize=13, color="white", fontweight="bold"
         )
 
-    # Título e eixos
     ax.set_title(f"Fornecimento de Água Potável por Fonte de Abastecimento - {ano_censo}", color="#FFA07A", fontsize=15)
     ax.set_ylabel("Número de Escolas", color="#FFA07A", fontsize=12)
     ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=12)
@@ -2469,6 +2442,7 @@ def grafico_agua_total_fontes(df, ano_censo):
         spine.set_color("#FFA07A")
 
     ax.set_ylim(0, max(valores) * 1.25)
+    
     fig.tight_layout()
     st.pyplot(fig)
 
@@ -2528,13 +2502,13 @@ def grafico_agua_total_fontes_municipios(df, municipio):
     valores = [total_fornece, total_nao_fornece]
     cores = ["#B0E0E6", "#FFC107"]
 
-    # Estilo do gráfico
+    # Plotagem do gráfico
     plt.style.use("dark_background")
     fig, ax = plt.subplots(figsize=(8, 6))
 
     barras = ax.bar(categorias, valores, color=cores)
 
-    # Rótulos nas barras
+    # Valores nas barras
     for bar, valor in zip(barras, valores):
         ax.text(
             bar.get_x() + bar.get_width() / 2,
@@ -2544,11 +2518,10 @@ def grafico_agua_total_fontes_municipios(df, municipio):
             fontsize=13, color="white", fontweight="bold"
         )
 
-    # Título e eixos
     ax.set_title(
-        f"Fornecimento de Água Potável - {municipio} ({ultimo_ano})",
+        f"Fornecimento de Água Potável por Fonte - {municipio} ({ultimo_ano})",
         color="#FFA07A",
-        fontsize=20
+        fontsize=15
     )
     ax.set_ylabel("Número de Escolas", color="#FFA07A", fontsize=12)
     ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=12)
@@ -2915,7 +2888,7 @@ def grafico_pdde_agua_escolas(df_censo, df_uex, df_equidade):
     """
     import matplotlib.pyplot as plt
     import streamlit as st
-
+    
     # ============
     # Selecionar último ano
     # ============
@@ -3023,7 +2996,7 @@ def grafico_pdde_agua_financeiro(df_censo, df_uex, df_equidade):
     """
     import matplotlib.pyplot as plt
     import streamlit as st
-    import numpy as np
+    import pandas as pd
 
     # ============
     # Selecionar último ano
@@ -3140,7 +3113,7 @@ def grafico_pdde_agua_escolas_municipios(df_censo, df_uex, df_equidade, nome_mun
     """
     import matplotlib.pyplot as plt
     import streamlit as st
-
+    
     # ============
     # Selecionar último ano
     # ============
@@ -3260,6 +3233,7 @@ def grafico_pdde_agua_financeiro_municipios(df_censo, df_uex, df_equidade, munic
     """
     import matplotlib.pyplot as plt
     import streamlit as st
+    import pandas as pd
     
     # ============
     # Selecionar último ano
