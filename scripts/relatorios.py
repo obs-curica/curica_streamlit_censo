@@ -505,10 +505,10 @@ def relatorio_pdde_agua_escolas_elegiveis(df_agua, df_uex, df_equidade):
         ano_mais_recente = max(anos_disponiveis)
 
         ano_censo = st.selectbox(
-        "Selecione o ano do Censo Escolar:",
-        options=anos_disponiveis,
-        index=anos_disponiveis.index(ano_mais_recente),
-        key="relatorio_escolas_elegiveis_ano"
+            "Selecione o ano do Censo Escolar:",
+            options=anos_disponiveis,
+            index=anos_disponiveis.index(ano_mais_recente),
+            key="relatorio_escolas_elegiveis_ano"
         )
 
         colunas_relatorio = [

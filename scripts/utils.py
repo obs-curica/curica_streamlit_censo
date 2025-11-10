@@ -1,17 +1,19 @@
-import pandas as pd
 import streamlit as st
 
 
-# Função para carregar os dados para páginas do projeto
 @st.cache_data
 def carregar_dados(url):
-    """Carrega dados de um arquivo CSV a partir de uma URL fornecida."""
+    """
+    Carrega dados de um arquivo CSV a partir de uma URL fornecida.
+    Parâmetros:
+    url : str
+    """
     import pandas as pd
     import streamlit as st
-        # Carregar os dados diretamente do link fornecido
-    df = pd.read_csv(url, delimiter=';', encoding='utf-8', low_memory=False)
     
+    df = pd.read_csv(url, delimiter=';', encoding='utf-8', low_memory=False)
     return df
+
 
 # Dicionário de renomeação de colunas do Censo Escolar
 COLUNAS_RENOMEADAS_CENSO = {
@@ -148,19 +150,29 @@ DICIONARIOS_DE_MAPPING_CENSO = {
     }
 }
 
-# Função para aplicação do dicionário de mapping do Censo
+
+# Funções para aplicação do dicionário de mapping do Censo
 def aplicar_mapeamentos_censo(df):
     """
-    Aplica os dicionários de mapping às colunas do DataFrame que tiverem correspondência.
+    Aplica os dicionários de mapping às colunas do DataFrame que
+    tiverem correspondência.
+    
+    Parâmetros:
+    df : pd.DataFrame
     """
     for coluna, dicionario in DICIONARIOS_DE_MAPPING_CENSO.items():
         if coluna in df.columns:
             df[coluna] = df[coluna].map(dicionario)
     return df
 
+
 def aplicar_mapeamentos_df_financiamento(df):
     """
-    Aplica os dicionários de mapping às colunas do DataFrame que tiverem correspondência.
+    Aplica os dicionários de mapping às colunas do DataFrame que
+    tiverem correspondência.
+
+    Parâmetros:
+    df : pd.DataFrame
     """
     for coluna, dicionario in COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO.items():
         if coluna in df.columns:

@@ -1,15 +1,12 @@
 import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
-import os
-import re
 
-from scripts.utils import carregar_dados
-from scripts.utils import COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO
+from scripts.utils import (
+    carregar_dados,
+    COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO
+)
 
-from scripts.textos import(
-    texto_pan_financiamento_intro, 
+from scripts.textos import (
+    texto_pan_financiamento_intro,
     texto_pan_financiamento_fnde_intro,
     texto_pan_financiamento_fnde_analise,
     texto_pan_financiamento_fundeb_intro,
@@ -32,8 +29,7 @@ from scripts.textos import(
     texto_pan_fin_consideracoes_finais_analise,
     texto_pan_fin_relatorio_intro
 )
-
-from scripts.graficos import(
+from scripts.graficos import (
     grafico_fnde_receita_total,
     grafico_fnde_acoes,    grafico_fundeb_total_ano,
     grafico_fundeb_total_ente,
@@ -54,7 +50,7 @@ from scripts.graficos import(
     grafico_receita_total_educacao
 )
 
-from scripts.relatorios import(
+from scripts.relatorios import (
     relatorio_fin_despesas_profissionais,
     relatorio_fin_superavit,
     relatorio_fin_minimo_constitucional,
@@ -64,43 +60,34 @@ from scripts.relatorios import(
 # Configuração da página
 st.set_page_config(page_title="Panorama Financiamento", layout="wide", page_icon="🦜")
 
-# Carregar dados
-# df_panorama_financiamento
+# Carrega dataframes
 url_panorama_financiamento = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_financiamento/df_panorama_financiamento.csv"
 df_panorama_financiamento = carregar_dados(url_panorama_financiamento)
 df_panorama_financiamento['nome'] = df_panorama_financiamento['nome'].astype(str)
 
-# df_receita_fnde
 url_receita_fnde = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_financiamento/df_receita_fnde.csv"
 df_receita_fnde = carregar_dados(url_receita_fnde)
 
-# df_despesas_fnde
 url_despesas_fnde = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_financiamento/df_despesas_fnde.csv"
 df_despesas_fnde = carregar_dados(url_despesas_fnde)
 
-# df_execucao_pdde
 url_execucao_pdde = "https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/panorama_financiamento/df_execucao_pdde.csv"
 df_execucao_pdde = carregar_dados(url_execucao_pdde)
 
-# Título da página
+
 st.title("💲 Considerações Gerais sobre o Financiamento da Educação Básica")
 
-# texto introdutório financiamento
 st.write(texto_pan_financiamento_intro())
 
-#++++++++
-# Subsção FNDE
+
 st.header("O Fundo Nacional de Desenvolvimento da Educação (FNDE)")
 
 st.write(texto_pan_financiamento_fnde_intro())
 
 col1, col2 = st.columns(2)
-
 with col1:
     grafico_fnde_receita_total(df_receita_fnde)
-    
 with col2:
-    
     anos_disponiveis = sorted(df_despesas_fnde['Ano'].unique())
     ano_mais_recente = max(anos_disponiveis)
 
@@ -113,19 +100,13 @@ with col2:
 
     grafico_fnde_acoes(df_despesas_fnde, ano)
 
-
-
 st.write(texto_pan_financiamento_fnde_analise())
 
 
-
-#++++++++
-# Subseção Fundeb
 st.header("Fundeb")
 st.write(texto_pan_financiamento_fundeb_intro())
 
 col1, col2 = st.columns(2)
-
 with col1:
     st.subheader("Fundeb Total por Ano")
     anos_disponiveis = sorted(df_panorama_financiamento['ano'].unique())
@@ -138,22 +119,20 @@ with col1:
         key="fundeb_ano"
     )
 
-    # Gráfico do Fundeb total por ano
     grafico_fundeb_total_ano(df_panorama_financiamento, ano)
-    
+
 with col2:
     st.subheader("Fundeb Total por Ente")
-    
+
     entes_disponiveis = sorted(df_panorama_financiamento['nome'].unique())
-    
     entes = st.selectbox(
         "Selecione o ente:",
         options=entes_disponiveis,
         key="fundeb_ente"
     )
-    
+
     grafico_fundeb_total_ente(df_panorama_financiamento, entes)
-        
+
 st.write(texto_pan_financiamento_fundeb_analise_1())
 
 # Gráficos do Fundeb Estado e Municipios sob demanda
@@ -166,14 +145,13 @@ entes = st.selectbox(
 )
 
 col1, col2 = st.columns(2)
-
 with col1:
     grafico_indicador_despesa_profissionais(df_panorama_financiamento, entes)
-    
 with col2:
     grafico_percentual_recursos_nao_utilizados(df_panorama_financiamento, entes)
 
 st.write(texto_pan_financiamento_fundeb_analise_2())
+
 
 st.subheader("Complementações do Fundeb: VAAT, VAAF e VAAR")
 
@@ -188,18 +166,14 @@ entes = st.selectbox(
 )
 
 col1, col2 = st.columns(2)
-
 with col1:
     grafico_valor_repasse_fundeb(df_panorama_financiamento, entes)
-
 with col2:
     grafico_complementacoes_fundeb(df_panorama_financiamento, entes)
     
 st.write(texto_pan_financiamento_fundeb_complementacao_analise())
 
 
-#+++++++++
-# Subseção Receita Impostos 5%
 st.header("Receita mínima proveniente de impostos")
 
 st.write(texto_pan_financiamento_receita_minima_impostos_intro())
@@ -213,18 +187,13 @@ entes = st.selectbox(
 )
 
 col1, col2 = st.columns(2)
-
 with col1:
     grafico_valor_receita_impostos(df_panorama_financiamento, entes)
-    
 with col2:
     grafico_valores_despesa_minima_impostos(df_panorama_financiamento, entes)
 
 st.write(texto_pan_financiamento_receita_minima_impostos_analise())
 
-
-#++++++++
-# Subseção Mínimo Constitucional
 
 st.header("Aplicação do Mínimo Constitucional de 25% da receita de impostos")
 
@@ -239,25 +208,19 @@ entes = st.selectbox(
 )
 
 col1, col2 = st.columns(2)
-
 with col1:
     grafico_valores_limite_constitucional(df_panorama_financiamento, entes)
-    
 with col2:
     grafico_indicador_limite_constitucional(df_panorama_financiamento, entes)
 
 st.write(texto_pan_financiamento_minimo_constitucional_analise())
 
 
-#++++++++
-# Subseção Salário Educação
 st.header("Salário-Educação")
 
 st.write(texto_pan_financiamento_salario_educacao_intro())
 
-
 col1, col2 = st.columns(2)
-
 with col1:
     st.subheader("Salário-Educação por Ano")
     anos_disponiveis = sorted(df_panorama_financiamento['ano'].unique())
@@ -287,14 +250,11 @@ with col2:
 st.write(texto_pan_financiamento_salario_educacao_analise())
 
 
-#++++++++
-# Subseção Programas, Projetos e Ações do FNDE
 st.header("Outras fontes de receita")
 
 st.write(texto_pan_financiamento_receitas_adicionais_intro())
 
 col1, col2 = st.columns(2)
-
 with col1:
     entes_disponiveis = sorted(df_panorama_financiamento['nome'].unique())
     entes = st.selectbox(
@@ -338,7 +298,6 @@ with col2:
     # Cria dicionário invertido para mapeamento reverso
     NOMES_RENOMEADOS_INV = {v: k for k, v in COLUNAS_RENOMEADAS_DF_PANORAMA_FINANCIAMENTO.items() if k in colunas_receitas}
     
-    # Opções legíveis
     opcoes_legiveis = list(NOMES_RENOMEADOS_INV.keys())
     
     # Seletor com nome amigável
@@ -347,20 +306,15 @@ with col2:
     # Converter de volta para nome técnico
     categoria_tecnica = NOMES_RENOMEADOS_INV[categoria_legivel]
     
-    # Chamada do gráfico com nome técnico
     grafico_receitas_adicionais_evolucao(df_panorama_financiamento, entes, categoria_tecnica)
     
 st.write(texto_pan_financiamento_receitas_adicionais_analise())
 
 st.subheader("Exemplo de deficiência na execução dos recursos do PDDE")
 
-
-#++++++++
-# Subseção PDDE
 st.write(texto_pan_financiamento_execucao_pdde_intro())
 
 col1, col2 = st.columns(2)
-
 with col1:
     entes_disponiveis = sorted(df_execucao_pdde['nome'].unique())
     entes = st.selectbox(
@@ -389,20 +343,16 @@ with col2:
         index=anos_disponiveis.index(ano_mais_recente),
         key="execucao_pdde_porcentagem_ano"
     )
-    
+
     grafico_execucao_pdde_porcentagem(df_execucao_pdde, ano)
 
 st.write(texto_pan_financiamento_execucao_pdde_analise())
 
 
-#++++++++
-# Subseção Responsabilidade Criminal
 st.header("Responsabilização dos gestores")
 st.write(texto_pan_financiamento_responsabilidade_criminal())
 
 
-#++++++++
-# Subseção Considerações finais
 st.header("Considerações finais")
 st.write(texto_pan_fin_consideracoes_finais_intro())
 
@@ -420,9 +370,8 @@ with col1:
 st.write(texto_pan_fin_consideracoes_finais_analise())
 
 
-#++++++++
-# Subseção Relatórios
 st.header("Geração de relatórios")
+
 st.write(texto_pan_fin_relatorio_intro())
 
 relatorio_fin_despesas_profissionais(df_panorama_financiamento)
