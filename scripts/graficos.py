@@ -31,6 +31,7 @@ def grafico_matriculas_por_municipio(df, ano_censo):
     # Gráfico total de matriculas por município
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(15, max(8, 0.5 * len(resultado_matriculas))))
+    
     bars = ax.barh(resultado_matriculas.index, resultado_matriculas.values, color=cores)
 
     # Valores nas barras com base mil
@@ -42,7 +43,7 @@ def grafico_matriculas_por_municipio(df, ano_censo):
     limite_superior = resultado_matriculas.max() * 1.1
     ax.set_xlim(right=limite_superior)
 
-    ax.set_title('Total de matrículas por Município', color='#FFA07A', fontsize=40)
+    ax.set_title(f'Total de matrículas por Município - {ano_censo}', color='#FFA07A', fontsize=35)
 
     for spine in ax.spines.values():
         spine.set_color('#FFA07A')
@@ -80,8 +81,8 @@ def grafico_escolas_por_municipio(df, ano_censo):
 
     # Plotagem do gráfico
     plt.style.use('dark_background')
-    
     fig, ax = plt.subplots(figsize=(15, max(8, 0.5 * len(resultado_escolas))))
+    
     bars = ax.barh(resultado_escolas.index, resultado_escolas.values, color=cores)
     
     for i, valor in enumerate(resultado_escolas):
@@ -92,7 +93,7 @@ def grafico_escolas_por_municipio(df, ano_censo):
     limite_superior = resultado_escolas.max() * 1.1
     ax.set_xlim(right=limite_superior)
 
-    ax.set_title('Total de Escolas por Município', color='#FFA07A', fontsize=40)
+    ax.set_title(f'Total de Escolas por Município - {ano_censo}', color='#FFA07A', fontsize=35)
     ax = plt.gca()
     
     for spine in ax.spines.values():
@@ -138,9 +139,14 @@ def grafico_matriculas_por_dependencia(df, ano_censo):
     # Plotagem do gráfico
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(10, 6))
+    
     bars = ax.bar(dependencia_counts.index, dependencia_counts.values, color=cores)
 
-    ax.set_title(f'Total de matrículas por Dependência Administrativa', color='#FFA07A', fontsize=23)
+    for i, valor in enumerate(dependencia_counts):
+        ax.text(i, valor + max(dependencia_counts) * 0.02, str(valor), ha='center',
+                color='white', fontweight='bold', fontsize=14)
+
+    ax.set_title(f'Total de matrículas por Dependência Administrativa - {ano_censo}', color='#FFA07A', fontsize=20)
     ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=13)
     
     for spine in ax.spines.values():
@@ -151,12 +157,7 @@ def grafico_matriculas_por_dependencia(df, ano_censo):
     ax.tick_params(axis='x', colors='#FFA07A', labelsize=17)
     ax.tick_params(axis='y', colors='#FFA07A', labelsize=15)
     ax.yaxis.set_major_locator(MaxNLocator(nbins=6))
-    
-    # Valores nas barras
-    for i, valor in enumerate(dependencia_counts):
-        ax.text(i, valor + max(dependencia_counts) * 0.02, str(valor), ha='center',
-                color='white', fontweight='bold', fontsize=14)
-    
+        
     fig.tight_layout()
     st.pyplot(fig)
 
@@ -179,11 +180,11 @@ def grafico_escolas_por_dependencia(df, ano_censo):
     dependencia_counts = df_filtrado['TP_DEPENDENCIA'].value_counts().sort_index()
     dependencia_counts.index = dependencia_counts.index.map({1: 'Federal', 2: 'Estadual', 3: 'Municipal'})
 
-    # Cores fixas opacas por categoria (RGBA)
+    # Cores fixas opacas por categoria (RGBA) com 70% de opacidade
     cores_localizacao = {
-        'Federal': (0/255, 191/255, 255/255, 0.7),     # Azul celeste com 70% opacidade
-        'Estadual': (255/255, 160/255, 122/255, 0.7),  # Salmão com 70% opacidade
-        'Municipal': (118/255, 238/255, 0/255, 0.7)     # Verde fosforescente com 70% opacidade
+        'Federal': (0/255, 191/255, 255/255, 0.7),
+        'Estadual': (255/255, 160/255, 122/255, 0.7),
+        'Municipal': (118/255, 238/255, 0/255, 0.7)
     }
    
     cores = [cores_localizacao[r] for r in dependencia_counts.index]
@@ -191,9 +192,14 @@ def grafico_escolas_por_dependencia(df, ano_censo):
     # Plotagem do gráfico
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(10, 6))
+    
     bars = ax.bar(dependencia_counts.index, dependencia_counts.values, color=cores)
 
-    ax.set_title('Total de Escolas por Dependência Administrativa', color='#FFA07A', fontsize=23)
+    for i, valor in enumerate(dependencia_counts):
+        ax.text(i, valor + max(dependencia_counts) * 0.02, str(valor), ha='center',
+                color='white', fontweight='bold', fontsize=14)
+
+    ax.set_title(f'Total de Escolas por Dependência Administrativa - {ano_censo}', color='#FFA07A', fontsize=20)
     ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=13)
     
     for spine in ax.spines.values():
@@ -203,11 +209,6 @@ def grafico_escolas_por_dependencia(df, ano_censo):
     ax.set_ylim(0, dependencia_counts.max() * 1.1)
     ax.tick_params(axis='x', colors='#FFA07A', labelsize=17)
     ax.tick_params(axis='y', colors='#FFA07A', labelsize=17)
-
-    # Valores nas barras
-    for i, valor in enumerate(dependencia_counts):
-        ax.text(i, valor + max(dependencia_counts) * 0.02, str(valor), ha='center',
-                color='white', fontweight='bold', fontsize=14)
 
     fig.tight_layout()
     st.pyplot(fig)
@@ -237,19 +238,22 @@ def grafico_matriculas_por_dependencia_municipio(df, ano_censo, municipio):
 
     # Cores fixas opacas por categoria (RGBA)
     cores_localizacao = {
-        'Federal': (0/255, 191/255, 255/255, 0.7),     # Azul celeste com 70% opacidade
-        'Estadual': (255/255, 160/255, 122/255, 0.7),  # Salmão com 70% opacidade
-        'Municipal': (118/255, 238/255, 0/255, 0.7)     # Verde fosforescente com 70% opacidade
+        'Federal': (0/255, 191/255, 255/255, 0.7),
+        'Estadual': (255/255, 160/255, 122/255, 0.7),
+        'Municipal': (118/255, 238/255, 0/255, 0.7)
     }
    
     cores = [cores_localizacao[r] for r in dependencia_counts.index]
 
-    plt.style.use('dark_background')
-
     # Plotagem do gráfico
     plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(10, 7))
+    
     bars = ax.bar(dependencia_counts.index, dependencia_counts.values, color=cores)
+
+    for i, valor in enumerate(dependencia_counts):
+        ax.text(i, valor + max(dependencia_counts) * 0.02, str(valor), ha='center',
+                color='white', fontweight='bold', fontsize=17)
 
     ax.set_title(f'Total de matrículas por Dep. Administrativa - {municipio} ({ano_censo})', color='#FFA07A', fontsize=19)
     ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=13)
@@ -263,11 +267,6 @@ def grafico_matriculas_por_dependencia_municipio(df, ano_censo, municipio):
     ax.tick_params(axis='y', colors='#FFA07A', labelsize=15)
     ax.yaxis.set_major_locator(MaxNLocator(nbins=6))
         
-    # Valores nas barras
-    for i, valor in enumerate(dependencia_counts):
-        ax.text(i, valor + max(dependencia_counts) * 0.02, str(valor), ha='center',
-                color='white', fontweight='bold', fontsize=17)
-    
     fig.tight_layout()
     st.pyplot(fig)
 
@@ -295,9 +294,9 @@ def grafico_escolas_por_dependencia_municipio(df, ano_censo, municipio):
     
     # Cores fixas opacas por categoria (RGBA)
     cores_localizacao = {
-        'Federal': (0/255, 191/255, 255/255, 0.7),     # Azul celeste com 50% opacidade
-        'Estadual': (255/255, 160/255, 122/255, 0.7),  # Salmão com 50% opacidade
-        'Municipal': (118/255, 238/255, 0/255, 0.7)     # Verde fosforescente com 50% opacidade
+        'Federal': (0/255, 191/255, 255/255, 0.7),
+        'Estadual': (255/255, 160/255, 122/255, 0.7),
+        'Municipal': (118/255, 238/255, 0/255, 0.7)
     }
     
     cores = [cores_localizacao[r] for r in dependencia_counts.index]
@@ -355,7 +354,7 @@ def grafico_matriculas_por_localizacao(df, ano_censo):
 
     # Plotagem do gráfico
     plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(10, 7))
     
     bars = ax.bar(localizacao_counts.index, localizacao_counts.values, color=cores)
 
@@ -363,7 +362,7 @@ def grafico_matriculas_por_localizacao(df, ano_censo):
         ax.text(i, valor + max(localizacao_counts) * 0.02, str(valor), ha='center',
                 color='white', fontweight='bold', fontsize=16)
     
-    ax.set_title('Total de matrículas por Localização', color='#FFA07A', fontsize=25)
+    ax.set_title(f'Total de matrículas por Localização - {ano_censo}', color='#FFA07A', fontsize=25)
     ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=13)
     
     for spine in ax.spines.values():
@@ -406,7 +405,7 @@ def grafico_escolas_por_localizacao(df, ano_censo):
 
     # Plotagem do gráfico
     plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(10, 7))
     
     bars = ax.bar(localizacao_counts.index, localizacao_counts.values, color=cores)
 
@@ -414,7 +413,7 @@ def grafico_escolas_por_localizacao(df, ano_censo):
         ax.text(i, valor + max(localizacao_counts) * 0.02, str(valor), ha='center',
                 color='white', fontweight='bold', fontsize=16)
         
-    ax.set_title('Total de Escolas por Localização', color='#FFA07A', fontsize=25)
+    ax.set_title(f'Total de Escolas por Localização - {ano_censo}', color='#FFA07A', fontsize=25)
     ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=13)
 
     for spine in ax.spines.values():
@@ -462,7 +461,7 @@ def grafico_matriculas_por_localizacao_municipio(df, ano_censo, municipio):
 
     # Plotagem do gráfico
     plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(10, 7))
     
     bars = ax.bar(localizacao_counts.index, localizacao_counts.values, color=cores)
 
@@ -470,7 +469,7 @@ def grafico_matriculas_por_localizacao_municipio(df, ano_censo, municipio):
         ax.text(i, valor + max(localizacao_counts) * 0.02, str(valor), ha='center',
                 color='white', fontweight='bold', fontsize=16)
     
-    ax.set_title(f'Total de matrículas por Localização - {municipio} ({ano_censo})', color='#FFA07A', fontsize=19)
+    ax.set_title(f'Total de matrículas por Localização - {municipio} ({ano_censo})', color='#FFA07A', fontsize=22)
     ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=13)
 
     for spine in ax.spines.values():
@@ -518,7 +517,7 @@ def grafico_escolas_por_localizacao_municipio(df, ano_censo, municipio):
 
     # Plotagem do gráfico
     plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(10, 7))
 
     bars = ax.bar(localizacao_counts.index, localizacao_counts.values, color=cores)
 
@@ -526,7 +525,7 @@ def grafico_escolas_por_localizacao_municipio(df, ano_censo, municipio):
         ax.text(i, valor + max(localizacao_counts) * 0.02, str(valor), ha='center',
                 color='white', fontweight='bold', fontsize=16)
 
-    ax.set_title(f'Total de Escolas por Localização - {municipio} ({ano_censo})', color='#FFA07A', fontsize=19)
+    ax.set_title(f'Total de Escolas por Localização - {municipio} ({ano_censo})', color='#FFA07A', fontsize=22)
     ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=13)
 
     for spine in ax.spines.values():
@@ -568,13 +567,13 @@ def grafico_matriculas_por_dependencia_localizacao(df, ano_censo):
 
     # Plotagem do gráfico
     plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(10, 7))
 
     # Barra dupla e Legenda
     ax.bar(x - largura/2, urbana, width=largura, label='Urbana', color='#C0C0C0')
     ax.bar(x + largura/2, rural, width=largura, label='Rural', color='#1FB029')
 
-    ax.set_title(f'Total de matrículas por Dependência e Localização - ({ano_censo})', color='#FFA07A', fontsize=20)
+    ax.set_title(f'Total de matrículas por Dependência e Localização - {ano_censo}', color='#FFA07A', fontsize=20)
     ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=13)
     
     ax.set_xticks(x)
@@ -627,13 +626,13 @@ def grafico_escolas_por_dependencia_localizacao(df, ano_censo):
 
     # Plotagem do gráfico
     plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(10, 7))
 
     # # Barra dupla e Legenda
     ax.bar(x - largura/2, urbana, width=largura, label='Urbana', color='#C0C0C0')
     ax.bar(x + largura/2, rural, width=largura, label='Rural', color='#1FB029')
 
-    ax.set_title(f'Total de Escolas por Dependência e Localização - ({ano_censo})', color='#FFA07A', fontsize=20)
+    ax.set_title(f'Total de Escolas por Dependência e Localização - {ano_censo}', color='#FFA07A', fontsize=20)
     ax.set_xlabel("Fonte: Censo Escolar", color="#FFA07A", fontsize=13)
     
     ax.set_xticks(x)
@@ -691,7 +690,7 @@ def grafico_matriculas_por_dependencia_localizacao_municipio(df, ano_censo, muni
 
     # Plotagem do gráfico
     plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(10, 7))
 
     # Barras duplas
     ax.bar(x - largura/2, urbana, width=largura, label='Urbana', color='#C0C0C0')
@@ -755,7 +754,7 @@ def grafico_escolas_por_dependencia_localizacao_municipio(df, ano_censo, municip
 
     # Plotagem do gráfico
     plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(10, 7))
 
     # Barras duplas
     ax.bar(x - largura/2, urbana, width=largura, label='Urbana', color='#C0C0C0')
@@ -807,28 +806,15 @@ def grafico_fnde_receita_total(df):
     # Converte valores para bilhões
     df_filtrado['Pago_bi'] = df_filtrado['Pago'] / 1_000_000_000
 
-    
-
     # Cor padrão (verde escuro para manter padrão visual financeiro)
     cor_barras = '#006400'
 
     # Plotagem do gráfico
     plt.style.use('dark_background')
-    fig, ax = plt.subplots(figsize=(9, 6))
+    fig, ax = plt.subplots(figsize=(9, 7))
+    
     ax.bar(df_filtrado['Ano'].astype(str), df_filtrado['Pago_bi'], color=cor_barras)
 
-    
-    ax.set_title('Evolução da Receita do FNDE', color='#FFA07A', fontsize=16)
-    ax.set_ylabel('Valor em bilhões de R$ (bi)', color='#FFA07A', fontsize=10)
-    ax.set_xlabel('Fonte: Painel do Orçamento Federal', color='#FFA07A', fontsize=10)
-
-    for spine in ax.spines.values():
-        spine.set_color('#FFA07A')
-
-    ax.tick_params(axis='x', colors='#FFA07A', labelsize=12)
-    ax.tick_params(axis='y', colors='#FFA07A', labelsize=12)
-
-    # Valores no topo das barras
     max_valor = df_filtrado['Pago_bi'].max()
     for i, valor in enumerate(df_filtrado['Pago_bi']):
         ax.text(
@@ -840,6 +826,16 @@ def grafico_fnde_receita_total(df):
             fontsize=10,
             fontweight='bold'
         )
+    
+    ax.set_title('Evolução da Receita do FNDE', color='#FFA07A', fontsize=16)
+    ax.set_ylabel('Valor em bilhões de R$ (bi)', color='#FFA07A', fontsize=10)
+    ax.set_xlabel('Fonte: Painel do Orçamento Federal', color='#FFA07A', fontsize=10)
+
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    ax.tick_params(axis='x', colors='#FFA07A', labelsize=12)
+    ax.tick_params(axis='y', colors='#FFA07A', labelsize=12)
 
     fig.tight_layout()
     st.pyplot(fig)
@@ -1183,19 +1179,9 @@ def grafico_valor_repasse_fundeb(df, ente):
     # Plotagem do gráfico
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(8, 6))
+
     ax.bar(df_filtrado['ano'].astype(str), df_filtrado['valor_milhoes'], color=cor_barras)
 
-    ax.set_title(f'Evolução do Repasse do Fundeb - {ente}', color='#FFA07A', fontsize=16)
-    ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=10)
-    ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=10)
-
-    ax.tick_params(axis='x', colors='#FFA07A', labelsize=12)
-    ax.tick_params(axis='y', colors='#FFA07A', labelsize=12)
-    
-    for spine in ax.spines.values():
-        spine.set_color('#FFA07A')
-
-    # Valores nas barras
     for i, valor in enumerate(df_filtrado['valor_milhoes']):
         if pd.notnull(valor):
             ax.text(
@@ -1207,6 +1193,16 @@ def grafico_valor_repasse_fundeb(df, ente):
                 fontsize=10,
                 fontweight='bold'
             )
+
+    ax.set_title(f'Evolução do Repasse do Fundeb - {ente}', color='#FFA07A', fontsize=16)
+    ax.set_ylabel('Valor em milhões de R$ (mi)', color='#FFA07A', fontsize=10)
+    ax.set_xlabel('Fonte: SIOPE', color='#FFA07A', fontsize=10)
+
+    ax.tick_params(axis='x', colors='#FFA07A', labelsize=12)
+    ax.tick_params(axis='y', colors='#FFA07A', labelsize=12)
+    
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
 
     fig.tight_layout()
     st.pyplot(fig)
@@ -1229,6 +1225,7 @@ def grafico_complementacoes_fundeb(df, ente):
     import numpy as np
     
     df_filtrado = df[df['nome'] == ente].sort_values(by='ano').copy()
+    df_filtrado = df_filtrado.reset_index(drop=True)
 
     # Conversão para float
     for col in ['valor_receita_vaaf', 'valor_receita_vaat', 'valor_receita_vaar']:
@@ -1253,7 +1250,7 @@ def grafico_complementacoes_fundeb(df, ente):
 
     # Plotagem das três barras agrupadas
     ax.bar(x - largura, df_filtrado['valor_receita_vaaf'], width=largura, label='VAAF', color=cor_vaaf)
-    ax.bar(x,            df_filtrado['valor_receita_vaat'], width=largura, label='VAAT', color=cor_vaat)
+    ax.bar(x,           df_filtrado['valor_receita_vaat'], width=largura, label='VAAT', color=cor_vaat)
     ax.bar(x + largura, df_filtrado['valor_receita_vaar'], width=largura, label='VAAR', color=cor_vaar)
 
     ax.set_title(f'Complementações do Fundeb por Ano - {ente}', color='#FFA07A', fontsize=16)
@@ -1267,6 +1264,25 @@ def grafico_complementacoes_fundeb(df, ente):
     
     for spine in ax.spines.values():
         spine.set_color('#FFA07A')
+
+    # Limite do eixo Y
+    valor_maximo = max(df_filtrado[['valor_receita_vaaf', 'valor_receita_vaat', 'valor_receita_vaar']].max())
+    ax.set_ylim(top=valor_maximo * 1.15)
+
+    # Rótulos dinâmicos nas barras
+    for i in range(len(df_filtrado)):
+        if pd.notnull(df_filtrado.loc[i, 'valor_receita_vaaf']):
+            ax.text(x[i] - largura, df_filtrado.loc[i, 'valor_receita_vaaf'] + valor_maximo * 0.015,
+                    f"{df_filtrado.loc[i, 'valor_receita_vaaf']:.1f}",
+                    ha='center', color='white', fontsize=9, fontweight='bold')
+        if pd.notnull(df_filtrado.loc[i, 'valor_receita_vaat']):
+            ax.text(x[i], df_filtrado.loc[i, 'valor_receita_vaat'] + valor_maximo * 0.015,
+                    f"{df_filtrado.loc[i, 'valor_receita_vaat']:.1f}",
+                    ha='center', color='white', fontsize=9, fontweight='bold')
+        if pd.notnull(df_filtrado.loc[i, 'valor_receita_vaar']):
+            ax.text(x[i] + largura, df_filtrado.loc[i, 'valor_receita_vaar'] + valor_maximo * 0.015,
+                    f"{df_filtrado.loc[i, 'valor_receita_vaar']:.1f}",
+                    ha='center', color='white', fontsize=9, fontweight='bold')
 
     # Legenda
     ax.legend(loc='upper left', frameon=False, fontsize=10)
@@ -1511,11 +1527,24 @@ def grafico_indicador_limite_constitucional(df, ente):
     # Plotagem do gráfico
     plt.style.use('dark_background')
     fig, ax = plt.subplots(figsize=(8, 6))
+    
     bars = ax.bar(
         df_filtrado['ano'].astype(str),
         df_filtrado['indicador_limite_constitucional'],
         color=cores
     )
+
+    for i, valor in enumerate(df_filtrado['indicador_limite_constitucional']):
+        if pd.notnull(valor):
+            ax.text(
+                i,
+                valor + 2,
+                f'{valor:.1f}%',
+                ha='center',
+                color='white',
+                fontsize=10,
+                fontweight='bold'
+            )
 
     ax.set_title(f'Indicador do Mínimo Constitucional - {ente}',
                  color='#FFA07A', fontsize=15)
@@ -1530,19 +1559,6 @@ def grafico_indicador_limite_constitucional(df, ente):
 
     # Limite do eixo Y
     ax.set_ylim(0, 110)
-
-    # Valor nas barras
-    for i, valor in enumerate(df_filtrado['indicador_limite_constitucional']):
-        if pd.notnull(valor):
-            ax.text(
-                i,
-                valor + 2,
-                f'{valor:.1f}%',
-                ha='center',
-                color='white',
-                fontsize=10,
-                fontweight='bold'
-            )
 
     fig.tight_layout()
     st.pyplot(fig)
@@ -1806,15 +1822,6 @@ def grafico_receitas_adicionais_evolucao(df, ente, categoria):
 
     bars = ax.bar(df_filtrado["ano_str"], df_filtrado["valor_mi"], color="#006400")
 
-    ax.set_title(f"Evolução da Receita de {nome_legivel} - {ente}", color="#FFA07A", fontsize=18)
-    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=11)
-    ax.set_xlabel("Fonte: SIOPE", color="#FFA07A", fontsize=11)
-
-    ax.tick_params(colors='#FFA07A', labelsize=14)
-    for spine in ax.spines.values():
-        spine.set_color('#FFA07A')
-
-    # Rótulos no topo das barras
     for bar in bars:
         altura = bar.get_height()
         ax.text(
@@ -1827,6 +1834,14 @@ def grafico_receitas_adicionais_evolucao(df, ente, categoria):
             fontweight='bold',
             fontsize=13
         )
+
+    ax.set_title(f"Evolução da Receita de {nome_legivel} - {ente}", color="#FFA07A", fontsize=18)
+    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=11)
+    ax.set_xlabel("Fonte: SIOPE", color="#FFA07A", fontsize=11)
+
+    ax.tick_params(colors='#FFA07A', labelsize=14)
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
 
     # Ajuste dinâmico do eixo y
     y_max = max(df_filtrado["valor_mi"].max(), 1.0)
