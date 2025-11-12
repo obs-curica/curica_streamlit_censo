@@ -1891,17 +1891,6 @@ def grafico_execucao_pdde_valores(df, ano, ente):
 
     bars = ax.bar(categorias, valores_mi, color=cores)
 
-    ax.set_title(f"Execução dos Recursos do PDDE - {ente} ({ano})", color="#FFA07A", fontsize=14)
-    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=10)
-    ax.set_xlabel("Fonte: Painel de Monitoramento do PDDE - FNDE", color="#FFA07A", fontsize=10)
-
-    ax.tick_params(axis="x", colors="#FFA07A", labelsize=12)
-    ax.tick_params(axis="y", colors="#FFA07A")
-    
-    for spine in ax.spines.values():
-        spine.set_color("#FFA07A")
-
-    # Valores no topo das barras
     for bar, valor in zip(bars, valores_mi):
         ax.text(
             bar.get_x() + bar.get_width() / 2,
@@ -1913,6 +1902,16 @@ def grafico_execucao_pdde_valores(df, ano, ente):
             fontweight='bold',
             fontsize=11
         )
+
+    ax.set_title(f"Execução dos Recursos do PDDE - {ente} ({ano})", color="#FFA07A", fontsize=14)
+    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=10)
+    ax.set_xlabel("Fonte: Painel de Monitoramento do PDDE - FNDE", color="#FFA07A", fontsize=10)
+
+    ax.tick_params(axis="x", colors="#FFA07A", labelsize=12)
+    ax.tick_params(axis="y", colors="#FFA07A")
+    
+    for spine in ax.spines.values():
+        spine.set_color("#FFA07A")
 
     # Ajuste de altura do eixo Y
     y_max = max(valores_mi)
@@ -1959,7 +1958,17 @@ def grafico_execucao_pdde_porcentagem(df, ano):
 
     ax.barh(df_filtrado["nome"], df_filtrado["porcentagem_execucao"] * 100, color=cores)
 
-    # Estilo dos eixos
+    for i, valor in enumerate(df_filtrado["porcentagem_execucao"]):
+            ax.text(
+                valor * 100 + 1,
+                i,
+                f"{valor * 100:.1f}%",
+                va="center",
+                color="white",
+                fontweight='bold',
+                fontsize=10
+            )
+
     ax.set_title(f"Execução Percentual dos Recursos do PDDE - {ano}", color="#FFA07A", fontsize=18)
     ax.set_ylabel("Porcentagem de Execução (%)", color="#FFA07A", fontsize=12)
     ax.set_xlabel("Fonte: Painel de Monitoramento do PDDE - FNDE", color="#FFA07A", fontsize=12)
@@ -1971,18 +1980,6 @@ def grafico_execucao_pdde_porcentagem(df, ano):
 
     ax.set_xlim(0, 100)
     
-    # Valores nas barras
-    for i, valor in enumerate(df_filtrado["porcentagem_execucao"]):
-        ax.text(
-            valor * 100 + 1,
-            i,
-            f"{valor * 100:.1f}%",
-            va="center",
-            color="white",
-            fontweight='bold',
-            fontsize=10
-        )
-
     fig.tight_layout()
     st.pyplot(fig)
 
@@ -2024,17 +2021,6 @@ def grafico_receita_total_educacao(df, ente):
 
     bars = ax.bar(df_filtrado["ano"].astype(str), df_filtrado["valor_mi"], color=cor_verde)
 
-    ax.set_title(f"Receita Total para Educação - {ente}", color="#FFA07A", fontsize=18)
-    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=11)
-    ax.set_xlabel("Fonte: SIOPE", color="#FFA07A", fontsize=11)
-
-    ax.tick_params(colors='#FFA07A', labelsize=13)    
-    for spine in ax.spines.values():
-        spine.set_color('#FFA07A')
-
-    ax.set_ylim(0, df_filtrado["valor_mi"].max() * 1.25)
-    
-    # Valores nas barras
     for bar, valor in zip(bars, df_filtrado["valor_mi"]):
         ax.text(
             bar.get_x() + bar.get_width() / 2,
@@ -2046,6 +2032,16 @@ def grafico_receita_total_educacao(df, ente):
             fontsize=13
         )
 
+    ax.set_title(f"Receita Total para Educação - {ente}", color="#FFA07A", fontsize=18)
+    ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=11)
+    ax.set_xlabel("Fonte: SIOPE", color="#FFA07A", fontsize=11)
+
+    ax.tick_params(colors='#FFA07A', labelsize=13)    
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+
+    ax.set_ylim(0, df_filtrado["valor_mi"].max() * 1.25)
+    
     fig.tight_layout()
     st.pyplot(fig)
 
