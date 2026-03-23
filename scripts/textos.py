@@ -42,9 +42,7 @@ def texto_home_contextualizacao():
     de alimentação escolar, materiais didáticos e materiais de expediente, transporte escolar de alunos e professores, 
     formações continuadas, acompanhamento pedagógico e gastos com combustível.  
     
-    Avesso da blusa para  
-    encontrar o caminho de volta...
-    criar uma picada segura nesse cipoal, tabocal espinhoso...
+    O Observatório Curica procura avessar a blusa e encontrar o caminho de volta, para então criar uma picada segura nesse cipoal.
 """
 
 
