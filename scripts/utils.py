@@ -11,7 +11,7 @@ def carregar_dados(url):
     import pandas as pd
     import streamlit as st
     
-    df = pd.read_csv(url, delimiter=';', encoding='utf-8', low_memory=False)
+    df = pd.read_csv(url, delimiter=';', encoding='latin-1', low_memory=False)
     return df
 
 
