@@ -591,8 +591,8 @@ def grafico_matriculas_por_dependencia_localizacao(df, ano_censo):
     # Valores nas barras com espaçamento dinâmico
     espaco_texto = limite_superior * 0.015
     for i in range(len(categorias)):
-        ax.text(x[i] - largura/2, urbana[i] + espaco_texto, f'{urbana[i]:,.0f}', ha='center', color='white', fontweight='bold', fontsize=15)
-        ax.text(x[i] + largura/2, rural[i] + espaco_texto, f'{rural[i]:,.0f}', ha='center', color='white', fontweight='bold', fontsize=15)
+        ax.text(x[i] - largura/2, urbana.iloc[i] + espaco_texto, f'{urbana.iloc[i]:,.0f}', ha='center', color='white', fontweight='bold', fontsize=15)
+        ax.text(x[i] + largura/2, rural.iloc[i] + espaco_texto, f'{rural.iloc[i]:,.0f}', ha='center', color='white', fontweight='bold', fontsize=15)
 
     plt.tight_layout()
     st.pyplot(fig)
