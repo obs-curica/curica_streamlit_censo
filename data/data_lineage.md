@@ -58,6 +58,27 @@
   
   -> dataframes processados: n/a
 
+  * PDDE
+    Painel Monitoramento PDDE.
+    Link: https://app.powerbi.com/view?r=eyJrIjoiNjBiNjZkZmYtMDRiZS00ZDRkLTkzMzUtNDkyZDk2ZDI4ZWQ4IiwidCI6ImNmODQ1NGQzLWUwMTItNGE5ZC05NWIzLTcwYmRiNmY0NTlkNSJ9
+
+    -> Aplicar os filtros:
+      Selecionar aba "Uso dos recursos";
+      Selecionar aba "Filtros" UF==AC, Ano==202...
+
+      Capturar tráfego da API do PowerBI no navegador com DevTools, no Firefox:
+        Clicar na aba Network;
+        Recarregar a página;
+        Clicar no método POST, e FILE "querydata?synchronous=true";
+        Clicar na aba Response;
+        Copiar o arquivo Json.
+
+    -> Processamento do JSON:
+      df_execucao_pdde.ipynb
+
+    -> Dataframes extraídos:
+      df_execucao_pdde.csv
+
 
 ## Página Panorama Água Potável
 
