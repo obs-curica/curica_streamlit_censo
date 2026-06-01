@@ -3487,6 +3487,71 @@ def grafico_escolas_por_localizacao_diferenciada(df, ano_censo):
     
     fig.tight_layout()
     st.pyplot(fig)
+
+# Função gráfico de barras total de matriculas por localizacao diferenciada
+def grafico_matriculas_por_localizacao_diferenciada_municipio(df, ano_censo, municipio):
+    """
+    Gera um gráfico de barras verticais com o total de matriculas por localizacao diferenciada.
+
+    Parâmetros:
+    -----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas 'TP_LOCALIZACAO_DIFERENCIADA', 'QT_MAT_BAS' e 'NU_ANO_CENSO'.
+    ano_censo : int
+        Ano do censo escolar selecionado pelo usuário na interface.
+    """
+    import matplotlib.pyplot as plt
+    import streamlit as st
+    from matplotlib.ticker import MaxNLocator
+    
+    # Filtra o DataFrame pelo ano selecionado
+    df_filtrado = df[
+        (df['NU_ANO_CENSO'] == ano_censo) &
+        (df['NO_MUNICIPIO'] == municipio) & 
+        (df['TP_LOCALIZACAO_DIFERENCIADA'] != 0) & 
+        (df['TP_LOCALIZACAO_DIFERENCIADA'].notnull())
+    ]
+    
+    # Agrupa por Localização e soma os matriculas
+    localizacao_counts = df_filtrado.groupby('TP_LOCALIZACAO_DIFERENCIADA')['QT_MAT_BAS'].sum().sort_index().astype(int)
+    localizacao_counts.index = localizacao_counts.index.map({1: 'Assentamento', 2: 'Terra Indígena', 3: 'Quilombola', 8: 'Com. Tradicionais'})
+    
+    # Cores fixas opacas por categoria
+    cores_localizacao = {
+        'Assentamento': '#1FB029',
+        'Terra Indígena': '#C0C0C0',
+        'Quilombola': '#FFA07A',
+        'Com. Tradicionais': '#FF6347'
+    }
+    
+    cores_localizacao = [cores_localizacao[r] for r in localizacao_counts.index]
+    
+    # Estilo escuro
+    plt.style.use('dark_background')
+    
+    # Criação do gráfico
+    fig, ax = plt.subplots(figsize=(10, 6))
+    bars = ax.bar(localizacao_counts.index, localizacao_counts.values, color=cores_localizacao)
+    
+    # Título e rótulos
+    ax.set_title(f'Matriculas por Localização Diferenciada - {municipio} ({ano_censo})', color='#FFA07A', fontsize=20)
+    ax.set_xlabel('Fonte: Censo Escolar', color='#FFA07A', fontsize=14)
+    
+    # Estilo dos spines
+    for spine in ax.spines.values():
+        spine.set_color('#FFA07A')
+        spine.set_linewidth(1)
+    # Ticks
+    ax.set_ylim(0, localizacao_counts.max() * 1.1)
+    ax.tick_params(axis='x', colors='#FFA07A', labelsize=20)
+    ax.tick_params(axis='y', colors='#FFA07A', labelsize=20)
+    ax.yaxis.set_major_locator(MaxNLocator(nbins=6))
+    # Inserir valores nas barras
+    for i, valor in enumerate(localizacao_counts):
+        ax.text(i, valor + max(localizacao_counts) * 0.02, str(valor), ha='center',
+                color='white', fontweight='bold', fontsize=14)
+    fig.tight_layout()
+    st.pyplot(fig)
     
 # Função para gráfico de barras total de escolas por localizacao diferenciada, por município
 def grafico_escolas_por_localizacao_diferenciada_municipio(df, ano_censo, municipio):
@@ -3505,10 +3570,11 @@ def grafico_escolas_por_localizacao_diferenciada_municipio(df, ano_censo, munici
 
     # Filtra o DataFrame pelo ano e município selecionados
     df_filtrado = df[
-        (df['TP_LOCALIZACAO_DIFERENCIADA'] != 0) &
-        (df['TP_LOCALIZACAO_DIFERENCIADA'].notnull()) &
         (df['NU_ANO_CENSO'] == ano_censo) &
-        (df['NO_MUNICIPIO'] == municipio)
+        (df['NO_MUNICIPIO'] == municipio) &
+        (df['TP_LOCALIZACAO_DIFERENCIADA'] != 0) &
+        (df['TP_LOCALIZACAO_DIFERENCIADA'].notnull())
+        
     ]
 
     # Agrupa por Localização e conta as escolas
@@ -3533,7 +3599,8 @@ def grafico_escolas_por_localizacao_diferenciada_municipio(df, ano_censo, munici
     bars = ax.bar(localizacao_counts.index, localizacao_counts.values, color=cores_localizacao)
 
     # Título e rótulos
-    ax.set_title(f'Total de Escolas por Localização Diferenciada em {municipio}', color='#FFA07A', fontsize=25)
+    ax.set_title(f'Escolas por Localização Diferenciada - {municipio} ({ano_censo})', color='#FFA07A', fontsize=20)
+    ax.set_xlabel('Fonte: Censo Escolar', color='#FFA07A', fontsize=14)
     
     # Estilo dos spines
     for spine in ax.spines.values():

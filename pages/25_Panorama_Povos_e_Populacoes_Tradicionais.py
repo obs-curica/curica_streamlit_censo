@@ -5,10 +5,10 @@ import matplotlib.colors as mcolors
 import os
 import re
 
-from scripts.load_data import carregar_dados
+from scripts.utils import carregar_dados
 from scripts.graficos import grafico_matriculas_por_localizacao_diferenciada
 from scripts.graficos import grafico_escolas_por_localizacao_diferenciada
-from scripts.load_data import dataframe_totais_por_localizacao_diferenciada_municipio
+from scripts.graficos import grafico_matriculas_por_localizacao_diferenciada_municipio
 from scripts.graficos import grafico_escolas_por_localizacao_diferenciada_municipio
 
 # Configuração da página
@@ -58,14 +58,15 @@ st.write("Texto analítico.")
 # Tabela de localização por Município
 with st.form("form_localizacao_diferenciada"):
     ano_censo_localizacao = st.selectbox("Selecione o ano do Censo Escolar:", sorted(df_panorama_geral['NU_ANO_CENSO'].unique()), key ="ano_censo_localizacao_diferenciada")
+
     municipio_localizacao = st.selectbox("Selecione o município:", sorted(df_panorama_geral['NO_MUNICIPIO'].unique()), key="municipio_localizacao_diferenciada")
+    
     # localizacao = st.selectbox("Selecione a localização:", sorted(df_panorama_geral['TP_LOCALIZACAO'].unique()), key="localizacao")
     submitted = st.form_submit_button("Gerar Dados")
     if submitted:
         col1, col2 = st.columns(2)
-        # Dataframe do total de alunos e escolas por localização
         with col1:
-            st.write(dataframe_totais_por_localizacao_diferenciada_municipio(df_panorama_geral, ano_censo_localizacao, municipio_localizacao))
+            st.write(grafico_matriculas_por_localizacao_diferenciada_municipio(df_panorama_geral, ano_censo_localizacao, municipio_localizacao))
         # Gráfico do total de escolas por localização    
         with col2:
             grafico_escolas_por_localizacao_diferenciada_municipio(df_panorama_geral, ano_censo_localizacao, municipio_localizacao)
