@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 from scripts.utils import carregar_dados
 
@@ -72,6 +73,30 @@ df_uex = carregar_dados(url_df_uex)
 url_df_pdde_equidade = 'https://raw.githubusercontent.com/obs-curica/curica_streamlit_censo/refs/heads/main/data/pdde_info/df_pdde_equidade.csv'
 df_pdde_equidade = carregar_dados(url_df_pdde_equidade)
 
+################## TESTES #####################
+
+st.title('Testes')
+
+st.write(df_pdde_equidade["Destinação"].dropna().unique()[:20])
+
+st.write(pd.__version__)
+
+st.write(df_pdde_equidade.shape)
+
+st.write(df_pdde_equidade["Ano"].value_counts())
+
+st.write(df_pdde_equidade["Destinação"].value_counts())
+
+st.write(
+    sorted(
+        df_pdde_equidade["Destinação"]
+        .dropna()
+        .unique()
+        .tolist()
+    )
+)
+
+###############################################
 
 st.title('💧 Panorama da Oferta de Água Potável')
 st.write(texto_pan_agua_intro()) 
