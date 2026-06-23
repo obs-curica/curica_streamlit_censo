@@ -1903,7 +1903,7 @@ def grafico_execucao_pdde_valores(df, ano, ente):
             fontweight='bold',
             fontsize=11
         )
-    #comentario para teste
+    
     ax.set_title(f"Execução dos Recursos do PDDE - {ente} ({ano})", color="#FFA07A", fontsize=14)
     ax.set_ylabel("Valor em milhões de R$ (mi)", color="#FFA07A", fontsize=10)
     ax.set_xlabel("Fonte: Painel de Monitoramento do PDDE - FNDE", color="#FFA07A", fontsize=10)
