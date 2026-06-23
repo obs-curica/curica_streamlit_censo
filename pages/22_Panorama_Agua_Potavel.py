@@ -290,6 +290,7 @@ with col2:
     anos_disponiveis = sorted(df_uex['Ano'].unique())
     ano_mais_recente = max(anos_disponiveis)
 
+    # teste
     ano_pdde = st.selectbox(
         "Selecione o ano:",
         options=anos_disponiveis,
