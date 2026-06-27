@@ -1,7 +1,7 @@
 import streamlit as st
 
 
-#@st.cache_data
+@st.cache_data
 def carregar_dados(url):
     """
     Carrega dados de um arquivo CSV a partir de uma URL fornecida.
