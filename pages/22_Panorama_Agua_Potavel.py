@@ -96,7 +96,7 @@ st.write(
     )
 )
 
-#ainda nao testei este
+
 st.write("teste 01")
 st.write(sorted(df_pdde_equidade["Ano"].unique()))
 
@@ -138,6 +138,25 @@ st.dataframe(
         )
     ][["Ano", "Destinação"]]
 )
+
+st.write("teste 06")
+st.write(
+    df_pdde_equidade["Ano"]
+      .map(type)
+      .value_counts()
+)
+
+st.write(df_pdde_equidade.dtypes)
+
+st.write(df_pdde_equidade["Ano"].unique())
+
+st.write(
+    repr(df_pdde_equidade.loc[
+        df_pdde_equidade["Destinação"]=="PDDE ÁGUA 2024",
+        "Ano"
+    ].iloc[0])
+)
+
 
 ###############################################
 
