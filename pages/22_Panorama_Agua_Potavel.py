@@ -128,6 +128,17 @@ df_debug = (
 
 st.dataframe(df_debug)
 
+st.write("teste 05")
+st.dataframe(
+    df_pdde_equidade[
+        df_pdde_equidade["Destinação"].str.contains(
+            "2024",
+            case=False,
+            na=False
+        )
+    ][["Ano", "Destinação"]]
+)
+
 ###############################################
 
 st.title('💧 Panorama da Oferta de Água Potável')
