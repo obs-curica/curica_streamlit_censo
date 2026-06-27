@@ -171,6 +171,18 @@ st.write(
     dest.str.contains("água", regex=False).groupby(df_pdde_equidade["Ano"]).sum()
 )
 
+
+st.write("teste 08")
+import re
+textos = [
+    "PDDE ÁGUA 2024",
+    "PDDE Agua 2021",
+    "Água 2019",
+    "Agua 2020",
+]
+
+for t in textos:
+    st.write(t, bool(re.search(r"\b(água|agua)\b", t, flags=re.IGNORECASE)))
 ###############################################
 
 st.title('💧 Panorama da Oferta de Água Potável')
