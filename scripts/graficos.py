@@ -2998,76 +2998,208 @@ def grafico_pdde_agua_por_ano(df):
     st.pyplot(fig)
 
 
+#def grafico_pdde_agua_por_municipio(df, ano):
+#    """
+#    Gera gráfico de barras horizontais com o total de escolas que acessaram o PDDE Água por município,
+#    para um determinado ano. Considera menções a 'água' na coluna 'Destinação'.
+#
+#    Se o município não aparecer no ano selecionado, seu valor será 0.
+#
+#    Parâmetros:
+#    -----------
+#    df : pd.DataFrame
+#        DataFrame contendo as colunas 'Ano', 'Destinação' e 'Município'.
+#    ano : int
+#        Ano a ser filtrado na análise.
+#    """
+#    import matplotlib.pyplot as plt
+#    import streamlit as st
+#    import pandas as pd
+#
+#    colunas_necessarias = {"Ano", "Destinação", "Município"}
+#    if not colunas_necessarias.issubset(df.columns):
+#        st.error("O DataFrame deve conter as colunas: 'Ano', 'Destinação' e 'Município'.")
+#        return
+#
+#    # Lista de todos os municípios existentes no DataFrame (mesmo que não apareçam no ano)
+#    todos_municipios = sorted(df["Município"].dropna().unique())
+#
+#    df_ano = df[df["Ano"] == ano]
+#
+#    # Se não houver dados, cria DataFrame vazio com municípios zerados
+#    if df_ano.empty:
+#        contagem = pd.Series(0, index=todos_municipios, dtype=int)
+#    else:
+#        # Coluna booleana para menções à "água"
+#        df_ano["ACESSOU_PDDE_AGUA"] = df_ano["Destinação"].str.contains(
+#            r"\b(água|agua)\b", case=False, na=False, regex=True
+#        )
+#
+#        contagem = df_ano.groupby("Município")["ACESSOU_PDDE_AGUA"].sum().astype(int)
+#
+#        contagem = contagem.reindex(todos_municipios, fill_value=0)
+#
+#    contagem = contagem.sort_values(ascending=True)
+#
+#    # Plotagem do gráfico
+#    plt.style.use("dark_background")
+#    fig, ax = plt.subplots(figsize=(10, max(6, len(contagem) * 0.4)))
+#
+#    barras = ax.barh(contagem.index, contagem.values, color="#B0E0E6")
+#
+#    for bar, valor in zip(barras, contagem.values):
+#        ax.text(
+#            valor + (contagem.max() * 0.01 if contagem.max() > 0 else 0.1),
+#            bar.get_y() + bar.get_height() / 2,
+#            f"{int(valor)}",
+#            va="center", ha="left",
+#            fontsize=12, color="white", fontweight="bold"
+#        )
+#
+#    ax.set_title(f"Escolas que acessaram o PDDE Água por Município — {ano}", color="#FFA07A", fontsize=20)
+#    ax.set_xlabel("Fonte: PDDE Info", color="#FFA07A", fontsize=12)
+#    
+#    ax.tick_params(axis='x', colors="#FFA07A", labelsize=12)
+#    ax.tick_params(axis='y', colors="#FFA07A", labelsize=11)
+#
+#    for spine in ax.spines.values():
+#        spine.set_color("#FFA07A")
+#
+#    ax.set_xlim(0, contagem.max() * 1.25 if contagem.max() > 0 else 1)
+#    
+#    fig.tight_layout()
+#    st.pyplot(fig)
+
 def grafico_pdde_agua_por_municipio(df, ano):
     """
-    Gera gráfico de barras horizontais com o total de escolas que acessaram o PDDE Água por município,
-    para um determinado ano. Considera menções a 'água' na coluna 'Destinação'.
+    Gera gráfico de barras horizontais com o total de escolas que acessaram o
+    PDDE Água por município, para um determinado ano.
 
-    Se o município não aparecer no ano selecionado, seu valor será 0.
-
-    Parâmetros:
-    -----------
-    df : pd.DataFrame
-        DataFrame contendo as colunas 'Ano', 'Destinação' e 'Município'.
-    ano : int
-        Ano a ser filtrado na análise.
+    A identificação do PDDE Água é realizada por meio da normalização da
+    coluna 'Destinação', tornando a busca independente de acentos e grafias.
     """
+
+    import unicodedata
     import matplotlib.pyplot as plt
     import streamlit as st
     import pandas as pd
 
     colunas_necessarias = {"Ano", "Destinação", "Município"}
+
     if not colunas_necessarias.issubset(df.columns):
-        st.error("O DataFrame deve conter as colunas: 'Ano', 'Destinação' e 'Município'.")
+        st.error(
+            "O DataFrame deve conter as colunas: "
+            "'Ano', 'Destinação' e 'Município'."
+        )
         return
 
-    # Lista de todos os municípios existentes no DataFrame (mesmo que não apareçam no ano)
-    todos_municipios = sorted(df["Município"].dropna().unique())
+    # Trabalha sobre uma cópia para evitar efeitos colaterais
+    df = df.copy()
 
-    df_ano = df[df["Ano"] == ano]
+    # Normalização da coluna Destinação
+    df["destinacao_normalizada"] = (
+        df["Destinação"]
+        .fillna("")
+        .astype(str)
+        .map(
+            lambda texto: unicodedata.normalize("NFKD", texto)
+            .encode("ASCII", "ignore")
+            .decode("utf-8")
+            .lower()
+        )
+    )
 
-    # Se não houver dados, cria DataFrame vazio com municípios zerados
+    # Lista de todos os municípios
+    todos_municipios = sorted(
+        df["Município"].dropna().unique()
+    )
+
+    # Filtra o ano
+    df_ano = df.loc[df["Ano"] == ano].copy()
+
     if df_ano.empty:
-        contagem = pd.Series(0, index=todos_municipios, dtype=int)
-    else:
-        # Coluna booleana para menções à "água"
-        df_ano["ACESSOU_PDDE_AGUA"] = df_ano["Destinação"].str.contains(
-            r"\b(água|agua)\b", case=False, na=False, regex=True
+        contagem = pd.Series(
+            0,
+            index=todos_municipios,
+            dtype=int
         )
 
-        contagem = df_ano.groupby("Município")["ACESSOU_PDDE_AGUA"].sum().astype(int)
+    else:
 
-        contagem = contagem.reindex(todos_municipios, fill_value=0)
+        df_ano["ACESSOU_PDDE_AGUA"] = (
+            df_ano["destinacao_normalizada"]
+            .str.contains(
+                "agua",
+                regex=False
+            )
+        )
 
-    contagem = contagem.sort_values(ascending=True)
+        contagem = (
+            df_ano
+            .groupby("Município")["ACESSOU_PDDE_AGUA"]
+            .sum()
+            .astype(int)
+            .reindex(todos_municipios, fill_value=0)
+        )
 
-    # Plotagem do gráfico
+    contagem = contagem.sort_values()
+
+    # Plotagem
     plt.style.use("dark_background")
+
     fig, ax = plt.subplots(figsize=(10, max(6, len(contagem) * 0.4)))
 
     barras = ax.barh(contagem.index, contagem.values, color="#B0E0E6")
 
-    for bar, valor in zip(barras, contagem.values):
+    deslocamento = (contagem.max() * 0.01 if contagem.max() > 0 else 0.1)
+
+    for barra, valor in zip(barras, contagem.values):
+
         ax.text(
-            valor + (contagem.max() * 0.01 if contagem.max() > 0 else 0.1),
-            bar.get_y() + bar.get_height() / 2,
-            f"{int(valor)}",
-            va="center", ha="left",
-            fontsize=12, color="white", fontweight="bold"
+            valor + deslocamento,
+            barra.get_y() + barra.get_height() / 2,
+            f"{valor}",
+            ha="left",
+            va="center",
+            fontsize=12,
+            color="white",
+            fontweight="bold"
         )
 
-    ax.set_title(f"Escolas que acessaram o PDDE Água por Município — {ano}", color="#FFA07A", fontsize=20)
-    ax.set_xlabel("Fonte: PDDE Info", color="#FFA07A", fontsize=12)
-    
-    ax.tick_params(axis='x', colors="#FFA07A", labelsize=12)
-    ax.tick_params(axis='y', colors="#FFA07A", labelsize=11)
+    ax.set_title(
+        f"Escolas que acessaram o PDDE Água por Município — {ano}",
+        color="#FFA07A",
+        fontsize=20
+    )
+
+    ax.set_xlabel(
+        "Fonte: PDDE Info",
+        color="#FFA07A",
+        fontsize=12
+    )
+
+    ax.tick_params(
+        axis="x",
+        colors="#FFA07A",
+        labelsize=12
+    )
+
+    ax.tick_params(
+        axis="y",
+        colors="#FFA07A",
+        labelsize=11
+    )
 
     for spine in ax.spines.values():
         spine.set_color("#FFA07A")
 
-    ax.set_xlim(0, contagem.max() * 1.25 if contagem.max() > 0 else 1)
-    
+    ax.set_xlim(
+        0,
+        contagem.max() * 1.25 if contagem.max() > 0 else 1
+    )
+
     fig.tight_layout()
+
     st.pyplot(fig)
 
 def grafico_pdde_agua_escolas(df_censo, df_uex, df_equidade):
