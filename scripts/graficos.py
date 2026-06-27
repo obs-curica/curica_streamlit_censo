@@ -2815,86 +2815,188 @@ def grafico_uex_por_municipio(df_agua, df_uex, municipio):
     fig.tight_layout()
     st.pyplot(fig)
 
+#def grafico_pdde_agua_por_ano(df):
+#    """
+#    Gera gráfico de barras verticais com o total de escolas que acessaram o PDDE Água por ano,
+#    com base nas ocorrências da palavra 'água' (em diferentes grafias) na coluna 'Destinação'.
+#
+#    Parâmetros:
+#    -----------
+#    df : pd.DataFrame
+#        DataFrame contendo as colunas 'Ano' e 'Destinação'.
+#    """
+#    import matplotlib.pyplot as plt
+#    import streamlit as st
+#    import pandas as pd
+#
+#    # teste
+#    st.write("Entrou na função") # teste
+#
+#    st.write(df["Ano"].value_counts().sort_index())  # teste
+#
+#    st.write(
+#        df.groupby("Ano")["Destinação"]
+#          .count()
+#    )  
+#    # fim teste
+#
+#    if "Ano" not in df.columns or "Destinação" not in df.columns:
+#        st.error("O DataFrame deve conter as colunas 'Ano' e 'Destinação'.")
+#        return
+#
+#    filtro_agua = df["Destinação"].str.contains(r"\b(água|agua)\b", case=False, na=False, regex=True)
+#    df_filtrado = df[filtro_agua]
+#
+#    if df_filtrado.empty:
+#        st.warning("Não há registros com 'água' na coluna 'Destinação'.")
+#        return
+#    
+#    # teste
+#    filtro = df["Destinação"].str.contains(
+#    r"\b(água|agua)\b",
+#    case=False,
+#    na=False,
+#    regex=True
+#)
+#
+#    st.write(
+#        pd.crosstab(df["Ano"], filtro)
+#    )
+#    # fim teste
+#
+#    contagem_por_ano = df_filtrado["Ano"].value_counts().sort_index()
+#
+#    # Plotagem do gráfico
+#    plt.style.use("dark_background")
+#    fig, ax = plt.subplots(figsize=(10, 8.9))
+#
+#    cor_barras = "#B0E0E6"
+#    
+#    barras = ax.bar(contagem_por_ano.index.astype(str), contagem_por_ano.values, color=cor_barras)
+#
+#    for bar, valor in zip(barras, contagem_por_ano.values):
+#        ax.text(
+#            bar.get_x() + bar.get_width() / 2,
+#            valor + contagem_por_ano.max() * 0.02,
+#            f"{valor:,}".replace(",", "."),
+#            ha="center", va="bottom",
+#            fontsize=15, color="white", fontweight="bold"
+#        )
+#
+#    ax.set_title("Escolas que acessaram o PDDE Água por ano", color="#FFA07A", fontsize=24)
+#    ax.set_xlabel("Fonte: PDDE Info", color="#FFA07A", fontsize=11)
+#
+#    ax.tick_params(axis='x', colors="#FFA07A", labelsize=17)
+#    ax.tick_params(axis='y', colors="#FFA07A", labelsize=12)
+#    for spine in ax.spines.values():
+#        spine.set_color("#FFA07A")
+#
+#    ax.set_ylim(0, contagem_por_ano.max() * 1.25)
+#    fig.tight_layout()
+#    st.pyplot(fig)
+
 def grafico_pdde_agua_por_ano(df):
     """
-    Gera gráfico de barras verticais com o total de escolas que acessaram o PDDE Água por ano,
-    com base nas ocorrências da palavra 'água' (em diferentes grafias) na coluna 'Destinação'.
+    Gera gráfico de barras verticais com o total de escolas que acessaram o
+    PDDE Água por ano.
 
-    Parâmetros:
-    -----------
-    df : pd.DataFrame
-        DataFrame contendo as colunas 'Ano' e 'Destinação'.
+    A identificação das ações do PDDE Água é realizada por meio da
+    normalização da coluna 'Destinação', tornando a busca independente
+    de acentos e diferenças de grafia.
     """
+
+    import unicodedata
     import matplotlib.pyplot as plt
     import streamlit as st
-    import pandas as pd
 
-    # teste
-    st.write("Entrou na função") # teste
-
-    st.write(df["Ano"].value_counts().sort_index())  # teste
-
-    st.write(
-        df.groupby("Ano")["Destinação"]
-          .count()
-    )  
-    # fim teste
-
+    # Validação das colunas necessárias
     if "Ano" not in df.columns or "Destinação" not in df.columns:
         st.error("O DataFrame deve conter as colunas 'Ano' e 'Destinação'.")
         return
 
-    filtro_agua = df["Destinação"].str.contains(r"\b(água|agua)\b", case=False, na=False, regex=True)
-    df_filtrado = df[filtro_agua]
+    # Trabalha sobre uma cópia para evitar alterações no DataFrame original
+    df = df.copy()
+
+    # Normalização da coluna Destinação
+    df["destinacao_normalizada"] = (
+        df["Destinação"]
+        .fillna("")
+        .astype(str)
+        .map(
+            lambda texto: unicodedata.normalize("NFKD", texto)
+            .encode("ASCII", "ignore")
+            .decode("utf-8")
+            .lower()
+        )
+    )
+
+    # Filtra apenas registros relacionados ao PDDE Água
+    filtro_agua = df["destinacao_normalizada"].str.contains(
+        "agua",
+        regex=False
+    )
+
+    df_filtrado = df.loc[filtro_agua]
 
     if df_filtrado.empty:
-        st.warning("Não há registros com 'água' na coluna 'Destinação'.")
+        st.warning("Não há registros do PDDE Água.")
         return
-    
-    # teste
-    filtro = df["Destinação"].str.contains(
-    r"\b(água|agua)\b",
-    case=False,
-    na=False,
-    regex=True
-)
 
-    st.write(
-        pd.crosstab(df["Ano"], filtro)
-    ) # teste
+    # Contagem por ano
+    contagem_por_ano = (
+        df_filtrado["Ano"]
+        .value_counts()
+        .sort_index()
+    )
 
-    # fim teste
-
-    contagem_por_ano = df_filtrado["Ano"].value_counts().sort_index()
-
-    # Plotagem do gráfico
+    # Plotagem
     plt.style.use("dark_background")
     fig, ax = plt.subplots(figsize=(10, 8.9))
 
     cor_barras = "#B0E0E6"
-    
-    barras = ax.bar(contagem_por_ano.index.astype(str), contagem_por_ano.values, color=cor_barras)
 
-    for bar, valor in zip(barras, contagem_por_ano.values):
+    barras = ax.bar(
+        contagem_por_ano.index.astype(str),
+        contagem_por_ano.values,
+        color=cor_barras
+    )
+
+    for barra, valor in zip(barras, contagem_por_ano.values):
         ax.text(
-            bar.get_x() + bar.get_width() / 2,
+            barra.get_x() + barra.get_width() / 2,
             valor + contagem_por_ano.max() * 0.02,
             f"{valor:,}".replace(",", "."),
-            ha="center", va="bottom",
-            fontsize=15, color="white", fontweight="bold"
+            ha="center",
+            va="bottom",
+            fontsize=15,
+            color="white",
+            fontweight="bold"
         )
 
-    ax.set_title("Escolas que acessaram o PDDE Água por ano", color="#FFA07A", fontsize=24)
-    ax.set_xlabel("Fonte: PDDE Info", color="#FFA07A", fontsize=11)
+    ax.set_title(
+        "Escolas que acessaram o PDDE Água por ano",
+        color="#FFA07A",
+        fontsize=24
+    )
 
-    ax.tick_params(axis='x', colors="#FFA07A", labelsize=17)
-    ax.tick_params(axis='y', colors="#FFA07A", labelsize=12)
+    ax.set_xlabel(
+        "Fonte: PDDE Info",
+        color="#FFA07A",
+        fontsize=11
+    )
+
+    ax.tick_params(axis="x", colors="#FFA07A", labelsize=17)
+    ax.tick_params(axis="y", colors="#FFA07A", labelsize=12)
+
     for spine in ax.spines.values():
         spine.set_color("#FFA07A")
 
     ax.set_ylim(0, contagem_por_ano.max() * 1.25)
+
     fig.tight_layout()
+
     st.pyplot(fig)
+
 
 def grafico_pdde_agua_por_municipio(df, ano):
     """
