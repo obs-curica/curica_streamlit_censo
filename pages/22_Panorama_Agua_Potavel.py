@@ -97,10 +97,13 @@ st.write(
 )
 
 #ainda nao testei este
+st.write("teste 01")
 st.write(sorted(df_pdde_equidade["Ano"].unique()))
 
+st.write("teste 02")
 st.write(df_pdde_equidade["Ano"].value_counts().sort_index())
 
+st.write("teste 03")
 st.write(
     df_pdde_equidade.groupby(["Ano", "Destinação"])
     .size()
@@ -108,6 +111,7 @@ st.write(
     .sort_values(["Ano", "Destinação"])
 )
 
+st.write("teste 04")
 filtro_agua = df_pdde_equidade["Destinação"].str.contains(
     r"\b(água|agua)\b",
     case=False,
