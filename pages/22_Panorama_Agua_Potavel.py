@@ -157,6 +157,19 @@ st.write(
     ].iloc[0])
 )
 
+st.write("teste 07")
+dest = (
+    df_pdde_equidade["Destinação"]
+        .str.lower()
+)
+
+st.write(
+    dest.str.contains("agua", regex=False).groupby(df_pdde_equidade["Ano"]).sum()
+)
+
+st.write(
+    dest.str.contains("água", regex=False).groupby(df_pdde_equidade["Ano"]).sum()
+)
 
 ###############################################
 
