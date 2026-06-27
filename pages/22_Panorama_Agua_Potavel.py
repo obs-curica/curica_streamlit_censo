@@ -96,6 +96,34 @@ st.write(
     )
 )
 
+#ainda nao testei este
+st.write(sorted(df_pdde_equidade["Ano"].unique()))
+
+st.write(df_pdde_equidade["Ano"].value_counts().sort_index())
+
+st.write(
+    df_pdde_equidade.groupby(["Ano", "Destinação"])
+    .size()
+    .reset_index(name="Total")
+    .sort_values(["Ano", "Destinação"])
+)
+
+filtro_agua = df_pdde_equidade["Destinação"].str.contains(
+    r"\b(água|agua)\b",
+    case=False,
+    na=False,
+    regex=True
+)
+
+df_debug = (
+    df_pdde_equidade[filtro_agua]
+    .groupby("Ano")
+    .size()
+    .reset_index(name="Total")
+)
+
+st.dataframe(df_debug)
+
 ###############################################
 
 st.title('💧 Panorama da Oferta de Água Potável')
