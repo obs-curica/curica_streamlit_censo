@@ -2827,6 +2827,18 @@ def grafico_pdde_agua_por_ano(df):
     """
     import matplotlib.pyplot as plt
     import streamlit as st
+    import pandas as pd
+
+    # teste
+    st.write("Entrou na função") # teste
+
+    st.write(df["Ano"].value_counts().sort_index())  # teste
+
+    st.write(
+        df.groupby("Ano")["Destinação"]
+          .count()
+    )  
+    # fim teste
 
     if "Ano" not in df.columns or "Destinação" not in df.columns:
         st.error("O DataFrame deve conter as colunas 'Ano' e 'Destinação'.")
@@ -2838,6 +2850,20 @@ def grafico_pdde_agua_por_ano(df):
     if df_filtrado.empty:
         st.warning("Não há registros com 'água' na coluna 'Destinação'.")
         return
+    
+    # teste
+    filtro = df["Destinação"].str.contains(
+    r"\b(água|agua)\b",
+    case=False,
+    na=False,
+    regex=True
+)
+
+    st.write(
+        pd.crosstab(df["Ano"], filtro)
+    ) # teste
+
+    # fim teste
 
     contagem_por_ano = df_filtrado["Ano"].value_counts().sort_index()
 
