@@ -10,6 +10,8 @@ from scripts.graficos import grafico_matriculas_por_localizacao_diferenciada
 from scripts.graficos import grafico_escolas_por_localizacao_diferenciada
 from scripts.graficos import grafico_matriculas_por_localizacao_diferenciada_municipio
 from scripts.graficos import grafico_escolas_por_localizacao_diferenciada_municipio
+from scripts.graficos import grafico_matriculas_por_dependencia_localizacao_diferenciada_municipio
+from scripts.graficos import grafico_escolas_por_dependencia_localizacao_diferenciada_municipio
 
 # Configuração da página
 st.set_page_config(page_title="Panorama Povos e Populações Tradicionais", layout="wide", page_icon="🦜")
@@ -62,7 +64,7 @@ with st.form("form_localizacao_diferenciada"):
     municipio_localizacao = st.selectbox("Selecione o município:", sorted(df_panorama_geral['NO_MUNICIPIO'].unique()), key="municipio_localizacao_diferenciada")
     
     # localizacao = st.selectbox("Selecione a localização:", sorted(df_panorama_geral['TP_LOCALIZACAO'].unique()), key="localizacao")
-    submitted = st.form_submit_button("Gerar Dados")
+    submitted = st.form_submit_button("Gerar Gráfico")
     if submitted:
         col1, col2 = st.columns(2)
         with col1:
@@ -73,6 +75,26 @@ with st.form("form_localizacao_diferenciada"):
     
         # Texto de análise dos gráficos
         st.write("Existem Unidades de Conservação no território de seu Município? E os ribeirinhos? Há populações tradicionais habitando esses espaços? Existem escolas na localidade?")
+
+# Tabela de localização por Município
+with st.form("form_localizacao_diferenciada_dependencia"):
+    ano_censo_localizacao = st.selectbox("Selecione o ano do Censo Escolar:", sorted(df_panorama_geral['NU_ANO_CENSO'].unique()), key ="ano_censo_localizacao_diferenciada_dependencia")
+
+    municipio_localizacao = st.selectbox("Selecione o município:", sorted(df_panorama_geral['NO_MUNICIPIO'].unique()), key="municipio_localizacao_diferenciada_dependencia")
+    
+    # localizacao = st.selectbox("Selecione a localização:", sorted(df_panorama_geral['TP_LOCALIZACAO'].unique()), key="localizacao")
+    submitted = st.form_submit_button("Gerar Gráfico")
+    if submitted:
+        col1, col2 = st.columns(2)
+        with col1:
+            st.write(grafico_matriculas_por_dependencia_localizacao_diferenciada_municipio(df_panorama_geral, ano_censo_localizacao, municipio_localizacao))
+        # Gráfico do total de escolas por localização    
+        with col2:
+            grafico_escolas_por_dependencia_localizacao_diferenciada_municipio(df_panorama_geral, ano_censo_localizacao, municipio_localizacao)
+    
+        # Texto de análise dos gráficos
+        st.write("Existem Unidades de Conservação no território de seu Município? E os ribeirinhos? Há populações tradicionais habitando esses espaços? Existem escolas na localidade?")
+
 
 # Subseção 02.3 - Total de Alunos e Escolas em Projeto de Assentamento do INCRA
 st.header("Escolas em Projeto de Assentamento do INCRA")

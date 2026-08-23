@@ -3726,3 +3726,408 @@ def grafico_escolas_por_localizacao_diferenciada_municipio(df, ano_censo, munici
     st.pyplot(fig)
 
 
+def grafico_matriculas_por_dependencia_localizacao_diferenciada_municipio(
+    df,
+    ano_censo,
+    municipio
+):
+    """
+    Gera gráfico de barras agrupadas com o total de matrículas por
+    dependência administrativa e localização diferenciada, no município
+    e ano selecionados.
+
+    Parâmetros
+    ----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas:
+        'TP_DEPENDENCIA',
+        'TP_LOCALIZACAO_DIFERENCIADA',
+        'QT_MAT_BAS',
+        'NU_ANO_CENSO' e
+        'NO_MUNICIPIO'.
+
+    ano_censo : int
+        Ano do Censo Escolar selecionado.
+
+    municipio : str
+        Nome do município selecionado.
+    """
+    import matplotlib.pyplot as plt
+    import numpy as np
+    import pandas as pd
+    import streamlit as st
+    from matplotlib.ticker import MaxNLocator
+
+    mapa_dependencia = {
+        #1: "Federal",
+        2: "Estadual",
+        3: "Municipal"
+    }
+
+    mapa_localizacao = {
+        1: "Assentamento",
+        2: "Terra Indígena",
+        3: "Quilombola",
+        8: "Com. Tradicionais"
+    }
+
+    cores_localizacao = {
+        "Assentamento": "#1FB029",
+        "Terra Indígena": "#C0C0C0",
+        "Quilombola": "#FFA07A",
+        "Com. Tradicionais": "#FF6347"
+    }
+
+    # Filtra o ano, o município e apenas os códigos conhecidos
+    # de localização diferenciada e dependência administrativa.
+    df_filtrado = df.loc[
+        (df["NU_ANO_CENSO"] == ano_censo)
+        & (df["NO_MUNICIPIO"] == municipio)
+        & (df["TP_DEPENDENCIA"].isin(mapa_dependencia))
+        & (df["TP_LOCALIZACAO_DIFERENCIADA"].isin(mapa_localizacao)),
+        [
+            "TP_DEPENDENCIA",
+            "TP_LOCALIZACAO_DIFERENCIADA",
+            "QT_MAT_BAS"
+        ]
+    ].copy()
+
+    if df_filtrado.empty:
+        st.info(
+            f"Não foram encontradas matrículas em localização diferenciada "
+            f"para {municipio}, em {ano_censo}."
+        )
+        return
+
+    # Garante que a coluna usada na soma seja numérica.
+    df_filtrado["QT_MAT_BAS"] = pd.to_numeric(
+        df_filtrado["QT_MAT_BAS"],
+        errors="coerce"
+    ).fillna(0)
+
+    # Linhas: dependências administrativas.
+    # Colunas: tipos de localização diferenciada.
+    agrupado = (
+        df_filtrado
+        .groupby(
+            ["TP_DEPENDENCIA", "TP_LOCALIZACAO_DIFERENCIADA"],
+            observed=True
+        )["QT_MAT_BAS"]
+        .sum()
+        .unstack(fill_value=0)
+        .reindex(
+            index=list(mapa_dependencia),
+            columns=list(mapa_localizacao),
+            fill_value=0
+        )
+        .astype(int)
+        .rename(
+            index=mapa_dependencia,
+            columns=mapa_localizacao
+        )
+    )
+
+    dependencias = agrupado.index.tolist()
+    localizacoes = agrupado.columns.tolist()
+
+    x = np.arange(len(dependencias))
+    largura = 0.18
+
+    plt.style.use("dark_background")
+    fig, ax = plt.subplots(figsize=(11, 7))
+
+    # Centraliza o conjunto de barras em cada dependência.
+    deslocamento_inicial = -(
+        (len(localizacoes) - 1) * largura / 2
+    )
+
+    barras_criadas = []
+
+    for indice, localizacao in enumerate(localizacoes):
+        deslocamento = deslocamento_inicial + indice * largura
+
+        barras = ax.bar(
+            x + deslocamento,
+            agrupado[localizacao].values,
+            width=largura,
+            label=localizacao,
+            color=cores_localizacao[localizacao]
+        )
+
+        barras_criadas.append(barras)
+
+    maior_valor = agrupado.to_numpy().max()
+    limite_superior = maior_valor * 1.18 if maior_valor > 0 else 1
+
+    ax.set_ylim(0, limite_superior)
+    ax.yaxis.set_major_locator(MaxNLocator(integer=True, nbins=6))
+
+    ax.set_title(
+        f"Matrículas por Dependência e Localização Diferenciada\n"
+        f"{municipio} ({ano_censo})",
+        color="#FFA07A",
+        fontsize=20
+    )
+
+    ax.set_xlabel(
+        "Fonte: Censo Escolar",
+        color="#FFA07A",
+        fontsize=13,
+        labelpad=15
+    )
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(
+        dependencias,
+        color="#FFA07A",
+        fontsize=16
+    )
+
+    ax.tick_params(
+        axis="y",
+        colors="#FFA07A",
+        labelsize=14
+    )
+
+    for spine in ax.spines.values():
+        spine.set_color("#FFA07A")
+        spine.set_linewidth(1)
+
+    legenda = ax.legend(
+        title="Localização diferenciada",
+        fontsize=11,
+        title_fontsize=11,
+        frameon=False,
+        ncol=2
+    )
+
+    plt.setp(legenda.get_texts(), color="white")
+    plt.setp(legenda.get_title(), color="#FFA07A")
+
+    espaco_texto = limite_superior * 0.015
+
+    for barras in barras_criadas:
+        for barra in barras:
+            valor = int(barra.get_height())
+
+            # Evita poluição visual com rótulos de valores iguais a zero.
+            if valor == 0:
+                continue
+
+            valor_formatado = f"{valor:,}".replace(",", ".")
+
+            ax.text(
+                barra.get_x() + barra.get_width() / 2,
+                valor + espaco_texto,
+                valor_formatado,
+                ha="center",
+                va="bottom",
+                color="white",
+                fontweight="bold",
+                fontsize=12
+            )
+
+    fig.tight_layout()
+    st.pyplot(fig)
+    plt.close(fig)
+
+
+def grafico_escolas_por_dependencia_localizacao_diferenciada_municipio(
+    df,
+    ano_censo,
+    municipio
+):
+    """
+    Gera gráfico de barras agrupadas com o total de escolas por
+    dependência administrativa e localização diferenciada, no município
+    e ano selecionados.
+
+    Parâmetros
+    ----------
+    df : pd.DataFrame
+        DataFrame contendo as colunas:
+        'CO_ENTIDADE',
+        'TP_DEPENDENCIA',
+        'TP_LOCALIZACAO_DIFERENCIADA',
+        'NU_ANO_CENSO' e
+        'NO_MUNICIPIO'.
+
+    ano_censo : int
+        Ano do Censo Escolar selecionado.
+
+    municipio : str
+        Nome do município selecionado.
+    """
+    import matplotlib.pyplot as plt
+    import numpy as np
+    import streamlit as st
+    from matplotlib.ticker import MaxNLocator
+
+    mapa_dependencia = {
+        #1: "Federal",
+        2: "Estadual",
+        3: "Municipal"
+    }
+
+    mapa_localizacao = {
+        1: "Assentamento",
+        2: "Terra Indígena",
+        3: "Quilombola",
+        8: "Com. Tradicionais"
+    }
+
+    cores_localizacao = {
+        "Assentamento": "#1FB029",
+        "Terra Indígena": "#C0C0C0",
+        "Quilombola": "#FFA07A",
+        "Com. Tradicionais": "#FF6347"
+    }
+
+    # Filtra o ano, o município e os códigos válidos para o gráfico.
+    df_filtrado = df.loc[
+        (df["NU_ANO_CENSO"] == ano_censo)
+        & (df["NO_MUNICIPIO"] == municipio)
+        & (df["TP_DEPENDENCIA"].isin(mapa_dependencia))
+        & (df["TP_LOCALIZACAO_DIFERENCIADA"].isin(mapa_localizacao)),
+        [
+            "CO_ENTIDADE",
+            "TP_DEPENDENCIA",
+            "TP_LOCALIZACAO_DIFERENCIADA"
+        ]
+    ].copy()
+
+    if df_filtrado.empty:
+        st.info(
+            f"Não foram encontradas escolas em localização diferenciada "
+            f"para {municipio}, em {ano_censo}."
+        )
+        return
+
+    # Linhas: dependências administrativas.
+    # Colunas: tipos de localização diferenciada.
+    # Valores: quantidade de escolas distintas.
+    agrupado = (
+        df_filtrado
+        .groupby(
+            ["TP_DEPENDENCIA", "TP_LOCALIZACAO_DIFERENCIADA"],
+            observed=True
+        )["CO_ENTIDADE"]
+        .nunique()
+        .unstack(fill_value=0)
+        .reindex(
+            index=list(mapa_dependencia),
+            columns=list(mapa_localizacao),
+            fill_value=0
+        )
+        .astype(int)
+        .rename(
+            index=mapa_dependencia,
+            columns=mapa_localizacao
+        )
+    )
+
+    dependencias = agrupado.index.tolist()
+    localizacoes = agrupado.columns.tolist()
+
+    x = np.arange(len(dependencias))
+    largura = 0.18
+
+    plt.style.use("dark_background")
+    fig, ax = plt.subplots(figsize=(11, 7))
+
+    # Centraliza as quatro barras em cada dependência administrativa.
+    deslocamento_inicial = -(
+        (len(localizacoes) - 1) * largura / 2
+    )
+
+    barras_criadas = []
+
+    for indice, localizacao in enumerate(localizacoes):
+        deslocamento = deslocamento_inicial + indice * largura
+
+        barras = ax.bar(
+            x + deslocamento,
+            agrupado[localizacao].values,
+            width=largura,
+            label=localizacao,
+            color=cores_localizacao[localizacao]
+        )
+
+        barras_criadas.append(barras)
+
+    maior_valor = agrupado.to_numpy().max()
+    limite_superior = maior_valor * 1.18 if maior_valor > 0 else 1
+
+    ax.set_ylim(0, limite_superior)
+    ax.yaxis.set_major_locator(
+        MaxNLocator(integer=True, nbins=6)
+    )
+
+    ax.set_title(
+        f"Escolas por Dependência e Localização Diferenciada\n"
+        f"{municipio} ({ano_censo})",
+        color="#FFA07A",
+        fontsize=20
+    )
+
+    ax.set_xlabel(
+        "Fonte: Censo Escolar",
+        color="#FFA07A",
+        fontsize=13,
+        labelpad=15
+    )
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(
+        dependencias,
+        color="#FFA07A",
+        fontsize=16
+    )
+
+    ax.tick_params(
+        axis="y",
+        colors="#FFA07A",
+        labelsize=14
+    )
+
+    for spine in ax.spines.values():
+        spine.set_color("#FFA07A")
+        spine.set_linewidth(1)
+
+    legenda = ax.legend(
+        title="Localização diferenciada",
+        fontsize=11,
+        title_fontsize=11,
+        frameon=False,
+        ncol=2
+    )
+
+    plt.setp(legenda.get_texts(), color="white")
+    plt.setp(legenda.get_title(), color="#FFA07A")
+
+    espaco_texto = limite_superior * 0.015
+
+    for barras in barras_criadas:
+        for barra in barras:
+            valor = int(barra.get_height())
+
+            # Não exibe rótulos nas barras com valor zero.
+            if valor == 0:
+                continue
+
+            valor_formatado = f"{valor:,}".replace(",", ".")
+
+            ax.text(
+                barra.get_x() + barra.get_width() / 2,
+                valor + espaco_texto,
+                valor_formatado,
+                ha="center",
+                va="bottom",
+                color="white",
+                fontweight="bold",
+                fontsize=12
+            )
+
+    fig.tight_layout()
+    st.pyplot(fig)
+    plt.close(fig)
